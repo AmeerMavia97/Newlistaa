@@ -35,6 +35,8 @@ const PropertyForm = () => {
     });
   }
 
+  console.log(formData);
+
   const nextStep = (data) => {
     setFormData((prev) => ({ ...prev, ...data }));
     setCurrentStep((prev) => prev + 1);
@@ -66,22 +68,13 @@ const PropertyForm = () => {
       form.append("state", formData.state);
       form.append("zip", formData.ZipPostalCode);
       form.append("description", formData.description);
-      form.append("featured_listing", formData.FeaturedListing ? 0 : 0);
+      form.append("featured_listing", formData.FeaturedListing ? 1 : 0);
       form.append("off_market_listing", formData.OffTheMarketListing ? 1 : 0);
       form.append("owner_financing", formData.OwnerFinancing ? 1 : 0);
       form.append("show_email", formData.ShowEmail ? 1 : 0);
       form.append("show_phone", formData.ShowNumber ? 1 : 0);
       form.append("noi", formData.Noi || "");
       form.append("cap_rate", formData.CapRate || "");
-      form.append(
-        "featured_listing_for_free_users",
-        formData.FeaturedListing ? 1 : 0
-      );
-      form.append(
-        "success_url",
-        "https://staging.newlista.com/create-property"
-      );
-      form.append("cancel_url", "https://staging.newlista.com/create-property");
 
       // Split fileInput into old URLs and new files
       formData.fileInput.forEach((item) => {
@@ -100,17 +93,13 @@ const PropertyForm = () => {
         });
       }
 
-      console.log("hello");
-
       // Send request
       const response = await axios.post(`${ApiKey}/add-update-property`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
-        }
+        },
       });
-
-      console.log("hello2");
 
       AlertModal({
         icon: "success",
@@ -118,7 +107,7 @@ const PropertyForm = () => {
         iconColor: "#703BF7",
         text: "Your Form has Been Submitted",
       });
-      navigate("/properties");
+      navigate('/properties')
       console.log(response);
     } catch (error) {
       setloading(false);
@@ -209,7 +198,7 @@ const PropertyForm = () => {
         <div className="flex flex-col gap-8 sm:gap-10 w-[100%] 2xl:w-[85%] ">
           <div className="px-2.5 sm:px-0">
             <h1 className="text-[28px] leading-[32px] min-[400px]:text-[32px] min-[400px]:leading-[38px] font-[700] font-Urbanist text-[#1E1E1E] md:text-[35px] lg:text-[39px] xl:text-[43px] sm:leading-[48px]">
-              Add New Property Listing
+              Add New Property Listingssssssssss
             </h1>
             <p className="text-[13px] min-[400px]:text-[13.5px] font-Inter font-medium text-pretty text-Paracolor mt-2 md:text-[14px]/8 sm:leading-[18px]">
               Fill out the form below to create your property listing
