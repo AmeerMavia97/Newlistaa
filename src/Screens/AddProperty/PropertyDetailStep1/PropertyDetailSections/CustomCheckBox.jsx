@@ -6,10 +6,7 @@ import propertyFeatureMap from "../../../../CustomHook/CheckBoxes/CheckBoxes.js"
 
 const CustomCheckBox = ({ control, errors, propertyType }) => {
 
-
-  console.log(propertyFeatureMap);
   const checkboxes = propertyFeatureMap[propertyType];
-
   if (!checkboxes) return null;
 
   return (

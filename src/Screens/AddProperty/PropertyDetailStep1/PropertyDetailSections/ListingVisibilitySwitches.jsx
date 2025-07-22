@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import ConfirmationModal from "../../../../Components/ConfirmationModal/ConfirmationModal";
 import { useConfirmation } from "../../../Admin/AccountSetting/Fields/Confirmation";
 
-const ListingVisibilitySwitches = ({ register, controls }) => {
+const ListingVisibilitySwitches = ({ register, controls, FeatureOneTime }) => {
   const status = localStorage.getItem("status");
   const [ShowError, setShowError] = useState(false);
   const { isOpen, confirm, handleConfirm, handleCancel } = useConfirmation();
@@ -22,28 +22,41 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
         </div>
         <div className="flex items-center gap-4 sm:gap-3">
           <div className=" max-[400px]:w-[13%] relative">
-            <Controller
-              name="FeaturedListing"
-              control={controls}
-              defaultValue={false}
-              render={({ field }) => (
-                <Switches
-                  checked={field.value}
-                  onChange={async () => {
-                    if (!field.value) {
-                      const confirmed = await confirm();
-                      if (confirmed) {
-                        field.onChange(true); // call onChange with true
+            {status === "active" ? (
+              <Controller
+                name="FeaturedListing"
+                control={controls}
+                defaultValue={false}
+                render={({ field }) => <Switches {...field} />}
+              />
+            ) : (
+              <Controller
+                name="FeaturedListing"
+                control={controls}
+                defaultValue={false}
+                render={({ field }) => (
+                  <Switches
+                    checked={field.value}
+                    onChange={async () => {
+                      if (!field.value) {
+                        if (FeatureOneTime === true) {
+                          field.onChange(true);
+                        } else {
+                          const confirmed = await confirm();
+                          if (confirmed) {
+                            field.onChange(true);
+                          }
+                        }
+                      } else {
+                        field.onChange(false);
                       }
-                    } else {
-                      field.onChange(false);
-                    }
-                  }}
-                  value={field.value}
-                  onBlur={field.onBlur}
-                />
-              )}
-            />
+                    }}
+                    value={field.value}
+                    onBlur={field.onBlur}
+                  />
+                )}
+              />
+            )}
           </div>
           <div className="flex flex-col max-[400px]:w-[87%] gap-1">
             <span className="flex gap-4">
@@ -68,9 +81,13 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               defaultValue={false} // Ensure this is set
               render={({ field }) => (
                 <Switches
-                  value={status ? field.value : setShowError(true)}
-                  onChange={status ? field.onChange : setShowError(true)}
-                  checked={status ? field.value : setShowError(true)} // Use field.value for checked
+                  value={status === "active" ? field.value : setShowError(true)}
+                  onChange={
+                    status === "active" ? field.onChange : setShowError(true)
+                  }
+                  checked={
+                    status === "active" ? field.value : setShowError(true)
+                  } // Use field.value for checked
                   onBlur={field.onBlur}
                 />
               )}
@@ -129,9 +146,13 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               defaultValue={false} // Ensure this is set
               render={({ field }) => (
                 <Switches
-                  value={status ? field.value : setShowError(true)}
-                  onChange={status ? field.onChange : setShowError(true)}
-                  checked={status ? field.value : setShowError(true)} // Use field.value for checked
+                  value={status === "active" ? field.value : setShowError(true)}
+                  onChange={
+                    status === "active" ? field.onChange : setShowError(true)
+                  }
+                  checked={
+                    status === "active" ? field.value : setShowError(true)
+                  } // Use field.value for checked
                   onBlur={field.onBlur}
                 />
               )}
@@ -157,9 +178,13 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               defaultValue={false} // Ensure this is set
               render={({ field }) => (
                 <Switches
-                  value={status ? field.value : setShowError(true)}
-                  onChange={status ? field.onChange : setShowError(true)}
-                  checked={status ? field.value : setShowError(true)} // Use field.value for checked
+                  value={status === "active" ? field.value : setShowError(true)}
+                  onChange={
+                    status === "active" ? field.onChange : setShowError(true)
+                  }
+                  checked={
+                    status === "active" ? field.value : setShowError(true)
+                  }
                   onBlur={field.onBlur}
                 />
               )}
@@ -220,7 +245,7 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
         message="Activating the Featured Listing costs $10. Do you want to proceed?"
         confirmLabel="Yes, Pay $10"
         icon={
-          <CreditCard  className="size-20 text-PurpleColor  bg-amber-50 PurpleColor px-3.5 py-3.5 rounded-full" />
+          <CreditCard className="size-20 text-PurpleColor  bg-amber-50 PurpleColor px-3.5 py-3.5 rounded-full" />
         }
         style="bg-PurpleColor"
       />

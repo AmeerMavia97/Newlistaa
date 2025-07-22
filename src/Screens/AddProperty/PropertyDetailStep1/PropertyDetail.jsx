@@ -48,12 +48,6 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
   const PropertyRadio = watch("propertyType");
   const propertyType = watch("propertyName");
 
-  console.log(PropertyRadio);
-  
-
-  
-
-
   const renderFormFields = () => {
     switch (propertyType) {
       case "Retail Center":
@@ -165,7 +159,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
                 error={errors.description?.message}
               ></TextAreas>
             </div>
-            <ListingVisibilitySwitches controls={control} />
+            <ListingVisibilitySwitches FeatureOneTime={defaultValues.feauture_with_one_time}  controls={control} />
           </div>
 
           {/* Send Message Button */}

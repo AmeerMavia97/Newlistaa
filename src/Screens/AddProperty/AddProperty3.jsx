@@ -13,6 +13,9 @@ import AddPropertyBanner from "../../assets/AddPropertyBanner1.1.jpg";
 import axios from "axios";
 import AlertModal from "../../Components/AlertModal/AlertModal.js";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Elements } from "@stripe/react-stripe-js";
+import StripeCardForm from "../Pricing/StripeCardForm.jsx";
+
 
 const PropertyForm = () => {
   const stepRef = useRef(null);
@@ -35,7 +38,7 @@ const PropertyForm = () => {
     });
   }
 
-  console.log(formData);
+ // console.log(formData);
 
   const nextStep = (data) => {
     setFormData((prev) => ({ ...prev, ...data }));
@@ -44,12 +47,13 @@ const PropertyForm = () => {
 
   const prevStep = () => setCurrentStep((prev) => prev - 1);
 
-  const handleFinalSubmit = async () => {
+  const handleFinalSubmit = async (Data) => {
+    console.log(Data);
     if (!formData || Object.keys(formData).length === 0) {
       console.error("Form submission failed: no data.");
       return;
     }
-    console.log("Submitted Data:", formData.fileInput);
+    console.log("Submitted Data:", formData);
     setloading(true);
     try {
       const form = new FormData();
@@ -75,6 +79,7 @@ const PropertyForm = () => {
       form.append("show_phone", formData.ShowNumber ? 1 : 0);
       form.append("noi", formData.Noi || "");
       form.append("cap_rate", formData.CapRate || "");
+      form.append("stripe_token", Data.paymentMethodId || null);
 
       // Split fileInput into old URLs and new files
       formData.fileInput.forEach((item) => {
@@ -93,6 +98,7 @@ const PropertyForm = () => {
         });
       }
 
+
       // Send request
       const response = await axios.post(`${ApiKey}/add-update-property`, form, {
         headers: {
@@ -100,14 +106,14 @@ const PropertyForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-
+      const data = response.data.message
       AlertModal({
         icon: "success",
         title: "Thank You",
         iconColor: "#703BF7",
-        text: "Your Form has Been Submitted",
+        text: data,
       });
-      navigate('/properties')
+      navigate("/properties");
       console.log(response);
     } catch (error) {
       setloading(false);
@@ -116,6 +122,8 @@ const PropertyForm = () => {
       setloading(false);
     }
   };
+
+
 
   useEffect(() => {
     if (editId) {
@@ -131,6 +139,9 @@ const PropertyForm = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = response.data?.data;
+      console.log('====================================');
+      console.log(data.feauture_with_one_time);
+      console.log('====================================');
       if (data) {
         setFormData({
           PropertyTitle: data.property_name,
@@ -156,6 +167,7 @@ const PropertyForm = () => {
           Noi: data.noi || "",
           CapRate: data.cap_rate || "",
           custom_fields: data.custom_fields || {},
+          feauture_with_one_time: data.feauture_with_one_time
         });
       }
     } catch (error) {
@@ -229,6 +241,7 @@ const PropertyForm = () => {
               )
             )}
           </div>
+          
 
           {/* Current Step Form */}
           {loading ? (
