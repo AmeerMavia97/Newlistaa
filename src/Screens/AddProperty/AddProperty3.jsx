@@ -35,6 +35,8 @@ const PropertyForm = () => {
     });
   }
 
+  console.log(formData);
+
   const nextStep = (data) => {
     setFormData((prev) => ({ ...prev, ...data }));
     setCurrentStep((prev) => prev + 1);
@@ -66,22 +68,13 @@ const PropertyForm = () => {
       form.append("state", formData.state);
       form.append("zip", formData.ZipPostalCode);
       form.append("description", formData.description);
-      form.append("featured_listing", formData.FeaturedListing ? 0 : 0);
+      form.append("featured_listing", formData.FeaturedListing ? 1 : 0);
       form.append("off_market_listing", formData.OffTheMarketListing ? 1 : 0);
       form.append("owner_financing", formData.OwnerFinancing ? 1 : 0);
       form.append("show_email", formData.ShowEmail ? 1 : 0);
       form.append("show_phone", formData.ShowNumber ? 1 : 0);
       form.append("noi", formData.Noi || "");
       form.append("cap_rate", formData.CapRate || "");
-      form.append(
-        "featured_listing_for_free_users",
-        formData.FeaturedListing ? 1 : 0
-      );
-      form.append(
-        "success_url",
-        "https://staging.newlista.com/create-property"
-      );
-      form.append("cancel_url", "https://staging.newlista.com/create-property");
 
       // Split fileInput into old URLs and new files
       formData.fileInput.forEach((item) => {
@@ -100,17 +93,13 @@ const PropertyForm = () => {
         });
       }
 
-      console.log("hello");
-
       // Send request
       const response = await axios.post(`${ApiKey}/add-update-property`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
-        }
+        },
       });
-
-      console.log("hello2");
 
       AlertModal({
         icon: "success",
@@ -118,7 +107,7 @@ const PropertyForm = () => {
         iconColor: "#703BF7",
         text: "Your Form has Been Submitted",
       });
-      navigate("/properties");
+      navigate('/properties')
       console.log(response);
     } catch (error) {
       setloading(false);
