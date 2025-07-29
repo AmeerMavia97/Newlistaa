@@ -29,6 +29,7 @@ import FreeYear from "../../Screens/Pricing/FreeYear.jsx";
 import PremiumYear from "../../Screens/Pricing/PremiumYear.jsx";
 import ForgetPassOtp from "../../Screens/ProtectedScreen/ForgetPassOpt.jsx";
 import ChangePassword from "../../Screens/ProtectedScreen/ChangePassword.jsx";
+import Privacy from "../../Screens/Privacy/Privacy.jsx";
 import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
 
 const Routing = () => {
@@ -69,6 +70,7 @@ const Routing = () => {
           <Route path={"/set-new-password"} element={<SetNewPassword />} />
           <Route path={"/register"} element={<Register />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/privacy-policy" element={<Privacy />} />
           {/* <Route path={"/plans"} element={<OurPlans />} /> */}
           {/* <Route path={"/residential"} element={<Residential />} /> */}
           {/* <Route path={"/commercial"} element={<Commercial />} /> */}
