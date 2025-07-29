@@ -72,7 +72,7 @@ const Routing = () => {
           <Route path={"/register"} element={<Register />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/privacy-policy" element={<Privacy />} />
-          <Route path="/terms-of-usage" element={<Terms />} />
+          <Route path="/terms-of-use" element={<Terms />} />
           {/* <Route path={"/plans"} element={<OurPlans />} /> */}
           {/* <Route path={"/residential"} element={<Residential />} /> */}
           {/* <Route path={"/commercial"} element={<Commercial />} /> */}
