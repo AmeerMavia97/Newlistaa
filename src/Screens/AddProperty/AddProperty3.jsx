@@ -42,9 +42,9 @@ const PropertyForm = () => {
  
   const prevStep = () => setCurrentStep((prev) => prev - 1);
  
-  const submittingRef = useRef(false);
+  // const submittingRef = useRef(false);
  
-  const hasCheckedPaymentStatus = useRef(false);
+  // const hasCheckedPaymentStatus = useRef(false);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const status = params.get("payment_status");
@@ -115,13 +115,19 @@ const PropertyForm = () => {
         });
       }
  
+      // const response = await axios.post(`${ApiKey}/add-update-property`, form, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
       const response = await axios.post(`${ApiKey}/add-update-property`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });
-      
+
  
  
       AlertModal({

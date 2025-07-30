@@ -50,15 +50,12 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               <h1 className="block font-Urbanist text-[14.5px] sm:text-[15px] lg:text-[17px] font-[500] text-[#000000]">
                 Featured Listing
               </h1>
-<<<<<<< HEAD
               <div className="border-PurpleColor border  font-[600]  text-[12px] sm:text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
                 Premium
               </div>
-=======
               <button className="border-PurpleColor border  font-[600] cursor-pointer text-[12px] sm:text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
                 Premium
               </button>
->>>>>>> 4c9600a (Changes)
             </span>
             <p className="block font-Urbanist text-[12.5px] sm:text-[14px] lg:text-[14.5px] font-[400] text-[#222222]">
               Featured listings appear at the top of search results and get more
@@ -88,7 +85,7 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
                 Off‑the‑Market Listing
               </h1>
               <button
-              type="button"
+                type="button"
                 className={`border border-PurpleColor text-PurpleColor font-[600] text-[13px] px-3 flex justify-center items-center rounded-[14px] font-Urbanist`}
               >
                 Premium
@@ -114,7 +111,10 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
                 Owner Financing
               </h1>
             </span>
-            <button type="button" className="border-PurpleColor ml-2 border  font-[600]  text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
+            <button
+              type="button"
+              className="border-PurpleColor ml-2 border  font-[600]  text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center"
+            >
               Free
             </button>
           </div>
@@ -151,7 +151,10 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
                 Show my phone number on this listing
               </h1>
             </span>
-            <button type="button" className="border-PurpleColor ml-2 border  font-[600] text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
+            <button
+              type="button"
+              className="border-PurpleColor ml-2 border  font-[600] text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center"
+            >
               Premium
             </button>
           </div>
@@ -179,7 +182,10 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
                 Show my email address on this listing
               </h1>
             </span>
-            <button type="button" className="border-PurpleColor ml-2 border  font-[600] text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
+            <button
+              type="button"
+              className="border-PurpleColor ml-2 border  font-[600] text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center"
+            >
               Premium
             </button>
           </div>
@@ -227,7 +233,7 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
         message="Activating the Featured Listing costs $10. Do you want to proceed?"
         confirmLabel="Yes, Pay $10"
         icon={
-          <CreditCard  className="size-20 text-PurpleColor  bg-amber-50 PurpleColor px-3.5 py-3.5 rounded-full" />
+          <CreditCard className="size-20 text-PurpleColor  bg-amber-50 PurpleColor px-3.5 py-3.5 rounded-full" />
         }
         style="bg-PurpleColor"
       />
