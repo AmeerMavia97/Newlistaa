@@ -7,16 +7,16 @@ import Step1 from "./PropertyDetailStep1/PropertyDetail.jsx";
 import Step3 from "./PreviewPropertyStep3/PreviewProperty.jsx";
 import MiniFooter from "../../Components/Footer/MiniFooter.jsx";
 import Spinner from "../../Components/Spinner/Spinner.jsx";
-
+ 
 // IMAGES
 import AddPropertyBanner from "../../assets/AddPropertyBanner1.1.jpg";
 import axios from "axios";
 import AlertModal from "../../Components/AlertModal/AlertModal.js";
 import { useLocation, useNavigate } from "react-router-dom";
-
+ 
 const PropertyForm = () => {
   const stepRef = useRef(null);
-
+ 
   const [loading, setloading] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
@@ -25,83 +25,40 @@ const PropertyForm = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const editId = queryParams.get("editId");
-
+ 
   const navigate = useNavigate();
-
+ 
   if (stepRef.current) {
     stepRef.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   }
-
+ 
   const nextStep = (data) => {
     setFormData((prev) => ({ ...prev, ...data }));
     setCurrentStep((prev) => prev + 1);
   };
-
+ 
   const prevStep = () => setCurrentStep((prev) => prev - 1);
-
-<<<<<<< HEAD
-  const handleFinalSubmit = async () => {
-    if (!formData || Object.keys(formData).length === 0) {
-      console.error("Form submission failed: no data.");
-      return;
-    }
-    console.log("Submitted Data:", formData.fileInput);
-    setloading(true);
-    try {
-      const form = new FormData();
-      form.append("property_id", editId || "");
-      form.append("property_name", formData.PropertyTitle);
-      form.append("listing_type", formData.propertyType);
-      form.append("property_type", formData.propertyName);
-      form.append("listing_status", formData.ListingStatus);
-      form.append("lease_rate", formData.leaseRate);
-      form.append("lease_rate_unit", formData.persf);
-      form.append("lease_type", formData.leaseType);
-      form.append("building_size", formData.BuildingSize_sqft);
-      form.append("sale_price", formData.salePrice || "");
-      form.append("address", formData.PropertyAddress);
-      form.append("city", formData.city);
-      form.append("state", formData.state);
-      form.append("zip", formData.ZipPostalCode);
-      form.append("description", formData.description);
-      form.append("featured_listing", formData.FeaturedListing ? 0 : 0);
-      form.append("off_market_listing", formData.OffTheMarketListing ? 1 : 0);
-      form.append("owner_financing", formData.OwnerFinancing ? 1 : 0);
-      form.append("show_email", formData.ShowEmail ? 1 : 0);
-      form.append("show_phone", formData.ShowNumber ? 1 : 0);
-      form.append("noi", formData.Noi || "");
-      form.append("cap_rate", formData.CapRate || "");
-      form.append(
-        "featured_listing_for_free_users",
-        formData.FeaturedListing ? 1 : 0
-      );
-      form.append(
-        "success_url",
-        "https://staging.newlista.com/create-property"
-      );
-      form.append("cancel_url", "https://staging.newlista.com/create-property");
-=======
+ 
   const submittingRef = useRef(false);
->>>>>>> 4c9600a (Changes)
-
+ 
   const hasCheckedPaymentStatus = useRef(false);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const status = params.get("payment_status");
-
+ 
     if (status === "confirm" || status === "cancel") {
       const savedForm = localStorage.getItem("pendingFormData");
-
+ 
       if (savedForm) {
         const parsedForm = JSON.parse(savedForm);
         setFormData(parsedForm);
-
+ 
         // Call submit using saved data
         submitFormAfterPayment(status === "confirm", parsedForm);
-
+ 
         // Clear localStorage and URL
         // localStorage.removeItem("pendingFormData");
         params.delete("payment_status");
@@ -112,14 +69,14 @@ const PropertyForm = () => {
       }
     }
   }, []);
-
+ 
   const submitFormAfterPayment = async (isFeatured, dataOverride) => {
     const data = dataOverride || formData;
-
+ 
     try {
       setloading(true);
       const form = new FormData();
-
+ 
       form.append("property_id", editId || "");
       form.append("property_name", data.PropertyTitle);
       form.append("listing_type", data.propertyType);
@@ -142,7 +99,7 @@ const PropertyForm = () => {
       form.append("show_phone", data.ShowNumber ? 1 : 0);
       form.append("noi", data.Noi || "");
       form.append("cap_rate", data.CapRate || "");
-
+ 
       data.fileInput?.forEach((item) => {
         if (typeof item === "string") {
           form.append("image_urls[]", item);
@@ -150,31 +107,23 @@ const PropertyForm = () => {
           form.append("images[]", item);
         }
       });
-
+ 
       const customFields = data.custom_fields;
       if (customFields && typeof customFields === "object") {
         Object.keys(customFields).forEach((key) => {
           form.append(`custom_fields[${key}]`, customFields[key]);
         });
       }
-
-<<<<<<< HEAD
-      console.log("hello");
-
-      // Send request
-=======
->>>>>>> 4c9600a (Changes)
+ 
       const response = await axios.post(`${ApiKey}/add-update-property`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
-        withCredentials: true,
-
       });
-
-      console.log("hello2");
-
+      
+ 
+ 
       AlertModal({
         icon: "success",
         title: "Thank You",
@@ -182,28 +131,24 @@ const PropertyForm = () => {
         text: "Your Form has Been Submitted",
       });
       navigate("/properties");
-<<<<<<< HEAD
-      console.log(response);
-=======
->>>>>>> 4c9600a (Changes)
     } catch (error) {
       console.error("Form submission failed:", error);
     } finally {
       setloading(false);
     }
   };
-
+ 
   const handleFinalSubmit = async () => {
     if (!formData || Object.keys(formData).length === 0) {
       console.error("Form submission failed: no data.");
       return;
     }
-
+ 
     if (formData.FeaturedListing) {
       try {
         localStorage.setItem("pendingFormData", JSON.stringify(formData));
         setloading(true);
-
+ 
         const paymentResponse = await axios.post(
           `${ApiKey}/one-time-payment`,
           {
@@ -215,9 +160,9 @@ const PropertyForm = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-
+ 
         console.log("Payment API Response:", paymentResponse.data);
-
+ 
         // Try multiple keys to find payment URL
         const paymentUrl = paymentResponse.data.checkout_url;
         if (paymentUrl) {
@@ -235,17 +180,17 @@ const PropertyForm = () => {
       await submitFormAfterPayment(false);
     }
   };
-
+ 
   useEffect(() => {
     if (editId) {
       fetchPropertyData(editId);
     }
   }, [editId]);
-
+ 
   const fetchPropertyData = async (id) => {
     try {
       setloading(true);
-
+ 
       const response = await axios.get(`${ApiKey}/view-property/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -283,7 +228,7 @@ const PropertyForm = () => {
       setloading(false);
     }
   };
-
+ 
   const steps = [
     <Step1 onNext={nextStep} defaultValues={formData} />,
     <Step2 onNext={nextStep} onBack={prevStep} defaultValues={formData} />,
@@ -293,7 +238,7 @@ const PropertyForm = () => {
       formData={loading ? "loading..." : formData}
     />,
   ];
-
+ 
   return (
     <>
       <Navbar></Navbar>
@@ -308,7 +253,7 @@ const PropertyForm = () => {
         </div>
       </section>
       {/* BANNER END   */}
-
+ 
       {/* PROPERTY FORM  */}
       <section
         ref={stepRef}
@@ -323,7 +268,7 @@ const PropertyForm = () => {
               Fill out the form below to create your property listing
             </p>
           </div>
-
+ 
           {/* STEP TABS*/}
           <div className="flex justify-center gap-1 min-[400px]:gap-3 md:gap-5 bg-[#F3EEFF] items-center px-2 min-[420px]:px-4 py-3 rounded-[5px] mx-2.5 sm:mx-0">
             {["Property Details", "Photo & Media", "Preview & Submit"].map(
@@ -348,7 +293,7 @@ const PropertyForm = () => {
               )
             )}
           </div>
-
+ 
           {/* Current Step Form */}
           {loading ? (
             <div className="h-[100vh] flex justify-center items-center">
@@ -359,11 +304,11 @@ const PropertyForm = () => {
           )}
         </div>
       </section>
-
+ 
       <MiniFooter></MiniFooter>
       <Footer></Footer>
     </>
   );
 };
-
+ 
 export default PropertyForm;
