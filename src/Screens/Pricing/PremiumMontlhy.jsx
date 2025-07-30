@@ -12,7 +12,6 @@ const stripePromise = loadStripe(
 );
 
 
-
 const PremiumMonthly = () => {
   return (
     <>

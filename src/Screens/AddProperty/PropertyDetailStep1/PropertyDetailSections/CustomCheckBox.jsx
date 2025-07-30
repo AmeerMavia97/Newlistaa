@@ -6,7 +6,10 @@ import propertyFeatureMap from "../../../../CustomHook/CheckBoxes/CheckBoxes.js"
 
 const CustomCheckBox = ({ control, errors, propertyType }) => {
 
+
+  console.log(propertyFeatureMap);
   const checkboxes = propertyFeatureMap[propertyType];
+
   if (!checkboxes) return null;
 
   return (
@@ -17,11 +20,11 @@ const CustomCheckBox = ({ control, errors, propertyType }) => {
       <Controller
         name="custom_fields"
         control={control}
-        rules={{
-          validate: (value) =>
-            Object.values(value || {}).some(Boolean) ||
-            "Please select at least one feature.",
-        }}
+        // rules={{
+        //   validate: (value) =>
+        //     Object.values(value || {}).some(Boolean) ||
+        //     "Please select at least one feature.",
+        // }}
         render={({ field }) => (
           <div className="grid max-[400px]:grid-cols-1 grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
             {checkboxes.map((opt) => (
@@ -29,7 +32,7 @@ const CustomCheckBox = ({ control, errors, propertyType }) => {
                 key={opt.name}
                 name={opt.name}
                 labels={opt.label}
-                checked={field.value?.[opt.name] || false}
+                checked={String(field.value?.[opt.name]) === "true"}
                 onChange={(checked) =>
                   field.onChange({
                     ...field.value,
@@ -41,12 +44,7 @@ const CustomCheckBox = ({ control, errors, propertyType }) => {
           </div>
         )}
       />
-
-      {errors?.custom_fields && (
-        <p className="text-red-500 text-sm mt-1">
-          {errors.custom_fields.message}
-        </p>
-      )}
+     
     </>
   );
 };

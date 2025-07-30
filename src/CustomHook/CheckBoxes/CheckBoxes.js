@@ -1,5 +1,5 @@
  const propertyFeatureMap = {
-  "Apartment / Multifamily": [
+  "Apartments / Multifamily": [
     { name: "LaundryFacilities", label: "Laundry Facilities" },
     { name: "ParkingSpaces", label: "Parking Spaces" },
     { name: "SwimmingPool", label: "Swimming Pool" },

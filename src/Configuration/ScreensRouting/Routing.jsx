@@ -29,9 +29,9 @@ import FreeYear from "../../Screens/Pricing/FreeYear.jsx";
 import PremiumYear from "../../Screens/Pricing/PremiumYear.jsx";
 import ForgetPassOtp from "../../Screens/ProtectedScreen/ForgetPassOpt.jsx";
 import ChangePassword from "../../Screens/ProtectedScreen/ChangePassword.jsx";
+import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
 import Privacy from "../../Screens/Privacy/Privacy.jsx";
 import Terms from "../../Screens/Terms/Terms.jsx";
-import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
 
 const Routing = () => {
   const [currentUser, setCurrentUser] = useState(null);

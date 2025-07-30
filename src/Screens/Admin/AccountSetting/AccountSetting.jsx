@@ -231,7 +231,7 @@ const AccountSetting = () => {
         });
 
         const data = res.data;
-        console.log(res);
+        console.log(data);
 
         setbanner(res.data.banner);
         setLogo(res.data.headshot);

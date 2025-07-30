@@ -190,6 +190,14 @@ export default function PrivateChat({
     return () => unsubscribe();
   }, [chatUser.id, currentUser.id]);
 
+   const formatJoinDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `Joined ${year}-${month}-${day}`;
+  };
+
   return (
     <>
       <div className="sm:w-[75%] sm:relative h-[76vh] relative w-full  top-0 left-0 bg-white flex flex-col rounded-[10px] sm:border border-[#B9B9B9] justify-between overflow-hidden">
@@ -472,7 +480,7 @@ export default function PrivateChat({
                         <Calendar className="size-5 text-PurpleColor" />{" "}
                         <span className="font-Urbanist font-semibold text-[16px] text-Paracolor">
                           {" "}
-                          {chatUser.created_at}{" "}
+                          {formatJoinDate(chatUser.created_at)}
                         </span>{" "}
                       </div>{" "}
                       <div className="flex items-center gap-2">

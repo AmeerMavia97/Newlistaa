@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import UnkownUser from "/public/Images/ProfileImage.jpg";
 import { Camera, Pen } from "lucide-react";
 import Spinner from "../../../../Components/Spinner/Spinner";
+import CropperModal from "../../../../Components/ImageCropper/ImageCropper";
 
 const HeadShootBanner = ({ setValue, defaultBanner, defaultHeadshot }) => {
   const [bannerImage, setBannerImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
-
+  const [showCropper, setShowCropper] = useState(false);
+  const [rawImage, setRawImage] = useState(null);
+  const [cropType, setCropType] = useState("profile");
   // Create preview URLs for images
   const bannerPreview = bannerImage ? URL.createObjectURL(bannerImage) : null;
   const profilePreview = profileImage
@@ -20,6 +23,19 @@ const HeadShootBanner = ({ setValue, defaultBanner, defaultHeadshot }) => {
   useEffect(() => {
     setValue("headshot", profileImage);
   }, [profileImage, setValue]);
+
+  const handleFileSelect = (e, type) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setRawImage(reader.result);
+      setCropType(type);
+      setShowCropper(true);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <>
@@ -90,16 +106,27 @@ const HeadShootBanner = ({ setValue, defaultBanner, defaultHeadshot }) => {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  setProfileImage(e.target.files[0]);
-                }
-              }}
+              onChange={(e) => handleFileSelect(e, "profile")}
               className="hidden"
             />
           </label>
         </div>
       </div>
+      {showCropper && (
+        <CropperModal
+          image={rawImage}
+          aspectRatio={cropType === "banner" ? 3 : 1}
+          onSave={(croppedFile) => {
+            if (cropType === "profile") {
+              setProfileImage(croppedFile);
+            } else {
+              setBannerImage(croppedFile);
+            }
+            setShowCropper(false);
+          }}
+          onClose={() => setShowCropper(false)}
+        />
+      )}
     </>
   );
 };

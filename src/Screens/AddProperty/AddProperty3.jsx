@@ -13,9 +13,6 @@ import AddPropertyBanner from "../../assets/AddPropertyBanner1.1.jpg";
 import axios from "axios";
 import AlertModal from "../../Components/AlertModal/AlertModal.js";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Elements } from "@stripe/react-stripe-js";
-import StripeCardForm from "../Pricing/StripeCardForm.jsx";
-
 
 const PropertyForm = () => {
   const stepRef = useRef(null);
@@ -38,8 +35,6 @@ const PropertyForm = () => {
     });
   }
 
- // console.log(formData);
-
   const nextStep = (data) => {
     setFormData((prev) => ({ ...prev, ...data }));
     setCurrentStep((prev) => prev + 1);
@@ -47,13 +42,13 @@ const PropertyForm = () => {
 
   const prevStep = () => setCurrentStep((prev) => prev - 1);
 
-  const handleFinalSubmit = async (Data) => {
-    console.log(Data);
+<<<<<<< HEAD
+  const handleFinalSubmit = async () => {
     if (!formData || Object.keys(formData).length === 0) {
       console.error("Form submission failed: no data.");
       return;
     }
-    console.log("Submitted Data:", formData);
+    console.log("Submitted Data:", formData.fileInput);
     setloading(true);
     try {
       const form = new FormData();
@@ -72,58 +67,174 @@ const PropertyForm = () => {
       form.append("state", formData.state);
       form.append("zip", formData.ZipPostalCode);
       form.append("description", formData.description);
-      form.append("featured_listing", formData.FeaturedListing ? 1 : 0);
+      form.append("featured_listing", formData.FeaturedListing ? 0 : 0);
       form.append("off_market_listing", formData.OffTheMarketListing ? 1 : 0);
       form.append("owner_financing", formData.OwnerFinancing ? 1 : 0);
       form.append("show_email", formData.ShowEmail ? 1 : 0);
       form.append("show_phone", formData.ShowNumber ? 1 : 0);
       form.append("noi", formData.Noi || "");
       form.append("cap_rate", formData.CapRate || "");
-      form.append("stripe_token", Data.paymentMethodId || null);
+      form.append(
+        "featured_listing_for_free_users",
+        formData.FeaturedListing ? 1 : 0
+      );
+      form.append(
+        "success_url",
+        "https://staging.newlista.com/create-property"
+      );
+      form.append("cancel_url", "https://staging.newlista.com/create-property");
+=======
+  const submittingRef = useRef(false);
+>>>>>>> 4c9600a (Changes)
 
-      // Split fileInput into old URLs and new files
-      formData.fileInput.forEach((item) => {
+  const hasCheckedPaymentStatus = useRef(false);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("payment_status");
+
+    if (status === "confirm" || status === "cancel") {
+      const savedForm = localStorage.getItem("pendingFormData");
+
+      if (savedForm) {
+        const parsedForm = JSON.parse(savedForm);
+        setFormData(parsedForm);
+
+        // Call submit using saved data
+        submitFormAfterPayment(status === "confirm", parsedForm);
+
+        // Clear localStorage and URL
+        // localStorage.removeItem("pendingFormData");
+        params.delete("payment_status");
+        const newUrl =
+          window.location.pathname +
+          (params.toString() ? `?${params.toString()}` : "");
+        window.history.replaceState({}, "", newUrl);
+      }
+    }
+  }, []);
+
+  const submitFormAfterPayment = async (isFeatured, dataOverride) => {
+    const data = dataOverride || formData;
+
+    try {
+      setloading(true);
+      const form = new FormData();
+
+      form.append("property_id", editId || "");
+      form.append("property_name", data.PropertyTitle);
+      form.append("listing_type", data.propertyType);
+      form.append("property_type", data.propertyName);
+      form.append("listing_status", data.ListingStatus);
+      form.append("lease_rate", data.leaseRate);
+      form.append("lease_rate_unit", data.persf);
+      form.append("lease_type", data.leaseType);
+      form.append("building_size", data.BuildingSize_sqft);
+      form.append("sale_price", data.salePrice || "");
+      form.append("address", data.PropertyAddress);
+      form.append("city", data.city);
+      form.append("state", data.state);
+      form.append("zip", data.ZipPostalCode);
+      form.append("description", data.description);
+      form.append("featured_listing", isFeatured ? 1 : 0);
+      form.append("off_market_listing", data.OffTheMarketListing ? 1 : 0);
+      form.append("owner_financing", data.OwnerFinancing ? 1 : 0);
+      form.append("show_email", data.ShowEmail ? 1 : 0);
+      form.append("show_phone", data.ShowNumber ? 1 : 0);
+      form.append("noi", data.Noi || "");
+      form.append("cap_rate", data.CapRate || "");
+
+      data.fileInput?.forEach((item) => {
         if (typeof item === "string") {
-          form.append("image_urls[]", item); // Existing image URLs
+          form.append("image_urls[]", item);
         } else {
-          form.append("images[]", item); // New uploaded files
+          form.append("images[]", item);
         }
       });
 
-      // Handle flat custom_fields
-      const customFields = formData.custom_fields;
+      const customFields = data.custom_fields;
       if (customFields && typeof customFields === "object") {
         Object.keys(customFields).forEach((key) => {
           form.append(`custom_fields[${key}]`, customFields[key]);
         });
       }
 
+<<<<<<< HEAD
+      console.log("hello");
 
       // Send request
+=======
+>>>>>>> 4c9600a (Changes)
       const response = await axios.post(`${ApiKey}/add-update-property`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
+        withCredentials: true,
+
       });
-      const data = response.data.message
+
+      console.log("hello2");
+
       AlertModal({
         icon: "success",
         title: "Thank You",
         iconColor: "#703BF7",
-        text: data,
+        text: "Your Form has Been Submitted",
       });
       navigate("/properties");
+<<<<<<< HEAD
       console.log(response);
+=======
+>>>>>>> 4c9600a (Changes)
     } catch (error) {
-      setloading(false);
-      console.log(error);
+      console.error("Form submission failed:", error);
     } finally {
       setloading(false);
     }
   };
 
+  const handleFinalSubmit = async () => {
+    if (!formData || Object.keys(formData).length === 0) {
+      console.error("Form submission failed: no data.");
+      return;
+    }
 
+    if (formData.FeaturedListing) {
+      try {
+        localStorage.setItem("pendingFormData", JSON.stringify(formData));
+        setloading(true);
+
+        const paymentResponse = await axios.post(
+          `${ApiKey}/one-time-payment`,
+          {
+            amount: 5000, // set your amount here
+            success_url: `${window.location.origin}${location.pathname}?payment_status=confirm`,
+            cancel_url: `${window.location.origin}${location.pathname}?payment_status=cancel`,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        console.log("Payment API Response:", paymentResponse.data);
+
+        // Try multiple keys to find payment URL
+        const paymentUrl = paymentResponse.data.checkout_url;
+        if (paymentUrl) {
+          window.location.href = paymentUrl; // redirect to Stripe payment page
+        } else {
+          console.error("Payment URL missing from response");
+          setloading(false);
+        }
+      } catch (error) {
+        console.error("Payment initiation failed", error);
+        setloading(false);
+      }
+    } else {
+      // Normal submission if no featured listing
+      await submitFormAfterPayment(false);
+    }
+  };
 
   useEffect(() => {
     if (editId) {
@@ -139,9 +250,6 @@ const PropertyForm = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = response.data?.data;
-      console.log('====================================');
-      console.log(data.feauture_with_one_time);
-      console.log('====================================');
       if (data) {
         setFormData({
           PropertyTitle: data.property_name,
@@ -167,7 +275,6 @@ const PropertyForm = () => {
           Noi: data.noi || "",
           CapRate: data.cap_rate || "",
           custom_fields: data.custom_fields || {},
-          feauture_with_one_time: data.feauture_with_one_time
         });
       }
     } catch (error) {
@@ -241,7 +348,6 @@ const PropertyForm = () => {
               )
             )}
           </div>
-          
 
           {/* Current Step Form */}
           {loading ? (
