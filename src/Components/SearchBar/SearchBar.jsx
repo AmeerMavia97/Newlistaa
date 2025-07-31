@@ -4,16 +4,16 @@ import React, { useEffect, useState } from "react";
 import ComboboxSelector from "../ComboboxSelector/ComboboxSelector";
 import { Search } from "lucide-react";
 import MobileMenu from "./MobileMenu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../../Reducers/filterSlice/filterSlice";
 
 const ListingType = [
-  { label: "", name: "Select Your Listing Type" },
+  { label: "Select Your Listing Type", name: "All Listing" },
+  { label: "All Listing", name: "All Listing" },
   { label: "Standard Listing", name: "Standard Listing" },
   { label: "Feature Listing", name: "Feature Listing" },
   { label: "Off Market Listing", name: "Off Market Listing" },
-  { label: "All Listing", name: "All Listing" },
 ];
 
 const propertyType = [
@@ -110,11 +110,16 @@ const SearchBar = ({ handleFilterChange }) => {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const { register, handleSubmit, setValue, getValues, watch } = useForm();
 
   const listingType = watch("listingType");
+  const propertyType = watch("propertyType");
+  const priceRange = watch("priceRange");
+  const state = watch("state");
+  const city = watch("city");
 
   const onSubmit = () => {
     const data = {
@@ -125,9 +130,33 @@ const SearchBar = ({ handleFilterChange }) => {
       priceRange: getValues("priceRange"),
     };
     console.log(data);
+    // handleFilterChange(data);
     dispatch(setFilters(data));
     navigate("/properties");
   };
+
+  useEffect(() => {
+    if (location.pathname === "/properties") {
+      const data = {
+        listingType: getValues("listingType"),
+        propertyType: getValues("propertyType"),
+        state: selectedState,
+        city: selectedCity,
+        priceRange: getValues("priceRange"),
+      };
+
+      dispatch(setFilters(data));
+      handleFilterChange(data);
+    }
+  }, [
+    getValues("listingType"),
+    getValues("propertyType"),
+    selectedState,
+    selectedCity,
+    getValues("priceRange"),
+  ]);
+
+  console.log(location.pathname);
 
   const StateSelectionHandler = (value) => {
     if (!value || !value.name) return;
@@ -198,7 +227,7 @@ const SearchBar = ({ handleFilterChange }) => {
           >
             {ListingType.map((item, index) => (
               <option key={index} value={item.name}>
-                {item.name}
+                {item.label}
               </option>
             ))}
           </select>
@@ -266,15 +295,17 @@ const SearchBar = ({ handleFilterChange }) => {
 
         {/* Search Button */}
         <div>
-          <button
-            type="button"
-            className="hover-btn hover-btn-purple text-white px-2 py-2 rounded-full text-[14px] cursor-pointer"
-            onClick={onSubmit}
-          >
-            <span>
-              <Search />
-            </span>
-          </button>
+          {location.pathname !== "/properties" && (
+            <button
+              type="button"
+              className="hover-btn hover-btn-purple text-white px-2 py-2 rounded-full text-[14px] cursor-pointer"
+              onClick={onSubmit}
+            >
+              <span>
+                <Search />
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </div>

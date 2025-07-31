@@ -30,6 +30,7 @@ import ResponsiveTabList from "./PropertyTabs/PropertyTabs";
 import Spinner from "../../Components/Spinner/Spinner";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Search } from "lucide-react";
 
 // BACKGORUND
 const BannerBackground = {
@@ -165,7 +166,7 @@ const ViewProperty = () => {
         result = result.filter(
           (p) => p.off_market_listing === false && p.featured_listing === false
         );
-      } else if (propertyType && propertyType !== "Select Your Listing Type") {
+      } else if (propertyType && propertyType !== "All Listing") {
         result = result.filter(
           (p) =>
             p.property_type?.toLowerCase().trim() ===
@@ -251,7 +252,7 @@ const ViewProperty = () => {
       {/* PROPERTY TABS START */}
       <section>
         <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-          <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 items-end  justify-center  border-b-[1px] border-[#BBBBBB] border-solid ">
+          <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 items-en  justify-center  border-b-[1px] border-[#BBBBBB] border-solid ">
             <div>
               <ResponsiveTabList
                 onTabSelect={(tab) => {
@@ -299,6 +300,17 @@ const ViewProperty = () => {
                   Off Market Listing
                 </option>
               </Select>
+            </div> */}
+            {/* <div>
+              <button
+                type="button"
+                className="hover-btn hover-btn-purple text-white px-2 py-2 rounded-full text-[14px] cursor-pointer"
+                // onClick={onSubmit}
+              >
+                <span>
+                  <Search />
+                </span>
+              </button>
             </div> */}
           </div>
 
