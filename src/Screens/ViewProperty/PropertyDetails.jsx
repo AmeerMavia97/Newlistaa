@@ -38,7 +38,7 @@ import EmptyCards from "../../Components/EmptyCard/EmptyCard";
 import TruncatedText from "../../Components/TruncatedText/TruncatedText";
 import KeyFeatures from "./KeyFeatures&Amenities/KeyFeatures";
 import InquiryForm from "../../Components/InquiryForm/InquiryForm";
-import DummyLogo from "../../../public/Images/UnknowUser.png";
+import DummyLogo from "/Images/UnknowUser2.png";
 import MakeOffer from "../../Components/MakeAnOffer/MakeOffer";
 import { useSelector } from "react-redux";
 import SocialPage from "./SocialIcons/SocialIcons";
@@ -301,9 +301,10 @@ const PropertyDetails = () => {
                       <span className="">
                         <img
                           className="rounded-full w-[65px] h-[65px] object-cover"
-                          src={
+                          src={ 
+                            SingleProperty.user.headshot ? 
                             import.meta.env.VITE_IMAGE_KEY +
-                              SingleProperty.user.headshot || DummyLogo
+                              SingleProperty.user.headshot : DummyLogo
                           }
                           alt=""
                         />
@@ -364,7 +365,7 @@ const PropertyDetails = () => {
 
                   <div className="grid xl:flex grid-cols-1 sm:grid-cols-2 md:grid-cols-3 min-[850px]:!grid-cols-1 lg:!grid-cols-2 2xl:!grid-cols-3 gap-6 sm:gap-0 lg:gap-4 pt-4  ">
                     {/* Year Built */}
-                    {SingleProperty.custom_fields && (
+                    {SingleProperty.custom_fields.YearBuilt && (
                       <div className="flex flex-col gap-1 border-b sm:border-b-0 lg:mr-5 lg:border-r border-[#BBBBBB] pb-4 lg:pb-0 xl:w-[25%] ">
                         <span className="flex gap-2 items-center">
                           <img
@@ -382,7 +383,7 @@ const PropertyDetails = () => {
                       </div>
                     )}
 
-                    <div className="flex flex-col gap-1 border-b sm:border-b-0 pb-4 lg:border-r border-[#BBBBBB] lg:pb-0 xl:w-[30%] justify-start">
+                    <div className="flex flex-col gap-1 border-b sm:border-b-0 pb-4 lg:border-r border-[#BBBBBB] lg:pb-0 xl:w-[40%] justify-start">
                       <span className="flex gap-2 items-center">
                         <img
                           className="w-[20px] h-5"
