@@ -29,6 +29,7 @@ import EmptyCards from "../../Components/EmptyCard/EmptyCard";
 import ResponsiveTabList from "./PropertyTabs/PropertyTabs";
 import Spinner from "../../Components/Spinner/Spinner";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // BACKGORUND
 const BannerBackground = {
@@ -57,8 +58,6 @@ const ViewProperty = () => {
         setLoading(true);
         const GetPropertyData = await axios.get(`${ApiKey}/properties`);
         const Response = GetPropertyData.data.data;
-        console.log(Response);
-
         setProperties(Response);
       } catch (error) {
         console.log(error);
@@ -139,19 +138,42 @@ const ViewProperty = () => {
       const { listingType, propertyType, state, city, priceRange } =
         searchFilters;
 
+      console.log(state + priceRange);
+
       if (listingType && listingType !== "Select") {
         result = result.filter(
           (p) => p.listing_type?.toLowerCase() === listingType.toLowerCase()
         );
       }
 
-      if (propertyType && propertyType !== "Select Your Property") {
+      if (propertyType === "Off Market Listing") {
+        result =
+          isLoggedIn === "active"
+            ? result.filter((p) => p.off_market_listing)
+            : [];
+      } else if (propertyType === "Feature Listing") {
+        result = result.filter((p) => {
+          if (p.featured_listing) {
+            if (p.off_market_listing && isLoggedIn !== "active") {
+              return false;
+            }
+            return true;
+          }
+          return false;
+        });
+      } else if (propertyType === "Standard Listing") {
         result = result.filter(
-          (p) => p.property_type?.toLowerCase() === propertyType.toLowerCase()
+          (p) => p.off_market_listing === false && p.featured_listing === false
+        );
+      } else if (propertyType && propertyType !== "Select Your Listing Type") {
+        result = result.filter(
+          (p) =>
+            p.property_type?.toLowerCase().trim() ===
+            propertyType.toLowerCase().trim()
         );
       }
 
-      if (state) {
+      if (state && state.toLowerCase() !== "any") {
         result = result.filter(
           (p) => p.state?.toLowerCase() === state.toLowerCase()
         );
@@ -163,7 +185,7 @@ const ViewProperty = () => {
         );
       }
 
-      if (priceRange && priceRange !== "") {
+      if (priceRange && priceRange !== "any") {
         result = result.filter((p) => {
           const price =
             p.listing_type === "For Sale" ? p.sale_price : p.lease_rate;
@@ -199,11 +221,18 @@ const ViewProperty = () => {
     return result;
   }, [Properties, isLoggedIn, FilterValue, selectedTab, searchFilters]);
 
-  console.log(selectedTab);
   const handleFilterChange = (filters) => {
     console.log("Filters selected:", filters);
-    setSearchFilters(filters);
   };
+  const filters = useSelector((state) => state.filters);
+
+  useEffect(() => {
+    if (filters) {
+      console.log("hello");
+
+      setSearchFilters(filters);
+    }
+  }, [filters]);
 
   return (
     <>
@@ -232,7 +261,7 @@ const ViewProperty = () => {
               />
             </div>
 
-            <div className="flex justify-center gap-2 font-Poppins border-[1px] px-3 sm:px-4  border-solid border-[#bebebe] rounded-[6px] text-Paracolor text-[15px] items-center font-semibold mb-5 sm:mb-6  ">
+            {/* <div className="flex justify-center gap-2 font-Poppins border-[1px] px-3 sm:px-4  border-solid border-[#bebebe] rounded-[6px] text-Paracolor text-[15px] items-center font-semibold mb-5 sm:mb-6  ">
               <img className="w-5 h-5" src={FilterIcon2} alt="" />
               <Select
                 className={
@@ -270,7 +299,7 @@ const ViewProperty = () => {
                   Off Market Listing
                 </option>
               </Select>
-            </div>
+            </div> */}
           </div>
 
           <TabPanels className={"flex justify-center"}>
@@ -310,8 +339,8 @@ const ViewProperty = () => {
                           <TruncatedText
                             text={
                               items.listing_type === "For Sale"
-                                  ? items.sale_price
-                                  : items.lease_rate
+                                ? items.sale_price
+                                : items.lease_rate
                             }
                             maxLength={10}
                           />
@@ -324,7 +353,6 @@ const ViewProperty = () => {
                           items.off_market_listing ? "Off Market Property" : ""
                         }
                       />
-                      {console.log(items)}
                     </div>
                   ))
                 )}

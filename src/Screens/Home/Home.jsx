@@ -222,7 +222,7 @@ const Home = () => {
                 </h1>
               </div>
               <div className="max-[350px]:w-[90%] w-[75%] sm:w-[50%] md:w-[90%] min-[800px]:w-[80%] lg:w-[100%] xl:w-[100%] 2xl:w-[80%]">
-                <SearchBar handleFilterChange={handleFilterChange}></SearchBar>
+                <SearchBar></SearchBar>
               </div>
             </div>
           </section>

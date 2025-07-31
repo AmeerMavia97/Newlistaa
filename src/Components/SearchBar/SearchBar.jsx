@@ -4,6 +4,17 @@ import React, { useEffect, useState } from "react";
 import ComboboxSelector from "../ComboboxSelector/ComboboxSelector";
 import { Search } from "lucide-react";
 import MobileMenu from "./MobileMenu";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setFilters } from "../../Reducers/filterSlice/filterSlice";
+
+const ListingType = [
+  { label: "", name: "Select Your Listing Type" },
+  { label: "Standard Listing", name: "Standard Listing" },
+  { label: "Feature Listing", name: "Feature Listing" },
+  { label: "Off Market Listing", name: "Off Market Listing" },
+  { label: "All Listing", name: "All Listing" },
+];
 
 const propertyType = [
   { label: "Apartments / Multifamily", name: "Select Your Property" },
@@ -34,6 +45,7 @@ const propertyType = [
 ];
 
 const statesArray = [
+  { id: 57, name: "Any", code: "any" },
   { id: 1, name: "Alabama", code: "AL" },
   { id: 2, name: "Alaska", code: "AK" },
   { id: 3, name: "Arizona", code: "AZ" },
@@ -93,10 +105,12 @@ const statesArray = [
 ];
 
 const SearchBar = ({ handleFilterChange }) => {
+  const navigate = useNavigate();
   const [cities, setCities] = useState([]);
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const { register, handleSubmit, setValue, getValues, watch } = useForm();
 
@@ -110,9 +124,10 @@ const SearchBar = ({ handleFilterChange }) => {
       city: selectedCity,
       priceRange: getValues("priceRange"),
     };
-    handleFilterChange(data);
+    console.log(data);
+    dispatch(setFilters(data));
+    navigate("/properties");
   };
-
 
   const StateSelectionHandler = (value) => {
     if (!value || !value.name) return;
@@ -127,16 +142,18 @@ const SearchBar = ({ handleFilterChange }) => {
 
     // Load cities using state short code
     const stateShortNames = value.code;
-    axios
-      .get(`/states/${stateShortNames}.json`)
-      .then((res) => {
-        const cityList = res.data;
-        setCities(cityList);
-      })
-      .catch((error) => {
-        console.error("Failed to load cities:", error);
-        setCities([]);
-      });
+    if (value.code !== "any") {
+      axios
+        .get(`/states/${stateShortNames}.json`)
+        .then((res) => {
+          const cityList = res.data;
+          setCities(cityList);
+        })
+        .catch((error) => {
+          console.error("Failed to load cities:", error);
+          setCities([]);
+        });
+    }
   };
 
   const CitySelectionHandler = (value) => {
@@ -173,13 +190,13 @@ const SearchBar = ({ handleFilterChange }) => {
         {/* Property Type */}
         <div className="hidden lg:flex lg:w-[20%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
           <h1 className="text-[14px] font-semibold font-Inter text-black">
-            Property Type
+            Listing Type
           </h1>
           <select
             {...register("propertyType")}
             className="text-[13px] font-Inter text-Paracolor font-[500] -mt-0.5 -ml-1"
           >
-            {propertyType.map((item, index) => (
+            {ListingType.map((item, index) => (
               <option key={index} value={item.name}>
                 {item.name}
               </option>
@@ -234,7 +251,7 @@ const SearchBar = ({ handleFilterChange }) => {
             className="text-[13px] font-Inter text-Paracolor font-[500] -mt-0.5 -ml-1"
           >
             <option value="">Choose Price Range</option>
-            <option value="Over $50M">Any</option>
+            <option value="Any">Any</option>
             <option value="Under $250K">Under $250K</option>
             <option value="$250K – $500K">$250K – $500K</option>
             <option value="$500K – $1M">$500K – $1M</option>
