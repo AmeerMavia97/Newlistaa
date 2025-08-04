@@ -188,7 +188,7 @@ const ViewProperty = () => {
         );
       }
 
-      if (city) {
+      if (city && city.toLowerCase() !== "any") {
         result = result.filter(
           (p) => p.city?.toLowerCase() === city.toLowerCase()
         );
