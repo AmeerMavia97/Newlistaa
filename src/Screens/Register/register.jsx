@@ -20,6 +20,8 @@ const Register = () => {
     reset,
   } = useForm();
 
+  const [PolicyConfirm, setPolicyComfirm] = useState(false)
+
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const ApiKey = import.meta.env.VITE_API_KEY;
   const navigate = useNavigate();
@@ -29,9 +31,84 @@ const Register = () => {
   const [ErrorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+  // Modal visibility state
+  const [showModal, setShowModal] = useState(false);
+  // State to track if user agreed in modal
+  const [modalAgreed, setModalAgreed] = useState(false);
+
+  // Store form data temporarily until modal agreement
+  const [tempFormData, setTempFormData] = useState(null);
+  const [googleUserData, setGoogleUserData] = useState(null);
+  const [isGoogleLogin, setIsGoogleLogin] = useState(false);
 
   const RegisterForm = async (Data) => {
-    console.log("RegisterUser :", Data);
+    // Instead of submitting directly, show modal first
+    setTempFormData(Data);
+    setShowModal(true);
+  };
+
+
+  const GoogleLogin = async (e) => {
+    const idToken = e.credential;
+    const userData = decodeJwt(idToken);
+
+    // Store data and show modal
+    setGoogleUserData(userData);
+    setIsGoogleLogin(true); // Indicate this is a Google login
+    setShowModal(true);
+  };
+
+
+  const submitAfterAgreement = async (Data) => {
+    setShowModal(false);
+
+    if (isGoogleLogin && googleUserData) {
+      try {
+        setLoading(true);
+        const Response = await axios.post(
+          `${ApiKey}/social-login`,
+          {
+            email: googleUserData.email,
+            first_name: googleUserData.given_name,
+            last_name: googleUserData.family_name,
+            profile_photo: googleUserData.picture,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const response = Response.data;
+        localStorage.setItem("token", response.token);
+        localStorage.setItem(
+          "status",
+          response.subscription?.status || "inactive"
+        );
+        localStorage.setItem("User", JSON.stringify(response.user));
+        if (response.profile_complete) {
+          localStorage.setItem("ProfileComplete", JSON.stringify(response.profile_complete));
+          navigate("/admin");
+        } else {
+          navigate("/admin/account-setting");
+        }
+
+      } catch (error) {
+        console.log(error);
+        alert(error?.response?.data?.errors?.[0]?.msg || "Google sign-in failed.");
+      } finally {
+        setLoading(false);
+        setIsGoogleLogin(false);
+        setGoogleUserData(null);
+      }
+
+      return;
+    }
+
+    // ... EXISTING normal form registration (for non-Google users)
+    // This is your current submitAfterAgreement logic
+    // Just keep it here as it is
     if (Data.Password.length < 8) {
       setError("Password", {
         type: "manual",
@@ -94,8 +171,10 @@ const Register = () => {
     } finally {
       setLoading(false);
     }
+
     setErrorMessage("");
   };
+
 
   // DECODE JWT CODE
   // BCZ GOOGLE DOES NOT PROVIDE DIRECT DATA
@@ -112,7 +191,7 @@ const Register = () => {
   }
 
   // GOOGLE LOGIN
-  const GoogleLogin = async (e) => {
+  const GooglesubmitAfterAgreement = async (e) => {
     const idToken = e.credential;
     const userData = decodeJwt(idToken);
     try {
@@ -201,33 +280,6 @@ const Register = () => {
           </div>
 
           {/* Important Notice for Investors */}
-          <div className="bg-red-50 border border-red-200 text-red-700 text-sm sm:text-base rounded-md p-4 mt-4">
-            <p className="mb-2 font-semibold">
-              Newlista is a platform exclusively for real estate investors
-              seeking off-market properties. To maintain the integrity and focus
-              of our community:
-            </p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>All users must be bona fide investors.</li>
-              <li>
-                Soliciting services, including brokerage, wholesaling, or
-                marketing to other users, is strictly prohibited.
-              </li>
-              <li>
-                Users found soliciting or misusing the platform for
-                non-investment purposes will have their accounts suspended or
-                banned without refund.
-              </li>
-              <li>
-                We reserve the right to verify user eligibility and enforce
-                these policies to protect the quality of our network.
-              </li>
-            </ul>
-            <p className="mt-2">
-              By signing up, you agree to comply with these terms and
-              acknowledge that Newlista is designed for investors only.
-            </p>
-          </div>
 
           <form
             onSubmit={handleSubmit(RegisterForm)}
@@ -347,7 +399,7 @@ const Register = () => {
                 </button>
               </span>
             </div>
-            <div className="flex items-start gap-2 mt-2">
+            {/* <div className="flex items-start gap-2 mt-2">
               <input
                 type="checkbox"
                 {...register("termsAgreement", {
@@ -372,16 +424,15 @@ const Register = () => {
               <p className="text-red-600 text-sm">
                 {errors.termsAgreement.message}
               </p>
-            )}
+            )} */}
 
             {/* Sign Up Button */}
             <div className="mt-1">
               <button
                 type="submit"
                 disabled={Loading}
-                className={`bg-PurpleColor w-full h-11 cursor-pointer mt-3 text-white font-Urbanist rounded-[6px] font-[700] ${
-                  Loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+                className={`bg-PurpleColor w-full h-11 cursor-pointer mt-3 text-white font-Urbanist rounded-[6px] font-[700] ${Loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
               >
                 {Loading ? "Signing Up..." : "Sign Up"}
               </button>
@@ -413,6 +464,79 @@ const Register = () => {
           </p>
         </div>
       </div>
+
+      {/* Modal Section */}
+      {showModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-[#000000a2] bg-opacity-50 z-50"
+          aria-modal="true"
+          role="dialog"
+        >
+          <div className="bg-white rounded-lg shadow-lg pt-10 pb-7  px-6.5 max-w-[37%] mx-4 no-scrollbar ">
+            <h2 className="text-[30px] leading-[34px] font-semibold mb-4 font-Urbanist">Important Notice for Investors</h2>
+            <div className="bg-red-50 border border-red-200 mb-4 rounded-md pb-4"><div className=" text-red-700 text-sm sm:text-base rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
+              <p className="mb-2 font-semibold">
+                Newlista is a platform exclusively for real estate investors
+                seeking off-market properties. To maintain the integrity and focus
+                of our community:
+              </p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>All users must be bona fide investors.</li>
+                <li>
+                  Soliciting services, including brokerage, wholesaling, or
+                  marketing to other users, is strictly prohibited.
+                </li>
+                <li>
+                  Users found soliciting or misusing the platform for
+                  non-investment purposes will have their accounts suspended or
+                  banned without refund.
+                </li>
+                <li>
+                  We reserve the right to verify user eligibility and enforce
+                  these policies to protect the quality of our network.
+                </li>
+              </ul>
+              <p className="mt-2">
+                By signing up, you agree to comply with these terms and
+                acknowledge that Newlista is designed for investors only.
+              </p>
+            </div></div>
+
+            <label className="flex items-center space-x-2 mb-8">
+              <input
+                type="checkbox"
+                checked={modalAgreed}
+                onChange={(e) => setModalAgreed(e.target.checked)}
+                className="w-5 h-5"
+              />
+              <span className="text-sm sm:text-[14.5px] font-Inter font-semibold">
+                I have read and agree to the important notice above.
+              </span>
+            </label>
+
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={() => {
+                  setShowModal(false);
+                  setGoogleUserData(null);
+                  setModalAgreed(false);
+                }}
+                className="px-4 py-2 border rounded hover:bg-gray-100 font-Urbanist text-[14px] font-semibold hover-btn hover-btn-black"
+              >
+                <span>Cancel</span>
+              </button>
+              <button
+                disabled={!modalAgreed || Loading}
+
+                onClick={() => submitAfterAgreement(tempFormData)}
+                className={`px-4 py-2 hover-btn hover-btn-purple disabled:cursor-not-allowed font-Urbanist font-semibold text-[14.5px]`}
+              >
+                <span>{Loading ? "Processing..." : "Agree & Continue"}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
