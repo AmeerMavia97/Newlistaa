@@ -136,7 +136,7 @@ const ViewProperty = () => {
 
     // 🔍 Apply SearchBar filters if provided
     if (searchFilters) {
-      const { listingType, propertyType, state, city, priceRange } =
+      const { listingType, propertyType, state, city, priceRange, propertyName } =
         searchFilters;
 
       console.log(state + priceRange);
@@ -171,6 +171,14 @@ const ViewProperty = () => {
           (p) =>
             p.property_type?.toLowerCase().trim() ===
             propertyType.toLowerCase().trim()
+        );
+      }
+
+      if (propertyName && propertyName !== "Select Your Property") {
+        result = result.filter(
+          (p) =>
+            p.property_type?.toLowerCase().trim() ===
+            propertyName.toLowerCase().trim()
         );
       }
 

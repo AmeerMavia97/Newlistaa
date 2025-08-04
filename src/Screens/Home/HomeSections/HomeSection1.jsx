@@ -4,7 +4,7 @@ import HomeSec1_1 from "../../../assets/HomeSec1.1.png";
 import HomeSec1_2 from "../../../assets/HomeSec1.2.png";
 import HomeSec1_3 from "../../../assets/HomeSec1.3.png";
 
-const HomeSection1 = ({ token, onclick }) => {
+const HomeSection1 = ({ token, onclick , NetWorkView }) => {
   const status = localStorage.getItem("status");
   const CardDetails = [
     {
@@ -19,7 +19,7 @@ const HomeSection1 = ({ token, onclick }) => {
       name: "Connect & Collaborate",
       desc: "Build your network and form partnerships.",
       buttonName: "Create a Network",
-      ButtonLink: token ? "/admin/network" : "/login",
+      onclick: NetWorkView,
     },
     {
       image: HomeSec1_3,

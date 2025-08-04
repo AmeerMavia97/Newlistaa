@@ -230,7 +230,8 @@ const Home = () => {
 
           {/* CARDS SECTION   */}
           <HomeSection1
-            onclick={() => goToViewProperties("offmarket")}
+            NetWorkView={()=>{NetWorkView()}}
+            onclick={() => goToViewProperties("offmarket") }
             token={token}
           ></HomeSection1>
 

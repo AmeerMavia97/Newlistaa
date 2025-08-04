@@ -46,7 +46,7 @@ const PlansTabs = ({
           <span
             className={classNames(
               featured ? "text-white" : "text-gray-900",
-               "text-[40px] sm:text-[45px] md:text-[43px]  font-semibold tracking-tight font-Inter leading-[49px]"
+               "text-[40px] sm:text-[45px] md:text-[40px]  font-semibold tracking-tight font-Inter leading-[49px]"
             )}
           >
             ${Pricing}USD

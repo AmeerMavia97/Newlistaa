@@ -17,7 +17,7 @@ const ListingType = [
 ];
 
 const propertyType = [
-  { label: "Apartments / Multifamily", name: "Select Your Property" },
+  { label: "Select Your Property", name: "Select Your Property" },
   { label: "Apartments / Multifamily", name: "Apartments / Multifamily" },
   { label: "Automotive Property", name: "Automotive Property" },
   { label: "Church", name: "Church" },
@@ -116,7 +116,8 @@ const SearchBar = ({ handleFilterChange }) => {
   const { register, handleSubmit, setValue, getValues, watch } = useForm();
 
   const listingType = watch("listingType");
-  const propertyType = watch("propertyType");
+  const propertyType1 = watch("propertyType");
+  const propertyName = watch("propertyName");
   const priceRange = watch("priceRange");
   const state = watch("state");
   const city = watch("city");
@@ -124,7 +125,7 @@ const SearchBar = ({ handleFilterChange }) => {
   const onSubmit = () => {
     const data = {
       listingType: getValues("listingType"),
-      propertyType: getValues("propertyType"),
+      propertyName: getValues("propertyName"),
       state: selectedState,
       city: selectedCity,
       priceRange: getValues("priceRange"),
@@ -217,7 +218,7 @@ const SearchBar = ({ handleFilterChange }) => {
         </div>
 
         {/* Property Type */}
-        <div className="hidden lg:flex lg:w-[20%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
+        {location.pathname === '/properties' ? <div className="hidden lg:flex lg:w-[20%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
           <h1 className="text-[14px] font-semibold font-Inter text-black">
             Listing Type
           </h1>
@@ -232,6 +233,21 @@ const SearchBar = ({ handleFilterChange }) => {
             ))}
           </select>
         </div>
+          : <div className="hidden lg:flex lg:w-[20%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
+            <h1 className="text-[14px] font-semibold font-Inter text-black">
+              Property Type
+            </h1>
+            <select
+              {...register("propertyName")}
+              className="text-[13px] font-Inter text-Paracolor font-[500] -mt-0.5 -ml-1"
+            >
+              {propertyType.map((item, index) => (
+                <option key={index} value={item.name}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+          </div>}
 
         {/* State Selector */}
         <div className="hidden lg:flex lg:w-[190px] whitespace-nowrap text-ellipsis px-8 py-1 lg:border-r-[1px] border-solid border-Paracolor flex-col">
