@@ -44,6 +44,20 @@ const propertyType = [
   { label: "Other", name: "Other" },
 ];
 
+const CityArray = [
+  { id: 1, labels:"Houston", name: "Houston, TX", code: "hu" },
+  { id: 2, labels:"Dallas", name: "Dallas, TX", code: "da" },
+  { id: 3, labels:"Atlanta", name: "Atlanta, GA", code: "at" },
+  { id: 4, labels:"Los Angeles", name: "Los Angeles, CA", code: "la" },
+  { id: 5, labels:"Miami", name: "Miami, FL", code: "mi" },
+  { id: 6, labels:"Chicago", name: "Chicago, IL", code: "ch" },
+  { id: 7, labels:"Phoenix", name: "Phoenix, AZ", code: "ph" },
+  { id: 8, labels:"Charlotte", name: "Charlotte, NC", code: "cl" },
+  { id: 9, labels:"Las Vegas", name: "Las Vegas, NV", code: "lv" },
+  { id: 10, labels:"New York", name: "New York", code: "ny" },
+];
+
+
 const statesArray = [
   { id: 57, name: "Any", code: "any" },
   { id: 1, name: "Alabama", code: "AL" },
@@ -167,34 +181,20 @@ const SearchBar = ({ handleFilterChange }) => {
 
     // Save selected state name
     setSelectedState(value.name);
-    setSelectedCity("");
-    setCities([]);
-
-    // Load cities using state short code
-    const stateShortNames = value.code;
-    if (value.code !== "any") {
-      axios
-        .get(`/states/${stateShortNames}.json`)
-        .then((res) => {
-          const cityList = res.data;
-          setCities(cityList);
-        })
-        .catch((error) => {
-          console.error("Failed to load cities:", error);
-          setCities([]);
-        });
-    }
   };
 
   const CitySelectionHandler = (value) => {
-    setSelectedCity(value.name);
-    setValue("city", value.name);
+    if (!value || !value.labels) return;
+
+    setValue("city", value.labels, { shouldValidate: true });
+    console.log(value);
+    setSelectedCity(value.labels);
   };
 
-  const cityOptions = cities.map((city, index) => ({
-    id: index + 1,
-    name: city,
-  }));
+  // const cityOptions = cities.map((city, index) => ({
+  //   id: index + 1,
+  //   name: city,
+  // }));
 
   return (
     <div className="sm:mb-8 sm:flex sm:justify-center mt-8">
@@ -278,11 +278,9 @@ const SearchBar = ({ handleFilterChange }) => {
         <div className="hidden lg:w-[20%] xl:w-[22%] px-8 py-1 border-r-[1px] border-solid border-Paracolor lg:flex flex-col">
           <h1 className="text-[14px] font-Inter text-black font-[600]">City</h1>
           <ComboboxSelector
-            options={cityOptions}
+            options={CityArray}
             onSelect={CitySelectionHandler}
-            value={{ name: selectedCity }}
             placeholder="Select Your City"
-            disabled={cityOptions.length === 0}
           />
         </div>
 
