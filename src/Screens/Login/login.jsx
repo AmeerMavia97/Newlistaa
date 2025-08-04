@@ -149,11 +149,40 @@ const Login = () => {
 
   // CHECK GOOGLE API AND RENDER BUTTON
   useEffect(() => {
-    if (window.google) {
+    const loadGoogleScript = () => {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        if (window.google) {
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: GoogleLogin,
+          });
+
+          window.google.accounts.id.renderButton(
+            document.getElementById("google-login-button"),
+            {
+              theme: "outline",
+              size: "large",
+              shape: "pill",
+            }
+          );
+        }
+      };
+      document.body.appendChild(script);
+    };
+
+    // Check if script already loaded
+    if (!window.google || !window.google.accounts) {
+      loadGoogleScript();
+    } else {
       window.google.accounts.id.initialize({
         client_id: clientId,
         callback: GoogleLogin,
       });
+
       window.google.accounts.id.renderButton(
         document.getElementById("google-login-button"),
         {
@@ -164,6 +193,7 @@ const Login = () => {
       );
     }
   }, []);
+
 
   return (
     <>
