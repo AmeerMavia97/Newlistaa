@@ -44,19 +44,19 @@ const propertyType = [
   { label: "Other", name: "Other" },
 ];
 
-const CityArray = [
-  { id: 1, labels:"Houston", name: "Houston, TX", code: "hu" },
-  { id: 2, labels:"Dallas", name: "Dallas, TX", code: "da" },
-  { id: 3, labels:"Atlanta", name: "Atlanta, GA", code: "at" },
-  { id: 4, labels:"Los Angeles", name: "Los Angeles, CA", code: "la" },
-  { id: 5, labels:"Miami", name: "Miami, FL", code: "mi" },
-  { id: 6, labels:"Chicago", name: "Chicago, IL", code: "ch" },
-  { id: 7, labels:"Phoenix", name: "Phoenix, AZ", code: "ph" },
-  { id: 8, labels:"Charlotte", name: "Charlotte, NC", code: "cl" },
-  { id: 9, labels:"Las Vegas", name: "Las Vegas, NV", code: "lv" },
-  { id: 10, labels:"New York", name: "New York", code: "ny" },
+const initialCities = [
+  { id: 1, labels: "Any", name: "Any" },
+  { id: 1, labels: "Houston", name: "Houston" },
+  { id: 2, labels: "Dallas", name: "Dallas" },
+  { id: 3, labels: "Atlanta", name: "Atlanta" },
+  { id: 4, labels: "Los Angeles", name: "Los Angeles" },
+  { id: 5, labels: "Miami", name: "Miami" },
+  { id: 6, labels: "Chicago", name: "Chicago" },
+  { id: 7, labels: "Phoenix", name: "Phoenix" },
+  { id: 8, labels: "Charlotte", name: "Charlotte" },
+  { id: 9, labels: "Las Vegas", name: "Las Vegas" },
+  { id: 10, labels: "New York", name: "New York" },
 ];
-
 
 const statesArray = [
   { id: 57, name: "Any", code: "any" },
@@ -120,14 +120,18 @@ const statesArray = [
 
 const SearchBar = ({ handleFilterChange }) => {
   const navigate = useNavigate();
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(initialCities);
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const location = useLocation();
   const dispatch = useDispatch();
+  const ApiKey = import.meta.env.VITE_API_KEY;
 
   const { register, handleSubmit, setValue, getValues, watch } = useForm();
+
+  console.log(cities);
+
 
   const listingType = watch("listingType");
   const propertyType1 = watch("propertyType");
@@ -171,6 +175,8 @@ const SearchBar = ({ handleFilterChange }) => {
     getValues("priceRange"),
   ]);
 
+
+
   console.log(location.pathname);
 
   const StateSelectionHandler = (value) => {
@@ -182,6 +188,71 @@ const SearchBar = ({ handleFilterChange }) => {
     // Save selected state name
     setSelectedState(value.name);
   };
+
+
+  function addCityIfNotExists(cityName) {
+    const exists = cities.some(
+      (city) => city.name.toLowerCase() === cityName.toLowerCase()
+    );
+
+    if (!exists) {
+      setCities((prevCities) => {
+        const newId =
+          prevCities.length > 0
+            ? Math.max(...prevCities.map((c) => c.id)) + 1
+            : 1;
+        return [
+          ...prevCities,
+          {
+            id: newId,
+            labels: cityName,
+            name: cityName,
+          },
+        ];
+      });
+    }
+  }
+
+  useEffect(()=>{
+    async function fetchAndAddCities() {
+    try {
+      const response = await axios.get(`${ApiKey}/properties`);
+      const properties = response.data.data;
+
+      // Extract unique city names from properties
+      const uniqueCities = [...new Set(properties.map((p) => p.city))];
+
+      uniqueCities.forEach((cityName) => {
+        addCityIfNotExists(cityName);
+      });
+    } catch (error) {
+      console.error("Error fetching city from API:", error);
+    }
+  }
+  fetchAndAddCities()
+  })
+  function addCityIfNotExists(cityName) {
+    const exists = cities.some(
+      (city) => city.name.toLowerCase() === cityName.toLowerCase()
+    );
+
+    if (!exists) {
+      setCities((prevCities) => {
+        const newId =
+          prevCities.length > 0
+            ? Math.max(...prevCities.map((c) => c.id)) + 1
+            : 1;
+        return [
+          ...prevCities,
+          {
+            id: newId,
+            labels: cityName,
+            name: cityName,
+          },
+        ];
+      });
+    }
+  }
 
   const CitySelectionHandler = (value) => {
     if (!value || !value.labels) return;
@@ -278,7 +349,7 @@ const SearchBar = ({ handleFilterChange }) => {
         <div className="hidden lg:w-[20%] xl:w-[22%] px-8 py-1 border-r-[1px] border-solid border-Paracolor lg:flex flex-col">
           <h1 className="text-[14px] font-Inter text-black font-[600]">City</h1>
           <ComboboxSelector
-            options={CityArray}
+            options={cities}
             onSelect={CitySelectionHandler}
             placeholder="Select Your City"
           />
