@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 // COMPONENTS
@@ -532,15 +532,15 @@ const Register = () => {
               </p>
             </div></div>
 
-            <label className="flex items-center space-x-2 mb-8">
+            <label className="flex items-start space-x-2 mb-8">
               <input
                 type="checkbox"
                 checked={modalAgreed}
                 onChange={(e) => setModalAgreed(e.target.checked)}
-                className="w-5 h-5"
+                className="w-10 h-10 -mt-2"
               />
-              <span className="text-sm sm:text-[14.5px] font-Inter font-semibold">
-                I have read and agree to the important notice above.
+              <span className="text-sm sm:text-[13.5px] font-Inter font-semibold">
+                I agree to Newlista’s <Link to={'/terms-of-use'} className="text-blue-500">Terms of Use</Link> and <Link to={'/privacy-policy'} className="text-blue-500">Privacy Policy</Link>, and confirm I am a real estate investor using this platform for investment purposes only.
               </span>
             </label>
 
