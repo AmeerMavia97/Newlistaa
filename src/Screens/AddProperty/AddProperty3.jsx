@@ -29,6 +29,9 @@ const PropertyForm = () => {
 
   const navigate = useNavigate();
 
+  console.log(formData);
+
+
   if (stepRef.current) {
     stepRef.current.scrollIntoView({
       behavior: "smooth",
@@ -74,6 +77,7 @@ const PropertyForm = () => {
   const submitFormAfterPayment = async (isFeatured, dataOverride) => {
     const data = dataOverride || formData;
 
+
     try {
       setloading(true);
       const form = new FormData();
@@ -110,11 +114,17 @@ const PropertyForm = () => {
       });
 
       const customFields = data.custom_fields;
+
       if (customFields && typeof customFields === "object") {
         Object.keys(customFields).forEach((key) => {
-          form.append(`custom_fields[${key}]`, customFields[key]);
+          const value = customFields[key];
+          // Skip undefined, null, or empty string
+          if (value !== undefined && value !== null && value !== "") {
+            form.append(`custom_fields[${key}]`, value);
+          }
         });
       }
+
 
       // const response = await axios.post(`${ApiKey}/add-update-property`, form, {
       //   headers: {
@@ -128,6 +138,9 @@ const PropertyForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      console.log(response);
+
 
 
 
@@ -183,7 +196,7 @@ const PropertyForm = () => {
       }
     } else {
       if (IsActive !== 'active' && formData.FeaturedListing) {
-        formData.FeaturedListing = false; 
+        formData.FeaturedListing = false;
       }
 
       await submitFormAfterPayment(true);
@@ -292,8 +305,8 @@ const PropertyForm = () => {
                 >
                   <span
                     className={`text-[12px] min-[400px]:text-[14px] md:text-[14.5px] lg:text-[15px] xl:text-[18px] w-full  rounded-[5px] text-center md:px-10 py-2 font-[600] font-Urbanist border border-[#cecece]  ${currentStep === index
-                        ? "text-white bg-PurpleColor"
-                        : "text-Paracolor"
+                      ? "text-white bg-PurpleColor"
+                      : "text-Paracolor"
                       }`}
                   >
                     {label}

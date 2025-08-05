@@ -212,7 +212,7 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
                 setSelectedValues={setSelectedInterests}
                 setValue={setValue}
                 name="propertyinterest"
-                placeholder="Select Investment Interest"
+                placeholder="Investment Interest"
               />
             </div>
             <div className="border-r-[1px] border-solid border-[#BBBBBB] w-[24%]">
@@ -232,7 +232,7 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
                 setSelectedValues={setSelectedStates}
                 setValue={setValue}
                 name="state"
-                placeholder="Select State(s)"
+                placeholder="Investment Location"
               />
             </div>
             <div className="flex justify-center items-center w-[20%]">

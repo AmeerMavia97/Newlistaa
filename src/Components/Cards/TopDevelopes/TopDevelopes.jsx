@@ -15,15 +15,15 @@ const TopDevelopes = ({
 }) => {
   return (
     <>
-      <div className="sm:w-[48.5%] md:w-[47%] lg:w-[33%] bg-white border border-gray-200 rounded-lg shadow-sm relative">
+      <div className=" bg-white border border-gray-200 rounded-lg shadow-sm relative">
         <img
           className="rounded-t-lg h-[240px] object-cover w-[100%] "
           src={import.meta.env.VITE_IMAGE_KEY + Img}
           alt=""
         />
-        <div className="pt-4 pb- flex flex-col gap-3 px-5 py-7 justify-between h-[38ch]">
+        <div className="pt-4 pb- flex flex-col gap-3 px-5 py-7 justify-between sm:h-[38ch]">
           <div className="flex flex-col gap-2">
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-wrap gap-2 items-center">
               {"For Sale" === type ? (
                 <span className="bg-[#28A745] text-white font-Inter px-3 py-1 text-[13.5px] rounded-full">
                   For Sale
@@ -57,7 +57,7 @@ const TopDevelopes = ({
           </div>
 
           <div>
-            <h1 className=" text-[25px] font-[700] font-Inter tracking-tight leading-[24px] mt-3 text-gray-900 sm:text-[23px]">
+            <h1 className=" text-[25px] leading-[30px] mb-3 font-[700] font-Inter tracking-tight sm:leading-[24px] mt-3 text-gray-900 sm:text-[23px]">
               {Heading}
             </h1>
             <h1 className="mb-2 text-[18px] font-[600] font-Inter tracking-tight leading-[24px] mt-1 text-gray-900">

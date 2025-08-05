@@ -6,12 +6,12 @@ export default function MultiSelectDropdown({
   options = [],
   selectedValues = [],
   setSelectedValues,
-  setValue, // optional (e.g., from react-hook-form)
-  name = "multiSelect", // field name for setValue
+  setValue, 
+  name = "multiSelect", 
   placeholder = "Select Options",
-  displayField = "name", // which field to show (default: name)
-  valueField = "name",   // which field to use as value (default: name)
-  className = "",        // optional styling
+  displayField = "name", 
+  valueField = "name",   
+  className = "",       
 }) {
   const [isOpen, setIsOpen] = useState(false);
 

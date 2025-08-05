@@ -217,7 +217,7 @@ const Home = () => {
           >
             <div className="max-[350px]:pt-28 pt-40 pb-20 min-[480px]:pt-44 flex flex-col justify-center sm:items-center  sm:py-44 lg:py-44">
               <div className="sm:text-center max-[891px]:pt-7 min-[891px]:pt-10 lg:pt-20">
-                <h1 className="text-[35.5px] leading-[47px] sm:text-[41px] sm:leading-[46px]  md:text-[47px]	md:leading-[53px] lg:text-[53px] lg:leading-[65px] xl:text-[60px] font-[600] font-Poppins tracking-tight lg:text-balance text-white ">
+                <h1 className="text-[28px] leading-[40px] min-[370px]:!text-[35.5px]  min-[370px]:!leading-[47px] sm:!text-[41px] sm:!leading-[46px]  md:!text-[47px]	md:!leading-[53px] lg:!text-[53px] lg:!leading-[65px] xl:!text-[60px] font-[600] font-Poppins tracking-tight lg:text-balance text-white ">
                   The Ultimate Commercial Real Estate Marketplace & Investor Network
                 </h1>
               </div>
@@ -238,7 +238,7 @@ const Home = () => {
           {/* FEATUES PROPERTIES */}
           <section
             id="featurelisting"
-            className="flex flex-col justify-center items-center py-3 sm:py-8 lg:py-14 px-6 sm:px-8 gap-10 md:px-0 sm:gap-6 w-[100%] xl:w-[94%] 2xl:w-[85%]"
+            className="flex flex-col justify-center items-center py-3 sm:py-8 lg:py-14 px-6 sm:px-8 gap-10 md:px-0 sm:gap-6 w-[100%] xl:w-[94%] 2xl:w-[80%]"
           >
             {/* CONTENT SECTION  */}
             <CardContentSection
@@ -251,7 +251,7 @@ const Home = () => {
               onClick={() => goToViewProperties("feature")}
             />
 
-            <div className="flex flex-wrap gap-7 sm:gap-3 md:gap-5 md:w-[84%]">
+            <div className="grid lg:grid-cols-3 flex-wrap gap-9 sm:gap-3 md:gap-5 min-[1666px]:!gap-7 md:w-[84%]">
               {filteredProperties.length === 0 ? (
                 <EmptyCards Title={"No matching properties found"} />
               ) : (
@@ -261,7 +261,7 @@ const Home = () => {
                   .map((items) => (
                     <div
                       key={items.id}
-                      className="sm:w-[48.5%] md:w-[47%] lg:w-[31.5%]"
+                      className=""
                     >
                       <PropertiesCards
                         PropertyType={items.property_type}
@@ -300,7 +300,7 @@ const Home = () => {
           {/* OFF MARKET PROPERTIES START  */}
           <section
             id="OffMarketingListing"
-            className="flex flex-col justify-center items-center py-20 px-6 sm:px-8 sm:py-14 md:px-0  gap-10 sm:gap-6 w-[100%] xl:w-[92%] 2xl:w-[85%]"
+            className="flex flex-col justify-center items-center py-20 px-6 sm:px-8 sm:py-14 md:px-0  gap-10 sm:gap-6 w-[100%] xl:w-[92%] 2xl:w-[78%]"
           >
             {/* CONTENT SECTION  */}
             <CardContentSection
@@ -313,7 +313,7 @@ const Home = () => {
             />
             {/* PROPERTY CARD SECTION  */}
             <div
-              className={`flex gap-7 sm:gap-3 sm:-ml-4 md:gap-5  md:w-[84%] ${
+              className={`grid lg:grid-cols-3   gap-7 sm:gap-3 sm:-ml-4 md:gap-5 2xl:gap-10 md:w-[84%] ${
                 status === "active" ? "" : "blur-xl"
               } `}
             >
@@ -327,7 +327,7 @@ const Home = () => {
           {/* OFF MARKET PROPERTIES  3 END */}
 
           {/* TESTIMONIAL START  */}
-          <section className="flex flex-col justify-center items-center py-3  gap-10 px-6 sm:gap-7 sm:py-5 sm:px-8 md:px-0 lg:py-16 w-[100%] xl:w-[92%] 2xl:w-[85%]">
+          <section className="flex flex-col justify-center items-center py-3  gap-10 px-6 sm:gap-7 sm:py-5 sm:px-8 md:px-0 lg:py-16 w-[100%] xl:w-[92%] 2xl:w-[80%]">
             {/* CONTENT SECTION  */}
             <div className="md:w-[84%]">
               <h1 className="text-[35px] leading-[39px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px]">
@@ -377,7 +377,7 @@ const Home = () => {
           {/* TESTIMONIAL 4 END  */}
 
           {/* SECTION 5 START  */}
-          <section className="flex flex-col justify-center gap-6 px-6 py-20 sm:pt-12 sm:gap-10 sm:pb-9 lg:pb-20 sm:px-8 md:px-0 md:items-center w-[100%] xl:w-[92%] 2xl:w-[85%]">
+          <section className="flex flex-col justify-center gap-6 px-6 py-20 sm:pt-12 sm:gap-10 sm:pb-9 lg:pb-20 sm:px-8 md:px-0 md:items-center w-[100%] xl:w-[92%] 2xl:w-[80%]">
             <div className="md:w-[84%]">
               <h1 className="text-[35px] leading-[38px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px]">
                 Have a Property to Sell?
@@ -406,7 +406,7 @@ const Home = () => {
           {/* SECTION 5 END  */}
 
           {/* SECTION 6 START  */}
-          <section className="flex flex-col justify-center items-center pb-20 px-6 gap-10 overflow-hidden sm:pb-16 sm:px-8 md:px-0 sm:pt-10 w-[100%] xl:w-[92%] 2xl:w-[85%]">
+          <section className="flex flex-col justify-center items-center pb-20 px-6 gap-10 overflow-hidden sm:pb-16 sm:px-8 md:px-0 sm:pt-10 w-[100%] xl:w-[92%] 2xl:w-[80%]">
             {/* CONTENT SECTION  */}
             <CardContentSection
               Heading={"Expand Your Real Estate Network"}

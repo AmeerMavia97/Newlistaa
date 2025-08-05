@@ -1,30 +1,32 @@
-import React, { useState } from "react";
-import { Select, Textarea } from "@headlessui/react";
+import axios from "axios";
+import  { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 // Components
-import Navbar from "../../Components/Navbar/Navbar";
-import MiniFooter from "../../Components/Footer/MiniFooter";
 import Footer from "../../Components/Footer/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
+import Spinner from "../../Components/Spinner/Spinner";
+import Inputs from "../../Components/InputFields/Inputs";
+import MiniFooter from "../../Components/Footer/MiniFooter";
+import TextAreas from "../../Components/InputFields/TextAreas";
+import AlertModal from "../../Components/AlertModal/AlertModal";
 import CountrySelector from "../../Components/RegisterCountrySelector/CountrySelection";
+
 // Image
 import ContactImage1_1 from "../../assets/ContactImage1.1.png";
 import ContactImage1_2 from "../../assets/ContactImage1.2.png";
-import Inputs from "../../Components/InputFields/Inputs";
-import { Controller, useForm } from "react-hook-form";
-import TextAreas from "../../Components/InputFields/TextAreas";
-import Swal from "sweetalert2";
-import AlertModal from "../../Components/AlertModal/AlertModal";
-import axios from "axios";
-import Spinner from "../../Components/Spinner/Spinner";
+
 
 const ContactUs = () => {
-  const [phone, setPhone] = useState("");
+
   const ApiKey = import.meta.env.VITE_API_KEY;
+
+  // STATES 
   const [loading, setloading] = useState(false);
+  const [phone, setPhone] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
     control,
     reset,
   } = useForm();

@@ -132,6 +132,7 @@ const InvestorCarousel = () => {
         640: { slidesPerView: 2, spaceBetween: 20 },
         950: { slidesPerView: 3, spaceBetween: 80 },
         1024: { slidesPerView: 4, spaceBetween: 200 },
+        1666: { slidesPerView: 4, spaceBetween: 150 },
       }}
     >
       {sortedLatest.map((inv, i) => (

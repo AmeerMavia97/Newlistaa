@@ -118,7 +118,7 @@ const statesArray = [
   { id: 56, name: "Northern Mariana Islands", code: "MP" },
 ];
 
-const SearchBar = ({ handleFilterChange }) => {
+const SearchBar = ({ }) => {
   const navigate = useNavigate();
   const [cities, setCities] = useState(initialCities);
   const [selectedState, setSelectedState] = useState("");
@@ -149,7 +149,6 @@ const SearchBar = ({ handleFilterChange }) => {
       priceRange: getValues("priceRange"),
     };
     console.log(data);
-    // handleFilterChange(data);
     dispatch(setFilters(data));
     navigate("/properties");
   };
@@ -165,7 +164,6 @@ const SearchBar = ({ handleFilterChange }) => {
       };
 
       dispatch(setFilters(data));
-      handleFilterChange(data);
     }
   }, [
     getValues("listingType"),
@@ -340,7 +338,7 @@ const SearchBar = ({ handleFilterChange }) => {
               setIsFilterOpen={setIsFilterOpen}
               isFilterOpen={isFilterOpen}
               listingType={listingType}
-              handleFilterChange={handleFilterChange}
+              // handleFilterChange={handleFilterChange}
             />
           )}
         </div>

@@ -1,36 +1,24 @@
-import React, { useEffect, useMemo, useState } from "react";
-import {
-  MenuButton,
-  MenuItems,
-  Select,
-  Tab,
-  TabGroup,
-  TabList,
-  TabPanel,
-  TabPanels,
-} from "@headlessui/react";
-import { Menu } from "@headlessui/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
+
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { TabGroup, TabPanel , TabPanels, } from "@headlessui/react";
+
 // COMPONENTS
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
-import MiniFooter from "../../Components/Footer/MiniFooter";
-// IMAGES
-import PropertiesImage1 from "../../assets/PropertiesImage1.png";
-import PropertiesImage2 from "../../assets/PropertiesImage2.png";
-import FilterIcon2 from "../../assets/FilterIcon2.png";
-import PropertiesImage3 from "../../assets/PropertiesImage3.png";
-import AddPropertyBanner from "../../assets/AddPropertyBanner.jpg";
-import PropertiesCards2 from "../../Components/Cards/PropertiesCards/PropertiesCards2";
-import SearchBar from "../../Components/SearchBar/SearchBar";
-import axios from "axios";
-import TruncatedText from "../../Components/TruncatedText/TruncatedText";
-import EmptyCards from "../../Components/EmptyCard/EmptyCard";
-import ResponsiveTabList from "./PropertyTabs/PropertyTabs";
 import Spinner from "../../Components/Spinner/Spinner";
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Search } from "lucide-react";
+import MiniFooter from "../../Components/Footer/MiniFooter";
+import ResponsiveTabList from "./PropertyTabs/PropertyTabs";
+import SearchBar from "../../Components/SearchBar/SearchBar";
+import EmptyCards from "../../Components/EmptyCard/EmptyCard";
+import TruncatedText from "../../Components/TruncatedText/TruncatedText";
+import PropertiesCards2 from "../../Components/Cards/PropertiesCards/PropertiesCards2";
+
+// IMAGES
+import AddPropertyBanner from "../../assets/AddPropertyBanner.jpg";
+
 
 // BACKGORUND
 const BannerBackground = {
@@ -42,18 +30,26 @@ const BannerBackground = {
 };
 
 const ViewProperty = () => {
+
   const location = useLocation();
   const ApiKey = import.meta.env.VITE_API_KEY;
+  const isLoggedIn = localStorage.getItem("status");
+  const filters = useSelector((state) => state.filters);
+
+  // STATES 
+  const [DefaultTab, setDefaulTab] = useState()
+  const [Loading, setLoading] = useState(false);
   const [Properties, setProperties] = useState([]);
+  const [selectedTab, setSelectedTab] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [searchFilters, setSearchFilters] = useState(null);
   const [FilterValue, setFilterValue] = useState("AllProperties");
-  const isLoggedIn = localStorage.getItem("status");
-  const [selectedTab, setSelectedTab] = useState("");
-  const [Loading, setLoading] = useState(false);
 
-  const [DefaultTab , setDefaulTab] = useState()
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  useEffect(() => {
+    if (filters) {
+      setSearchFilters(filters);
+    }
+  }, [filters]);
 
   useEffect(() => {
     async function GetProperty() {
@@ -156,10 +152,6 @@ const ViewProperty = () => {
       const { listingType, propertyType, state, city, priceRange, propertyName } =
         searchFilters;
 
-        
-
-      console.log(state + priceRange);
-
       if (listingType && listingType !== "Select") {
         result = result.filter(
           (p) => p.listing_type?.toLowerCase() === listingType.toLowerCase()
@@ -250,18 +242,8 @@ const ViewProperty = () => {
     return result;
   }, [Properties, isLoggedIn, FilterValue, selectedTab, searchFilters]);
 
-  const handleFilterChange = (filters) => {
-    console.log("Filters selected:", filters);
-  };
-  const filters = useSelector((state) => state.filters);
-
-  useEffect(() => {
-    if (filters) {
-      console.log("hello");
-
-      setSearchFilters(filters);
-    }
-  }, [filters]);
+  
+ 
 
   return (
     <>
@@ -272,7 +254,7 @@ const ViewProperty = () => {
         className="flex items-center justify-center"
       >
         <div className=" pt-16 pb-20 ml-10 sm:ml-0 md:py-16 lg:py-28 lg:px-12  max-[350px]:w-[90%] w-[75%] sm:w-[50%] md:w-[90%] min-[800px]:w-[80%] lg:w-[100%] xl:w-[100%] 2xl:w-[80%]">
-          <SearchBar handleFilterChange={handleFilterChange}></SearchBar>
+          <SearchBar ></SearchBar>
         </div>
       </section>
       {/* BANNER END   */}
@@ -280,67 +262,16 @@ const ViewProperty = () => {
       {/* PROPERTY TABS START */}
       <section>
         <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} >
-          <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 items-en  justify-center  border-b-[1px] border-[#BBBBBB] border-solid ">
+          <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 justify-center border-b-[1px] border-[#BBBBBB] border-solid ">
             <div>
               <ResponsiveTabList
-               DefaultTab={DefaultTab}
+                DefaultTab={DefaultTab}
                 onTabSelect={(tab) => {
                   setSelectedTab(tab);
                   setFilterValue("AllProperties");
                 }}
               />
             </div>
-
-            {/* <div className="flex justify-center gap-2 font-Poppins border-[1px] px-3 sm:px-4  border-solid border-[#bebebe] rounded-[6px] text-Paracolor text-[15px] items-center font-semibold mb-5 sm:mb-6  ">
-              <img className="w-5 h-5" src={FilterIcon2} alt="" />
-              <Select
-                className={
-                  "appearance-none outline-none focus:outline-none w-14 px-1 py-2.5 cursor-pointer"
-                }
-                name="status"
-                aria-label="Project status"
-                value={FilterValue}
-                onChange={(e) => {
-                  setFilterValue(e.target.value);
-                }}
-              >
-                <option
-                  className="text-[#1a1919] text-[11.5px] font-[500] font-Urbanist sm:text-[15px]"
-                  value="AllProperties"
-                >
-                  Filter
-                </option>
-                <option
-                  className="text-[#1a1919] text-[11.5px] font-[500] font-Urbanist sm:text-[15px]"
-                  value="Standard Property"
-                >
-                  Standard Listing
-                </option>
-                <option
-                  className="text-[#1a1919] text-[11.5px] font-[500] font-Urbanist sm:text-[15px]"
-                  value="Features Property"
-                >
-                  Featured Listing
-                </option>
-                <option
-                  className="text-[#1a1919] text-[11.5px] font-[500] font-Urbanist sm:text-[15px]"
-                  value="Off Market Properties"
-                >
-                  Off Market Listing
-                </option>
-              </Select>
-            </div> */}
-            {/* <div>
-              <button
-                type="button"
-                className="hover-btn hover-btn-purple text-white px-2 py-2 rounded-full text-[14px] cursor-pointer"
-                // onClick={onSubmit}
-              >
-                <span>
-                  <Search />
-                </span>
-              </button>
-            </div> */}
           </div>
 
           <TabPanels className={"flex justify-center"}>

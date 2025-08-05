@@ -30,7 +30,7 @@ const PropertiesCards = ({
             alt=""
           />
         </Link>
-        <div className="p-5 flex flex-col gap-2 justify-between h-[55vh]">
+        <div className="px-5 py-6 sm:p-5 flex flex-col gap-5 sm:gap-2 justify-between sm:h-[55vh]">
           <div className="flex flex-col gap-2">
             <div>
               {"For Sale" === type ? (

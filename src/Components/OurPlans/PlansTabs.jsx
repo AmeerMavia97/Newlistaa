@@ -42,11 +42,11 @@ const PlansTabs = ({
         >
           {PlanName}
         </h3>
-        <p className="mt-4 flex items-baseline gap-x-1">
+        <p className="mt-4 flex items-baseline gap-x-1 ">
           <span
             className={classNames(
               featured ? "text-white" : "text-gray-900",
-               "text-[40px] sm:text-[45px] md:text-[40px]  font-semibold tracking-tight font-Inter leading-[49px]"
+               "text-[32px] min-[450px]:!text-[39px] sm:!text-[43px] md:!text-[40px]  font-semibold tracking-tight font-Inter leading-[49px]"
             )}
           >
             ${Pricing}USD
@@ -54,7 +54,7 @@ const PlansTabs = ({
           <span
             className={classNames(
               featured ? "text-white" : "text-gray-500",
-              "text-base"
+              "text-[13.5px] min-[450px]:text-base"
             )}
           >
             {Duration}
@@ -72,7 +72,7 @@ const PlansTabs = ({
           role="list"
           className={classNames(
             featured ? "text-white" : "text-gray-600",
-            " mt-8 space-y-2 text-[14px] sm:text-sm/6 md:text-[13.5px] lg:text-[13px] sm:mt-5"
+            " mt-8 space-y-2 text-[12.5px] sm:text-sm/6 md:text-[13.5px] lg:text-[13px] sm:mt-5"
           )}
         >
           {features.map((feature, index) => (
@@ -82,11 +82,11 @@ const PlansTabs = ({
                   aria-hidden="true"
                   className={classNames(
                     featured ? "text-white" : "text-PurpleColor",
-                    "h-6 w-5 flex-none"
+                    "h-5 w-4.5 min-[480px]:h-6 min-[480px]:w-5 flex-none"
                   )}
                 />
               ) : (
-                <X className={"h-6 w-5 flex-none text-red-600"} />
+                <X className={"h-5 w-4.5 min-[480px]:h-6 min-[480px]:w-5 flex-none text-red-600"} />
               )}
               {feature.label}
             </li>
@@ -104,7 +104,7 @@ const PlansTabs = ({
                 disabled
                   ? "cursor-not-allowed !bg-[#e9e9e9]"
                   : "hover-btn-black hover-btn "
-              } mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10  w-full`
+              } mt-8 block rounded-md px-3.5 py-2.5 text-center text-[13px] sm:text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10  w-full`
             )}
           >
             <span>{ButtonText}</span>

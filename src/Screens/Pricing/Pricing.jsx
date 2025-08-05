@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 // Components
 import Navbar from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
+import Spinner from "../../Components/Spinner/Spinner";
 import PlansTabs from "../../Components/OurPlans/PlansTabs";
+
 // IMAGE
 import Shape from "../../assets/Shape.png";
 import Shape2 from "../../assets/Shape2.png";
-import PricingSec2_1 from "../../assets/PricingSec2.1.png";
 import HomeSec5_2 from "../../assets/HomeSec5.2.png";
-import { Link, useNavigate } from "react-router-dom";
-import AlertModal from "../../Components/AlertModal/AlertModal";
-import Spinner from "../../Components/Spinner/Spinner";
-import axios from "axios";
-import { CheckIcon } from "@heroicons/react/20/solid";
-import { X } from "lucide-react";
+import PricingSec2_1 from "../../assets/PricingSec2.1.png";
+
 
 const freebenefits = [
   {
@@ -94,12 +94,13 @@ const benefits = [
 ];
 
 const Pricing = () => {
+
   const ApiKey = import.meta.env.VITE_API_KEY;
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+
+  // STATES 
   const [PricingData, setPricingData] = useState([]);
   const [Loading, setLoading] = useState(false);
-
   const [checked, setchecked] = useState();
 
   useEffect(() => {
@@ -117,6 +118,7 @@ const Pricing = () => {
     };
     GetPricing();
   }, []);
+
   useEffect(() => {
     const CurrentPricing = async () => {
       setLoading(true);
@@ -127,7 +129,6 @@ const Pricing = () => {
           },
         });
         setchecked(response.data.subscription);
-        console.log(response);
         localStorage.setItem(
           "status",
           response.data.subscription.status !== null &&
@@ -135,7 +136,6 @@ const Pricing = () => {
         );
       } catch (error) {
         setLoading(false);
-        console.log(error);
       } finally {
         setLoading(false);
       }
@@ -160,7 +160,6 @@ const Pricing = () => {
         }
       );
       window.location.href = response.data.checkout_url;
-      console.log(response.data.checkout_url);
       CurrentPricing();
     } catch (error) {
       setLoading(false);
@@ -190,9 +189,10 @@ const Pricing = () => {
             <img src={Shape2} alt="" />
           </div>
           {/* SHAPE END  */}
+
           {/* HEADER SECTION  */}
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="max-[350px]:text-[13.5px] text-base/7 font-semibold text-indigo-600">
+            <h2 className="max-[350px]:text-[13.5px] text-base/7 font-semibold text-PurpleColor">
               Pricing
             </h2>
             <p className="lg:mt-2 max-[350px]:text-[28px] max-[350px]:leading-[33px] text-[33px] leading-[36px] sm:leading-[45px] sm:text-[40px] font-Urbanist  tracking-tight text-balanc text-gray-900 lg:text-5xl font-[700]">
@@ -207,8 +207,8 @@ const Pricing = () => {
 
           {/* TABS SEC START  */}
           {!Loading ? (
-            <div className="">
-              <div className="grid px-0 min-[400px]:px-3 mt-10 grid-cols-1 items-center gap-y-6 sm:gap-y-10 md:grid-cols-2 lg:gap-y-0 sm:px-24 md:px-0 min-[800px]:!px-8 lg:!px-0 xl:!px-8 2xl:!px-[6%]  lg:grid-cols-3 gap-6">
+            <div className="w-[%]">
+              <div className="grid px-1 min-[400px]:!px-6 mt-10 grid-cols-1 min-[800px]:!grid-cols-2 items-center gap-y-6 sm:gap-y-10  lg:gap-y-10 sm:!px-24 md:!px-2  min-[800px]:!px-8 lg:!px-28 xl:!px-8 2xl:!px-[6%]  xl:!grid-cols-3 gap-6">
                 <PlansTabs
                   features={freebenefits}
                   featured={
@@ -246,7 +246,7 @@ const Pricing = () => {
                     token &&
                     checked?.status !== "active" &&
                     checked?.plan_id !== null
-                      ? () => Subscription(freePlanId) // Optional if free plan is subscribable
+                      ? () => Subscription(freePlanId)
                       : undefined
                   }
                 />
@@ -309,7 +309,7 @@ const Pricing = () => {
       <section className="flex justify-center items-center">
         <div className="flex flex-col justify-center gap-6 px-5 pb-16 sm:py-20 sm:pt-12 sm:gap-10 sm:pb-9 lg:pb-20 sm:px-8 md:px-0 md:items-center w-[100%] xl:w-[92%] 2xl:w-[85%]">
           <div className="md:w-[84%]">
-            <h1 className=" text-center sm:text-start text-[30px]  leading-[38px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px]">
+            <h1 className=" text-center md:text-start text-[28px]  leading-[38px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px]">
               Unlock Your Full Real Estate Potential
             </h1>
           </div>
@@ -318,12 +318,12 @@ const Pricing = () => {
               <img className="" src={PricingSec2_1} alt="" />
             </div>
             <div className="flex flex-col justify-center items-center text-center gap-5 py-2 px-5 sm:px-10 md:w-[50%] md:px-3 lg:px-5 xl:px-20 ">
-              <h1 className="font-Inter font-bold text-[20px] leading-[29px] sm:text-[24px] md:text-[20px] lg:text-[22px] sm:leading-[25px]">
+              <h1 className="font-Inter font-bold text-[16.5px] leading-[22px] sm:text-[24px] md:text-[20px] lg:text-[22px] sm:leading-[25px]">
                 Not sure which plan is right for you? Contact Us for a
                 personalized recommendation.{" "}
               </h1>
               <Link className="w-full" to={"/contact-us"}>
-                <button className="hover-btn-purple hover-btn py-2 text-[16px] text-white font-Inter rounded-[8px] w-full cursor-pointer">
+                <button className="hover-btn-purple hover-btn py-2 text-[15px] sm:text-[16px] text-white font-Inter rounded-[8px] w-full cursor-pointer">
                   <span>Contact Us</span>
                 </button>
               </Link>

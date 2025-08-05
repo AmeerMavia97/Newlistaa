@@ -41,11 +41,11 @@ const premiumBenefits = [
 ];
 
 const SubscriptionSetting = () => {
+
+  const navigate = useNavigate()
   const ApiKey = import.meta.env.VITE_API_KEY;
   const token = localStorage.getItem("token");
   const status = localStorage.getItem("status");
-  const navigate = useNavigate()
-
   const [loading, setLoading] = useState(false);
   const [CurrentPlan, setCurrentPlan] = useState(null);
 
@@ -65,7 +65,6 @@ const SubscriptionSetting = () => {
         setLoading(false);
       }
     };
-
     fetchCurrentPlan();
   }, []);
 
@@ -96,8 +95,6 @@ const SubscriptionSetting = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
-      // Redirect to Stripe portal (or whatever URL the API returns)
       window.location.href = response.data.url;
     } catch (error) {
       console.error("Manage subscription error:", error);

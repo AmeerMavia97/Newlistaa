@@ -59,7 +59,6 @@ const AboutUs = () => {
             {/* Paragraph  */}
             <div>
               <p class="mx-auto mt-6 max-w-3xl font-medium text-pretty text-[#ececec] sm:text-md/8 text-[13px]  font-Urbanist sm:text-[13.5px] md:text-[14px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px]">
-                {" "}
                 At Newlista, we're redefining how real estate investors connect,
                 collaborate, and close deals. Our platform offers seamless
                 access to off-market listings, powerful networking tools, and
@@ -68,32 +67,6 @@ const AboutUs = () => {
                 the tools and connections you need to succeed.
               </p>
             </div>
-            {/* <div className="flex gap-4 mt-6">
-              <span className="bg-white rounded-[6px] px-4 py-4">
-                <h1 class="text-[26px] font-bold font-Inter text-PurpleColor">
-                  200+
-                </h1>
-                <p class="mx-auto text-[18px] font-bold text-[#222222] sm:text-md font-Inter leading-[25px]">
-                  Happy Customers
-                </p>
-              </span>
-              <span className="bg-white rounded-[6px] px-4 py-4">
-                <h1 class="text-[26px] font-bold font-Inter text-PurpleColor">
-                  10k+
-                </h1>
-                <p class="mx-auto text-[18px] font-bold text-[#222222] sm:text-md font-Inter leading-[25px]">
-                  Properties For Clients
-                </p>
-              </span>
-              <span className="bg-white rounded-[6px] px-4 py-4">
-                <h1 class="text-[26px] font-bold font-Inter text-PurpleColor">
-                  16+
-                </h1>
-                <p class="mx-auto text-[18px] font-bold text-[#222222] sm:text-md font-Inter leading-[25px]">
-                  Years of Experience
-                </p>
-              </span>
-            </div> */}
           </div>
         </div>
       </section>
@@ -221,7 +194,7 @@ const AboutUs = () => {
       <section className="flex justify-center py-10 md:py-0">
         <div className="flex flex-col justify-center items-center pt-3  gap-10 px-6 sm:gap-7 sm:py-5 pb-16 sm:px-8 md:px-0 lg:py-16 w-[95%] md:w-[91%] xl:w-[100%] 2xl:w-[85%] ">
           {/* CONTENT SECTION  */}
-          <div className="lg:w-[87%] xl:w-[84%]">
+          <div className="lg:w-[96%] xl:w-[84%]">
             <h1 className="text-[27px] sm:text-[32px] leading-[39px] font-[700] font-Urbanist  text-[#1E1E1E] md:text-[37px] sm:leading-[48px]">
               What Our Clients Say
             </h1>
@@ -233,7 +206,7 @@ const AboutUs = () => {
             </p>
           </div>
           {/* CARDSECTION  */}
-          <div className="flex flex-col gap-7 sm:gap-4 sm:flex-row sm:flex-wrap lg:w-[87%] xl:w-[84%] md:gap-5">
+          <div className="flex flex-col gap-7 sm:gap-4 sm:flex-row sm:flex-wrap lg:w-[97%] xl:w-[84%] md:gap-5">
             <Testimonials
               RevTitle={""}
               RevParagraph={
