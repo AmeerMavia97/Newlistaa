@@ -260,9 +260,9 @@ const ViewProperty = () => {
       {/* BANNER END   */}
 
       {/* PROPERTY TABS START */}
-      <section>
+      <section >
         <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} >
-          <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 justify-center border-b-[1px] border-[#BBBBBB] border-solid ">
+          <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 justify-center items-center border-b-[1px] border-[#BBBBBB] border-solid ">
             <div>
               <ResponsiveTabList
                 DefaultTab={DefaultTab}
@@ -274,11 +274,11 @@ const ViewProperty = () => {
             </div>
           </div>
 
-          <TabPanels className={"flex justify-center"}>
+          <TabPanels className={"flex justify-center  "}>
             {!Loading ? (
               <TabPanel
                 id="offmarket"
-                className="w-[100%] flex flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-10 sm:py-12 lg:py-16 xl:my-1 sm:gap-4 sm:px-13 md:gap-10 md:px-16 lg:gap-5 xl:gap-5 2xl:gap-10  2xl:w-[90%]"
+                className="w-[100%]  grid sm:grid-cols-2 min-[860px]:!grid-cols-3 xl:!grid-cols-4 flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-10 sm:py-12 lg:py-16 xl:my-1 sm:gap-4 sm:px-13 md:gap-10 min-[860px]:!gap-5 md:px-16  xl:!gap-5 2xl:!gap-10  2xl:w-[90%] min-[1850px]:!w-[83%]"
               >
                 {filteredProperties.length === 0 ? (
                   <EmptyCards
@@ -292,7 +292,7 @@ const ViewProperty = () => {
                   filteredProperties.map((items) => (
                     <div
                       key={items.id}
-                      className="sm:w-[48.5%] md:w-[43%] lg:w-[31%] xl:w-[23.5%] 2xl:w-[20.5%]"
+                      className=""
                     >
                       <PropertiesCards2
                         PropertyType={items.property_type}

@@ -6,12 +6,10 @@ import { Pickaxe } from "lucide-react";
 import TruncatedText from "../../TruncatedText/TruncatedText";
 
 const PropertiesCards2 = ({
-  Img,
   Heading,
   desc,
   Status,
   Price,
-  Features,
   id,
   images,
   PropertyType,
@@ -20,6 +18,8 @@ const PropertiesCards2 = ({
   forsale,
   forlease,
 }) => {
+
+
   return (
     <>
       <div className="w-[100%] bg-white border border-gray-200 rounded-lg shadow-sm relative ">
@@ -28,7 +28,7 @@ const PropertiesCards2 = ({
           src={import.meta.env.VITE_IMAGE_KEY + images}
           alt=""
         />
-        <div className="py-3 pb-4 px-4 flex flex-col gap-2 justify-between h-[35ch]">
+        <div className="py-3 pb-4 px-4 flex flex-col gap-2 justify-between sm:h-[42ch] lg:h-[39ch]">
           <div className="absolute top-8 end-8">
             {"Active" === Status ? (
               <span className="bg-[#28A745] text-white font-Inter px-4 py-1.5 text-[14px] rounded-full">

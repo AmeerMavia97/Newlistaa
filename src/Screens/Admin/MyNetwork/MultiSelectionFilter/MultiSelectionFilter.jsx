@@ -16,7 +16,6 @@ export default function MultiSelectDropdown({
   const [isOpen, setIsOpen] = useState(false);
  const dropdownRef = useRef(null);
 
-  // ✅ Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
