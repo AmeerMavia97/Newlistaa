@@ -213,23 +213,23 @@ const SearchBar = ({ handleFilterChange }) => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     async function fetchAndAddCities() {
-    try {
-      const response = await axios.get(`${ApiKey}/properties`);
-      const properties = response.data.data;
+      try {
+        const response = await axios.get(`${ApiKey}/properties`);
+        const properties = response.data.data;
 
-      // Extract unique city names from properties
-      const uniqueCities = [...new Set(properties.map((p) => p.city))];
+        // Extract unique city names from properties
+        const uniqueCities = [...new Set(properties.map((p) => p.city))];
 
-      uniqueCities.forEach((cityName) => {
-        addCityIfNotExists(cityName);
-      });
-    } catch (error) {
-      console.error("Error fetching city from API:", error);
+        uniqueCities.forEach((cityName) => {
+          addCityIfNotExists(cityName);
+        });
+      } catch (error) {
+        console.error("Error fetching city from API:", error);
+      }
     }
-  }
-  fetchAndAddCities()
+    fetchAndAddCities()
   })
   function addCityIfNotExists(cityName) {
     const exists = cities.some(
@@ -379,9 +379,8 @@ const SearchBar = ({ handleFilterChange }) => {
         </div>
 
         {/* Search Button */}
-          {location.pathname !== "/properties" && (
-
-        <div>
+        {location.pathname !== "/properties" && (
+          <div>
             <button
               type="button"
               className="hover-btn hover-btn-purple text-white px-2 py-2 rounded-full text-[14px] cursor-pointer"
@@ -391,8 +390,8 @@ const SearchBar = ({ handleFilterChange }) => {
                 <Search />
               </span>
             </button>
-        </div>
-          )}
+          </div>
+        )}
 
       </div>
     </div>

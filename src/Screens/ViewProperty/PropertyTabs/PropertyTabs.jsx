@@ -133,10 +133,29 @@ const propertyType = [
   },
 ];
 
-function ResponsiveTabs({ onTabSelect }) {
+function ResponsiveTabs({ onTabSelect, DefaultTab }) {
   const [showMoreTabs, setShowMoreTabs] = useState(false);
   const [visibleTabs, setVisibleTabs] = useState(2);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(() => {
+    if (!DefaultTab) return 0;
+    const idx = propertyType.findIndex(
+      (tab) => tab.name.toLowerCase() === DefaultTab.toLowerCase()
+    );
+
+    return idx === -1 ? 0 : idx;
+  });
+
+  useEffect(() => {
+    if (DefaultTab) {
+      const idx = propertyType.findIndex(
+        (tab) => tab.name.toLowerCase() === DefaultTab.toLowerCase()
+      );
+      if (idx !== -1) {
+        setSelectedIndex(idx);
+      }
+    }
+  }, [DefaultTab]);
+
 
   const dropdownRef = useRef(null); // <-- Step 1
   useEffect(() => {

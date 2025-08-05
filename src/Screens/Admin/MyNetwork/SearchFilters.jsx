@@ -5,29 +5,30 @@ import { useForm, useWatch } from "react-hook-form";
 import Selection from "../../../Components/InputFields/Selection";
 import ComboboxSelector from "../../../Components/ComboboxSelector/ComboboxSelector";
 import MultiSelectCombobox from "./MultiSelectionFilter/MultiSelectionFilter";
+import MultiSelectDropdown from "./MultiSelectionFilter/MultiSelectionFilter";
 
 const PropertyInterest = [
-  "Apartments / Multifamily",
-  "Automotive Property",
-  "Church",
-  "Gas Station",
-  "Healthcare Facility",
-  "Hospitality",
-  "Industrial Building",
-  "Industrial Park",
-  "Mixed Use Property",
-  "Office Building",
-  "Recreation Center",
-  "Retail Center",
-  "School Building",
-  "Self-Storage Facility",
-  "Senior Living Facility",
-  "Shopping Center",
-  "Single-Tenant Retail Building",
-  "Strip Center",
-  "Vacant Land",
-  "Warehouse",
-  "Other",
+  { id: 1, name: "Apartments / Multifamily" },
+  { id: 2, name: "Automotive Property" },
+  { id: 3, name: "Church" },
+  { id: 4, name: "Gas Station" },
+  { id: 5, name: "Healthcare Facility" },
+  { id: 6, name: "Hospitality" },
+  { id: 7, name: "Industrial Building" },
+  { id: 8, name: "Industrial Park" },
+  { id: 9, name: "Mixed Use Property" },
+  { id: 10, name: "Office Building" },
+  { id: 11, name: "Recreation Center" },
+  { id: 12, name: "Retail Center" },
+  { id: 13, name: "School Building" },
+  { id: 14, name: "Self-Storage Facility" },
+  { id: 15, name: "Senior Living Facility" },
+  { id: 16, name: "Shopping Center" },
+  { id: 17, name: "Single-Tenant Retail Building" },
+  { id: 18, name: "Strip Center" },
+  { id: 19, name: "Vacant Land" },
+  { id: 20, name: "Warehouse" },
+  { id: 21, name: "Other" },
 ];
 
 const statesArray = [
@@ -137,9 +138,11 @@ const InvestmentRange = [
   "Over $50M",
 ];
 
+
+
 const SearchFilters = ({ watch, setValue, register, control }) => {
-  const [selectedState, setSelectedState] = useState(null);
-  const [selectedNames, setSelectedNames] = useState([]);
+  const [selectedStates, setSelectedStates] = useState([]);
+  const [selectedInterests, setSelectedInterests] = useState([]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -154,7 +157,8 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
     setValue("search", "");
     setValue("investmentRange", "");
     setValue("state", "");
-    setSelectedNames([]);
+    setSelectedStates([]);
+    setSelectedInterests([]);
   };
 
   return (
@@ -202,13 +206,13 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
             </button>
             {/* STATUS  */}
             <div className="border-r-[1px] border-solid border-[#BBBBBB] w-[22%]">
-              <Selection
-                defaultOption={"Investment Interest"}
-                Options={PropertyInterest}
-                icon={"!top-3.5 !right-0.5"}
-                name={"propertyinterest"}
-                register={register}
-                Style={"bg-transparent border-none"}
+              <MultiSelectDropdown
+                options={PropertyInterest}
+                selectedValues={selectedInterests}
+                setSelectedValues={setSelectedInterests}
+                setValue={setValue}
+                name="propertyinterest"
+                placeholder="Select Investment Interest"
               />
             </div>
             <div className="border-r-[1px] border-solid border-[#BBBBBB] w-[24%]">
@@ -222,10 +226,13 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
               />
             </div>
             <div className=" border-r-[1px] border-solid border-[#BBBBBB] w-[24%]">
-              <MultiSelectCombobox
-                selectedNames={selectedNames}
-                setSelectedNames={setSelectedNames}
+              <MultiSelectDropdown
+                options={statesArray}
+                selectedValues={selectedStates}
+                setSelectedValues={setSelectedStates}
                 setValue={setValue}
+                name="state"
+                placeholder="Select State(s)"
               />
             </div>
             <div className="flex justify-center items-center w-[20%]">
@@ -279,12 +286,13 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
                   </span>
                 </button>
                 <div>
-                  <Selection
-                    defaultOption={"Property Interest"}
-                    Options={PropertyInterest}
-                    name={"propertyinterest"}
-                    icon={"!top-3.5"}
-                    register={register}
+                  <MultiSelectDropdown
+                    options={PropertyInterest}
+                    selectedValues={selectedInterests}
+                    setSelectedValues={setSelectedInterests}
+                    setValue={setValue}
+                    name="propertyinterest"
+                    placeholder="Select Investment Interest"
                   />
                 </div>
                 <div>
@@ -297,12 +305,13 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
                   />
                 </div>
                 <div>
-                  <ComboboxSelector
-                    style={`flex items-center bg-[#f3eeff] py-4 rounded-[5px] px-4 text-[#4b4b4b] font-[600] font-Urbanist text-[14px] outline-none appearance-none cursor-pointer focus:outline-none`}
-                    icon={"top-4.5 right-3.5"}
+                  <MultiSelectDropdown
                     options={statesArray}
-                    onSelect={StateSelectionHandler}
-                    placeholder={"Location"}
+                    selectedValues={selectedStates}
+                    setSelectedValues={setSelectedStates}
+                    setValue={setValue}
+                    name="state"
+                    placeholder="Select State(s)"
                   />
                 </div>
 

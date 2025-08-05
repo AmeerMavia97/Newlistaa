@@ -73,11 +73,16 @@ const MyNetwork2 = () => {
   const applyFilters = (users) => {
     return users.filter((user) => {
       const searchTerm = search?.toLowerCase() || "";
-      const selectedInterest = propertyinterest?.toLowerCase() || "";
+      // const selectedInterest = propertyinterest?.toLowerCase() || "";
       const selectedInvestment = investmentRange?.toLowerCase() || "";
       const selectedStates = Array.isArray(state)
         ? state.map((s) => s.toLowerCase())
         : [];
+      const selectedInterest = Array.isArray(propertyinterest)
+        ? propertyinterest.map((s) => (typeof s === "string" ? s.toLowerCase() : ""))
+          .filter(Boolean)
+        : [];
+
 
       const fullName = `${user.first_name || ""} ${user.last_name || ""
         }`.toLowerCase();
@@ -88,15 +93,17 @@ const MyNetwork2 = () => {
         ? user.property_interests.map((i) => i.toLowerCase())
         : [];
 
+
       const matchesSearch = search
         ? fullName.includes(searchTerm) ||
         title.includes(searchTerm) ||
         interests.some((interest) => interest.includes(searchTerm))
         : true;
 
-      const matchesInterest = propertyinterest
-        ? interests.includes(selectedInterest)
-        : true;
+      const matchesInterest =
+        selectedInterest.length > 0
+          ? selectedInterest.includes("any") || selectedInterest.some((val) => interests.includes(val))
+          : true;
 
       const matchesInvestment = investmentRange
         ? selectedInvestment === 'any' || investment === selectedInvestment

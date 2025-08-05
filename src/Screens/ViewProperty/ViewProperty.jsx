@@ -51,6 +51,8 @@ const ViewProperty = () => {
   const [selectedTab, setSelectedTab] = useState("");
   const [Loading, setLoading] = useState(false);
 
+  const [DefaultTab , setDefaulTab] = useState()
+
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
@@ -154,6 +156,8 @@ const ViewProperty = () => {
       const { listingType, propertyType, state, city, priceRange, propertyName } =
         searchFilters;
 
+        
+
       console.log(state + priceRange);
 
       if (listingType && listingType !== "Select") {
@@ -190,6 +194,7 @@ const ViewProperty = () => {
       }
 
       if (propertyName && propertyName !== "Select Your Property") {
+        setDefaulTab(propertyName)
         result = result.filter(
           (p) =>
             p.property_type?.toLowerCase().trim() ===
@@ -274,10 +279,11 @@ const ViewProperty = () => {
 
       {/* PROPERTY TABS START */}
       <section>
-        <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+        <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} >
           <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 items-en  justify-center  border-b-[1px] border-[#BBBBBB] border-solid ">
             <div>
               <ResponsiveTabList
+               DefaultTab={DefaultTab}
                 onTabSelect={(tab) => {
                   setSelectedTab(tab);
                   setFilterValue("AllProperties");
