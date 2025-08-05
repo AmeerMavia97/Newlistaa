@@ -10,11 +10,14 @@ import PasswordChangeSuccesFully from "../../Components/PasswordChangeSuccesFull
 
 // IMAGE
 import Image from "../../assets/SetNewPassword.jpg";
+import { Eye, EyeOff } from "lucide-react";
 
 const SetNewPassword = () => {
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const email = localStorage.getItem("ForgetUser");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setshowConfirmPassword] = useState(false);
 
   const {
     register,
@@ -28,7 +31,7 @@ const SetNewPassword = () => {
   const SetNewPassword = async (data) => {
 
     console.log(data);
-    
+
     setLoading(true);
     clearErrors(); // clear old errors
 
@@ -75,12 +78,12 @@ const SetNewPassword = () => {
         }
       );
       console.log(response);
-      
+
 
       if (response.data.message === "Password reset successful") {
         localStorage.removeItem("ForgetUser");
         setShowSuccess(true);
-        reset(); 
+        reset();
       }
     } catch (error) {
       const errorMsg =
@@ -118,31 +121,50 @@ const SetNewPassword = () => {
               onSubmit={handleSubmit(SetNewPassword)}
               className="flex flex-col gap-5"
             >
-             <span>
-               <Inputs
-                name="NewPassword"
-                register={register("NewPassword", {
-                  required: "New password is required",
-                })}
-                labels="Create New Password"
-                placeholder="Enter new password"
-                type="password"
-                error={errors.NewPassword?.message}
-              />
-             </span>
-
-              <span>
+              <span className="relative">
                 <Inputs
-                name="ReEnterNewPassword"
-                register={register("ReEnterNewPassword", {
-                  required: "Please re-enter your password",
-                })}
-                labels="Re-enter New Password"
-                placeholder="Re-enter new password"
-                type="password"
-                error={errors.ReEnterNewPassword?.message}
-              />
+                  name={"NewPassword"}
+                  register={register("NewPassword", {
+                    required: "New password is required",
+                  })}
+                  labels={"Create New Password"}
+                  type={showPassword ? "text" : "password"}
+                  placeholder={"Enter new password"}
+                  error={errors.NewPassword?.message}
+                ></Inputs>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPassword((prev) => !prev);
+                  }}
+                  className="absolute right-6 text-[#747474] top-[50px] transform -translate-y-1/2 cursor-pointer"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </span>
+
+              <span className="relative">
+                <Inputs
+                  name={"ReEnterNewPassword"}
+                  register={register("ReEnterNewPassword", {
+                    required: "Please re-enter your password",
+                  })}
+                  labels={"Re-enter New Password"}
+                  type={showPassword ? "text" : "password"}
+                  placeholder={"Enter new password"}
+                  error={errors.ReEnterNewPassword?.message}
+                ></Inputs>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setshowConfirmPassword((prev) => !prev);
+                  }}
+                  className="absolute right-6 text-[#747474] top-[50px] transform -translate-y-1/2 cursor-pointer"
+                >
+                  {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </span>
+             
 
               <button
                 type="submit"

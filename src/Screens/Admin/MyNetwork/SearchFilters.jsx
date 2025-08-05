@@ -31,6 +31,7 @@ const PropertyInterest = [
 ];
 
 const statesArray = [
+  { id: 57, name: "Any", code: "" },
   { id: 1, name: "Alabama", code: "AL" },
   { id: 2, name: "Alaska", code: "AK" },
   { id: 3, name: "Arizona", code: "AZ" },
@@ -124,6 +125,7 @@ const propertyTypess = [
 ];
 
 const InvestmentRange = [
+  "Any",
   "Under $250K",
   "$250K – $500K",
   "$500K – $1M",

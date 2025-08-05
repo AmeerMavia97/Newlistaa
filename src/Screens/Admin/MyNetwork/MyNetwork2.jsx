@@ -99,7 +99,7 @@ const MyNetwork2 = () => {
         ? interests.includes(selectedInterest)
         : true;
 
-      const matchesInvestment = investmentRange
+      const matchesInvestment = investmentRange !== "Any"
         ? investment === selectedInvestment
         : true;
 

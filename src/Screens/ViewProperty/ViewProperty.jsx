@@ -119,6 +119,19 @@ const ViewProperty = () => {
           : [];
     }
 
+    if (!selectedTab || selectedTab.toLowerCase() === "all properties") {
+      result =
+        isLoggedIn === "active"
+          ? result
+          : result.filter((p) => !p.off_market_listing);
+    } else {
+      result =
+        isLoggedIn === "active"
+          ? result
+          : result.filter((p) => !p.off_market_listing);
+    }
+
+
     if (FilterValue === "AllProperties") {
       if (!selectedTab || selectedTab.toLowerCase() === "all properties") {
         result =
@@ -133,6 +146,8 @@ const ViewProperty = () => {
         );
       }
     }
+
+
 
     // 🔍 Apply SearchBar filters if provided
     if (searchFilters) {

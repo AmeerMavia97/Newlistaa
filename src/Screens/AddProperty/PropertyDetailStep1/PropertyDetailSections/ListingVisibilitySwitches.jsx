@@ -31,9 +31,13 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
                   checked={field.value}
                   onChange={async () => {
                     if (!field.value) {
-                      const confirmed = await confirm();
-                      if (confirmed) {
-                        field.onChange(true); // call onChange with true
+                      if (status === "active") {
+                        field.onChange(true); // Skip confirmation if user is active
+                      } else {
+                        const confirmed = await confirm();
+                        if (confirmed) {
+                          field.onChange(true);
+                        }
                       }
                     } else {
                       field.onChange(false);
@@ -44,6 +48,7 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
                 />
               )}
             />
+
           </div>
           <div className="flex flex-col max-[400px]:w-[87%] gap-1">
             <span className="flex gap-4">
@@ -53,9 +58,6 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               <div className="border-PurpleColor border  font-[600]  text-[12px] sm:text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
                 Premium
               </div>
-              <button className="border-PurpleColor border  font-[600] cursor-pointer text-[12px] sm:text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
-                Premium
-              </button>
             </span>
             <p className="block font-Urbanist text-[12.5px] sm:text-[14px] lg:text-[14.5px] font-[400] text-[#222222]">
               Featured listings appear at the top of search results and get more
