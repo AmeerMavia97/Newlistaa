@@ -73,9 +73,9 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               defaultValue={false} // Ensure this is set
               render={({ field }) => (
                 <Switches
-                  value={status ? field.value : setShowError(true)}
-                  onChange={status ? field.onChange : setShowError(true)}
-                  checked={status ? field.value : setShowError(true)} // Use field.value for checked
+                  value={status === "active" ? field.value : setShowError(true)}
+                  onChange={status === "active" ? field.onChange : setShowError(true)}
+                  checked={status === "active" ? field.value : setShowError(true)} // Use field.value for checked
                   onBlur={field.onBlur}
                 />
               )}
@@ -138,9 +138,9 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               defaultValue={false} // Ensure this is set
               render={({ field }) => (
                 <Switches
-                  value={status ? field.value : setShowError(true)}
-                  onChange={status ? field.onChange : setShowError(true)}
-                  checked={status ? field.value : setShowError(true)} // Use field.value for checked
+                  value={status === "active" ? field.value : setShowError(true)}
+                  onChange={status === "active" ? field.onChange : setShowError(true)}
+                  checked={status === "active" ? field.value : setShowError(true)} // Use field.value for checked
                   onBlur={field.onBlur}
                 />
               )}
@@ -169,9 +169,9 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               defaultValue={false} // Ensure this is set
               render={({ field }) => (
                 <Switches
-                  value={status ? field.value : setShowError(true)}
-                  onChange={status ? field.onChange : setShowError(true)}
-                  checked={status ? field.value : setShowError(true)} // Use field.value for checked
+                  value={status === "active" ? field.value : setShowError(true)}
+                  onChange={status === "active" ? field.onChange : setShowError(true)}
+                  checked={status === "active" ? field.value : setShowError(true)} // Use field.value for checked
                   onBlur={field.onBlur}
                 />
               )}
