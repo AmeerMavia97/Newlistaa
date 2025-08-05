@@ -43,7 +43,7 @@ const MyNetwork2 = () => {
   });
   const [activeTab, setActiveTab] = useState("addToNetwork");
 
-   useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tabParam = params.get("tab");
 
@@ -79,9 +79,8 @@ const MyNetwork2 = () => {
         ? state.map((s) => s.toLowerCase())
         : [];
 
-      const fullName = `${user.first_name || ""} ${
-        user.last_name || ""
-      }`.toLowerCase();
+      const fullName = `${user.first_name || ""} ${user.last_name || ""
+        }`.toLowerCase();
       const title = user.title?.toLowerCase() || "";
       const userState = user.state?.toLowerCase() || "";
       const investment = user.preferred_investment_range?.toLowerCase() || "";
@@ -91,20 +90,22 @@ const MyNetwork2 = () => {
 
       const matchesSearch = search
         ? fullName.includes(searchTerm) ||
-          title.includes(searchTerm) ||
-          interests.some((interest) => interest.includes(searchTerm))
+        title.includes(searchTerm) ||
+        interests.some((interest) => interest.includes(searchTerm))
         : true;
 
       const matchesInterest = propertyinterest
         ? interests.includes(selectedInterest)
         : true;
 
-      const matchesInvestment = investmentRange !== "Any"
-        ? investment === selectedInvestment
+      const matchesInvestment = investmentRange
+        ? selectedInvestment === 'any' || investment === selectedInvestment
         : true;
 
       const matchesState =
-        selectedStates.length > 0 ? selectedStates.includes(userState) : true;
+        selectedStates.length > 0
+          ? selectedStates.includes('any') || selectedStates.includes(userState)
+          : true;
 
       return (
         matchesSearch && matchesInterest && matchesInvestment && matchesState
@@ -141,9 +142,10 @@ const MyNetwork2 = () => {
     try {
       const response = await axios.post(
         `${ApiKey}/connections/request`,
-        { to_user_id: id , 
-          action_url : `${window.location.origin}/admin/network?tab=pending`
-         },
+        {
+          to_user_id: id,
+          action_url: `${window.location.origin}/admin/network?tab=pending`
+        },
         { headers: { Authorization: `Bearer ${tokens}` } }
       );
 
@@ -182,9 +184,10 @@ const MyNetwork2 = () => {
     try {
       await axios.patch(
         `${ApiKey}/connections/${id}/update`,
-        { status: Val , 
-          action_url : `${window.location.origin}/admin/network?tab=myNetwork`
-         },
+        {
+          status: Val,
+          action_url: `${window.location.origin}/admin/network?tab=myNetwork`
+        },
         { headers: { Authorization: `Bearer ${tokens}` } }
       );
 
@@ -247,11 +250,10 @@ const MyNetwork2 = () => {
             <button
               key={index}
               onClick={() => setActiveTab(val.TabLink)}
-              className={`flex-1 min-w-[100px] text-[15px] sm:text-[18px] font-Urbanist py-2.5 md:py-2 px-2.5 md:px-4 rounded-[7px] font-semibold text-center transition duration-200 items-center cursor-pointer relative ${
-                activeTab === val.TabLink
-                  ? "bg-PurpleColor text-white"
-                  : "bg-gray-200 text-gray-700"
-              }`}
+              className={`flex-1 min-w-[100px] text-[15px] sm:text-[18px] font-Urbanist py-2.5 md:py-2 px-2.5 md:px-4 rounded-[7px] font-semibold text-center transition duration-200 items-center cursor-pointer relative ${activeTab === val.TabLink
+                ? "bg-PurpleColor text-white"
+                : "bg-gray-200 text-gray-700"
+                }`}
             >
               <span>{val.name}</span>
               {val.TabLink === "pending" && PendinNetwork.length > 0 && (

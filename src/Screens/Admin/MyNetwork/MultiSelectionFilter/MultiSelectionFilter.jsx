@@ -13,6 +13,7 @@ import { useState } from "react";
 import clsx from "clsx";
 
 const statesArray = [
+  { id: 57, name: "Any", code: "" },
   { id: 1, name: "Alabama", code: "AL" },
   { id: 2, name: "Alaska", code: "AK" },
   { id: 3, name: "Arizona", code: "AZ" },
