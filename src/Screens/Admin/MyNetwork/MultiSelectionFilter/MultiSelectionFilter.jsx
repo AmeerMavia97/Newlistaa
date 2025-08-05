@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDownIcon, CheckIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 
@@ -14,6 +14,20 @@ export default function MultiSelectDropdown({
   className = "",       
 }) {
   const [isOpen, setIsOpen] = useState(false);
+ const dropdownRef = useRef(null);
+
+  // ✅ Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
 
   const toggleSelection = (item) => {
     const itemValue = item[valueField];
@@ -24,16 +38,12 @@ export default function MultiSelectDropdown({
 
     setSelectedValues(updated);
     if (setValue) setValue(name, updated);
-
-    if (!alreadySelected && selectedValues.length === 0) {
-      setIsOpen(false);
-    }
   };
   
 
 
   return (
-    <div className={`text-black py-2 w-full max-w-md relative ${className}`}>
+    <div ref={dropdownRef} className={`text-black py-2 w-full max-w-md relative ${className}`}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}

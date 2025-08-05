@@ -59,7 +59,6 @@ const PropertyForm = () => {
       if (savedForm) {
         const parsedForm = JSON.parse(savedForm);
         setFormData(parsedForm);
-
         // Call submit using saved data
         submitFormAfterPayment(status === "confirm", parsedForm);
 
@@ -118,20 +117,12 @@ const PropertyForm = () => {
       if (customFields && typeof customFields === "object") {
         Object.keys(customFields).forEach((key) => {
           const value = customFields[key];
-          // Skip undefined, null, or empty string
           if (value !== undefined && value !== null && value !== "") {
             form.append(`custom_fields[${key}]`, value);
           }
         });
       }
 
-
-      // const response = await axios.post(`${ApiKey}/add-update-property`, form, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
       const response = await axios.post(`${ApiKey}/add-update-property`, form, {
         headers: {
           Authorization: `Bearer ${token}`,
