@@ -487,9 +487,9 @@ const PropertyDetails = () => {
                 <div className="flex justify-center items-center">
                   <iframe
                     src={`https://www.google.com/maps?q=404 ${
-                      SingleProperty.address +
-                      SingleProperty.city +
-                      SingleProperty.state +
+                      SingleProperty.address + "," +
+                      SingleProperty.city + "," +
+                      SingleProperty.state + "," +
                       SingleProperty.zip
                     }&output=embed`}
                     className="w-full h-[220px] sm:h-[300px] md:h-[250px] lg:h-[300px] rounded-[8px]"
