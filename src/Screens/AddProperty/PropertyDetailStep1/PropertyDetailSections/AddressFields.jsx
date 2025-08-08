@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Inputs from "../../../../Components/InputFields/Inputs";
 import ComboboxSelector from "../../../../Components/ComboboxSelector/ComboboxSelector.jsx";
 import { useWatch } from "react-hook-form";
@@ -71,6 +71,7 @@ const AddressFields = ({
   trigger,
   control,
   watch,
+  defaultValues
 }) => {
   const [selectedState, setSelectedState] = useState("");
   const [cities, setCities] = useState([]);
@@ -83,6 +84,28 @@ const AddressFields = ({
   }));
   const DefaultSelection = useWatch({ control, name: "state" });
 
+  useEffect(() => {
+    if (defaultValues?.state) {
+      const matchedState = statesArray.find(
+        (s) => s.name.toLowerCase() === defaultValues.state.toLowerCase()
+      );
+
+      if (matchedState?.code) {
+        setValue("state", matchedState.name);
+        setSelectedState(matchedState.name); 
+
+        axios
+          .get(`/states/${matchedState.code}.json`)
+          .then((res) => setCities(res.data))
+          .catch((error) => {
+            console.error("Failed to load cities:", error);
+            setCities([]);
+          });
+      }
+    }
+  }, [defaultValues?.state]);
+
+
   const StateSelectionHandler = (value) => {
     setValue("state", value.name, { shouldValidate: true });
     trigger("state");
@@ -94,7 +117,7 @@ const AddressFields = ({
 
     console.log(state.name);
 
-    if (state) {
+    if (defaultValues.state || state) {
       const stateShortNames = value.code;
       axios
         .get(`/states/${stateShortNames}.json`)
@@ -106,10 +129,6 @@ const AddressFields = ({
     }
   };
   const selectedCitys = useWatch({ control, name: "city" });
-  // const CitySelectionHandler = (value) => {
-  //   setValue("city", value.name, { shouldValidate: true });
-  //   trigger("city");
-  // };
 
   return (
     <>
@@ -131,9 +150,8 @@ const AddressFields = ({
               State
             </label>
             <ComboboxSelector
-              style={`flex items-center bg-[#F3EEFF] text-[#4b4b4b] font-[600] font-Urbanist text-[14px] w-full h-12 px-4 rounded-[6px] outline-none appearance-none cursor-pointer focus:outline-none ${
-                errors.state ? "border border-red-500" : ""
-              }`}
+              style={`flex items-center bg-[#F3EEFF] text-[#4b4b4b] font-[600] font-Urbanist text-[14px] w-full h-12 px-4 rounded-[6px] outline-none appearance-none cursor-pointer focus:outline-none ${errors.state ? "border border-red-500" : ""
+                }`}
               icon={"top-3.5 right-3.5"}
               options={statesArray}
               onSelect={StateSelectionHandler}

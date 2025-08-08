@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import ConfirmationModal from "../../../../Components/ConfirmationModal/ConfirmationModal";
 import { useConfirmation } from "../../../Admin/AccountSetting/Fields/Confirmation";
 
-const ListingVisibilitySwitches = ({ register, controls, PropertyRadio }) => {
+const ListingVisibilitySwitches = ({ register, setValue, watch, controls, PropertyRadio, defaultValues }) => {
   const status = localStorage.getItem("status");
   const [ShowError, setShowError] = useState(false);
   const { isOpen, confirm, handleConfirm, handleCancel } = useConfirmation();
@@ -32,7 +32,10 @@ const ListingVisibilitySwitches = ({ register, controls, PropertyRadio }) => {
                   onChange={async () => {
                     if (!field.value) {
                       if (status === "active") {
-                        field.onChange(true); // Skip confirmation if user is active
+                        field.onChange(true);
+                        setValue("OffTheMarketListing", false);
+                      } else if (defaultValues.OneTime) {
+                        field.onChange(true);
                       } else {
                         const confirmed = await confirm();
                         if (confirmed) {
@@ -72,16 +75,23 @@ const ListingVisibilitySwitches = ({ register, controls, PropertyRadio }) => {
             <Controller
               name="OffTheMarketListing"
               control={controls}
-              defaultValue={false} // Ensure this is set
+              defaultValue={false}
               render={({ field }) => (
                 <Switches
-                  value={status === "active" ? field.value : setShowError(true)}
-                  onChange={status === "active" ? field.onChange : setShowError(true)}
-                  checked={status === "active" ? field.value : setShowError(true)} // Use field.value for checked
+                  value={field.value}
+                  onChange={() => {
+                    if (status === "active") {
+                      setValue("FeaturedListing", false); // Turn off Featured
+                      field.onChange(!field.value); // Toggle current
+                    } else {
+                      setShowError(true);
+                    }
+                  }}
                   onBlur={field.onBlur}
                 />
               )}
             />
+
           </div>
           <div className="flex flex-col max-[400px]:w-[87%] gap-0.5">
             <span className="flex gap-4">

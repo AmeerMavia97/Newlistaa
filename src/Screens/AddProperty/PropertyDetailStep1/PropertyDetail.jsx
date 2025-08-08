@@ -120,6 +120,9 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
   };
   
 
+  console.log(defaultValues);
+  
+
   const SubmitPropertyForm = (value) => {
     console.log("Validated Form Data:", value);
     if (value) {
@@ -151,7 +154,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
               <CustomCheckBox propertyType={propertyType} control={control} errors={errors}></CustomCheckBox>
             </div>
 
-            <AddressFields setValue={setValue}  control ={control} trigger={trigger} watch={watch} register={register} errors={errors} />
+            <AddressFields defaultValues={defaultValues} setValue={setValue}  control ={control} trigger={trigger} watch={watch} register={register} errors={errors} />
             {/* DESCRIPTION SECTION  */}
             <div className="border-b-[1px]  border-[#BBBBBB] pb-7 sm:py-7 flex-col gap-4 flex">
               <TextAreas
@@ -165,7 +168,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
                 error={errors.description?.message}
               ></TextAreas>
             </div>
-            <ListingVisibilitySwitches PropertyRadio={PropertyRadio} controls={control} />
+            <ListingVisibilitySwitches setValue={setValue}  watch={watch} defaultValues={defaultValues} PropertyRadio={PropertyRadio} controls={control} />
           </div>
 
           {/* Send Message Button */}

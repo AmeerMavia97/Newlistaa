@@ -8,7 +8,7 @@ const Switches = ({ value, onChange , checked  , onBlur , onClick }) => {
       checked={value}
       onChange={onChange}
       className={`${
-        value ? "bg-PurpleColor" : "bg-gray-200"
+        value || checked ? "bg-PurpleColor" : "bg-gray-200"
       } group inline-flex h-6 w-10 lg:h-6.5 lg:w-12 items-center rounded-full transition outline-none`}
     >
       <span

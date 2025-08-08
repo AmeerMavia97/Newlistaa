@@ -2,8 +2,16 @@ import { Building, DollarSign, Image, Phone } from "lucide-react";
 import Checkboxs from "../../../Components/InputFields/Checkboxs";
 import PropertyDetail from "./PropertyDetail/PropertyDetail";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ImagesCarousel from "../../../Components/ImagesCarousel/ImagesCarousel";
+import { loadStripe } from "@stripe/stripe-js";
+import StripeCardForm from "../../Pricing/StripeCardForm";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51QNhA3CZMEjSlLSVVEV7gw1olyfTdOOYIQRYE5X2lXYofRmkNPrT4h3eiO9vcQIjDGq7sneF3PheuW7dfVv8nJKX000xZhH6aL"
+);
+
 
 const Step3 = ({ formData, onBack, onSubmit }) => {
   const {
@@ -17,6 +25,7 @@ const Step3 = ({ formData, onBack, onSubmit }) => {
       authorizedToList: false,
     },
   });
+  const status = localStorage.getItem("status");
   useEffect(() => {
     if (formData) {
       reset();
@@ -25,26 +34,53 @@ const Step3 = ({ formData, onBack, onSubmit }) => {
 
   console.log(formData);
 
-  const handleFinalSubmit = (data) => {
+  const cardFormRef = useRef();
+
+  const handlePaymentSuccess = (paymentMethodId) => {
+    console.log("Got paymentMethod.id:", paymentMethodId);
+  };
+
+
+  const handleFinalSubmit = async (data) => {
     const finalData = { ...formData, ...data };
+
+    if (status !== "active" && finalData.FeaturedListing === true) {
+      if (cardFormRef.current) {
+        const paymentResult = await cardFormRef.current.submitPayment();
+        if (!paymentResult.success) {
+          return; // stop if payment fails
+        }
+        finalData.paymentMethodId = paymentResult.paymentMethodId;
+      }
+    } else {
+      finalData.paymentMethodId = null;
+    }
+
+    console.log("Final submission data:", finalData);
+    console.log("🧾 Is Featured:", finalData.FeaturedListing);
+    console.log("💳 Payment Method ID:", finalData.paymentMethodId);
+
     onSubmit(finalData);
   };
 
+
   return (
     <>
-      <form onSubmit={handleSubmit(handleFinalSubmit)}>
-        <div className="border border-[#ececec] rounded-2xl px-3.5 sm:px-5 py-8 mx-3 sm:mx-0">
-          {/* HEADER */}
-          <div className="flex flex-col md:flex-row gap-4 justify-between md:items-center md:gap-0">
-            <div>
-              <h1 className="text-[25px] md:text-[28px] font-[700] font-Urbanist  text-[#1E1E1E] lg:text-[30px]">
-                Property Preview
-              </h1>
-              <p className="max-[400px]:text-[12.5px] text-[13.5px] font-Inter font-medium text-pretty text-Paracolor mt-1 md:text-[13.5px] lg:text-[14px]/8 sm:leading-[18px] ">
-                Review your listing before publishing
-              </p>
-            </div>
-            {/* <div className="flex gap-3">
+      <Elements stripe={stripePromise}>
+
+        <form onSubmit={handleSubmit(handleFinalSubmit)}>
+          <div className="border border-[#ececec] rounded-2xl px-3.5 sm:px-5 py-8 mx-3 sm:mx-0">
+            {/* HEADER */}
+            <div className="flex flex-col md:flex-row gap-4 justify-between md:items-center md:gap-0">
+              <div>
+                <h1 className="text-[25px] md:text-[28px] font-[700] font-Urbanist  text-[#1E1E1E] lg:text-[30px]">
+                  Property Preview
+                </h1>
+                <p className="max-[400px]:text-[12.5px] text-[13.5px] font-Inter font-medium text-pretty text-Paracolor mt-1 md:text-[13.5px] lg:text-[14px]/8 sm:leading-[18px] ">
+                  Review your listing before publishing
+                </p>
+              </div>
+              {/* <div className="flex gap-3">
               <button className="bg-transparent border-[#6C757D] cursor-pointer max-[400px]:text-[13px] text-[14px] md:text-[15px] lg:text-[16px] border-solid border-[2px] font-[600] pl-2.5 pr-2.5 min-[400px]:pl-3 min-[400px]:pr-4 py-2 text-[#6C757D] font-Urbanist rounded-[6px] flex gap-1 items-center">
                 <Phone className="size-4 md:size-4.5 lg:size-5" /> Direct
                 Contact
@@ -54,12 +90,12 @@ const Step3 = ({ formData, onBack, onSubmit }) => {
                 Offer
               </button>
             </div> */}
-          </div>
+            </div>
 
-          {/* Image Preview */}
-          <ImagesCarousel images={formData.fileInput || []} />
+            {/* Image Preview */}
+            <ImagesCarousel images={formData.fileInput || []} />
 
-          {/* <div>
+            {/* <div>
             {!formData || !formData.fileInput?.length ? (
               <div className="mt-7 rounded-lg bg-muted flex items-center justify-center bg-[#f5f5f5] max-[400px]:py-20 py-24 sm:py-28 lg:py-40">
                 <div className="text-center flex flex-col justify-center items-center gap-2">
@@ -108,70 +144,83 @@ const Step3 = ({ formData, onBack, onSubmit }) => {
             </div>
           )} */}
 
-          {/* Property Details */}
-          <PropertyDetail formData={formData} />
+            {/* Property Details */}
+            <PropertyDetail formData={formData} />
 
-          {/* Description */}
-          <div className="py-5">
-            <h1 className="text-[22px] font-[700] font-Urbanist text-[#1E1E1E]">
-              Description
-            </h1>
-            <p className="text-[13.5px] font-Inter font-medium text-Paracolor mt-1">
-              {formData.description}
-            </p>
-          </div>
+            {/* Description */}
+            <div className="grid grid-cols-2">
+              <div className="py-5">
+                <h1 className="text-[22px] font-[700] font-Urbanist text-[#1E1E1E]">
+                  Description
+                </h1>
+                <p className="text-[13.5px] font-Inter font-medium text-Paracolor mt-1">
+                  {formData.description}
+                </p>
+              </div>
 
-          {/* Verification Checkboxes */}
-          <div className="bg-[#f5f5f5] px-5 py-5 rounded-[8px]">
-            <h1 className="text-[18px] font-[600] font-Urbanist text-[#1E1E1E] flex items-center gap-2">
-              <Building size={22} /> Listing Verification
-            </h1>
-            <div className="mt-3 flex flex-col gap-1">
-              <Controller
-                name="confirmInfo"
-                control={control}
-                rules={{ required: "You must confirm the information." }}
-                render={({ field }) => (
-                  <Checkboxs
-                    {...field}
-                    labels="I confirm that all information provided is accurate and complete"
-                    error={errors.confirmInfo?.message}
+              <div>
+                {status !== "active" && formData.FeaturedListing === true && formData.OneTime === false && (
+                  <StripeCardForm
+                    ref={cardFormRef}
+                    onPaymentSuccess={handlePaymentSuccess}
                   />
                 )}
-              />
-              <Controller
-                name="authorizedToList"
-                control={control}
-                rules={{ required: "You must confirm authorization to list." }}
-                render={({ field }) => (
-                  <Checkboxs
-                    {...field}
-                    labels="I am authorized to list this property"
-                    error={errors.authorizedToList?.message}
-                  />
-                )}
-              />
+              </div>
+            </div>
+
+            {/* Verification Checkboxes */}
+            <div className="bg-[#f5f5f5] px-5 py-5 rounded-[8px]">
+              <h1 className="text-[18px] font-[600] font-Urbanist text-[#1E1E1E] flex items-center gap-2">
+                <Building size={22} /> Listing Verification
+              </h1>
+              <div className="mt-3 flex flex-col gap-1">
+                <Controller
+                  name="confirmInfo"
+                  control={control}
+                  rules={{ required: "You must confirm the information." }}
+                  render={({ field }) => (
+                    <Checkboxs
+                      {...field}
+                      labels="I confirm that all information provided is accurate and complete"
+                      error={errors.confirmInfo?.message}
+                    />
+                  )}
+                />
+                <Controller
+                  name="authorizedToList"
+                  control={control}
+                  rules={{ required: "You must confirm authorization to list." }}
+                  render={({ field }) => (
+                    <Checkboxs
+                      {...field}
+                      labels="I am authorized to list this property"
+                      error={errors.authorizedToList?.message}
+                    />
+                  )}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Buttons */}
-        <div className="flex gap-2 justify-between px-1.5 py-5 mx-3 sm:mx-0">
-          <button
-            type="button"
-            onClick={onBack}
-            className="bg-transparent border-[#6C757D] text-[#6C757D] border-2 font-[600] px-5 py-2 cursor-pointer rounded-[6px]"
-          >
-            Back to Photo & Media
-          </button>
-          <button
-            type="submit"
-            className="bg-PurpleColor text-white font-[600] px-5 py-2 rounded-[6px] cursor-pointer"
-          >
-            Publish Listing
-          </button>
-        </div>
-      </form>
+          {/* Buttons */}
+          <div className="flex gap-2 justify-between px-1.5 py-5 mx-3 sm:mx-0">
+            <button
+              type="button"
+              onClick={onBack}
+              className="bg-transparent border-[#6C757D] text-[#6C757D] border-2 font-[600] px-5 py-2 cursor-pointer rounded-[6px]"
+            >
+              Back to Photo & Media
+            </button>
+            <button
+              type="submit"
+              className="bg-PurpleColor text-white font-[600] px-5 py-2 rounded-[6px] cursor-pointer"
+            >
+              Publish Listing
+            </button>
+          </div>
+        </form>
+      </Elements>
+
     </>
   );
 };

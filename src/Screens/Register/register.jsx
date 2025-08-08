@@ -504,8 +504,12 @@ const Register = () => {
         >
           <div className="bg-white rounded-lg shadow-lg pt-10 pb-7  px-6.5 max-w-[37%] mx-4 no-scrollbar ">
             <h2 className="text-[30px] leading-[34px] font-semibold mb-4 font-Urbanist">Important Notice for Investors</h2>
-            <div className="bg-red-50 border border-red-200 mb-4 rounded-md pb-4"><div className=" text-red-700 text-sm sm:text-base rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
-              <p className="mb-2 font-semibold">
+            <div className="bg-red-50 border border-red-200 mb-4 rounded-md -4"><div className=" text-red-700 text-sm sm:text-[14px] rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
+             <p className="font-semibold">
+              Welcome to Newlista — a Private Network for Real Estate Investors Newlista is exclusively for verified real estate investors looking to buy, sell, or network on and off market opportunities. To protect the integrity of our investor community: All users must be bona fide investors. Soliciting services (brokerage, wholesaling, marketing, etc.) to others is strictly prohibited. Newlista is not a syndicator and does not pool funds or manage investments. Violations may result in account suspension or removal without refund. We reserve the right to verify investor status and enforce these policies. By signing up, you agree to follow these terms and acknowledge that Newlista is a platform built by and for investors only.
+             </p>
+             
+              {/* <p className="mb-2 font-semibold">
                 Newlista is a platform exclusively for real estate investors
                 seeking off-market properties. To maintain the integrity and focus
                 of our community:
@@ -529,7 +533,7 @@ const Register = () => {
               <p className="mt-2">
                 By signing up, you agree to comply with these terms and
                 acknowledge that Newlista is designed for investors only.
-              </p>
+              </p> */}
             </div></div>
 
             <label className="flex items-start space-x-2 mb-8">

@@ -93,7 +93,7 @@ const PropertyDetail = ({ formData }) => {
               Location:
             </h1>
             <p className="font-Inter text-[12.5px] text-end min-[400px]:text-[13px] text-pretty text-Paracolor sm:text-[13.5px] lg:text-[14px]/8 sm:leading-[18px] ">
-              {formData.PropertyAddress + " " + formData.City + " " + formData.StateProvince + " " + formData.ZipPostalCode}
+              {formData.PropertyAddress + " " + formData.city + " " + formData.state + " " + formData.ZipPostalCode}
             </p>
           </div>
           <div>

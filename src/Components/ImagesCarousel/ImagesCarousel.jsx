@@ -32,7 +32,7 @@ export default function ImagesCarousel({ images }) {
         {images.map((img, index) => (
           <SwiperSlide key={index}>
             <img
-              className=" w-full h-full"
+              className=" w-full h-full object-contain"
               src={
                 typeof img === "string"
                   ? import.meta.env.VITE_IMAGE_KEY + img
