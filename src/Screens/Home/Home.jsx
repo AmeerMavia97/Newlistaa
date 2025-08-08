@@ -313,8 +313,8 @@ const Home = () => {
             />
             {/* PROPERTY CARD SECTION  */}
             <div
-              className={`grid lg:grid-cols-3   gap-7 sm:gap-3 sm:-ml-4 md:gap-5 2xl:gap-10 md:w-[84%] ${
-                status === "active" ? "" : "blur-xl"
+              className={` w-full  gap-7 sm:gap-3 sm:-ml-4 md:gap-5 2xl:gap-10 md:w-[84%] ${
+                status === "active" ? "grid lg:grid-cols-3" : "blur-xl "
               } `}
             >
               {status === "active" ? (

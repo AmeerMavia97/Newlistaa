@@ -29,7 +29,7 @@ const ProtectedSection = ({ children }) => {
 
   return (
     <div 
-    className="flex gap-7"
+    className="!w-[100%] grid grid-cols-3 gap-7"
       ref={sectionRef}
       style={{
         userSelect: "none",
