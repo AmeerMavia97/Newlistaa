@@ -16,6 +16,7 @@ const PropertiesCards2 = ({
   Area,
   CheckProperty,
   forsale,
+  featured_listing,
   forlease,
 }) => {
 
@@ -51,6 +52,13 @@ const PropertiesCards2 = ({
                   {CheckProperty}
                 </span>
               )}
+              {
+                !CheckProperty && featured_listing && (
+                  <span className="bg-[#28A745] text-white font-Inter px-4 py-1.5 mb-3  text-[14px] rounded-full">
+                    {featured_listing}
+                  </span>
+                )
+              }
             </div>
             <h1 className="mb-2 text-[21px] font-[600] font-Inter tracking-tight leading-[24px] mt-4 text-gray-900 ">
               {Heading}
@@ -90,14 +98,14 @@ const PropertiesCards2 = ({
 
                 </h1>
                 <h1 className="font-Inter text-[16px] font-bold">
-                   $
+                  $
                   <TruncatedText
                     text={
                       forlease
                     }
                     maxLength={6}
                   />
-                   {"/lease"}
+                  {"/lease"}
                 </h1>
               </div>
             )}

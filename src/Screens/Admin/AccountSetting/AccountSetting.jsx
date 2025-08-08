@@ -112,6 +112,7 @@ const PropertyInterest = [
 ];
 
 const InvestmentRange = [
+  "Any",
   "Under $250K",
   "$250K – $500K",
   "$500K – $1M",

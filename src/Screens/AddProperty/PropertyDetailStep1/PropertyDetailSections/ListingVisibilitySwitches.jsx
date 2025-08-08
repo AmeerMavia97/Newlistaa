@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import ConfirmationModal from "../../../../Components/ConfirmationModal/ConfirmationModal";
 import { useConfirmation } from "../../../Admin/AccountSetting/Fields/Confirmation";
 
-const ListingVisibilitySwitches = ({ register, controls }) => {
+const ListingVisibilitySwitches = ({ register, controls, PropertyRadio }) => {
   const status = localStorage.getItem("status");
   const [ShowError, setShowError] = useState(false);
   const { isOpen, confirm, handleConfirm, handleCancel } = useConfirmation();
@@ -58,14 +58,16 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               <div className="border-PurpleColor border  font-[600]  text-[12px] sm:text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
                 Premium
               </div>
+              <div className="border-PurpleColor border  font-[600]  text-[12px] sm:text-[13px] w-max px-3 flex justify-center items-center text-PurpleColor font-Urbanist rounded-[14px] text-center">
+                Pay 10$
+              </div>
             </span>
-            <p className="block font-Urbanist text-[12.5px] sm:text-[14px] lg:text-[14.5px] font-[400] text-[#222222]">
-              Featured listings appear at the top of search results and get more
-              visibility
+            <p className="block font-Urbanist text-[12.5px] w-[70%] leading-[16px] sm:text-[14px] lg:text-[14.5px] font-[400] text-[#222222]">
+              Get top placement and more visibility with Featured Listings—$10 for free users, included for paid members.
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        {PropertyRadio === "For Sale" && <div className="flex items-center gap-3">
           <div className="max-[400px]:w-[13%]">
             <Controller
               name="OffTheMarketListing"
@@ -98,7 +100,8 @@ const ListingVisibilitySwitches = ({ register, controls }) => {
               version.
             </p>
           </div>
-        </div>
+        </div>}
+
         <div className="flex  items-center gap-3">
           <Controller
             name="OwnerFinancing"

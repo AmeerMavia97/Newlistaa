@@ -106,8 +106,8 @@ const statesArray = [
   { id: 44, name: "Utah", code: "UT" },
   { id: 45, name: "Vermont", code: "VT" },
   { id: 46, name: "Virginia", code: "VA" },
-  { id: 47, name: "Washington", code: "WA" }, // U.S. State
-  { id: 48, name: "Washington D.C.", code: "DC" }, // Federal District
+  { id: 47, name: "Washington", code: "WA" },
+  { id: 48, name: "Washington D.C.", code: "DC" }, 
   { id: 49, name: "West Virginia", code: "WV" },
   { id: 50, name: "Wisconsin", code: "WI" },
   { id: 51, name: "Wyoming", code: "WY" },
@@ -157,7 +157,7 @@ const SearchBar = ({ }) => {
     if (location.pathname === "/properties") {
       const data = {
         listingType: getValues("listingType"),
-        propertyType: getValues("propertyType"),
+        propertyName: getValues("propertyName"),
         state: selectedState,
         city: selectedCity,
         priceRange: getValues("priceRange"),
@@ -167,7 +167,7 @@ const SearchBar = ({ }) => {
     }
   }, [
     getValues("listingType"),
-    getValues("propertyType"),
+    getValues("propertyName"),
     selectedState,
     selectedCity,
     getValues("priceRange"),
@@ -283,11 +283,12 @@ const SearchBar = ({ }) => {
             <option value="Select">Select</option>
             <option value="For Sale">For Sale</option>
             <option value="For Lease">For Lease</option>
+            <option value="Off Market Listing">Off Market Listing</option>
           </select>
         </div>
 
         {/* Property Type */}
-        {location.pathname === '/properties' ? <div className="hidden lg:flex lg:w-[20.5%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
+        {/* {location.pathname === '/properties' ? <div className="hidden lg:flex lg:w-[20.5%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
           <h1 className="text-[14px] font-semibold font-Inter text-black">
             Listing Type
           </h1>
@@ -301,8 +302,8 @@ const SearchBar = ({ }) => {
               </option>
             ))}
           </select>
-        </div>
-          : <div className="hidden lg:flex lg:w-[21%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
+         </div> */ }
+          <div className="hidden lg:flex lg:w-[21%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col"> 
             <h1 className="text-[14px] font-semibold font-Inter text-black">
               Property Type
             </h1>
@@ -316,8 +317,8 @@ const SearchBar = ({ }) => {
                 </option>
               ))}
             </select>
-          </div>}
-
+          </div>
+          {/* } */}
         {/* State Selector */}
         <div className="hidden lg:flex lg:w-[190px] whitespace-nowrap text-ellipsis px-8 py-1 lg:border-r-[1px] border-solid border-Paracolor flex-col">
           <h1 className="text-[14px] font-Inter text-black font-[600]">

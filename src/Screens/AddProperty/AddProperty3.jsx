@@ -133,8 +133,6 @@ const PropertyForm = () => {
       console.log(response);
 
 
-
-
       AlertModal({
         icon: "success",
         title: "Thank You",
@@ -156,7 +154,6 @@ const PropertyForm = () => {
     }
 
     if (formData.FeaturedListing && IsActive !== 'active') {
-      // User inactive but wants FeaturedListing → Payment required
       try {
         localStorage.setItem("pendingFormData", JSON.stringify(formData));
         setloading(true);

@@ -15,11 +15,11 @@ const CitySearchForm = ({
   useEffect(() => {
     setInputValue(watchedCity);
   }, [watchedCity]);
-
+  
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
-    setValue("city", value);
+    setValue("city", value, { shouldValidate: true }); // ✅
 
     if (value.trim() === "") {
       setFilteredSuggestions(suggestedCities);
@@ -35,7 +35,7 @@ const CitySearchForm = ({
 
   const handleSelectSuggestion = (cityName) => {
     setInputValue(cityName);
-    setValue("city", cityName);
+    setValue("city", cityName, { shouldValidate: true }); // ✅
     setShowSuggestions(false);
   };
 
@@ -43,7 +43,7 @@ const CitySearchForm = ({
     if (e.key === "Enter") {
       e.preventDefault();
       if (inputValue.trim() !== "") {
-        setValue("city", inputValue);
+        setValue("city", inputValue, { shouldValidate: true }); // ✅
         setShowSuggestions(false);
       }
     }
@@ -68,11 +68,10 @@ const CitySearchForm = ({
             max-[481px]:h-11 max-[891px]:h-12 max-[1000px]:h-10.5 max-[1100px]:h-11
             max-[1280px]:h-11.5 max-[1666px]:h-12 min-[1666px]:h-14 min-[1666px]:text-[15px] min-[1666px]:placeholder:text-[15px]
             ${error ? "border-red-500" : "border-[#F3EEFF]"}
-             ${
-               suggestedCities.length === 4
-                 ? "opacity-100 cursor-not-allowed"
-                 : ""
-             }
+             ${suggestedCities.length === 4
+            ? "opacity-100 cursor-not-allowed"
+            : ""
+          }
             
           `}
         autoComplete="off"

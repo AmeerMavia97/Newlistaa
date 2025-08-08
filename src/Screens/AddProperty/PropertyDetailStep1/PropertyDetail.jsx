@@ -165,7 +165,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
                 error={errors.description?.message}
               ></TextAreas>
             </div>
-            <ListingVisibilitySwitches controls={control} />
+            <ListingVisibilitySwitches PropertyRadio={PropertyRadio} controls={control} />
           </div>
 
           {/* Send Message Button */}

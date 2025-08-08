@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { TabGroup, TabPanel , TabPanels, } from "@headlessui/react";
+import { TabGroup, TabPanel, TabPanels, } from "@headlessui/react";
 
 // COMPONENTS
 import Navbar from "../../Components/Navbar/Navbar";
@@ -152,46 +152,60 @@ const ViewProperty = () => {
       const { listingType, propertyType, state, city, priceRange, propertyName } =
         searchFilters;
 
-      if (listingType && listingType !== "Select") {
+      if (listingType === "Off Market Listing" && listingType !== "Select" ) {
+        if (isLoggedIn === "active") {
+          result = result.filter(p => Boolean(p.off_market_listing) === true);
+        } else {
+          result = [];
+        }
+      } else if (listingType !== "Select" ) {
         result = result.filter(
           (p) => p.listing_type?.toLowerCase() === listingType.toLowerCase()
-        );
+        )
       }
 
-      if (propertyType === "Off Market Listing") {
-        result =
-          isLoggedIn === "active"
-            ? result.filter((p) => p.off_market_listing)
-            : [];
-      } else if (propertyType === "Feature Listing") {
-        result = result.filter((p) => {
-          if (p.featured_listing) {
-            if (p.off_market_listing && isLoggedIn !== "active") {
-              return false;
-            }
-            return true;
-          }
-          return false;
-        });
-      } else if (propertyType === "Standard Listing") {
-        result = result.filter(
-          (p) => p.off_market_listing === false && p.featured_listing === false
-        );
-      } else if (propertyType && propertyType !== "All Listing") {
-        result = result.filter(
-          (p) =>
-            p.property_type?.toLowerCase().trim() ===
-            propertyType.toLowerCase().trim()
-        );
-      }
+
+      // if (listingType && listingType !== "Select") {
+      //   result = result.filter(
+      //     (p) => p.listing_type?.toLowerCase() === listingType.toLowerCase()
+      //   );
+      // }
+
+      // } else if (propertyType === "Feature Listing") {
+      //   result = result.filter((p) => {
+      //     if (p.featured_listing) {
+      //       if (p.off_market_listing && isLoggedIn !== "active") {
+      //         return false;
+      //       }
+      //       return true;
+      //     }
+      //     return false;
+      //   });
+      // } else if (propertyType === "Standard Listing") {
+      //   result = result.filter(
+      //     (p) => p.off_market_listing === false && p.featured_listing === false
+      //   );
+      // } else if (propertyType && propertyType !== "All Listing") {
+      //   result = result.filter(
+      //     (p) =>
+      //       p.property_type?.toLowerCase().trim() ===
+      //       propertyType.toLowerCase().trim()
+      //   );
+      // }
+
+      console.log(propertyName + state);
+
 
       if (propertyName && propertyName !== "Select Your Property") {
-        setDefaulTab(propertyName)
+        setDefaulTab(propertyName);
+
         result = result.filter(
           (p) =>
             p.property_type?.toLowerCase().trim() ===
             propertyName.toLowerCase().trim()
         );
+      } else {
+        setDefaulTab("All Properties");
       }
 
       if (state && state.toLowerCase() !== "any") {
@@ -205,6 +219,9 @@ const ViewProperty = () => {
           (p) => p.city?.toLowerCase() === city.toLowerCase()
         );
       }
+      console.log(result);
+
+
 
       if (priceRange && priceRange !== "any") {
         result = result.filter((p) => {
@@ -242,8 +259,8 @@ const ViewProperty = () => {
     return result;
   }, [Properties, isLoggedIn, FilterValue, selectedTab, searchFilters]);
 
-  
- 
+
+
 
   return (
     <>
@@ -323,6 +340,9 @@ const ViewProperty = () => {
                         images={items.images[0]}
                         CheckProperty={
                           items.off_market_listing ? "Off Market Property" : ""
+                        }
+                        featured_listing={
+                          items.featured_listing && "Featured Listing"
                         }
                       />
                     </div>
