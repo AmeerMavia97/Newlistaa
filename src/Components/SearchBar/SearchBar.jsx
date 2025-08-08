@@ -18,6 +18,7 @@ const ListingType = [
 
 const propertyType = [
   { label: "Select Your Property", name: "Select Your Property" },
+  { label: "Any", name: "All Properties" },
   { label: "Apartments / Multifamily", name: "Apartments / Multifamily" },
   { label: "Automotive Property", name: "Automotive Property" },
   { label: "Church", name: "Church" },
@@ -107,7 +108,7 @@ const statesArray = [
   { id: 45, name: "Vermont", code: "VT" },
   { id: 46, name: "Virginia", code: "VA" },
   { id: 47, name: "Washington", code: "WA" },
-  { id: 48, name: "Washington D.C.", code: "DC" }, 
+  { id: 48, name: "Washington D.C.", code: "DC" },
   { id: 49, name: "West Virginia", code: "WV" },
   { id: 50, name: "Wisconsin", code: "WI" },
   { id: 51, name: "Wyoming", code: "WY" },
@@ -118,7 +119,7 @@ const statesArray = [
   { id: 56, name: "Northern Mariana Islands", code: "MP" },
 ];
 
-const SearchBar = ({ }) => {
+const SearchBar = ({ ByDefault }) => {
   const navigate = useNavigate();
   const [cities, setCities] = useState(initialCities);
   const [selectedState, setSelectedState] = useState("");
@@ -130,11 +131,7 @@ const SearchBar = ({ }) => {
 
   const { register, handleSubmit, setValue, getValues, watch } = useForm();
 
-  console.log(cities);
-
-
   const listingType = watch("listingType");
-  const propertyType1 = watch("propertyType");
   const propertyName = watch("propertyName");
   const priceRange = watch("priceRange");
   const state = watch("state");
@@ -153,6 +150,24 @@ const SearchBar = ({ }) => {
     navigate("/properties");
   };
 
+  console.log(propertyName);
+  
+
+  useEffect(() => {
+    if (ByDefault) {
+        const found = propertyType.find(
+          (item) => item.name.toLowerCase() === ByDefault.toLowerCase()
+        );
+        if (found) {
+          setValue("propertyName", found.name);
+        }
+    }
+  }, [ByDefault, setValue]);
+
+
+
+
+
   useEffect(() => {
     if (location.pathname === "/properties") {
       const data = {
@@ -163,7 +178,21 @@ const SearchBar = ({ }) => {
         priceRange: getValues("priceRange"),
       };
 
-      dispatch(setFilters(data));
+      // Check if any meaningful value exists
+      const hasValidFilter =
+        (data.listingType && data.listingType !== "Select") ||
+        (data.propertyName && data.propertyName !== "Select Your Property") ||
+        (data.state && data.state !== "") ||
+        (data.city && data.city !== "") ||
+        (data.priceRange && data.priceRange !== "");
+
+      if (hasValidFilter) {
+        console.log("Dispatching filters:", data);
+        dispatch(setFilters(data));
+      } else {
+        console.log("Skipped dispatch: filters are empty or default", data);
+      }
+
     }
   }, [
     getValues("listingType"),
@@ -175,7 +204,6 @@ const SearchBar = ({ }) => {
 
 
 
-  console.log(location.pathname);
 
   const StateSelectionHandler = (value) => {
     if (!value || !value.name) return;
@@ -256,7 +284,6 @@ const SearchBar = ({ }) => {
     if (!value || !value.labels) return;
 
     setValue("city", value.labels, { shouldValidate: true });
-    console.log(value);
     setSelectedCity(value.labels);
   };
 
@@ -303,22 +330,22 @@ const SearchBar = ({ }) => {
             ))}
           </select>
          </div> */ }
-          <div className="hidden lg:flex lg:w-[21%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col"> 
-            <h1 className="text-[14px] font-semibold font-Inter text-black">
-              Property Type
-            </h1>
-            <select
-              {...register("propertyName")}
-              className="text-[13px] font-Inter text-Paracolor font-[500] -mt-0.5 -ml-1"
-            >
-              {propertyType.map((item, index) => (
-                <option key={index} value={item.name}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          {/* } */}
+        <div className="hidden lg:flex lg:w-[21%] px-8 py-1 md:border-r-[1px] border-solid border-Paracolor flex-col">
+          <h1 className="text-[14px] font-semibold font-Inter text-black">
+            Property Type
+          </h1>
+          <select
+            {...register("propertyName")}
+            className="text-[13px] font-Inter text-Paracolor font-[500] -mt-0.5 -ml-1"
+          >
+            {propertyType.map((item, index) => (
+              <option key={index} value={item.name}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* } */}
         {/* State Selector */}
         <div className="hidden lg:flex lg:w-[190px] whitespace-nowrap text-ellipsis px-8 py-1 lg:border-r-[1px] border-solid border-Paracolor flex-col">
           <h1 className="text-[14px] font-Inter text-black font-[600]">
@@ -339,7 +366,7 @@ const SearchBar = ({ }) => {
               setIsFilterOpen={setIsFilterOpen}
               isFilterOpen={isFilterOpen}
               listingType={listingType}
-              // handleFilterChange={handleFilterChange}
+            // handleFilterChange={handleFilterChange}
             />
           )}
         </div>

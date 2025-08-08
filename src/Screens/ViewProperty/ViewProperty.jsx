@@ -45,6 +45,8 @@ const ViewProperty = () => {
   const [searchFilters, setSearchFilters] = useState(null);
   const [FilterValue, setFilterValue] = useState("AllProperties");
 
+
+
   useEffect(() => {
     if (filters) {
       setSearchFilters(filters);
@@ -152,51 +154,34 @@ const ViewProperty = () => {
       const { listingType, propertyType, state, city, priceRange, propertyName } =
         searchFilters;
 
-      if (listingType === "Off Market Listing" && listingType !== "Select" ) {
+      if (listingType === "Off Market Listing") {
         if (isLoggedIn === "active") {
+          // Show only off-market listings
           result = result.filter(p => Boolean(p.off_market_listing) === true);
         } else {
           result = [];
         }
-      } else if (listingType !== "Select" ) {
-        result = result.filter(
-          (p) => p.listing_type?.toLowerCase() === listingType.toLowerCase()
-        )
+      } else {
+        const selectedType = listingType?.toLowerCase();
+        const noTypeSelected = !selectedType || selectedType === "select";
+        const featured = result.filter(p =>
+          Boolean(p.featured_listing) === true &&
+          Boolean(p.off_market_listing) !== true &&
+          (noTypeSelected || p.listing_type?.toLowerCase() === selectedType)
+        );
+
+        const regular = result.filter(p =>
+          Boolean(p.featured_listing) !== true &&
+          Boolean(p.off_market_listing) !== true &&
+          (noTypeSelected || p.listing_type?.toLowerCase() === selectedType)
+        );
+        result = [...featured, ...regular];
       }
 
+      console.log(propertyName);
+      
 
-      // if (listingType && listingType !== "Select") {
-      //   result = result.filter(
-      //     (p) => p.listing_type?.toLowerCase() === listingType.toLowerCase()
-      //   );
-      // }
-
-      // } else if (propertyType === "Feature Listing") {
-      //   result = result.filter((p) => {
-      //     if (p.featured_listing) {
-      //       if (p.off_market_listing && isLoggedIn !== "active") {
-      //         return false;
-      //       }
-      //       return true;
-      //     }
-      //     return false;
-      //   });
-      // } else if (propertyType === "Standard Listing") {
-      //   result = result.filter(
-      //     (p) => p.off_market_listing === false && p.featured_listing === false
-      //   );
-      // } else if (propertyType && propertyType !== "All Listing") {
-      //   result = result.filter(
-      //     (p) =>
-      //       p.property_type?.toLowerCase().trim() ===
-      //       propertyType.toLowerCase().trim()
-      //   );
-      // }
-
-      console.log(propertyName + state);
-
-
-      if (propertyName && propertyName !== "Select Your Property") {
+      if (propertyName && propertyName !== "Select Your Property" && propertyName !== "All Properties") {
         setDefaulTab(propertyName);
 
         result = result.filter(
@@ -205,6 +190,7 @@ const ViewProperty = () => {
             propertyName.toLowerCase().trim()
         );
       } else {
+        
         setDefaulTab("All Properties");
       }
 
@@ -219,8 +205,6 @@ const ViewProperty = () => {
           (p) => p.city?.toLowerCase() === city.toLowerCase()
         );
       }
-      console.log(result);
-
 
 
       if (priceRange && priceRange !== "any") {
@@ -271,7 +255,7 @@ const ViewProperty = () => {
         className="flex items-center justify-center"
       >
         <div className=" pt-16 pb-20 ml-10 sm:ml-0 md:py-16 lg:py-28 lg:px-12  max-[350px]:w-[90%] w-[75%] sm:w-[50%] md:w-[90%] min-[800px]:w-[80%] lg:w-[100%] xl:w-[100%] 2xl:w-[80%]">
-          <SearchBar ></SearchBar>
+          <SearchBar ByDefault={selectedTab} active={"Yes"}></SearchBar>
         </div>
       </section>
       {/* BANNER END   */}
