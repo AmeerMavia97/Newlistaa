@@ -28,7 +28,7 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
   const itemsPerPage = 5;
   const { isOpen, confirm, handleConfirm, handleCancel } = useConfirmation();
 
-  
+
 
 
   useEffect(() => {
@@ -111,6 +111,9 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  console.log(currentListings);
+  
 
   const handleConfirmation = async (id) => {
     setSelectedId(id);
@@ -200,17 +203,18 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
                       {item.property_type}
                     </td>
                     <td className="w-[15%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
-                      <TruncatedText text={item.sale_price} maxLength={9} />
+                      {item.listing_type === "For Sale" && <TruncatedText text={item.sale_price} maxLength={9} />}
+                      {item.listing_type === "For Lease" && <TruncatedText text={item.lease_rate} maxLength={9} />}
+                      {item.listing_type === "Both (For Sale & For Lease)" && <TruncatedText text={item.sale_price + "/sale" + item.lease_rate +"/lease"} maxLength={9} />}
                     </td>
                     <td className="px-3.5 py-6 text-[#222222] font-[550] text-[16px] flex gap-1 items-center mt-3 ml-2 sm:ml-0 sm:mt-2.5">
                       <div
-                        className={`h-2 w-2 rounded-full ${
-                          item.listing_status === "Available"
+                        className={`h-2 w-2 rounded-full ${item.listing_status === "Available"
                             ? "bg-[#02E327]"
                             : item.listing_status === "Loss"
-                            ? "bg-[#E31D1C]"
-                            : "bg-[#4379EE]"
-                        }`}
+                              ? "bg-[#E31D1C]"
+                              : "bg-[#4379EE]"
+                          }`}
                       ></div>
                       {item.listing_status}
                     </td>
@@ -231,13 +235,13 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
                         </Link>
                       ) : (
                         <span className="relative">
-                          <span className=""> 
+                          <span className="">
                             <Lock
-                            strokeWidth={3}
-                            className="absolute text-red-600 size-2 -right-1 z-50 sm:size-2 -top-1 sm:mt-0 "
-                          />
+                              strokeWidth={3}
+                              className="absolute text-red-600 size-2 -right-1 z-50 sm:size-2 -top-1 sm:mt-0 "
+                            />
                           </span>
-                          <ChartNoAxesCombined  className="cursor-not-allowed" />
+                          <ChartNoAxesCombined className="cursor-not-allowed" />
                         </span>
                       )}
 

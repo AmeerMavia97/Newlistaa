@@ -3,12 +3,15 @@ import { AlertCircle, CreditCard, UserRoundCheck } from "lucide-react";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import Switches from "../../../../Components/InputFields/Switch";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../../../Components/ConfirmationModal/ConfirmationModal";
 import { useConfirmation } from "../../../Admin/AccountSetting/Fields/Confirmation";
 
 const ListingVisibilitySwitches = ({ register, setValue, watch, controls, PropertyRadio, defaultValues }) => {
   const status = localStorage.getItem("status");
+  const navigate = useNavigate();
+  const [showUpgradeConfirm, setShowUpgradeConfirm] = useState(false);
+
   const [ShowError, setShowError] = useState(false);
   const { isOpen, confirm, handleConfirm, handleCancel } = useConfirmation();
 
@@ -223,15 +226,17 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
               <div className="flex flex-col gap-3 lg:gap-0 lg:flex-row font-Urbanist mt-1.5 sm:mt-0 text-[13.5px] md:text-[14px] lg:text-[15px] font-[500] text-amber-800">
                 Upgrade to a premium subscription to access featured and
                 off-the-market listings.
-                <Link to="/pricing">
-                  <button
-                    variant="outline"
-                    size="sm"
-                    className="lg:ml-2 text-[12.5px] md:text-[13px] w-max text-black bg-amber-100 hover:bg-amber-200 border-amber-300 border px-4 rounded-[8px] py-2 hover-btn hover-btn-yellow"
-                  >
-                    <span>Upgrade Now</span>
-                  </button>
-                </Link>
+
+
+                <button
+                  onClick={() => setShowUpgradeConfirm(true)}
+                  variant="outline"
+                  size="sm"
+                  type="button"
+                  className="lg:ml-2 text-[12.5px] md:text-[13px] w-max text-black bg-amber-100 hover:bg-amber-200 border-amber-300 border px-4 rounded-[8px] py-2 hover-btn hover-btn-yellow"
+                >
+                  <span>Upgrade Now</span>
+                </button>
               </div>
             </div>
           </div>
@@ -239,6 +244,7 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
       ) : (
         ""
       )}
+
 
       <ConfirmationModal
         isOpen={isOpen}
@@ -250,8 +256,27 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
         icon={
           <CreditCard className="size-20 text-PurpleColor  bg-amber-50 PurpleColor px-3.5 py-3.5 rounded-full" />
         }
+        cancel={'Not now'}
         style="bg-PurpleColor"
       />
+
+      <ConfirmationModal
+        isOpen={showUpgradeConfirm}
+        onClose={() => setShowUpgradeConfirm(false)}
+        onConfirm={() => {
+          setShowUpgradeConfirm(false);
+          navigate("/pricing");
+        }}
+        title="You have unsaved changes"
+        message="Are you sure you want to leave this page?"
+        confirmLabel="Yes"
+        cancel="Cancel"
+        icon={
+          <UserRoundCheck className="size-20 text-PurpleColor bg-amber-50 px-3.5 py-3.5 rounded-full" />
+        }
+        style="bg-PurpleColor"
+      />
+
     </>
   );
 };

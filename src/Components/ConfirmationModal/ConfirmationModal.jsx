@@ -10,7 +10,8 @@ const ConfirmationModal = ({
   confirmLabel,
   icon,
   style,
-  title
+  title,
+  cancel
 }) => {
   return (
     <div
@@ -57,7 +58,7 @@ const ConfirmationModal = ({
               type="button"
               className="bg-[#ffeded] font-[600] px-4.5 py-2.5 text-PurpleColor rounded-[5px] font-Inter text-[15px] cursor-pointer "
             >
-              Cancel
+              {cancel ? cancel : "Cancel" }
             </button>
           </div>
         </div>
