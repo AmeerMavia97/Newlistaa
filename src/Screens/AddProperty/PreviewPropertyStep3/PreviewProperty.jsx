@@ -159,12 +159,15 @@ const Step3 = ({ formData, onBack, onSubmit }) => {
               </div>
 
               <div>
-                {status !== "active" && formData.FeaturedListing === true && formData.OneTime === false && (
-                  <StripeCardForm
-                    ref={cardFormRef}
-                    onPaymentSuccess={handlePaymentSuccess}
-                  />
-                )}
+                {status !== "active" &&
+                  formData?.FeaturedListing === true &&
+                  (formData?.OneTime === false || formData?.OneTime === undefined) && (
+                    <StripeCardForm
+                      ref={cardFormRef}
+                      onPaymentSuccess={handlePaymentSuccess}
+                    />
+                  )}
+
               </div>
             </div>
 

@@ -179,7 +179,7 @@ const PropertyForm = () => {
       form.append("state", data.state);
       form.append("zip", data.ZipPostalCode);
       form.append("description", data.description);
-      form.append("featured_listing", data.FeaturedListing ? 1 : 0);
+      form.append("featured_listing", data.FeaturedListing ? 0 : 0);
       form.append("off_market_listing", data.OffTheMarketListing ? 1 : 0);
       form.append("owner_financing", data.OwnerFinancing ? 1 : 0);
       form.append("show_email", data.ShowEmail ? 1 : 0);

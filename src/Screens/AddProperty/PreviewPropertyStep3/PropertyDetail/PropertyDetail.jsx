@@ -98,7 +98,7 @@ const PropertyDetail = ({ formData }) => {
           </div>
           <div>
             <iframe
-              src={`https://www.google.com/maps?q=404 ${formData.PropertyAddress + formData.City + formData.StateProvince + formData.ZipPostalCode}&output=embed`}
+              src={`https://www.google.com/maps?q=404 ${formData.PropertyAddress + formData.city + formData.state + formData.ZipPostalCode}&output=embed`}
               className="w-full h-[200px]"
               allowFullScreen=""
               loading="lazy"
