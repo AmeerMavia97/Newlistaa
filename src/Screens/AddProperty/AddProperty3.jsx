@@ -224,7 +224,7 @@ const PropertyForm = () => {
         icon: "success",
         title: "Thank You",
         iconColor: "#703BF7",
-        text: "Your Form has Been Submitted",
+        text: response.data.message,
       });
       navigate("/properties");
     } catch (error) {

@@ -31,20 +31,20 @@ const StripeCardForm = forwardRef(({ onPaymentSuccess }, ref) => {
       });
 
       if (error) {
-        AlertModal({
-          icon: "error",
-          title: "Payment Failed",
-          text: error.message,
-        });
+        // AlertModal({
+        //   icon: "error",
+        //   title: "Payment Failed",
+        //   text: error.message,
+        // });
         return { success: false };
       }
 
-      AlertModal({
-        icon: "success",
-        title: "Thank You",
-        iconColor: "#703BF7",
-        text: "Package Purchased Successfully",
-      });
+      // AlertModal({
+      //   icon: "success",
+      //   title: "Thank You",
+      //   iconColor: "#703BF7",
+      //   text: "Package Purchased Successfully",
+      // });
 
       if (onPaymentSuccess && typeof onPaymentSuccess === "function") {
         onPaymentSuccess(paymentMethod.id);
