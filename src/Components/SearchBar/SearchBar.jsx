@@ -151,16 +151,16 @@ const SearchBar = ({ ByDefault }) => {
   };
 
   console.log(propertyName);
-  
+
 
   useEffect(() => {
     if (ByDefault) {
-        const found = propertyType.find(
-          (item) => item.name.toLowerCase() === ByDefault.toLowerCase()
-        );
-        if (found) {
-          setValue("propertyName", found.name);
-        }
+      const found = propertyType.find(
+        (item) => item.name.toLowerCase() === ByDefault.toLowerCase()
+      );
+      if (found) {
+        setValue("propertyName", found.name);
+      }
     }
   }, [ByDefault, setValue]);
 
@@ -181,10 +181,13 @@ const SearchBar = ({ ByDefault }) => {
       // Check if any meaningful value exists
       const hasValidFilter =
         (data.listingType && data.listingType !== "Select") ||
-        (data.propertyName && data.propertyName !== "Select Your Property") ||
+        
         (data.state && data.state !== "") ||
         (data.city && data.city !== "") ||
         (data.priceRange && data.priceRange !== "");
+
+      console.log(data);
+
 
       if (hasValidFilter) {
         console.log("Dispatching filters:", data);

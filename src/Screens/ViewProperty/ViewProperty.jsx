@@ -279,16 +279,18 @@ const ViewProperty = () => {
             {!Loading ? (
               <TabPanel
                 id="offmarket"
-                className="w-[100%]  grid sm:grid-cols-2 min-[860px]:!grid-cols-3 xl:!grid-cols-4 flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-10 sm:py-12 lg:py-16 xl:my-1 sm:gap-4 sm:px-13 md:gap-10 min-[860px]:!gap-5 md:px-16  xl:!gap-5 2xl:!gap-10  2xl:w-[90%] min-[1850px]:!w-[83%]"
+                className="w-[100%] relative grid sm:grid-cols-2 min-[860px]:!grid-cols-3 xl:!grid-cols-4 flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-10 sm:py-12 lg:py-16 xl:my-1 sm:gap-4 sm:px-13 md:gap-10 min-[860px]:!gap-5 md:px-16  xl:!gap-5 2xl:!gap-10  2xl:w-[90%] min-[1850px]:!w-[83%]"
               >
                 {filteredProperties.length === 0 ? (
-                  <EmptyCards
+                  <div className="relative min-h-screen flex justify-center items-center">
+                    <EmptyCards
                     Title={
                       isLoggedIn
                         ? "No properties match the selected filter."
                         : "Unlock hidden opportunities by upgrading to a premium membership"
                     }
                   />
+                  </div>
                 ) : (
                   filteredProperties.map((items) => (
                     <div
