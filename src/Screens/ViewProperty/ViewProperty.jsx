@@ -46,6 +46,9 @@ const ViewProperty = () => {
   const [FilterValue, setFilterValue] = useState("AllProperties");
 
 
+  const [PackageUpgrade , setPackageUpgrade] = useState(false)
+
+
 
   useEffect(() => {
     if (filters) {
@@ -154,7 +157,10 @@ const ViewProperty = () => {
       const { listingType, propertyType, state, city, priceRange, propertyName } =
         searchFilters;
 
+
+
       if (listingType === "Off Market Listing") {
+        setPackageUpgrade(true)
         if (isLoggedIn === "active") {
           // Show only off-market listings
           result = result.filter(p => Boolean(p.off_market_listing) === true);
@@ -179,7 +185,7 @@ const ViewProperty = () => {
       }
 
       console.log(propertyName);
-      
+
 
       if (propertyName && propertyName !== "Select Your Property" && propertyName !== "All Properties") {
         setDefaulTab(propertyName);
@@ -190,7 +196,7 @@ const ViewProperty = () => {
             propertyName.toLowerCase().trim()
         );
       } else {
-        
+
         setDefaulTab("All Properties");
       }
 
@@ -262,7 +268,7 @@ const ViewProperty = () => {
 
       {/* PROPERTY TABS START */}
       <section >
-        <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} >
+        {/* <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} >
           <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 justify-center items-center border-b-[1px] border-[#BBBBBB] border-solid ">
             <div>
               <ResponsiveTabList
@@ -273,75 +279,76 @@ const ViewProperty = () => {
                 }}
               />
             </div>
-          </div>
+          </div> */}
 
-          <TabPanels className={"flex justify-center  "}>
-            {!Loading ? (
-              <TabPanel
-                id="offmarket"
-                className="w-[100%] relative grid sm:grid-cols-2 min-[860px]:!grid-cols-3 xl:!grid-cols-4 flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-10 sm:py-12 lg:py-16 xl:my-1 sm:gap-4 sm:px-13 md:gap-10 min-[860px]:!gap-5 md:px-16  xl:!gap-5 2xl:!gap-10  2xl:w-[90%] min-[1850px]:!w-[83%]"
-              >
-                {filteredProperties.length === 0 ? (
-                  <div className="relative min-h-screen flex justify-center items-center">
-                    <EmptyCards
+        <div className={"flex justify-center  "}>
+          {!Loading ? (
+            <div
+              id="offmarket"
+              className="w-[100%] relative grid sm:grid-cols-2 min-[860px]:!grid-cols-3 xl:!grid-cols-4 flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-10 sm:py-12 lg:py-16 xl:my-1 sm:gap-4 sm:px-13 md:gap-10 min-[860px]:!gap-5 md:px-16  xl:!gap-5 2xl:!gap-10  2xl:w-[90%] min-[1850px]:!w-[83%]"
+            >
+              {filteredProperties.length === 0 ? (
+                <div className="relative min-h-screen flex justify-center items-center">
+                  <EmptyCards
+                  type={PackageUpgrade}
                     Title={
                       isLoggedIn
                         ? "No properties match the selected filter."
                         : "Unlock hidden opportunities by upgrading to a premium membership"
                     }
                   />
+                </div>
+              ) : (
+                filteredProperties.map((items) => (
+                  <div
+                    key={items.id}
+                    className=""
+                  >
+                    <PropertiesCards2
+                      PropertyType={items.property_type}
+                      Area={items.building_size}
+                      type={items.listing_type}
+                      Img={items.images[0]}
+                      Heading={items.property_name}
+                      desc={
+                        <TruncatedText
+                          text={items.description}
+                          maxLength={90}
+                        />
+                      }
+                      Status={items.listing_type}
+                      Price={
+                        <TruncatedText
+                          text={
+                            items.listing_type === "For Sale"
+                              ? items.sale_price
+                              : items.lease_rate
+                          }
+                          maxLength={10}
+                        />
+                      }
+                      forsale={items.sale_price && items.sale_price}
+                      forlease={items.lease_rate && items.lease_rate}
+                      id={items.id}
+                      images={items.images[0]}
+                      CheckProperty={
+                        items.off_market_listing ? "Off Market Property" : ""
+                      }
+                      featured_listing={
+                        items.featured_listing && "Featured Listing"
+                      }
+                    />
                   </div>
-                ) : (
-                  filteredProperties.map((items) => (
-                    <div
-                      key={items.id}
-                      className=""
-                    >
-                      <PropertiesCards2
-                        PropertyType={items.property_type}
-                        Area={items.building_size}
-                        type={items.listing_type}
-                        Img={items.images[0]}
-                        Heading={items.property_name}
-                        desc={
-                          <TruncatedText
-                            text={items.description}
-                            maxLength={90}
-                          />
-                        }
-                        Status={items.listing_type}
-                        Price={
-                          <TruncatedText
-                            text={
-                              items.listing_type === "For Sale"
-                                ? items.sale_price
-                                : items.lease_rate
-                            }
-                            maxLength={10}
-                          />
-                        }
-                        forsale={items.sale_price && items.sale_price}
-                        forlease={items.lease_rate && items.lease_rate}
-                        id={items.id}
-                        images={items.images[0]}
-                        CheckProperty={
-                          items.off_market_listing ? "Off Market Property" : ""
-                        }
-                        featured_listing={
-                          items.featured_listing && "Featured Listing"
-                        }
-                      />
-                    </div>
-                  ))
-                )}
-              </TabPanel>
-            ) : (
-              <div className="flex justify-center items-center !h-[75vh]">
-                <Spinner style={"w-14 h-20 text-PurpleColor z-50"} />
-              </div>
-            )}
-          </TabPanels>
-        </TabGroup>
+                ))
+              )}
+            </div>
+          ) : (
+            <div className="flex justify-center items-center !h-[75vh]">
+              <Spinner style={"w-14 h-20 text-PurpleColor z-50"} />
+            </div>
+          )}
+        </div>
+        {/* </TabGroup> */}
       </section>
       {/* PROPERTY TABS END */}
 

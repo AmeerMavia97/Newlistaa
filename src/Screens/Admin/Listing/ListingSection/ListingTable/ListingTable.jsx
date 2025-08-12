@@ -59,7 +59,14 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
         ? item.property_type?.toLowerCase() === propertyType.toLowerCase()
         : true;
 
-      const price = item.sale_price;
+      //  const price = item.lease_rate ?? item.sale_price;
+      const rawPrice = item.sale_price != null ? item.sale_price : item.lease_rate;
+
+      const price = rawPrice
+        ? Number(rawPrice.toString().replace(/,/g, ''))
+        : NaN;
+
+
       const matchesPrice = (() => {
         if (!priceRange || isNaN(price)) return true;
 
@@ -113,7 +120,7 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
   );
 
   console.log(currentListings);
-  
+
 
   const handleConfirmation = async (id) => {
     setSelectedId(id);
@@ -205,15 +212,15 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
                     <td className="w-[15%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
                       {item.listing_type === "For Sale" && <TruncatedText text={item.sale_price} maxLength={9} />}
                       {item.listing_type === "For Lease" && <TruncatedText text={item.lease_rate} maxLength={9} />}
-                      {item.listing_type === "Both (For Sale & For Lease)" && <TruncatedText text={item.sale_price + "/sale" + item.lease_rate +"/lease"} maxLength={9} />}
+                      {item.listing_type === "Both (For Sale & For Lease)" && <TruncatedText text={item.sale_price + "/sale" + item.lease_rate + "/lease"} maxLength={9} />}
                     </td>
                     <td className="px-3.5 py-6 text-[#222222] font-[550] text-[16px] flex gap-1 items-center mt-3 ml-2 sm:ml-0 sm:mt-2.5">
                       <div
                         className={`h-2 w-2 rounded-full ${item.listing_status === "Available"
-                            ? "bg-[#02E327]"
-                            : item.listing_status === "Loss"
-                              ? "bg-[#E31D1C]"
-                              : "bg-[#4379EE]"
+                          ? "bg-[#02E327]"
+                          : item.listing_status === "Loss"
+                            ? "bg-[#E31D1C]"
+                            : "bg-[#4379EE]"
                           }`}
                       ></div>
                       {item.listing_status}

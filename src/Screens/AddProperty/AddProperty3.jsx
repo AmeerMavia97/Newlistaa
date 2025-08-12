@@ -183,7 +183,10 @@ const PropertyForm = () => {
         "featured_listing",
         !data.paymentMethodId && data.FeaturedListing ? 1 : 0
       );
-      form.append("off_market_listing", data.OffTheMarketListing ? 1 : 0);
+      form.append(
+        "off_market_listing",
+        data.propertyType === 'For Sale' ? (data.OffTheMarketListing ? 1 : 0) : 0
+      );
       form.append("owner_financing", data.OwnerFinancing ? 1 : 0);
       form.append("show_email", data.ShowEmail ? 1 : 0);
       form.append("show_phone", data.ShowNumber ? 1 : 0);

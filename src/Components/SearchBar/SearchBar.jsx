@@ -5,7 +5,7 @@ import ComboboxSelector from "../ComboboxSelector/ComboboxSelector";
 import { Search } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFilters } from "../../Reducers/filterSlice/filterSlice";
 
 const ListingType = [
@@ -120,6 +120,8 @@ const statesArray = [
 ];
 
 const SearchBar = ({ ByDefault }) => {
+  const filters = useSelector((state) => state.filters); // adjust path to your filters slice
+
   const navigate = useNavigate();
   const [cities, setCities] = useState(initialCities);
   const [selectedState, setSelectedState] = useState("");
@@ -147,63 +149,80 @@ const SearchBar = ({ ByDefault }) => {
     };
     console.log(data);
     dispatch(setFilters(data));
-    navigate("/properties");
+    if (location.pathname !== "/properties") {
+      navigate("/properties");
+    }
   };
 
-  console.log(propertyName);
-
 
   useEffect(() => {
-    if (ByDefault) {
-      const found = propertyType.find(
-        (item) => item.name.toLowerCase() === ByDefault.toLowerCase()
-      );
-      if (found) {
-        setValue("propertyName", found.name);
+    if (filters) {
+      if (filters.listingType) setValue("listingType", filters.listingType);
+      if (filters.propertyName) setValue("propertyName", filters.propertyName);
+      if (filters.priceRange) setValue("priceRange", filters.priceRange);
+      if (filters.state) {
+        setValue("state", filters.state);
+        setSelectedState(filters.state);
+      }
+      if (filters.city) {
+        setValue("city", filters.city);
+        setSelectedCity(filters.city);
       }
     }
-  }, [ByDefault, setValue]);
+  }, [filters, setValue]);
+
+
+  // useEffect(() => {
+  //   if (ByDefault) {
+  //     const found = propertyType.find(
+  //       (item) => item.name.toLowerCase() === ByDefault.toLowerCase()
+  //     );
+  //     if (found) {
+  //       setValue("propertyName", found.name);
+  //     }
+  //   }
+  // }, [ByDefault, setValue]);
 
 
 
 
 
-  useEffect(() => {
-    if (location.pathname === "/properties") {
-      const data = {
-        listingType: getValues("listingType"),
-        propertyName: getValues("propertyName"),
-        state: selectedState,
-        city: selectedCity,
-        priceRange: getValues("priceRange"),
-      };
+  // useEffect(() => {
+  //   if (location.pathname === "/properties") {
+  //     const data = {
+  //       listingType: getValues("listingType"),
+  //       propertyName: getValues("propertyName"),
+  //       state: selectedState,
+  //       city: selectedCity,
+  //       priceRange: getValues("priceRange"),
+  //     };
 
-      // Check if any meaningful value exists
-      const hasValidFilter =
-        (data.listingType && data.listingType !== "Select") ||
-        
-        (data.state && data.state !== "") ||
-        (data.city && data.city !== "") ||
-        (data.priceRange && data.priceRange !== "");
+  //     // Check if any meaningful value exists
+  //     const hasValidFilter =
+  //       (data.listingType && data.listingType !== "Select") ||
 
-      console.log(data);
+  //       (data.state && data.state !== "") ||
+  //       (data.city && data.city !== "") ||
+  //       (data.priceRange && data.priceRange !== "");
+
+  //     console.log(data);
 
 
-      if (hasValidFilter) {
-        console.log("Dispatching filters:", data);
-        dispatch(setFilters(data));
-      } else {
-        console.log("Skipped dispatch: filters are empty or default", data);
-      }
+  //     if (hasValidFilter) {
+  //       console.log("Dispatching filters:", data);
+  //       dispatch(setFilters(data));
+  //     } else {
+  //       console.log("Skipped dispatch: filters are empty or default", data);
+  //     }
 
-    }
-  }, [
-    getValues("listingType"),
-    getValues("propertyName"),
-    selectedState,
-    selectedCity,
-    getValues("priceRange"),
-  ]);
+  //   }
+  // }, [
+  //   getValues("listingType"),
+  //   getValues("propertyName"),
+  //   selectedState,
+  //   selectedCity,
+  //   getValues("priceRange"),
+  // ]);
 
 
 
@@ -224,6 +243,9 @@ const SearchBar = ({ ByDefault }) => {
       (city) => city.name.toLowerCase() === cityName.toLowerCase()
     );
 
+    console.log(exists);
+
+
     if (!exists) {
       setCities((prevCities) => {
         const newId =
@@ -242,24 +264,52 @@ const SearchBar = ({ ByDefault }) => {
     }
   }
 
+  console.log(cities);
+
+
   useEffect(() => {
     async function fetchAndAddCities() {
       try {
         const response = await axios.get(`${ApiKey}/properties`);
         const properties = response.data.data;
 
-        // Extract unique city names from properties
-        const uniqueCities = [...new Set(properties.map((p) => p.city))];
+        setCities((prevCities) => {
+          const citySet = new Set(prevCities.map((c) => c.name.toLowerCase()));
 
-        uniqueCities.forEach((cityName) => {
-          addCityIfNotExists(cityName);
+          const newCities = [];
+
+          properties.forEach((p) => {
+            const cityName = p.city?.trim();
+            if (cityName && !citySet.has(cityName.toLowerCase())) {
+              citySet.add(cityName.toLowerCase());
+              newCities.push(cityName);
+            }
+          });
+
+          if (newCities.length > 0) {
+            const startId = prevCities.length > 0 ? Math.max(...prevCities.map((c) => c.id)) + 1 : 1;
+
+            const newCityObjects = newCities.map((cityName, index) => ({
+              id: startId + index,
+              labels: cityName,
+              name: cityName,
+            }));
+
+            return [...prevCities, ...newCityObjects];
+          }
+
+          return prevCities; // no changes, return prevCities
         });
       } catch (error) {
-        console.error("Error fetching city from API:", error);
+        console.error("Error fetching cities:", error);
       }
     }
-    fetchAndAddCities()
-  })
+
+    fetchAndAddCities();
+  }, [ApiKey]);
+
+
+
   function addCityIfNotExists(cityName) {
     const exists = cities.some(
       (city) => city.name.toLowerCase() === cityName.toLowerCase()
@@ -408,19 +458,17 @@ const SearchBar = ({ ByDefault }) => {
         </div>
 
         {/* Search Button */}
-        {location.pathname !== "/properties" && (
-          <div>
-            <button
-              type="button"
-              className="hover-btn hover-btn-purple text-white px-2 py-2 rounded-full text-[14px] cursor-pointer"
-              onClick={onSubmit}
-            >
-              <span>
-                <Search />
-              </span>
-            </button>
-          </div>
-        )}
+        <div>
+          <button
+            type="button"
+            className="hover-btn hover-btn-purple text-white px-2 py-2 rounded-full text-[14px] cursor-pointer"
+            onClick={onSubmit}
+          >
+            <span>
+              <Search />
+            </span>
+          </button>
+        </div>
 
       </div>
     </div>
