@@ -347,9 +347,9 @@ const SearchBar = ({ ByDefault }) => {
 
   return (
     <div className="sm:mb-8 sm:flex sm:justify-center mt-8">
-      <div className="relative w-[85%] justify-between md:w-[35%] lg:w-[94%] xl:w-[87%] flex rounded-full py-3 px-5 lg:px-6.5 sm:py-3.5 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 bg-textColor lg:justify-center items-center">
+      <div className="relative w-[85%] justify-between md:w-[35%] lg:w-[94%] xl:w-[90%] flex rounded-full py-3 px-5 lg:px-6.5 sm:py-3.5 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 bg-textColor lg:justify-center items-center">
         {/* Listing Type */}
-        <div className="w-[45%] lg:w-[13%] xl:w-[19%] px-4 py-2 lg:border-r-[1px] border-solid border-Paracolor">
+        <div className="w-[45%] lg:w-[13%] xl:w-[18%] px-4 py-2 lg:border-r-[1px] border-solid border-Paracolor">
           <select
             {...register("listingType")}
             className="text-[14px] font-Inter text-black font-[500] focus:outline-none border-none focus:ring-0 w-full"
@@ -400,7 +400,7 @@ const SearchBar = ({ ByDefault }) => {
         </div>
         {/* } */}
         {/* State Selector */}
-        <div className="hidden lg:flex lg:w-[190px] whitespace-nowrap text-ellipsis px-8 py-1 lg:border-r-[1px] border-solid border-Paracolor flex-col">
+        <div className="hidden lg:flex lg:w-[20%] whitespace-nowrap text-ellipsis px-8 py-1 lg:border-r-[1px] border-solid border-Paracolor flex-col">
           <h1 className="text-[14px] font-Inter text-black font-[600]">
             State
           </h1>
