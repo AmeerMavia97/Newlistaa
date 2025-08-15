@@ -49,6 +49,7 @@ const WareHouseForm = ({
   control,
   watch,
   setValue,
+  PropertyRadio
 }) => {
 
   const Check = watch("custom_fields.BuildingSize");
@@ -56,27 +57,31 @@ const WareHouseForm = ({
     <div className="border-[2px] rounded-[8px] px-4 border-solid border-[#ececec] mt-5 bg-[#fcfcfc] py-8">
       <div className="">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex-col gap-5 md:gap-8">
-          <span className="w-[100%]">
-            <Selection
-              labels={"Select"}
-              Options={currencies}
-              defaultOption={"Select"}
-              register={register}
-              name={"custom_fields.Currency"}
-              value={watch("custom_fields.Currency")}
-            ></Selection>
-          </span>
-          <span className="w-[100%]">
-            <NumberInputs
-              labels={"Gross Scheduled Income (Annual) "}
-              type={"text"}
-              watch={watch}
-              setValue={setValue}
-              placeholder={"Ex: 10000"}
-              name={"custom_fields.MonthlyRental"}
-              register={register}
-            ></NumberInputs>
-          </span>
+          {PropertyRadio !== "For Lease" &&
+            <>
+              <span className="w-[100%]">
+                <Selection
+                  labels={"Currency"}
+                  Options={currencies}
+                  defaultOption={"Select"}
+                  register={register}
+                  name={"custom_fields.Currency"}
+                  value={watch("custom_fields.Currency")}
+                ></Selection>
+              </span>
+              <span className="w-[100%]">
+                <NumberInputs
+                  labels={"Gross Scheduled Income (Annual) "}
+                  type={"text"}
+                  watch={watch}
+                  setValue={setValue}
+                  placeholder={"Ex: 10000"}
+                  name={"custom_fields.MonthlyRental"}
+                  register={register}
+                ></NumberInputs>
+              </span>
+            </>
+          }
           <span className="">
             <NumberInputs
               labels={"Lot Size"}

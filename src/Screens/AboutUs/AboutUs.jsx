@@ -206,11 +206,11 @@ const AboutUs = () => {
             </p>
           </div>
           {/* CARDSECTION  */}
-          <div className="flex flex-col gap-7 sm:gap-4 sm:flex-row sm:flex-wrap lg:w-[97%] xl:w-[84%] md:gap-5">
+          <div className="flex flex-col gap-7 sm:gap-4 sm:flex-row sm:flex-wrap md:w-[84%] md:gap-5">
             <Testimonials
               RevTitle={""}
               RevParagraph={
-                "Newlista has transformed my real estate investing. It connected me with exclusive off-market deals, including a commercial property I recently closed. The platform is efficient, easy to use, and has opened up networking and deal opportunities I never thought possible"
+                "Newlista transformed my real estate investing—helped me close an off-market commercial deal. It's easy to use and opened doors to exclusive opportunities and valuable connections."
               }
               Stars={5}
               RevImage={RevImage1}
@@ -220,7 +220,7 @@ const AboutUs = () => {
             <Testimonials
               RevTitle={""}
               RevParagraph={
-                "As a seasoned real estate investor, I'm always looking for an edge. Newlista's networking features and exclusive off-market listings have given me just that. The tailored notifications save me time, and the ability to share my own listings with a select group of professionals has led to quicker, more profitable deals. It's become an indispensable tool in my investment arsenal."
+                "As a seasoned investor, Newlista gives me the edge with exclusive off-market deals, smart alerts, and pro networking. Sharing listings with select buyers has led to faster, more profitable closes."
               }
               Stars={5}
               RevImage={RevImage2}
@@ -230,7 +230,7 @@ const AboutUs = () => {
             <Testimonials
               RevTitle={""}
               RevParagraph={
-                "Newlista is revolutionizing how I connect with fellow real estate investors. The platform's focus on facilitating networking among professionals is a game-changer. I'm particularly excited about the potential to share and discover off-market listings exclusively with other investors. This feature alone could be invaluable for finding hidden gem properties."
+                "Newlista is changing how I connect with other investors. Its pro networking and exclusive off-market listings help me find hidden gems and share deals efficiently—truly a game-changer in real estate."
               }
               Stars={5}
               RevImage={RevImage3}

@@ -506,7 +506,7 @@ const Register = () => {
             <h2 className="text-[30px] leading-[34px] font-semibold mb-4 font-Urbanist">Important Notice for Investors</h2>
             <div className="bg-red-50 border border-red-200 mb-4 rounded-md -4"><div className=" text-red-700 text-sm sm:text-[14px] rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
              <p className="font-semibold">
-              Welcome to Newlista — a Private Network for Real Estate Investors Newlista is exclusively for verified real estate investors looking to buy, sell, or network on and off market opportunities. To protect the integrity of our investor community: All users must be bona fide investors. Soliciting services (brokerage, wholesaling, marketing, etc.) to others is strictly prohibited. Newlista is not a syndicator and does not pool funds or manage investments. Violations may result in account suspension or removal without refund. We reserve the right to verify investor status and enforce these policies. By signing up, you agree to follow these terms and acknowledge that Newlista is a platform built by and for investors only.
+              Newlista is exclusively for bona fide real estate investors. Soliciting, wholesaling, or marketing to other users is prohibited. We do not facilitate syndications. Investors must follow all SEC rules. Users misusing the platform will be suspended or banned without refund. By signing up, you agree to these terms.
              </p>
              
               {/* <p className="mb-2 font-semibold">
@@ -544,7 +544,7 @@ const Register = () => {
                 className="w-10 h-10 -mt-2"
               />
               <span className="text-sm sm:text-[13.5px] font-Inter font-semibold">
-                I agree to Newlista’s <Link to={'/terms-of-use'} className="text-blue-500">Terms of Use</Link> and <Link to={'/privacy-policy'} className="text-blue-500">Privacy Policy</Link>, and confirm I am a real estate investor using this platform for investment purposes only.
+                I have read and agree to the Important Notice above, as well as the <Link to={'/terms-of-use'} className="text-blue-500">Terms & Conditions</Link>  and  <Link to={'/privacy-policy'} className="text-blue-500">Privacy Policy.</Link>
               </span>
             </label>
 

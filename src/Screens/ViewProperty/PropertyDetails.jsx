@@ -266,6 +266,7 @@ const PropertyDetails = () => {
                   {UserId !== SingleProperty.user.id && (
                     <div className="flex gap-4">
                       <InquiryForm
+                        ListingType={SingleProperty.listing_type}
                         id={params.id}
                         propertyAddress={
                           SingleProperty.address +

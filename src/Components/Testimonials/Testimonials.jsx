@@ -58,7 +58,7 @@ const Testimonials = ({
             {RevTitle}
           </h1>
           <p className="text-[14.5px] font-Inter font-medium text-pretty text-Paracolor mt-2 sm:text-[14px]/5.5  ">
-            <TruncatedText text={RevParagraph} maxLength={220} />
+            <TruncatedText text={RevParagraph} maxLength={1000} />
           </p>
         </span>
         <div className="flex justify-center gap-3">

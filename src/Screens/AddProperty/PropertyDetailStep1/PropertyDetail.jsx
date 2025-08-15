@@ -20,18 +20,22 @@ import NumberInputs from "../../../Components/InputFields/NumberInputs.jsx";
 import IndustrialForm from "../../../Components/PropertyForm/IndustrialForm/IndustrialForm.jsx";
 import CustomCheckBox from "./PropertyDetailSections/CustomCheckBox.jsx";
 
-const Step1 = ({ onNext, defaultValues  , prevStep }) => {
+const Step1 = ({ onNext, defaultValues, prevStep }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    getValues,
     control,
     setValue,
     reset,
     trigger
   } = useForm({
     defaultValues,
+    leaseRateMin: "",
+    leaseRateMax: "",
+    leaseRate: "",
   });
 
   useEffect(() => {
@@ -40,7 +44,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
       reset(defaultValues);
 
       console.log(defaultValues);
-      
+
     }
   }, [defaultValues, reset]);
 
@@ -49,9 +53,6 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
   const propertyType = watch("propertyName");
 
   console.log(PropertyRadio);
-  
-
-  
 
 
   const renderFormFields = () => {
@@ -60,6 +61,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
         return (
           <RentailForm
             watch={watch}
+            PropertyRadio={PropertyRadio}
             setValue={setValue}
             register={register}
             propertyTypeName={propertyType}
@@ -70,6 +72,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
           <WareHouseForm
             register={register}
             control={control}
+            PropertyRadio={PropertyRadio}
             watch={watch}
             setValue={setValue}
             propertyTypeName={propertyType}
@@ -90,6 +93,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
           <IndustrialForm
             register={register}
             control={control}
+            PropertyRadio={PropertyRadio}
             watch={watch}
             setValue={setValue}
             propertyTypeName={propertyType}
@@ -110,6 +114,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
           <DefaultForm
             errors={errors}
             register={register}
+            PropertyRadios={PropertyRadio}
             watch={watch}
             setValue={setValue}
             propertyTypeName={propertyType}
@@ -118,10 +123,10 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
         );
     }
   };
-  
+
 
   console.log(defaultValues);
-  
+
 
   const SubmitPropertyForm = (value) => {
     console.log("Validated Form Data:", value);
@@ -139,6 +144,8 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
           <PropertyRadios defaultValues={defaultValues} register={register}></PropertyRadios>
           <div className="border border-[#ececec] rounded-2xl mx-3 md:mx-0 px-3 md:px-5 py-8">
             <PropertytypeSelection
+              getValues={getValues}
+              propertyType={propertyType}
               setValue={setValue}
               watch={watch}
               PropertyRadios={PropertyRadio}
@@ -154,12 +161,12 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
               <CustomCheckBox propertyType={propertyType} control={control} errors={errors}></CustomCheckBox>
             </div>
 
-            <AddressFields defaultValues={defaultValues} setValue={setValue}  control ={control} trigger={trigger} watch={watch} register={register} errors={errors} />
+            <AddressFields defaultValues={defaultValues} setValue={setValue} control={control} trigger={trigger} watch={watch} register={register} errors={errors} />
             {/* DESCRIPTION SECTION  */}
             <div className="border-b-[1px]  border-[#BBBBBB] pb-7 sm:py-7 flex-col gap-4 flex">
               <TextAreas
                 label={"Description"}
-                placeholder={ PropertyRadio === "For Sale" ? 
+                placeholder={PropertyRadio === "For Sale" ?
                   "Describe the property, its features, location, and any unique selling points. You may also include zoning, deed restrictions, environmental or title issues, and investment highlights." : PropertyRadio === "For Lease" ? "Describe the property, available suites, square footage, lease rate (per month or per SF), location, and any unique features. If there are multiple units, list each with its suite number, size, and lease price" : "Describe the property, its location, and any unique selling points. If the property is available for both sale and lease, include relevant lease terms, suite details, and any investment considerations such as zoning or deed restrictions."
                 }
                 register={register("description", {
@@ -168,7 +175,7 @@ const Step1 = ({ onNext, defaultValues  , prevStep }) => {
                 error={errors.description?.message}
               ></TextAreas>
             </div>
-            <ListingVisibilitySwitches setValue={setValue}  watch={watch} defaultValues={defaultValues} PropertyRadio={PropertyRadio} controls={control} />
+            <ListingVisibilitySwitches setValue={setValue} watch={watch} defaultValues={defaultValues} PropertyRadio={PropertyRadio} controls={control} />
           </div>
 
           {/* Send Message Button */}

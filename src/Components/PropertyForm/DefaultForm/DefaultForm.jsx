@@ -45,6 +45,7 @@ const DefaultForm = ({
   watch,
   setValue,
   control,
+  PropertyRadios
 }) => {
   // should log: "434"
 
@@ -82,27 +83,54 @@ const DefaultForm = ({
     <div className="border-[2px] rounded-[8px] px-4 border-solid border-[#ececec] mb-10 bg-[#fcfcfc] py-8">
       <div className="flex flex-col gap-8">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 items-end md:gap-8">
-          <span className="">
-            <Selection
-              labels={"Currency"}
-              Options={currencies}
-              defaultOption={"Select"}
-              name={"custom_fields.Currency"}
-              register={register}
-              value={watch("custom_fields.Currency")}
-            ></Selection>
-          </span>
-          <span className="">
-            <NumberInputs
-              labels={"Gross Scheduled Income (Annual)"}
-              type={"text"}
-              watch={watch}
-              setValue={setValue}
-              placeholder={"Ex: 10000"}
-              name={"custom_fields.MonthlyRental"}
-              register={register}
-            ></NumberInputs>
-          </span>
+          {!(
+            PropertyRadios === "For Lease" &&
+            [
+              "Church",
+              "Gas Station",
+              "Health Care Facility",
+              "Hospitality",
+              "Industrial Building",
+              "Mixed Use Property",
+              "Office Building",
+              "Recreation Center",
+              "Retail Center",
+              "School Building",
+              "Self Storage",
+              "Senior Living Facility",
+              "Shopping Center",
+              "Single Tenant Building",
+              "Strip Center",
+              "Warehouse",
+              "Other"
+            ].includes(propertyTypeName)
+          ) && (
+              <>
+                <span className="">
+                  <Selection
+                    labels={"Currency"}
+                    Options={currencies}
+                    defaultOption={"Select"}
+                    name={"custom_fields.Currency"}
+                    register={register}
+                    value={watch("custom_fields.Currency")}
+                  />
+                </span>
+
+                <span className="">
+                  <NumberInputs
+                    labels={"Gross Scheduled Income (Annual)"}
+                    type={"text"}
+                    watch={watch}
+                    setValue={setValue}
+                    placeholder={"Ex: 10000"}
+                    name={"custom_fields.MonthlyRental"}
+                    register={register}
+                  />
+                </span>
+              </>
+            )}
+
           <span className="">
             <NumberInputs
               labels={"Lot Size"}

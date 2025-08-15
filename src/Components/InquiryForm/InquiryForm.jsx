@@ -12,7 +12,7 @@ import AlertModal from "../AlertModal/AlertModal";
 import { AtSign, X } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function InquiryForm({ id, propertyAddress }) {
+function InquiryForm({ id, propertyAddress , ListingType }) {
   const ApiKey = import.meta.env.VITE_API_KEY;
     const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -138,8 +138,9 @@ function InquiryForm({ id, propertyAddress }) {
                     INQUIRY FORM
                   </h1>
                   <p className="font-Urbanist font-[500] leading-[18px] text-[14.5px]">
-                    Submit your loan inquiry by providing basic contact details,
-                    financial info, and property description.
+                    {
+                      ListingType === "Both (For Sale & For Lease)" ? "Looking to acquire this property? Let us help with financing — just share your contact details, financial info, and property description." : ListingType === "For Sale" ? "Looking to acquire this property? Let us help with financing — just share your contact details, financial info, and property description." : "Need financing for this opportunity? Let us help — just share your contact details, financial info, and property description."
+                    }
                   </p>
                 </div>
                 <span className="">

@@ -49,6 +49,7 @@ const IndustrialForm = ({
   control,
   watch,
   setValue,
+  PropertyRadio
 }) => {
   return (
     <div className="border-[2px] rounded-[8px] px-4 border-solid border-[#ececec] mt-5 bg-[#fcfcfc] py-8">

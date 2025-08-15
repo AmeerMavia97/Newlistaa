@@ -38,23 +38,26 @@ const currencies = [
   "MYR",
 ];
 
-const RentailForm = ({ propertyTypeName, register, watch, setValue }) => {
+const RentailForm = ({ propertyTypeName, register, watch, setValue, PropertyRadio }) => {
 
   const Check = watch("custom_fields.BuildingSize");
-  
+
   return (
     <div className="border-[2px] rounded-[8px] px-4 border-solid border-[#ececec] mt-5 bg-[#fcfcfc] py-8">
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
-        <span className="w-[100%]">
-          <Selection
-            labels={"Currency"}
-            defaultOption={"Select Your Currency"}
-            Options={currencies}
-            name={"custom_fields.Currency"}
-            register={register}
-            value={watch("custom_fields.Currency")}
-          ></Selection>
-        </span>
+        {PropertyRadio !== "For Lease" &&
+          <>
+          <span className="w-[100%]">
+            <Selection
+              labels={"Currency"}
+              defaultOption={"Select Your Currency"}
+              Options={currencies}
+              name={"custom_fields.Currency"}
+              register={register}
+              value={watch("custom_fields.Currency")}
+            ></Selection>
+          </span>
+
         <span className="w-[100%]">
           <NumberInputs
             labels={"Gross Scheduled Income (Annual) "}
@@ -65,7 +68,9 @@ const RentailForm = ({ propertyTypeName, register, watch, setValue }) => {
             name={"custom_fields.MonthlyRental"}
             register={register}
           ></NumberInputs>
-        </span>
+        </span></>
+        }
+
         <span className="">
           <NumberInputs
             labels={"Lot Size"}
