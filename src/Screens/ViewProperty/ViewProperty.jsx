@@ -45,6 +45,9 @@ const ViewProperty = () => {
   const [searchFilters, setSearchFilters] = useState(null);
   const [FilterValue, setFilterValue] = useState("AllProperties");
 
+  console.log(FilterValue);
+  
+
 
   const [PackageUpgrade , setPackageUpgrade] = useState(false)
 
@@ -72,10 +75,13 @@ const ViewProperty = () => {
     GetProperty();
   }, []);
 
+
   useEffect(() => {
     if (location?.state?.filterType) {
       switch (location.state.filterType) {
         case "offmarket":
+          console.log('hello');
+          
           setFilterValue("Off Market Properties");
           setSelectedIndex(0);
           break;

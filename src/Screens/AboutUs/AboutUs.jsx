@@ -52,20 +52,17 @@ const AboutUs = () => {
                 About Newlista
               </h1>
               <p class="mx-auto max-w-3xl  font-semibold text-pretty text-[#ececec] font-Urbanist text-[13px] sm:text-[13.5px] md:text-[14px] lg:text-[15px] xl:text-[17px]  2xl:text-[19px]">
-                Discover the story behind Newlista, where a passion for real
-                estate meets innovation and integrity.
+                Newlista is an exclusive commercial real estate investor network and online marketplace where serious investors don’t just find properties, they discover each other. In addition to showcasing, discovering, and acquiring investment properties, members can search for investors and connect with like-minded professionals who share the same investment goals. This makes Newlista more than a listing site. t’s a relationship-building platform designed for real estate success.
               </p>
             </div>
             {/* Paragraph  */}
             <div>
               <p class="mx-auto mt-6 max-w-3xl font-medium text-pretty text-[#ececec] sm:text-md/8 text-[13px]  font-Urbanist sm:text-[13.5px] md:text-[14px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px]">
-                At Newlista, we're redefining how real estate investors connect,
-                collaborate, and close deals. Our platform offers seamless
-                access to off-market listings, powerful networking tools, and
-                exclusive market insights. Whether you're buying, selling, or
-                expanding your investment portfolio, Newlista empowers you with
-                the tools and connections you need to succeed.
+                Investors can list their commercial real estate properties for sale or lease — completely free. The platform is strictly for investors, with no service solicitations allowed, so every interaction is focused on genuine opportunities. Members can grow their network, receive instant notifications when a new connection is made, and explore off-market opportunities with trusted peers.
               </p>
+              <p className="mx-auto mt-6 max-w-3xl font-medium text-pretty text-[#ececec] sm:text-md/8 text-[13px]  font-Urbanist sm:text-[13.5px] md:text-[14px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px]">Premium members enjoy even more ways to close deals faster, including early access to select listings, the ability to make direct property offers, view the status of offers, whether pending, accepted, or declined, private dashboard messaging for secure investor-to-investor communication, and built-in analytics to monitor listing and profile engagement. Hence, you know what’s resonating and when to follow up. These tools make it easy to collaborate, share market insights, and form joint ventures to acquire properties together.</p>
+              <p className="mx-auto mt-6 max-w-3xl font-medium text-pretty text-[#ececec] sm:text-md/8 text-[13px]  font-Urbanist sm:text-[13.5px] md:text-[14px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px]">
+                Whether you’re selling a multifamily complex, acquiring industrial property, or partnering on your next retail development, Newlista brings the right people and the right properties together, all in one place.</p>
             </div>
           </div>
         </div>

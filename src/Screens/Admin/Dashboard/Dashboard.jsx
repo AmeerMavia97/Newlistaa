@@ -141,7 +141,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <section className="py-6 px-2 sm:px-3 min-[890px]:px-0 ">
+      <section className="py-6 px-2 sm:px-3 min-[890px]:px-0 2xl:min-h-screen ">
         {/* PAGE TITTLE  */}
         <div>
           <h1 className="text-[30px] font-Urbanist text-[#222222] sm:text-[30px] font-[700]">

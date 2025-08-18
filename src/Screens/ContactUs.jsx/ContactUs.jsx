@@ -1,5 +1,5 @@
 import axios from "axios";
-import  { useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 // Components
 import Footer from "../../Components/Footer/Footer";
@@ -101,8 +101,7 @@ const ContactUs = () => {
                 Get in Touch with Newlista
               </h1>
               <p className="text-[12.5px] font-Inter font-medium text-pretty text-Paracolor mt-2 sm:text-[14px] lg:text-[15px] sm:leading-[18px] 2xl:text-[16px] 2xl:leading-[23px] ">
-                Have questions or need assistance? Our team is here to help.
-                Reach out, and we'll get back to you as soon as possible.
+                Have questions or need more information? Reach out directly to the investor, and they’ll get back to you as soon as possible
               </p>
             </div>
 

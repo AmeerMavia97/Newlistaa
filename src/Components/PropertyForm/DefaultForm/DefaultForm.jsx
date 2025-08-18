@@ -88,7 +88,7 @@ const DefaultForm = ({
             [
               "Church",
               "Gas Station",
-              "Health Care Facility",
+              "Healthcare Facility",
               "Hospitality",
               "Industrial Building",
               "Mixed Use Property",
@@ -96,10 +96,10 @@ const DefaultForm = ({
               "Recreation Center",
               "Retail Center",
               "School Building",
-              "Self Storage",
+              "Self-Storage Facility",
               "Senior Living Facility",
               "Shopping Center",
-              "Single Tenant Building",
+              "Single-Tenant Retail Building",
               "Strip Center",
               "Warehouse",
               "Other"

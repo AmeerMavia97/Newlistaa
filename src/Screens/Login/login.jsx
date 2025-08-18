@@ -316,8 +316,12 @@ const Login = () => {
         >
           <div className="bg-white rounded-lg shadow-lg pt-10 pb-7  px-6.5 max-w-[37%] mx-4 no-scrollbar ">
             <h2 className="text-[30px] leading-[34px] font-semibold mb-4 font-Urbanist">Important Notice for Investors</h2>
-            <div className="bg-red-50 border border-red-200 mb-4 rounded-md pb-4"><div className=" text-red-700 text-sm sm:text-base rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
-              <p className="mb-2 font-semibold">
+            <div className="bg-red-50 border border-red-200 mb-4 rounded-md -4"><div className=" text-red-700 text-sm sm:text-[14px] rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
+              <p className="font-semibold">
+                Newlista is exclusively for bona fide real estate investors. Soliciting, wholesaling, or marketing to other users is prohibited. We do not facilitate syndications. Investors must follow all SEC rules. Users misusing the platform will be suspended or banned without refund. By signing up, you agree to these terms.
+              </p>
+
+              {/* <p className="mb-2 font-semibold">
                 Newlista is a platform exclusively for real estate investors
                 seeking off-market properties. To maintain the integrity and focus
                 of our community:
@@ -341,7 +345,7 @@ const Login = () => {
               <p className="mt-2">
                 By signing up, you agree to comply with these terms and
                 acknowledge that Newlista is designed for investors only.
-              </p>
+              </p> */}
             </div></div>
 
             <label className="flex items-center space-x-2 mb-8">
@@ -349,10 +353,10 @@ const Login = () => {
                 type="checkbox"
                 checked={modalAgreed}
                 onChange={(e) => setModalAgreed(e.target.checked)}
-                className="w-5 h-5"
+                className="w-10 h-10 -mt-2"
               />
-              <span className="text-sm sm:text-[14.5px] font-Inter font-semibold">
-                I have read and agree to the important notice above.
+              <span className="text-sm sm:text-[13.5px] font-Inter font-semibold">
+                I have read and agree to the Important Notice above, as well as the <Link to={'/terms-of-use'} className="text-blue-500">Terms & Conditions</Link>  and  <Link to={'/privacy-policy'} className="text-blue-500">Privacy Policy.</Link>
               </span>
             </label>
 

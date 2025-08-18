@@ -105,7 +105,7 @@ useEffect(() => {
         setValue("multipleLeaseRates", false);
       }
     }
-  }, 100); // Delay by one event loop
+  }, 100);
 }, []);
 
 

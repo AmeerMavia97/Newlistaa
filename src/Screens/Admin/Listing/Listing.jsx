@@ -78,11 +78,11 @@ const Listing = () => {
       <section className="py-6">
         {/* PAGE TITTLE  */}
         <div className="flex flex-co flex-wrap max-[350px]:gap-3 gap-5 sm:flex-row justify-between items-center">
-          <h1 className="font-Urbanist text-[#222222] text-[30px] font-[700]">
+          <h1 className="font-Urbanist text-[#222222] text-[24px] sm:text-[30px] font-[700]">
             My Listings
           </h1>
           <Link to={"/create-property"}>
-            <button className="text-[13.5px] px-3 sm:px-5 md:text-[15px] font-Inter hover-btn hover-btn-black  bg-[#1E1E1E] text-white py-2.5 sm:py-3 max-[350px]:text-[12.5px] rounded-[7px]">
+            <button className="!text-[11px] sm:!text-[13.5px] px-3 sm:px-5 md:text-[15px] font-Inter hover-btn hover-btn-black  bg-[#1E1E1E] text-white py-2.5 sm:py-3 max-[350px]:text-[12.5px] rounded-[7px]">
               <span>Add New Property</span>
             </button>
           </Link>
@@ -91,7 +91,7 @@ const Listing = () => {
 
       <section className=" bg-white rounded-t-[20px] w-[100%] px-4 sm:px-0 pt-5">
         {/* UPPER TAB  */}
-        <div className="flex flex-col sm:gap-5 sm:px-7 bg-white">
+        <div className="flex flex-col overflow-hidden gap-4 sm:gap-5 sm:px-7 bg-white">
           {/* SEARCH  */}
           <div className="relative w-[100%]">
             <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
@@ -114,7 +114,7 @@ const Listing = () => {
             <input
               type="search"
               id="default-search"
-              className=" w-[100%] text-[#444444] placeholder:text-[#444444] font-Urbanist font-semibold py-3.5 pl-11 rounded-[10px] text-[15px] bg-[#F3EEFF] outline-none"
+              className="w-[100%] text-[#444444] placeholder:text-[#444444] font-Urbanist font-semibold py-3.5 pl-11 rounded-[10px] text-[13px] sm:text-[15px] bg-[#F3EEFF] outline-none"
               placeholder="Search Property Name "
               {...register("search")}
             />
@@ -179,7 +179,7 @@ const Listing = () => {
             </div>
           </div>
           {/* Mobile filter button (visible only on small screens) */}
-          <div className="flex xl:hidden  px-4 w-[30%]  md:w-[20%] py-2 bg-white">
+          <div className="flex xl:hidden  px-4 w-[20%]  md:w-[20%] sm:py-2 bg-white">
             <button
               onClick={() => setIsFilterOpen(true)}
               className="bg-[#1E1E1E] text-white py-2.5 pl-3.5 pr-9.5 lg:pl-5 lg:pr-10 rounded-[10px] flex items-center gap-2"
