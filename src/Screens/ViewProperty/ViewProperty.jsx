@@ -84,11 +84,9 @@ const ViewProperty = () => {
 
     if (filterType === "offmarket") {
       setFilterValue("Off Market Properties");
-
-      // ❗Ensure this format matches the expected value in your filtering logic
       setSearchFilters((prev) => ({
         ...prev,
-        listingType: "Off Market Listing", // ✅ must match exactly what your useMemo logic expects
+        listingType: "Off Market Listing", 
       }));
 
       setSelectedIndex(0);
