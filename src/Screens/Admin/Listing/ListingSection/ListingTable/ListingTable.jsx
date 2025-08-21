@@ -154,7 +154,7 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
 
   return (
     <>
-      <div className="pt-8 sm:px-4 md:px-7 bg-white w-[98%] rounded-b-[13px] xl:w-full overflow-x-auto h-[88vh]">
+      <div className="pt-8 sm:px-4 md:px-7 bg-white  rounded-b-[13px] xl:w-full overflow-x-auto h-[88vh]">
         {loading ? (
           <div className="flex justify-center items-center !h-[75vh]">
             <Spinner style={"w-14 h-20 text-PurpleColor z-50"} />
@@ -203,11 +203,11 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
                         className={"hover:border-b-[1px] pb-2"}
                         to={`/properties/${item.id}`}
                       >
-                        {item.property_name}
+                        <TruncatedText text={item.property_name} maxLength={35} />
                       </NavLink>
                     </th>
                     <td className="w-[18%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
-                      {item.property_type}
+                    <TruncatedText text={item.property_type} maxLength={12} />
                     </td>
                     <td className="w-[15%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
                       {item.listing_type === "For Sale" && <TruncatedText text={item.sale_price} maxLength={9} />}

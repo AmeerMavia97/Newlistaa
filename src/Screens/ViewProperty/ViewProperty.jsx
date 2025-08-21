@@ -45,11 +45,9 @@ const ViewProperty = () => {
   const [searchFilters, setSearchFilters] = useState(null);
   const [FilterValue, setFilterValue] = useState("AllProperties");
 
-  console.log(FilterValue);
-  
 
 
-  const [PackageUpgrade , setPackageUpgrade] = useState(false)
+  const [PackageUpgrade, setPackageUpgrade] = useState(false)
 
 
 
@@ -76,26 +74,33 @@ const ViewProperty = () => {
   }, []);
 
 
+  console.log(location?.state?.filterType);
+
+
   useEffect(() => {
-    if (location?.state?.filterType) {
-      switch (location.state.filterType) {
-        case "offmarket":
-          console.log('hello');
-          
-          setFilterValue("Off Market Properties");
-          setSelectedIndex(0);
-          break;
-        case "feature":
-          setFilterValue("Features Property");
-          setSelectedIndex(0);
-          break;
-        default:
-          setFilterValue("AllProperties");
-          setSelectedIndex(0);
-          break;
-      }
+    if (!location?.state?.filterType) return;
+
+    const filterType = location.state.filterType;
+
+    if (filterType === "offmarket") {
+      setFilterValue("Off Market Properties");
+
+      // ❗Ensure this format matches the expected value in your filtering logic
+      setSearchFilters((prev) => ({
+        ...prev,
+        listingType: "Off Market Listing", // ✅ must match exactly what your useMemo logic expects
+      }));
+
+      setSelectedIndex(0);
+    } else if (filterType === "feature") {
+      setFilterValue("Features Property");
+      setSelectedIndex(0);
+    } else {
+      setFilterValue("AllProperties");
+      setSelectedIndex(0);
     }
   }, [location?.state?.filterType]);
+
 
   const filteredProperties = useMemo(() => {
     if (!Properties || Properties.length === 0) return [];
@@ -158,11 +163,21 @@ const ViewProperty = () => {
 
 
 
+
     // 🔍 Apply SearchBar filters if provided
     if (searchFilters) {
       const { listingType, propertyType, state, city, priceRange, propertyName } =
         searchFilters;
 
+      if (location?.state?.filterType === "offmarket") {
+        setPackageUpgrade(true)
+        if (isLoggedIn === "active") {
+          // Show only off-market listings
+          result = result.filter(p => Boolean(p.off_market_listing) === true);
+        } else {
+          result = [];
+        }
+      }
 
 
       if (listingType === "Off Market Listing") {
@@ -296,7 +311,7 @@ const ViewProperty = () => {
               {filteredProperties.length === 0 ? (
                 <div className="relative min-h-screen flex justify-center items-center">
                   <EmptyCards
-                  type={PackageUpgrade}
+                    type={PackageUpgrade}
                     Title={
                       isLoggedIn
                         ? "No properties match the selected filter."

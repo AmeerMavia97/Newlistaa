@@ -91,7 +91,7 @@ const Listing = () => {
 
       <section className=" bg-white rounded-t-[20px] w-[100%] px-4 sm:px-0 pt-5">
         {/* UPPER TAB  */}
-        <div className="flex flex-col overflow-hidden gap-4 sm:gap-5 sm:px-7 bg-white">
+        <div className="flex xl:flex-col overflow-hidden gap-4 sm:gap-5 sm:px-7 bg-white">
           {/* SEARCH  */}
           <div className="relative w-[100%]">
             <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
@@ -179,10 +179,10 @@ const Listing = () => {
             </div>
           </div>
           {/* Mobile filter button (visible only on small screens) */}
-          <div className="flex xl:hidden  px-4 w-[20%]  md:w-[20%] sm:py-2 bg-white">
+          <div className="flex xl:hidden  px-0 w-[20%]  md:w-[20%] sm:py- bg-white">
             <button
               onClick={() => setIsFilterOpen(true)}
-              className="bg-[#1E1E1E] text-white py-2.5 pl-3.5 pr-9.5 lg:pl-5 lg:pr-10 rounded-[10px] flex items-center gap-2"
+              className="bg-[#1E1E1E] text-white py-2.5 pl-3.5 pr-9.5 xl:pl-5 xl:pr-10 rounded-[10px] flex items-center gap-2"
             >
               <img
                 className="w-5 h-5 lg:w-7 lg:h-7"
