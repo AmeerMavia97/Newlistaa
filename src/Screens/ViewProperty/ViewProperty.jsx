@@ -86,7 +86,7 @@ const ViewProperty = () => {
       setFilterValue("Off Market Properties");
       setSearchFilters((prev) => ({
         ...prev,
-        listingType: "Off Market Listing", 
+        listingType: "Off Market Listing",
       }));
 
       setSelectedIndex(0);

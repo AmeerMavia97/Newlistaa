@@ -16,14 +16,15 @@ import { UserRoundCheck } from "lucide-react";
 import Spinner from "../Spinner/Spinner";
 
 const InvestorCarousel = () => {
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const status = localStorage.getItem("status");
   const ApiKey = import.meta.env.VITE_API_KEY;
-  const [AddNetwork, setAddNetwork] = useState([]);
+
+  // STATES
   const [investors, setInvestors] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const { isOpen, confirm, handleConfirm, handleCancel } = useConfirmation();
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const InvestorCarousel = () => {
     .sort(
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    ) // newest first :contentReference[oaicite:6]{index=6}
+    )
     .slice(0, 8);
 
   const getJoinYear = (ts) => new Date(ts).getFullYear();
@@ -114,9 +115,11 @@ const InvestorCarousel = () => {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center !h-[75vh]">
+     <div className="flex justify-center items-center w-full">
+       <div className="flex justify-center items-center !h-[75vh]">
         <Spinner style={"w-14 h-20 text-PurpleColor z-50"} />
       </div>
+     </div>
     );
 
   return (
@@ -130,13 +133,16 @@ const InvestorCarousel = () => {
       breakpoints={{
         0: { slidesPerView: 1, spaceBetween: 20 },
         640: { slidesPerView: 2, spaceBetween: 20 },
-        950: { slidesPerView: 3, spaceBetween: 80 },
-        1024: { slidesPerView: 4, spaceBetween: 200 },
+        769: { slidesPerView: 3, spaceBetween: 200 },
+        890: { slidesPerView: 3, spaceBetween: 80 },
+        1024: { slidesPerView: 3, spaceBetween: 200 },
+        1280: { slidesPerView: 4, spaceBetween: 240 },
         1666: { slidesPerView: 4, spaceBetween: 150 },
+        1780: { slidesPerView: 4, spaceBetween: 150 },
       }}
     >
       {sortedLatest.map((inv, i) => (
-        <SwiperSlide key={inv.id || i} className="mb-12">
+        <SwiperSlide key={inv.id || i} className="mb-12 flex justify-center items-center ">
           <InvestorCards
             InvesImage={
               inv.headshot

@@ -158,7 +158,7 @@ const Home = () => {
       <TopDevelopes
         key={items.id}
         Img={items.images[0]}
-        Heading={items.property_name}
+        Heading={<TruncatedText text={items.property_name} maxLength={42} />}
         MiniHeading={<TruncatedText text={items.address} maxLength={19} />}
         desc={<TruncatedText text={items.description} maxLength={90} />}
         Price={
@@ -209,36 +209,35 @@ const Home = () => {
       {/* <AntiInspect /> */}
       <div className=" overflow-x-hidden">
         <TransparentNavbar></TransparentNavbar>
-        <div className="flex flex-col justify-center items-center ">
-          {/* HERO SECTION START */}
-          <section
-            style={HeroBackground}
-            className="relative px-6  -mt-[40%] sm:pt-10 sm:-mt-[18%] max-[891px]:pt-12 min-[891px]:pt-18 md:-mt-[15%] lg:px-8 lg:pt-18  xl:-mt-[10%] xl:pt-14"
-          >
-            <div className="max-[350px]:pt-28 pt-40 pb-20 min-[480px]:pt-44 flex flex-col justify-center sm:items-center  sm:py-44 lg:py-44">
-              <div className="sm:text-center max-[891px]:pt-7 min-[891px]:pt-10 lg:pt-20">
-                <h1 className="text-[28px] leading-[40px] min-[370px]:!text-[35.5px]  min-[370px]:!leading-[47px] sm:!text-[41px] sm:!leading-[46px]  md:!text-[47px]	md:!leading-[53px] lg:!text-[53px] lg:!leading-[65px] xl:!text-[60px] font-[600] font-Poppins tracking-tight lg:text-balance text-white ">
-                  The Ultimate Commercial Real Estate Marketplace & Investor Network
-                </h1>
-              </div>
-              <div className="max-[350px]:w-[90%] w-[75%] sm:w-[50%] md:w-[90%] min-[800px]:w-[80%] lg:w-[100%] xl:w-[100%] 2xl:w-[80%]">
-                <SearchBar></SearchBar>
-              </div>
+        {/* HERO SECTION START */}
+        <section
+          style={HeroBackground}
+          className="relative max-[400px]:px-6 px-10  -mt-[40%] sm:pt-10 sm:-mt-[18%] max-[891px]:pt-12 min-[891px]:pt-18 md:-mt-[15%] lg:px-8 lg:pt-18  xl:-mt-[10%] xl:pt-14"
+        >
+          <div className="max-[350px]:pt-28 max-[400px]:pt-40 pt-48 max-[400px]:pb-20 pb-28 min-[480px]:!pt-44 flex flex-col justify-center sm:items-center  sm:!pb-36 sm:pt-44 md:!pt-40 md:!pb-32 lg:!py-44">
+            <div className="sm:text-center max-[891px]:pt-7 min-[891px]:pt-10 lg:pt-20">
+              <h1 className="text-[28px] leading-[40px] min-[370px]:!text-[37.5px]  min-[370px]:!leading-[47px] sm:!text-[37px] sm:!leading-[46px]  md:!text-[42px]	md:!leading-[53px] lg:!text-[53px] lg:!leading-[65px] xl:!text-[60px] font-[600] font-Poppins tracking-tight lg:text-balance text-white ">
+                The Ultimate Commercial Real Estate Marketplace & Investor Network
+              </h1>
             </div>
-          </section>
-          {/* HERO SECTION END */}
-
+            <div className="max-[350px]:w-[90%] w-[75%] sm:w-[50%] md:w-[90%] min-[800px]:w-[80%] lg:w-[100%] xl:w-[97%] 2xl:w-[75%] min-[1780px]:!w-[65%]">
+              <SearchBar></SearchBar>
+            </div>
+          </div>
+        </section>
+        {/* HERO SECTION END */}
+        <div className="flex flex-col justify-center items-center min-[400px]:px-5 sm:px-0 min-[1780px]:!px-28 ">
           {/* CARDS SECTION   */}
           <HomeSection1
-            NetWorkView={()=>{NetWorkView()}}
-            onclick={() => goToViewProperties("offmarket") }
+            NetWorkView={() => { NetWorkView() }}
+            onclick={() => goToViewProperties("offmarket")}
             token={token}
           ></HomeSection1>
 
           {/* FEATUES PROPERTIES */}
           <section
             id="featurelisting"
-            className="flex flex-col justify-center items-center py-3 sm:py-8 lg:py-14 px-6 sm:px-8 gap-10 md:px-0 sm:gap-6 w-[100%] xl:w-[94%] 2xl:w-[80%]"
+            className="flex flex-col justify-center sm:items-center py-3 sm:py-8 lg:py-14 px-6 sm:px-8  gap-10 md:px-0 sm:gap-6 w-[100%] xl:w-[94%] 2xl:w-[80%] 2xl:py-20"
           >
             {/* CONTENT SECTION  */}
             <CardContentSection
@@ -251,7 +250,7 @@ const Home = () => {
               onClick={() => goToViewProperties("feature")}
             />
 
-            <div className="grid lg:grid-cols-3 flex-wrap gap-9 sm:gap-3 md:gap-5 min-[1666px]:!gap-7 md:w-[84%]">
+            <div className="grid sm:grid-cols-2 min-[870px]:!grid-cols-3 flex-wrap gap-9 sm:gap-10 xl:!gap-7 min-[1666px]:!gap-7 md:w-[84%] min-[870px]:!w-[91%] lg:!w-[84%] min-[870px]:!gap-4">
               {filteredProperties.length === 0 ? (
                 <EmptyCards Title={"No matching properties found"} />
               ) : (
@@ -300,7 +299,7 @@ const Home = () => {
           {/* OFF MARKET PROPERTIES START  */}
           <section
             id="OffMarketingListing"
-            className="flex flex-col justify-center items-center py-20 px-6 sm:px-8 sm:py-14 md:px-0  gap-10 sm:gap-6 w-[100%] xl:w-[92%] 2xl:w-[78%]"
+            className="flex flex-col justify-center items-center py-20 px-6 sm:px-8 sm:py-14 md:px-0  gap-10 sm:gap-6 w-[100%] xl:w-[93%] 2xl:w-[78%]"
           >
             {/* CONTENT SECTION  */}
             <CardContentSection
@@ -313,9 +312,8 @@ const Home = () => {
             />
             {/* PROPERTY CARD SECTION  */}
             <div
-              className={` w-full  gap-7 sm:gap-3 sm:-ml-4 md:gap-5 2xl:gap-10 md:w-[84%] ${
-                status === "active" ? "grid lg:grid-cols-3" : "blur-xl "
-              } `}
+              className={` w-full  gap-7 sm:gap-10 sm:-ml-4 md:gap-10 min-[870px]:!gap-5 2xl:!gap-10 md:w-[84%] min-[870px]:!w-[90%] lg:!w-[84%] xl:!gap-7 ${status === "active" ? "grid sm:grid-cols-2 min-[870px]:!grid-cols-3" : "blur-xl "
+                } `}
             >
               {status === "active" ? (
                 OffMarketProperties()
@@ -327,21 +325,21 @@ const Home = () => {
           {/* OFF MARKET PROPERTIES  3 END */}
 
           {/* TESTIMONIAL START  */}
-          <section className="flex flex-col justify-center items-center py-3  gap-10 px-6 sm:gap-7 sm:py-5 sm:px-8 md:px-0 lg:py-16 w-[100%] xl:w-[92%] 2xl:w-[80%]">
+          <section className="flex flex-col justify-center items-center py-3  gap-10 px-6 sm:gap-7 sm:py-5 sm:px-8 md:px-0 lg:py-16 w-[100%] xl:w-[94%] 2xl:w-[80%]">
             {/* CONTENT SECTION  */}
-            <div className="md:w-[84%]">
-              <h1 className="text-[35px] leading-[39px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px]">
+            <div className="md:w-[84%] min-[870px]:!w-[91%] lg:!w-[84%]">
+              <h1 className="text-[31px] leading-[39px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[33px] sm:leading-[48px]">
                 What Our Clients Say
               </h1>
 
-              <p className="text-[16px] font-Inter font-medium text-pretty text-Paracolor mt-2 sm:text-[15px]/5.5  ">
+              <p className="text-[14px] font-Inter font-medium text-pretty text-Paracolor mt-2 sm:text-[13.5px]/5.5  ">
                 Read the success stories and heartfelt testimonials from our
                 valued clients. Discover why they chose Newlista for their real
                 estate needs
               </p>
             </div>
             {/* CARDSECTION  */}
-            <div className="flex flex-col gap-7 sm:gap-4 sm:flex-row sm:flex-wrap md:w-[84%] md:gap-5">
+            <div className="flex flex-col gap-7 sm:gap-4 sm:flex-row sm:flex-wrap md:w-[84%] min-[870px]:!w-[90%] md:gap-5 lg:!w-[84%]">
               <Testimonials
                 RevTitle={""}
                 RevParagraph={
@@ -377,23 +375,23 @@ const Home = () => {
           {/* TESTIMONIAL 4 END  */}
 
           {/* SECTION 5 START  */}
-          <section className="flex flex-col justify-center gap-6 px-6 py-20 sm:pt-12 sm:gap-10 sm:pb-9 lg:pb-20 sm:px-8 md:px-0 md:items-center w-[100%] xl:w-[92%] 2xl:w-[80%]">
-            <div className="md:w-[84%]">
-              <h1 className="text-[35px] leading-[38px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px]">
+          <section className="flex flex-col justify-center gap-6  px-6 py-20 sm:pt-12 sm:gap-5 sm:pb-9 lg:pb-20 sm:px-8 md:px-0 md:items-center w-[100%] xl:w-[94%] 2xl:w-[80%]">
+            <div className="md:w-[84%] min-[870px]:!w-[91%] lg:!w-[84%]">
+              <h1 className="text-[30px] leading-[38px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[33px] sm:leading-[48px] md:text-[30px]">
                 Have a Property to Sell?
               </h1>
             </div>
-            <div className="md:w-[84%] border-solid border-[1px] border-[#BBBBBB] flex flex-col items-center rounded-[10px] pb-7 pt-3 md:py-4 lg:py-5 xl:py-0  md:flex-row relative">
-              <div className="w-[65%] sm:w-[40%]  md:w-[25%] sm:h-[90%]">
+            <div className="md:w-[84%] min-[870px]:!w-[91%] lg:!w-[84%] border-solid border-[1px] border-[#BBBBBB] flex flex-col items-center rounded-[10px] pb-7 pt-3 md:py-4 lg:py-5 xl:py-0  md:flex-row relative">
+              <div className="w-[65%] sm:w-[32%]  md:w-[25%] sm:h-[90%]">
                 <img className="" src={HomeSec5_1} alt="" />
               </div>
               <div className="flex flex-col justify-center items-center text-center gap-5 py-2 px-5 sm:px-10 md:w-[50%] md:px-3 lg:px-5 xl:px-20 ">
-                <h1 className="font-Inter font-bold text-[24px] leading-[29px] sm:text-[24px] md:text-[20px] lg:text-[22px] sm:leading-[25px]">
+                <h1 className="font-Inter font-bold text-[20px] leading-[25px] sm:text-[22px] md:text-[20px] lg:text-[22px] sm:leading-[25px]">
                   Reach serious buyers, close deals faster, and maximize your
                   property's potential.{" "}
                 </h1>
                 <Link className="w-full" to={"/create-property"}>
-                  <button className="hover-btn-purple hover-btn py-2 text-[16px] text-white font-Inter rounded-[8px] w-full cursor-pointer">
+                  <button className="hover-btn-purple hover-btn py-2.5 text-[14px] text-white font-Inter rounded-[8px] w-full cursor-pointer">
                     <span>Sell your Property</span>
                   </button>
                 </Link>
@@ -406,7 +404,7 @@ const Home = () => {
           {/* SECTION 5 END  */}
 
           {/* SECTION 6 START  */}
-          <section className="flex flex-col justify-center items-center pb-20 px-6 gap-10 overflow-hidden sm:pb-16 sm:px-8 md:px-0 sm:pt-10 w-[100%] xl:w-[92%] 2xl:w-[80%]">
+          <section className="flex flex-col justify-center items-center pb-20 px-6 gap-10 overflow-hidden sm:pb-16 sm:px-8 md:px-0 sm:pt-10 w-[100%] xl:w-[94%] 2xl:w-[80%]">
             {/* CONTENT SECTION  */}
             <CardContentSection
               Heading={"Expand Your Real Estate Network"}
@@ -419,7 +417,7 @@ const Home = () => {
               }}
             />
             {/* CARD SECTION  */}
-            <div className="w-[98%] sm:-ml-3 md:w-[84%] flex gap-">
+            <div className="w-[98%] sm:-ml-3 md:w-[84%] min-[870px]:!w-[91%] lg:!w-[84%] flex gap-">
               <CardCarousel />
             </div>
           </section>

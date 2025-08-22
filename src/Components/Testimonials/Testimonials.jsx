@@ -54,10 +54,10 @@ const Testimonials = ({
               ))}
         </span>
         <span>
-          <h1 className="font-Inter font-bold text-[22px] leading-[25px]">
+          <h1 className="font-Inter font-bold text-[22px] sm:text-[19px] leading-[25px]">
             {RevTitle}
           </h1>
-          <p className="text-[14.5px] font-Inter font-medium text-pretty text-Paracolor mt-2 sm:text-[14px]/5.5  ">
+          <p className="text-[14.5px] font-Inter font-medium text-pretty text-Paracolor mt-2 sm:text-[12.5px]/5.5  ">
             <TruncatedText text={RevParagraph} maxLength={1000} />
           </p>
         </span>

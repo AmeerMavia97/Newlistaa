@@ -11,20 +11,20 @@ const Footer = () => {
       {/* Footer Section START  */}
       <div className="">
         <div className="flex flex-col justify-center items-center bg-[#0F0F0F]">
-          <div className="py-12 px-8 lg:flex lg:justify-between bg-[#0F0F0F] sm:px-10 md:px-14 lg:px-20 lg:py-20 gap-10 w-full xl:w-[92%] 2xl:w-[80%]">
+          <div className="py-12 max-[400px]:px-6 px-10 lg:flex lg:justify-between bg-[#0F0F0F] sm:px-10 md:px-14 lg:px-20 lg:py-20 gap-10 w-full xl:w-[92%] 2xl:w-[80%] min-[1780px]:!w-[70%]">
             {/* SECTION 1  */}
             <div className="mb-6 md:mb-0 flex flex-col gap-10 lg:w-[35%] ">
               <div>
                 <Link to={"/"} className="flex items-center">
                   <img
                     src={WhiteLogo}
-                    className="h-[65px] sm:h-[80px] me-3"
+                    className="h-[65px] sm:h-[65px] me-3"
                     alt="FlowBite Logo"
                   />
                 </Link>
               </div>
 
-              <form className="w-[90%] bg-[#262626] rounded-lg  py-0.5 border-[1px] border-solid border-[#5f5f5f] sm:w-[80%] md:w-[55%] lg:w-[90%]">
+              <form className="w-[100%] bg-[#262626] rounded-lg  py-0.5 border-[1px] border-solid border-[#5f5f5f] sm:w-[80%] md:w-[55%] lg:w-[90%]">
                 <div className="relative flex justify-center items-center">
                   <div className=" inset-y-0  start-0 flex items-center pl-4 pointer-events-none">
                     <img src={FooterIcon} alt="" />
@@ -38,9 +38,9 @@ const Footer = () => {
                   />
                   <button
                     type="submit"
-                    className="text-white absolute end-4 bottom-3 "
+                    className="text-white absolute end-4  bottom-3 sm:bottom-3.5 "
                   >
-                    <img className="w-6 h-6" src={FooterIcon2} alt="" />
+                    <img className="w-6 h-6 sm:w-5 sm:h-5" src={FooterIcon2} alt="" />
                   </button>
                 </div>
               </form>
@@ -52,7 +52,7 @@ const Footer = () => {
                 <h2 className="mb-4 text-[15px] font-semibold font-Urbanist text-[#999999] uppercase dark:text-white">
                   Quick Links
                 </h2>
-                <ul className="text-white flex flex-col gap-2 sm:gap-4 dark:text-gray-400 text-[15px] font-[500] font-Urbanist">
+                <ul className="text-white flex flex-col gap-2 sm:gap-4 dark:text-gray-400 text-[15px] font-[500] font-Urbanist sm:text-[14px]">
                   <li className=" hover:text-[#c4c4c4]">
                     <Link to={"/about-us"}>About Us</Link>
                   </li>
@@ -80,24 +80,6 @@ const Footer = () => {
                   </a>
                 </ul>
               </div>
-              {/* TAB 3
-            <div>
-              <h2 className="mb-4 text-[15px] font-semibold font-Urbanist text-[#999999] uppercase dark:text-white">
-                Secure
-              </h2>
-              <ul className="flex flex-col gap-2 sm:gap-4 text-white text-[15px] dark:text-gray-400 font-[500] font-Urbanist">
-                <li className="hover:text-[#c4c4c4]">
-                  <Link to={"/login"}>Login</Link>
-                </li>
-                <li className="hover:text-[#c4c4c4]">
-                  <Link to={"/register"}>Register</Link>
-                </li>
-                <li className=" hover:text-[#c4c4c4]">
-                  <Link to={"/our-plans"}>Our Plans</Link>
-                </li>
-              </ul>
-            </div> */}
-              {/* TAB 5 */}
               <div>
                 <h2 className="mb-4 text-[15px] font-semibold font-Urbanist text-[#999999] uppercase dark:text-white">
                   Contact Us
@@ -113,7 +95,7 @@ const Footer = () => {
         </div>
         {/* COPYRIGHT AND SOCIAL MEDIA  */}
         <div className="bg-[#1A1A1A]">
-          <div className=" px-6 sm:flex sm:items-center sm:px-8 sm:justify-between  py-6 md:p-4 lg:py-8 mx-auto w-full md:px-20 xl:w-[92%] 2xl:w-[80%]">
+          <div className=" max-[400px]:px-6 px-10 sm:flex sm:items-center sm:px-8 sm:justify-between  py-6 md:p-4 lg:py-8 mx-auto w-full md:px-20 xl:w-[92%] 2xl:w-[80%]">
             <span className="text-[15px] text-white font-Urbanist sm:text-center dark:text-gray-400">
               © 2025{" "}
               <Link to={"/"} className="hover:underline">
