@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Lock, UserRoundCheck } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -21,6 +21,7 @@ function TransparentNavbar() {
   const token = localStorage.getItem("token");
   const status = localStorage.getItem("status");
   const isLocked = !token || status !== "active";
+  const location = useLocation()
 
   // STATES 
   const [user, setUser] = useState([]);
@@ -88,7 +89,7 @@ function TransparentNavbar() {
   return (
 
 
-    <header className="bg-transparent relative z-10">
+    <header className={`relative z-10 ${location.pathname === '/' ? "bg-transparent" : "bg-black" }`}>
       <nav
         aria-label="Global"
         className="mx-auto flex max-w-7xl items-center justify-between p-6 md:px-12 lg:px-8"
@@ -97,10 +98,10 @@ function TransparentNavbar() {
         <div className="flex lg:flex-1">
           <Link to={"/"} className="-m-1.5 p-1.5">
             <span className="sr-only">New Lista</span>
-            <img alt="" src={Logo} className="h-12 sm:h-16 w-auto" />
+            <img alt="" src={Logo} className="h-12 sm:h-16 lg:h-15 w-auto" />
           </Link>
         </div>
-        <div className="flex items-center md:gap-8 lg:gap-3 xl:gap-8 justify-between">
+        <div className="flex items-center md:gap-8 lg:gap-5 xl:gap-8 justify-between">
           {/* MENU ICON MOBILE  */}
           <div className="flex lg:hidden">
             <button
@@ -116,35 +117,35 @@ function TransparentNavbar() {
             </button>
           </div>
           {/* MAIN MENU SECTION  */}
-          <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+          <PopoverGroup className="hidden lg:flex lg:gap-x-8 xl:gap-x-12">
             <Link
               to={"/about-us"}
-              className="text-sm/6 font-[500] text-textColor font-Inter hover:text-[#c4c4c4]"
+              className="text-sm/6 lg:text-[14px] xl:text-sm/6 font-[500] text-textColor font-Inter hover:text-[#c4c4c4]"
             >
               About Us
             </Link>
             <Link
               to={"/pricing"}
-              className="text-sm/6 font-[500] text-textColor font-Inter hover:text-[#c4c4c4]"
+              className="text-sm/6 lg:text-[14px] xl:text-sm/6 font-[500] text-textColor font-Inter hover:text-[#c4c4c4]"
             >
               Pricing
             </Link>
 
             <Link
               to={"/properties"}
-              className="text-sm/6 font-[500]  text-textColor  font-Inter hover:text-[#c4c4c4] "
+              className="text-sm/6 lg:text-[14px] xl:text-sm/6 font-[500]  text-textColor  font-Inter hover:text-[#c4c4c4] "
             >
               Properties
             </Link>
             <Link
               to={token ? "/admin/network" : "/login"}
-              className="text-sm/6 font-[500]  text-textColor  font-Inter hover:text-[#c4c4c4] "
+              className="text-sm/6 lg:text-[14px] xl:text-sm/6 font-[500]  text-textColor  font-Inter hover:text-[#c4c4c4] "
             >
               Networking
             </Link>
             <Link
               to={"contact-us"}
-              className="text-sm/6 font-[500] text-textColor font-Inter hover:text-[#c4c4c4]"
+              className="text-sm/6 lg:text-[14px] xl:text-sm/6 font-[500] text-textColor font-Inter hover:text-[#c4c4c4]"
             >
               Contact
             </Link>

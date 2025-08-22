@@ -1,7 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
 
-const CardContentSection = ({Heading , Desc , ButtonName , ButtonLink ,onClick}) => {
+
+const HighlightBlock = ({Heading , Desc , ButtonName , ButtonLink ,onClick}) => {
   return (
     <>
       <div className="flex flex-col gap-4 sm:flex-row justify-center sm:items-center md:w-[84%] min-[870px]:!w-[91%] lg:!w-[84%]">
@@ -23,4 +22,4 @@ const CardContentSection = ({Heading , Desc , ButtonName , ButtonLink ,onClick})
   );
 };
 
-export default CardContentSection;
+export default HighlightBlock;

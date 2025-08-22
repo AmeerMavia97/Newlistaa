@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Home from "../../Screens/Home/Home";
 import Login from "../../Screens/Login/login";
 import OurPlans from "../../Screens/OurPlans/OurPlans";
@@ -32,6 +32,29 @@ import ChangePassword from "../../Screens/ProtectedScreen/ChangePassword.jsx";
 import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
 import Privacy from "../../Screens/Privacy/Privacy.jsx";
 import Terms from "../../Screens/Terms/Terms.jsx";
+import Navbar from "../../Components/Navbar/Navbar.jsx";
+import TransparentNavbar from "../../Components/Navbar/TransparentNavbar.jsx";
+import Footer from "../../Components/Footer/Footer.jsx";
+import MiniFooter from "../../Components/Footer/MiniFooter.jsx";
+
+
+const Layout = ({ children }) => {
+  const location = useLocation();
+
+  const showNavbar = ["/" , "/about-us"].includes(location.pathname);
+  const showMiniFooter = ["/" , "/about-us"].includes(location.pathname);
+  const showFooter = ["/" , "/about-us"].includes(location.pathname);
+
+  return (
+    <>
+      {showNavbar && <TransparentNavbar />}
+      {children}
+      {showMiniFooter && <MiniFooter />}
+      {showFooter && <Footer />}
+    </>
+  );
+};
+
 
 const Routing = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -47,42 +70,39 @@ const Routing = () => {
   return (
     <>
       <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route path={"/about-us"} element={<AboutUs />} />
-          {/* <Route path={"/add-property"} element={<AddProperty />} /> */}
-          <Route
-            path={"/create-property"}
-            element={<ProtectiveRoute component={<AddProperty3 />} />}
-          />
-          <Route path={"/properties"} element={<ViewProperty />} />
-          <Route path={"/properties/:id"} element={<PropertyDetails />} />
-          <Route path={"/pricing"} element={<Pricing />} />
-          <Route path={"/premiumyear"} element={<PremiumYear />} />
-          <Route path={"/freemontlhy"} element={<FreeMontlhy />} />
-          <Route path={"/premiummontlhy"} element={<PremiumMonthly />} />
-          <Route path={"/freeyear"} element={<FreeYear />} />
-          <Route path={"/contact-us"} element={<ContactUs />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/reset-password"} element={<ForgetPassword />} />
-          <Route path={"/verify-otp"} element={<OptVerification />} />
-          <Route path={"/forget-otp"} element={<ForgetPassOtp />} />
-          <Route path={"/set-new-password"} element={<SetNewPassword />} />
-          <Route path={"/register"} element={<Register />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/privacy-policy" element={<Privacy />} />
-          <Route path="/terms-of-use" element={<Terms />} />
-          {/* <Route path={"/plans"} element={<OurPlans />} /> */}
-          {/* <Route path={"/residential"} element={<Residential />} /> */}
-          {/* <Route path={"/commercial"} element={<Commercial />} /> */}
-          {/* <Route path={"/industrial"} element={<Industrial />} /> */}
-          {/* <Route path={"/lease"} element={<LeaseForm />} /> */}
-          <Route
-            path={"/admin/*"}
-            element={<ProtectiveRoute component={<Admin />} />}
-          />
-        </Routes>
+        <Layout>
+          <ScrollToTop />
+          <Routes>
+            <Route path={"/"} element={<Home />} />
+            <Route path={"/about-us"} element={<AboutUs />} />
+            <Route
+              path={"/create-property"}
+              element={<ProtectiveRoute component={<AddProperty3 />} />}
+            />
+            <Route path={"/properties"} element={<ViewProperty />} />
+            <Route path={"/properties/:id"} element={<PropertyDetails />} />
+            <Route path={"/pricing"} element={<Pricing />} />
+            <Route path={"/premiumyear"} element={<PremiumYear />} />
+            <Route path={"/freemontlhy"} element={<FreeMontlhy />} />
+            <Route path={"/premiummontlhy"} element={<PremiumMonthly />} />
+            <Route path={"/freeyear"} element={<FreeYear />} />
+            <Route path={"/contact-us"} element={<ContactUs />} />
+            <Route path={"/login"} element={<Login />} />
+            <Route path={"/reset-password"} element={<ForgetPassword />} />
+            <Route path={"/verify-otp"} element={<OptVerification />} />
+            <Route path={"/forget-otp"} element={<ForgetPassOtp />} />
+            <Route path={"/set-new-password"} element={<SetNewPassword />} />
+            <Route path={"/register"} element={<Register />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/privacy-policy" element={<Privacy />} />
+            <Route path="/terms-of-use" element={<Terms />} />
+            <Route
+              path={"/admin/*"}
+              element={<ProtectiveRoute component={<Admin />} />}
+            />
+          </Routes>
+        </Layout>
+
       </BrowserRouter>
     </>
   );

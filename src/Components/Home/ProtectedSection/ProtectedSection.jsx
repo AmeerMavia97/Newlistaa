@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-const ProtectedSection2 = ({ children }) => {
+const ProtectedSection = ({ children }) => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -46,4 +46,4 @@ const ProtectedSection2 = ({ children }) => {
   );
 };
 
-export default ProtectedSection2;
+export default ProtectedSection;

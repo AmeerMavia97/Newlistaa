@@ -95,7 +95,7 @@ const Footer = () => {
         </div>
         {/* COPYRIGHT AND SOCIAL MEDIA  */}
         <div className="bg-[#1A1A1A]">
-          <div className=" max-[400px]:px-6 px-10 sm:flex sm:items-center sm:px-8 sm:justify-between  py-6 md:p-4 lg:py-8 mx-auto w-full md:px-20 xl:w-[92%] 2xl:w-[80%]">
+          <div className=" max-[400px]:px-6 px-10 sm:flex sm:items-center sm:px-8 sm:justify-between  py-6 md:p-4 lg:py-8 mx-auto w-full md:px-20 xl:w-[92%] 2xl:w-[80%] min-[1780px]:!w-[70%]">
             <span className="text-[15px] text-white font-Urbanist sm:text-center dark:text-gray-400">
               © 2025{" "}
               <Link to={"/"} className="hover:underline">
