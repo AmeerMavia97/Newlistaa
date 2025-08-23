@@ -2,11 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 // Components
-import Footer from "../../Components/Footer/Footer";
-import Navbar from "../../Components/Navbar/Navbar";
 import Spinner from "../../Components/Spinner/Spinner";
 import Inputs from "../../Components/InputFields/Inputs";
-import MiniFooter from "../../Components/Footer/MiniFooter";
 import TextAreas from "../../Components/InputFields/TextAreas";
 import AlertModal from "../../Components/AlertModal/AlertModal";
 import CountrySelector from "../../Components/RegisterCountrySelector/CountrySelection";
@@ -22,7 +19,6 @@ const ContactUs = () => {
 
   // STATES 
   const [loading, setloading] = useState(false);
-  const [phone, setPhone] = useState("");
   const {
     register,
     handleSubmit,
@@ -67,7 +63,6 @@ const ContactUs = () => {
         text: response.data.message,
       });
     } catch (error) {
-      console.log(error);
       setloading(false);
       AlertModal({
         icon: "error",
@@ -78,21 +73,19 @@ const ContactUs = () => {
     } finally {
       setloading(false);
     }
-    setPhone("");
     reset();
   };
 
   return (
     <>
-      <Navbar></Navbar>
       {/* CONTACT SECTION START   */}
-      <section className=" relative px-6 sm:px-16 md:px-20 gap-28 py-20 sm:py-24 md:py-32 overflow-x-hidden flex justify-center items-center  ">
+      <section className=" relative px-6 sm:px-16 md:px-20 gap-28 py-20 sm:py-24 md:py-32 overflow-x-hidden flex justify-center items-center ">
         {/* SHAPE  */}
         <div className="absolute -z-10 -end-30 overflow -top-10">
           <img className="w-[80%]" src={ContactImage1_2} alt="" />
         </div>
 
-        <div className="flex justify-center 2xl:w-[85%]">
+        <div className="flex justify-center 2xl:w-[85%] min-[1780px]:!w-[75%]">
           {/* CONTACT FORM SECTION */}
           <div className=" w-[100%] lg:w-[58%] xl:w-[55%] 2xl:w-[50%] flex flex-col gap-8">
             {/* CONTACT INFO  */}
@@ -160,8 +153,6 @@ const ContactUs = () => {
                   control={control}
                   render={({ field }) => (
                     <CountrySelector
-                      phone={field.value}
-                      setPhone={field.onChange}
                       error={errors.phone?.message}
                     />
                   )}
@@ -208,16 +199,13 @@ const ContactUs = () => {
             {/* CONTACT FORM */}
           </div>
           {/* IMAGE SECTION  */}
-          <div className="w-[42%] 2xl:w-[40%] hidden lg:flex lg:ml-10 xl:ml-0 justify-center items-center">
+          <div className="w-[42%] 2xl:w-[40%] hidden lg:flex lg:ml-10 xl:ml-0 justify-center 2xl:justify-end items-center">
             <span>
               <img src={ContactImage1_1} alt="" />
             </span>
           </div>
         </div>
       </section>
-      {/* CONTACT SECTION END  */}
-      <MiniFooter></MiniFooter>
-      <Footer></Footer>
     </>
   );
 };

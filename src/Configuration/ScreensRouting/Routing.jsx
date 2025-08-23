@@ -41,9 +41,9 @@ import MiniFooter from "../../Components/Footer/MiniFooter.jsx";
 const Layout = ({ children }) => {
   const location = useLocation();
 
-  const showNavbar = ["/" , "/about-us"].includes(location.pathname);
-  const showMiniFooter = ["/" , "/about-us"].includes(location.pathname);
-  const showFooter = ["/" , "/about-us"].includes(location.pathname);
+  const showNavbar = ["/" , "/about-us" , "/pricing" , "/contact-us"].includes(location.pathname);
+  const showMiniFooter = ["/" , "/about-us" , "/contact-us" ].includes(location.pathname);
+  const showFooter = ["/" , "/about-us" , "/pricing" , "/contact-us"].includes(location.pathname);
 
   return (
     <>

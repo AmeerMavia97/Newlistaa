@@ -11,9 +11,9 @@ const AboutUs = () => {
       <HeroSection></HeroSection>
 
       <div className="min-[1780px]:px-28">
-  
+
         <ServiceCardShowcase></ServiceCardShowcase>
-  
+
         <GuidanceSec></GuidanceSec>
 
         <section className="py-14 flex justify-center 2xl:-ml-10">

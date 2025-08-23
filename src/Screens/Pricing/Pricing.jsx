@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Components
-import Navbar from "../../Components/Navbar/Navbar";
-import Footer from "../../Components/Footer/Footer";
 import Spinner from "../../Components/Spinner/Spinner";
 import PlansTabs from "../../Components/OurPlans/PlansTabs";
 
@@ -171,7 +169,6 @@ const Pricing = () => {
 
   return (
     <>
-      <Navbar></Navbar>
       {/* PRICING SECTION  */}
       <section>
         <div className="relative isolate max-[350px]:px-4 px-6 py-24 sm:py-32 lg:px-8 flex flex-col justify-center items-center overflow-hidden">
@@ -207,7 +204,7 @@ const Pricing = () => {
 
           {/* TABS SEC START  */}
           {!Loading ? (
-            <div className="w-[%]">
+            <div className="md:w-[55%] min-[800px]:!w-[100%] min-[1600px]:!w-[87%] min-[1780px]:!w-[79%]">
               <div className="grid px-1 min-[400px]:!px-6 mt-10 grid-cols-1 min-[800px]:!grid-cols-2 items-center gap-y-6 sm:gap-y-10  lg:gap-y-10 sm:!px-24 md:!px-2  min-[800px]:!px-8 lg:!px-28 xl:!px-8 2xl:!px-[6%]  xl:!grid-cols-3 gap-6">
                 <PlansTabs
                   features={freebenefits}
@@ -307,23 +304,23 @@ const Pricing = () => {
       {/* SECTION 2 START  */}
 
       <section className="flex justify-center items-center">
-        <div className="flex flex-col justify-center gap-6 px-5 pb-16 sm:py-20 sm:pt-12 sm:gap-10 sm:pb-9 lg:pb-20 sm:px-8 md:px-0 md:items-center w-[100%] xl:w-[92%] 2xl:w-[85%]">
+        <div className="flex flex-col justify-center gap-6 px-5 pb-16 sm:py-20 sm:pt-12 sm:gap-10 sm:pb-9 lg:pb-20 sm:px-8 md:px-0 md:items-center w-[100%] xl:w-[98%] 2xl:w-[85%] min-[1780px]:!w-[78%]">
           <div className="md:w-[84%]">
-            <h1 className=" text-center md:text-start text-[28px]  leading-[38px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px]">
+            <h1 className=" text-center md:text-start text-[28px]  leading-[38px] font-[700] font-Urbanist  text-[#1E1E1E] sm:text-[37px] sm:leading-[48px] xl:text-[34px] xl:-mb-5 2xl:mb-0">
               Unlock Your Full Real Estate Potential
             </h1>
           </div>
-          <div className="md:w-[84%] border-solid border-[1px] border-[#BBBBBB] flex flex-col items-center rounded-[10px] pb-7 pt-3 md:py-4 lg:py-5 xl:py-0  md:flex-row relative">
-            <div className="w-[55%] sm:w-[35%]  md:w-[24%] sm:h-[90%]">
+          <div className="md:w-[84%] border-solid border-[1px] border-[#BBBBBB] flex flex-col items-center rounded-[10px] pb-7 pt-3 md:py-4 lg:py-5 xl:py-0   md:flex-row relative">
+            <div className="w-[55%] sm:w-[35%]  md:w-[24%] sm:h-[90%] xl:-mb-2">
               <img className="" src={PricingSec2_1} alt="" />
             </div>
-            <div className="flex flex-col justify-center items-center text-center gap-5 py-2 px-5 sm:px-10 md:w-[50%] md:px-3 lg:px-5 xl:px-20 ">
-              <h1 className="font-Inter font-bold text-[16.5px] leading-[22px] sm:text-[24px] md:text-[20px] lg:text-[22px] sm:leading-[25px]">
+            <div className="flex flex-col justify-center items-center text-center gap-5 py-2 px-5 sm:px-10 md:w-[50%] md:px-3 lg:px-5 xl:px-16 ">
+              <h1 className="font-Inter font-bold text-[16.5px] leading-[22px] sm:text-[24px] md:text-[20px] lg:text-[22px] sm:leading-[25px] min-[1780px]:!text-[28px] min-[1780px]:!leading-[32px]">
                 Not sure which plan is right for you? Contact Us for a
                 personalized recommendation.{" "}
               </h1>
               <Link className="w-full" to={"/contact-us"}>
-                <button className="hover-btn-purple hover-btn py-2 text-[15px] sm:text-[16px] text-white font-Inter rounded-[8px] w-full cursor-pointer">
+                <button className="hover-btn-purple hover-btn py-2 text-[15px] sm:text-[16px] text-white font-Inter rounded-[8px] w-full cursor-pointer min-[1780px]:!w-[90%] min-[1780px]:!py-3 min-[1780px]:!text-[17px]">
                   <span>Contact Us</span>
                 </button>
               </Link>
@@ -335,8 +332,6 @@ const Pricing = () => {
         </div>
       </section>
       {/* SECTION 2 END  */}
-
-      <Footer></Footer>
     </>
   );
 };
