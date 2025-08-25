@@ -316,37 +316,13 @@ const Login = () => {
         >
           <div className="bg-white rounded-lg shadow-lg pt-10 pb-7  px-6.5 max-w-[37%] mx-4 no-scrollbar ">
             <h2 className="text-[30px] leading-[34px] font-semibold mb-4 font-Urbanist">Important Notice for Investors</h2>
-            <div className="bg-red-50 border border-red-200 mb-4 rounded-md -4"><div className=" text-red-700 text-sm sm:text-[14px] rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
-              <p className="font-semibold">
-                Newlista is exclusively for bona fide real estate investors. Soliciting, wholesaling, or marketing to other users is prohibited. We do not facilitate syndications. Investors must follow all SEC rules. Users misusing the platform will be suspended or banned without refund. By signing up, you agree to these terms.
-              </p>
-
-              {/* <p className="mb-2 font-semibold">
-                Newlista is a platform exclusively for real estate investors
-                seeking off-market properties. To maintain the integrity and focus
-                of our community:
-              </p>
-              <ul className="list-disc list-inside space-y-1">
-                <li>All users must be bona fide investors.</li>
-                <li>
-                  Soliciting services, including brokerage, wholesaling, or
-                  marketing to other users, is strictly prohibited.
-                </li>
-                <li>
-                  Users found soliciting or misusing the platform for
-                  non-investment purposes will have their accounts suspended or
-                  banned without refund.
-                </li>
-                <li>
-                  We reserve the right to verify user eligibility and enforce
-                  these policies to protect the quality of our network.
-                </li>
-              </ul>
-              <p className="mt-2">
-                By signing up, you agree to comply with these terms and
-                acknowledge that Newlista is designed for investors only.
-              </p> */}
-            </div></div>
+            <div className="bg-red-50 border border-red-200 mb-4 rounded-md -4">
+              <div className=" text-red-700 text-sm sm:text-[14px] rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
+                <p className="font-semibold">
+                  Newlista is exclusively for bona fide real estate investors. Soliciting, wholesaling, or marketing to other users is prohibited. We do not facilitate syndications. Investors must follow all SEC rules. Users misusing the platform will be suspended or banned without refund. By signing up, you agree to these terms.
+                </p>
+              </div>
+            </div>
 
             <label className="flex items-center space-x-2 mb-8">
               <input

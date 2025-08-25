@@ -299,7 +299,6 @@ const PropertyForm = () => {
 
   return (
     <>
-      <Navbar></Navbar>
       {/* BANNER START  */}
       <section>
         <div>
@@ -317,7 +316,7 @@ const PropertyForm = () => {
         ref={stepRef}
         className="sm:px-7 lg:px-10 xl:px-20 py-16 lg:py-20 flex justify-center"
       >
-        <div className="flex flex-col gap-8 sm:gap-10 w-[100%] 2xl:w-[85%] ">
+        <div className="flex flex-col gap-8 sm:gap-10 w-[100%] 2xl:w-[85%] min-[1780px]:!w-[70%] ">
           <div className="px-2.5 sm:px-0">
             <h1 className="text-[28px] leading-[32px] min-[400px]:text-[32px] min-[400px]:leading-[38px] font-[700] font-Urbanist text-[#1E1E1E] md:text-[35px] lg:text-[39px] xl:text-[43px] sm:leading-[48px]">
               Add New Property Listing
@@ -361,9 +360,6 @@ const PropertyForm = () => {
           )}
         </div>
       </section>
-
-      <MiniFooter></MiniFooter>
-      <Footer></Footer>
     </>
   );
 };

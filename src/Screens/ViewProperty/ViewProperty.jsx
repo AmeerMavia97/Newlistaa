@@ -3,14 +3,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
-import { TabGroup, TabPanel, TabPanels, } from "@headlessui/react";
-
 // COMPONENTS
-import Navbar from "../../Components/Navbar/Navbar";
-import Footer from "../../Components/Footer/Footer";
 import Spinner from "../../Components/Spinner/Spinner";
-import MiniFooter from "../../Components/Footer/MiniFooter";
-import ResponsiveTabList from "./PropertyTabs/PropertyTabs";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import EmptyCards from "../../Components/EmptyCard/EmptyCard";
 import TruncatedText from "../../Components/TruncatedText/TruncatedText";
@@ -44,12 +38,7 @@ const ViewProperty = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [searchFilters, setSearchFilters] = useState(null);
   const [FilterValue, setFilterValue] = useState("AllProperties");
-
-
-
   const [PackageUpgrade, setPackageUpgrade] = useState(false)
-
-
 
   useEffect(() => {
     if (filters) {
@@ -72,10 +61,6 @@ const ViewProperty = () => {
     }
     GetProperty();
   }, []);
-
-
-  console.log(location?.state?.filterType);
-
 
   useEffect(() => {
     if (!location?.state?.filterType) return;
@@ -158,9 +143,6 @@ const ViewProperty = () => {
         );
       }
     }
-
-
-
 
     // 🔍 Apply SearchBar filters if provided
     if (searchFilters) {
@@ -273,7 +255,6 @@ const ViewProperty = () => {
 
   return (
     <>
-      <Navbar></Navbar>
       {/* BANNER START  */}
       <section
         style={BannerBackground}
@@ -285,26 +266,13 @@ const ViewProperty = () => {
       </section>
       {/* BANNER END   */}
 
-      {/* PROPERTY TABS START */}
+      {/* PROPERTY CARDS */}
       <section >
-        {/* <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex} >
-          <div className="flex gap-5 sm:gap-8 px-4 sm:px-8 pt-6 justify-center items-center border-b-[1px] border-[#BBBBBB] border-solid ">
-            <div>
-              <ResponsiveTabList
-                DefaultTab={DefaultTab}
-                onTabSelect={(tab) => {
-                  setSelectedTab(tab);
-                  setFilterValue("AllProperties");
-                }}
-              />
-            </div>
-          </div> */}
-
         <div className={"flex justify-center  "}>
           {!Loading ? (
             <div
               id="offmarket"
-              className="w-[100%] relative grid sm:grid-cols-2 min-[860px]:!grid-cols-3 xl:!grid-cols-4 flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-10 sm:py-12 lg:py-16 xl:my-1 sm:gap-4 sm:px-13 md:gap-10 min-[860px]:!gap-5 md:px-16  xl:!gap-5 2xl:!gap-10  2xl:w-[90%] min-[1850px]:!w-[83%]"
+              className="w-[100%] relative grid sm:grid-cols-2 min-[860px]:!grid-cols-3 xl:!grid-cols-4 flex-wrap justify-center gap-8 py-14 px-6 min-[350px]:px-14 sm:py-12 lg:py-16 xl:my-1 sm:gap-6 sm:px-10 md:gap-10 min-[860px]:!gap-5 md:px-16 min-[860px]:!px-8 lg:!px-16  xl:!gap-5 2xl:!gap-7 2xl:!px-28  2xl:w-[90%] min-[1850px]:!w-[83%]"
             >
               {filteredProperties.length === 0 ? (
                 <div className="relative min-h-screen flex justify-center items-center">
@@ -367,12 +335,7 @@ const ViewProperty = () => {
             </div>
           )}
         </div>
-        {/* </TabGroup> */}
       </section>
-      {/* PROPERTY TABS END */}
-
-      <MiniFooter></MiniFooter>
-      <Footer></Footer>
     </>
   );
 };

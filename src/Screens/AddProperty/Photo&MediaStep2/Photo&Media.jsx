@@ -46,23 +46,8 @@ const Step2 = ({ onNext, onBack, defaultValues }) => {
   useEffect(() => {
     if (defaultValues && Object.keys(defaultValues).length > 0) {
       setimages(defaultValues.fileInput);
-
-      // const fields = defaultValues.custom_fields || {};
-      // const convertedFields = {};
-
-      // for (const key in fields) {
-      //   const value = fields[key];
-      //   // Only convert "true" or "false" strings to booleans
-      //   if (value === "true" || value === "false") {
-      //     convertedFields[key] = value === "true";
-      //   } else {
-      //     convertedFields[key] = value; // leave other values as-is
-      //   }
-      // }
-
       reset({
         ...defaultValues,
-        // custom_fields: convertedFields,
       });
     }
   }, [defaultValues, reset]);
@@ -80,30 +65,6 @@ const Step2 = ({ onNext, onBack, defaultValues }) => {
               control={control}
             ></AddPhotoSection>
           </div>
-          {/* <div className="border-y-[1px] border-[#BBBBBB] border-solid mt-10 py-9">
-            <Features errors={errors} control={control}></Features>
-          </div> */}
-          {/* <div>
-            <div>
-              <h1 className="font-Urbanist font-[500] mb-2 text-[#242424] text-[17px]">
-                Social Media Sharing
-              </h1>
-            </div>
-            <div className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4 gap-4 w-fit">
-              {socialPlatforms.map(({ name, icon: Icon }) => (
-                <button
-                  key={name}
-                  className="border border-[#703BF7] rounded-[7px] text-PurpleColor bg-transparent flex gap-2 pl-3 pr-4 py-2 font-Inter font-[500] cursor-pointer text-[15px] justify-center "
-                  aria-label={`Share on ${name}`}
-                >
-                  <span className="flex gap-1.5 items-center">
-                    <Icon color="#703BF7" className="size-4.5 sm:size-5" />
-                    <span className="text-[14.5px] sm:text-[15px]">{name}</span>
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div> */}
         </div>
         <div className="flex gap-2 justify-between px-1.5 py-7 mx-3 sm:mx-0">
           <button

@@ -143,7 +143,7 @@ const AddPhotoSection = ({ register, setValue, error, DefaultImage = [] }) => {
 
       {(defaultImages.length > 0 || uploadedImages.length > 0) && (
         <div className="pt-5">
-          <h1 className="font-Urbanist font-[500] mb-2 text-[#242424] text-[17px]">
+          <h1 className="font-Urbanist font-[500] mb-2 text-[#242424] text-[15px] lg:text-[17px]">
             Selected Images*
           </h1>
           <div className="flex flex-wrap gap-4">
@@ -151,7 +151,7 @@ const AddPhotoSection = ({ register, setValue, error, DefaultImage = [] }) => {
             {defaultImages.map((item, index) => (
               <div className="relative" key={`default-${index}`}>
                 <img
-                  className="object-cover w-40 h-36 rounded-2xl"
+                  className="object-cover w-32 h-28 lg:w-40 lg:h-36 rounded-2xl"
                   src={
                     typeof item === "string"
                       ? import.meta.env.VITE_IMAGE_KEY + item
@@ -161,7 +161,7 @@ const AddPhotoSection = ({ register, setValue, error, DefaultImage = [] }) => {
                 />
                 <X
                   onClick={() => removeDefaultImage(index)}
-                  className="absolute top-2 right-2 px-1 bg-PurpleColor text-white font-semibold rounded-full cursor-pointer"
+                  className="size-5 lg:size-6 absolute top-2 right-2 px-1 bg-PurpleColor text-white font-semibold rounded-full cursor-pointer"
                 />
               </div>
             ))}
@@ -170,13 +170,13 @@ const AddPhotoSection = ({ register, setValue, error, DefaultImage = [] }) => {
             {uploadedImages.map((file, index) => (
               <div className="relative" key={`upload-${index}`}>
                 <img
-                  className="object-cover w-40 h-36 rounded-2xl"
+                  className="object-cover w-32 h-28 lg:w-40 lg:h-36 rounded-2xl"
                   src={URL.createObjectURL(file)}
                   alt={`Uploaded ${index}`}
                 />
                 <X
                   onClick={() => removeUploadedImage(index)}
-                  className="absolute top-2 right-2 px-1 bg-PurpleColor text-white font-semibold rounded-full cursor-pointer"
+                  className="size-5 lg:size-6 absolute top-2 right-2 px-1 bg-PurpleColor text-white font-semibold rounded-full cursor-pointer"
                 />
               </div>
             ))}

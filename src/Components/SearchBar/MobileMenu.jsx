@@ -1,39 +1,60 @@
 import axios from "axios";
 import { Grip, Search } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ComboboxSelector from "../ComboboxSelector/ComboboxSelector";
 import { Select } from "@headlessui/react";
 import Selection from "../InputFields/Selection";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilters } from "../../Reducers/filterSlice/filterSlice";
 
 const propertyType = [
-  { name: "Select Your Property" },
-  { name: "Church" },
-  { name: "Condominium" },
-  { name: "Gas Station" },
-  { name: "Hotel" },
-  { name: "Industrial Park" },
-  { name: "Medical Building" },
-  { name: "Mixed Use" },
-  { name: "Mobile Home Park" },
-  { name: "Motel" },
-  { name: "Multifamily" },
-  { name: "Office Building" },
-  { name: "Recreation Center" },
-  { name: "Retail Center" },
-  { name: "Self-Storage Facility" },
-  { name: "School Building" },
-  { name: "Senior Living Facility" },
-  { name: "Shopping Center" },
-  { name: "Single Tenant Retail Building" },
-  { name: "Storage Facility" },
-  { name: "Townhomes" },
-  { name: "Vacant Land" },
-  { name: "Warehouse" },
-  { name: "Other" },
+  { label: "Select Your Property", name: "Select Your Property" },
+  { label: "Any", name: "All Properties" },
+  { label: "Apartments / Multifamily", name: "Apartments / Multifamily" },
+  { label: "Automotive Property", name: "Automotive Property" },
+  { label: "Church", name: "Church" },
+  { label: "Gas Station", name: "Gas Station" },
+  { label: "Healthcare Facility", name: "Healthcare Facility" },
+  { label: "Hospitality", name: "Hospitality" },
+  { label: "Industrial Building", name: "Industrial Building" },
+  { label: "Industrial Park", name: "Industrial Park" },
+  { label: "Mixed Use Property", name: "Mixed Use Property" },
+  { label: "Office Building", name: "Office Building" },
+  { label: "Recreation Center", name: "Recreation Center" },
+  { label: "Retail Center", name: "Retail Center" },
+  { label: "School Building", name: "School Building" },
+  { label: "Self-Storage Facility", name: "Self-Storage Facility" },
+  { label: "Senior Living Facility", name: "Senior Living Facility" },
+  { label: "Shopping Center", name: "Shopping Center" },
+  {
+    label: "Single-Tenant Retail Building",
+    name: "Single-Tenant Retail Building",
+  },
+  { label: "Strip Center", name: "Strip Center" },
+  { label: "Vacant Land", name: "Vacant Land" },
+  { label: "Warehouse", name: "Warehouse" },
+  { label: "Other", name: "Other" },
 ];
+
+const initialCities = [
+  { id: 1, labels: "Any", name: "Any" },
+  { id: 1, labels: "Houston", name: "Houston" },
+  { id: 2, labels: "Dallas", name: "Dallas" },
+  { id: 3, labels: "Atlanta", name: "Atlanta" },
+  { id: 4, labels: "Los Angeles", name: "Los Angeles" },
+  { id: 5, labels: "Miami", name: "Miami" },
+  { id: 6, labels: "Chicago", name: "Chicago" },
+  { id: 7, labels: "Phoenix", name: "Phoenix" },
+  { id: 8, labels: "Charlotte", name: "Charlotte" },
+  { id: 9, labels: "Las Vegas", name: "Las Vegas" },
+  { id: 10, labels: "New York", name: "New York" },
+];
+
 const statesArray = [
+  { id: 57, name: "Any", code: "any" },
   { id: 1, name: "Alabama", code: "AL" },
   { id: 2, name: "Alaska", code: "AK" },
   { id: 3, name: "Arizona", code: "AZ" },
@@ -62,28 +83,34 @@ const statesArray = [
   { id: 26, name: "Montana", code: "MT" },
   { id: 27, name: "Nebraska", code: "NE" },
   { id: 28, name: "Nevada", code: "NV" },
-  { id: 29, name: "NewHampshire", code: "NH" },
-  { id: 30, name: "NewJersey", code: "NJ" },
-  { id: 31, name: "NewMexico", code: "NM" },
-  { id: 32, name: "NewYork", code: "NY" },
-  { id: 33, name: "NorthCarolina", code: "NC" },
-  { id: 34, name: "NorthDakota", code: "ND" },
+  { id: 29, name: "New Hampshire", code: "NH" },
+  { id: 30, name: "New Jersey", code: "NJ" },
+  { id: 31, name: "New Mexico", code: "NM" },
+  { id: 32, name: "New York", code: "NY" },
+  { id: 33, name: "North Carolina", code: "NC" },
+  { id: 34, name: "North Dakota", code: "ND" },
   { id: 35, name: "Ohio", code: "OH" },
   { id: 36, name: "Oklahoma", code: "OK" },
   { id: 37, name: "Oregon", code: "OR" },
   { id: 38, name: "Pennsylvania", code: "PA" },
-  { id: 39, name: "RhodeIsland", code: "RA" },
-  { id: 40, name: "SouthCarolina", code: "SC" },
-  { id: 41, name: "SouthDakota", code: "SD" },
+  { id: 39, name: "Rhode Island", code: "RI" },
+  { id: 40, name: "South Carolina", code: "SC" },
+  { id: 41, name: "South Dakota", code: "SD" },
   { id: 42, name: "Tennessee", code: "TN" },
   { id: 43, name: "Texas", code: "TX" },
   { id: 44, name: "Utah", code: "UT" },
   { id: 45, name: "Vermont", code: "VT" },
   { id: 46, name: "Virginia", code: "VA" },
   { id: 47, name: "Washington", code: "WA" },
-  { id: 48, name: "WestVirginia", code: "WV" },
-  { id: 49, name: "Wisconsin", code: "WI" },
-  { id: 50, name: "Wyoming", code: "WY" },
+  { id: 48, name: "Washington D.C.", code: "DC" },
+  { id: 49, name: "West Virginia", code: "WV" },
+  { id: 50, name: "Wisconsin", code: "WI" },
+  { id: 51, name: "Wyoming", code: "WY" },
+  { id: 52, name: "Puerto Rico", code: "PR" },
+  { id: 53, name: "U.S. Virgin Islands", code: "VI" },
+  { id: 54, name: "Guam", code: "GU" },
+  { id: 55, name: "American Samoa", code: "AS" },
+  { id: 56, name: "Northern Mariana Islands", code: "MP" },
 ];
 
 const MobileMenu = ({
@@ -92,74 +119,235 @@ const MobileMenu = ({
   listingType,
   handleFilterChange,
 }) => {
-  const [selectedState, setSelectedState] = useState("");
-  const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState("");
+  // const [selectedState, setSelectedState] = useState("");
+  // const [cities, setCities] = useState([]);
+  // const [selectedCity, setSelectedCity] = useState("");
 
-  const { register, setValue, getValues, watch } = useForm({
-    defaultValues: {
-      propertyType: "Select Your Property",
-      listingTypes: listingType,
-      priceRange: "Choose Price Range",
-      city: "",
-      state: "",
-    },
-  });
-  // const listingType = watch("listingTypes");
+  // const { register, setValue, getValues, watch } = useForm({
+  //   defaultValues: {
+  //     propertyType: "Select Your Property",
+  //     listingTypes: listingType,
+  //     priceRange: "Choose Price Range",
+  //     city: "",
+  //     state: "",
+  //   },
+  // });
+  // // const listingType = watch("listingTypes");
+  // const onSubmit = () => {
+  //   const formValues = getValues();
+  //   const data = {
+  //     listingType: formValues.listingTypes, // if needed
+  //     propertyType: formValues.propertyType,
+  //     state: selectedState,
+  //     city: selectedCity,
+  //     priceRange: formValues.priceRange,
+  //   };
+  //   handleFilterChange(data);
+  //   setIsFilterOpen(false)
+
+  // };
+
+  // const StateSelectionHandler = (value) => {
+  //   let state = value.name;
+  //   setSelectedState(state);
+  //   setSelectedCity("");
+  //   setCities([]);
+  //   setValue("state", state);
+
+  //   try {
+  //     if (state) {
+  //       const stateShortNames = value.code;
+
+  //       axios
+  //         .get(`/states/${stateShortNames}.json`)
+  //         .then((res) => {
+  //           setCities(res.data);
+  //         })
+  //         .catch((error) => {
+  //           console.error("Failed to load cities:", error);
+  //           setCities([]);
+  //         });
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to load cities:", error);
+  //   }
+  // };
+
+  // const CitySelectionHandler = (value) => {
+  //   console.log("Selected Data :", value);
+  //   setSelectedCity(value.name)
+  //   setValue("city", value.name);
+  // };
+
+  // //   CHECK IF CITY EXIST OR NOT
+  // let citiess = cities.map((name, index) => ({
+  //   id: index + 1,
+  //   name,
+  // }));
+
+
+  const filters = useSelector((state) => state.filters);
+
+  const navigate = useNavigate();
+  const [cities, setCities] = useState(initialCities);
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const ApiKey = import.meta.env.VITE_API_KEY;
+
+  const { register, handleSubmit, setValue, getValues, watch } = useForm();
+
+  const propertyName = watch("propertyName");
+  const priceRange = watch("priceRange");
+  const state = watch("state");
+  const city = watch("city");
+
   const onSubmit = () => {
-    const formValues = getValues();
     const data = {
-      listingType: formValues.listingTypes, // if needed
-      propertyType: formValues.propertyType,
+      listingType: getValues("listingType"),
+      propertyName: getValues("propertyName"),
       state: selectedState,
       city: selectedCity,
-      priceRange: formValues.priceRange,
+      priceRange: getValues("priceRange"),
     };
-    handleFilterChange(data);
-    setIsFilterOpen(false)
-
-  };
-
-  const StateSelectionHandler = (value) => {
-    let state = value.name;
-    setSelectedState(state);
-    setSelectedCity("");
-    setCities([]);
-    setValue("state", state);
-
-    try {
-      if (state) {
-        const stateShortNames = value.code;
-
-        axios
-          .get(`/states/${stateShortNames}.json`)
-          .then((res) => {
-            setCities(res.data);
-          })
-          .catch((error) => {
-            console.error("Failed to load cities:", error);
-            setCities([]);
-          });
-      }
-    } catch (error) {
-      console.error("Failed to load cities:", error);
+    console.log(data);
+    dispatch(setFilters(data));
+    if (location.pathname !== "/properties") {
+      navigate("/properties");
     }
   };
 
-  const CitySelectionHandler = (value) => {
-    console.log("Selected Data :", value);
-    setSelectedCity(value.name)
-    setValue("city", value.name);
+
+  useEffect(() => {
+    if (filters) {
+      if (filters.listingType) setValue("listingType", filters.listingType);
+      if (filters.propertyName) setValue("propertyName", filters.propertyName);
+      if (filters.priceRange) setValue("priceRange", filters.priceRange);
+      if (filters.state) {
+        setValue("state", filters.state);
+        setSelectedState(filters.state);
+      }
+      if (filters.city) {
+        setValue("city", filters.city);
+        setSelectedCity(filters.city);
+      }
+    }
+  }, [filters, setValue]);
+
+
+  // useEffect(() => {
+  //   if (ByDefault) {
+  //     const found = propertyType.find(
+  //       (item) => item.name.toLowerCase() === ByDefault.toLowerCase()
+  //     );
+  //     if (found) {
+  //       setValue("propertyName", found.name);
+  //     }
+  //   }
+  // }, [ByDefault, setValue]);
+
+
+
+
+
+  // useEffect(() => {
+  //   if (location.pathname === "/properties") {
+  //     const data = {
+  //       listingType: getValues("listingType"),
+  //       propertyName: getValues("propertyName"),
+  //       state: selectedState,
+  //       city: selectedCity,
+  //       priceRange: getValues("priceRange"),
+  //     };
+
+  //     // Check if any meaningful value exists
+  //     const hasValidFilter =
+  //       (data.listingType && data.listingType !== "Select") ||
+
+  //       (data.state && data.state !== "") ||
+  //       (data.city && data.city !== "") ||
+  //       (data.priceRange && data.priceRange !== "");
+
+  //     console.log(data);
+
+
+  //     if (hasValidFilter) {
+  //       console.log("Dispatching filters:", data);
+  //       dispatch(setFilters(data));
+  //     } else {
+  //       console.log("Skipped dispatch: filters are empty or default", data);
+  //     }
+
+  //   }
+  // }, [
+  //   getValues("listingType"),
+  //   getValues("propertyName"),
+  //   selectedState,
+  //   selectedCity,
+  //   getValues("priceRange"),
+  // ]);
+
+
+
+
+  const StateSelectionHandler = (value) => {
+    if (!value || !value.name) return;
+    setValue("state", value.name, { shouldValidate: true });
+    setSelectedState(value.name);
   };
 
-  //   CHECK IF CITY EXIST OR NOT
-  let citiess = cities.map((name, index) => ({
-    id: index + 1,
-    name,
-  }));
+  useEffect(() => {
+    async function fetchAndAddCities() {
+      try {
+        const response = await axios.get(`${ApiKey}/properties`);
+        const properties = response.data.data;
+
+        setCities((prevCities) => {
+          const citySet = new Set(prevCities.map((c) => c.name.toLowerCase()));
+
+          const newCities = [];
+
+          properties.forEach((p) => {
+            const cityName = p.city?.trim();
+            if (cityName && !citySet.has(cityName.toLowerCase())) {
+              citySet.add(cityName.toLowerCase());
+              newCities.push(cityName);
+            }
+          });
+
+          if (newCities.length > 0) {
+            const startId = prevCities.length > 0 ? Math.max(...prevCities.map((c) => c.id)) + 1 : 1;
+
+            const newCityObjects = newCities.map((cityName, index) => ({
+              id: startId + index,
+              labels: cityName,
+              name: cityName,
+            }));
+
+            return [...prevCities, ...newCityObjects];
+          }
+
+          return prevCities;
+        });
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      }
+    }
+
+    fetchAndAddCities();
+  }, [ApiKey]);
+
+
+  const CitySelectionHandler = (value) => {
+    if (!value || !value.labels) return;
+
+    setValue("city", value.labels, { shouldValidate: true });
+    setSelectedCity(value.labels);
+  };
 
   return (
-    <div className="relative">
+    <div className="relative overflow-scroll">
       {/* Mobile filter button (visible only on small screens) */}
       <div className="sm:hidden w-0">
         <button
@@ -170,7 +358,7 @@ const MobileMenu = ({
       </div>
       {/* Fullscreen filter drawer (visible when isFilterOpen === true) */}
       {isFilterOpen && (
-        <div className="fixed inset-0 md:w-[40%] bg-white z-50 pt-10 px-5  flex flex-col gap-3">
+        <div className="fixed inset-0 md:w-[40%] bg-white z-50 pt-10 px-5  flex flex-col gap-3 overflow-scroll">
           {/* Back Button */}
           <div className="flex items-center">
             <button
@@ -196,7 +384,7 @@ const MobileMenu = ({
 
           {/* Filter Content */}
           <div className="flex flex-col gap-4">
-            <div>
+            <div className="w-full">
               <Selection
                 Options={["For Sale", "For Lease"].filter(
                   (option) => option !== listingType
@@ -213,7 +401,7 @@ const MobileMenu = ({
                 {"Property Type"}
               </label>
               <select
-                {...register("propertyType")}
+                {...register("propertyName")}
                 aria-label="Project status"
                 className={
                   "bg-[#F3EEFF] border-[#F3EEFF]  text-[#4b4b4b] font-[600] font-Urbanist text-[14px] w-[100%] h-12 px-4 rounded-[6px] outline-none appearance-none cursor-pointer focus:outline-none"
@@ -242,11 +430,10 @@ const MobileMenu = ({
               </label>
               <div className="bg-[#F3EEFF] border-[#F3EEFF]  text-[#4b4b4b] font-[600] font-Urbanist text-[14px] w-[100%] h-12 px-4 rounded-[6px] outline-none appearance-none cursor-pointer focus:outline-none flex flex-col justify-center">
                 <ComboboxSelector
-                  styles={"w-full"}
                   options={statesArray}
                   onSelect={StateSelectionHandler}
-                  placeholder={"Select Your State"}
-                ></ComboboxSelector>
+                  placeholder="Select Your State"
+                />
               </div>
             </div>
 
@@ -257,11 +444,10 @@ const MobileMenu = ({
               </label>
               <div className="bg-[#F3EEFF] border-[#F3EEFF]  text-[#4b4b4b] font-[600] font-Urbanist text-[14px] w-[100%] h-12 px-4 rounded-[6px] outline-none appearance-none cursor-pointer focus:outline-none flex flex-col justify-center">
                 <ComboboxSelector
-                  options={citiess}
+                  options={cities}
                   onSelect={CitySelectionHandler}
-                  placeholder={"Select Your City"}
-                  disabled={citiess.length > 0 ? false : true}
-                ></ComboboxSelector>
+                  placeholder="Select Your City"
+                />
               </div>
             </div>
 

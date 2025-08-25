@@ -120,7 +120,7 @@ const statesArray = [
 ];
 
 const SearchBar = ({ ByDefault }) => {
-  const filters = useSelector((state) => state.filters); // adjust path to your filters slice
+  const filters = useSelector((state) => state.filters);
 
   const navigate = useNavigate();
   const [cities, setCities] = useState(initialCities);
@@ -229,43 +229,9 @@ const SearchBar = ({ ByDefault }) => {
 
   const StateSelectionHandler = (value) => {
     if (!value || !value.name) return;
-
-    // Set the state value correctly
     setValue("state", value.name, { shouldValidate: true });
-
-    // Save selected state name
     setSelectedState(value.name);
   };
-
-
-  function addCityIfNotExists(cityName) {
-    const exists = cities.some(
-      (city) => city.name.toLowerCase() === cityName.toLowerCase()
-    );
-
-    console.log(exists);
-
-
-    if (!exists) {
-      setCities((prevCities) => {
-        const newId =
-          prevCities.length > 0
-            ? Math.max(...prevCities.map((c) => c.id)) + 1
-            : 1;
-        return [
-          ...prevCities,
-          {
-            id: newId,
-            labels: cityName,
-            name: cityName,
-          },
-        ];
-      });
-    }
-  }
-
-  console.log(cities);
-
 
   useEffect(() => {
     async function fetchAndAddCities() {
@@ -298,7 +264,7 @@ const SearchBar = ({ ByDefault }) => {
             return [...prevCities, ...newCityObjects];
           }
 
-          return prevCities; // no changes, return prevCities
+          return prevCities; 
         });
       } catch (error) {
         console.error("Error fetching cities:", error);
@@ -309,30 +275,6 @@ const SearchBar = ({ ByDefault }) => {
   }, [ApiKey]);
 
 
-
-  function addCityIfNotExists(cityName) {
-    const exists = cities.some(
-      (city) => city.name.toLowerCase() === cityName.toLowerCase()
-    );
-
-    if (!exists) {
-      setCities((prevCities) => {
-        const newId =
-          prevCities.length > 0
-            ? Math.max(...prevCities.map((c) => c.id)) + 1
-            : 1;
-        return [
-          ...prevCities,
-          {
-            id: newId,
-            labels: cityName,
-            name: cityName,
-          },
-        ];
-      });
-    }
-  }
-
   const CitySelectionHandler = (value) => {
     if (!value || !value.labels) return;
 
@@ -340,16 +282,11 @@ const SearchBar = ({ ByDefault }) => {
     setSelectedCity(value.labels);
   };
 
-  // const cityOptions = cities.map((city, index) => ({
-  //   id: index + 1,
-  //   name: city,
-  // }));
-
   return (
     <div className="sm:mb-8 sm:flex sm:justify-center mt-8">
-      <div className="relative w-[85%] justify-between md:w-[35%] lg:w-[94%] xl:w-[90%] flex rounded-full py-3 px-5 lg:px-6.5 sm:py-3.5 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 bg-textColor lg:justify-center items-center">
+      <div className="relative w-[98%] justify-betwee md:w-[40%] lg:w-[94%] xl:w-[90%] flex  rounded-full py-3 px-5 lg:px-6.5 sm:py-3.5 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 bg-textColor lg:justify-center items-center">
         {/* Listing Type */}
-        <div className="w-[45%] lg:w-[13%] xl:w-[18%] px-4 py-2 lg:border-r-[1px] border-solid border-Paracolor">
+        <div className="w-[380%] sm:w-[1200px] md:w-[100%] lg:w-[13%] xl:w-[18%] px-0 sm:px-1 py-2 lg:border-r-[1px] border-solid border-Paracolor">
           <select
             {...register("listingType")}
             className="text-[14px] font-Inter text-black font-[500] focus:outline-none border-none focus:ring-0 w-full"

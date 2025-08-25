@@ -47,7 +47,7 @@ const LandForm = ({ propertyTypeName, register, watch, setValue, control }) => {
   const Check = watch("custom_fields.BuildingSize");
   return (
     <div className="border-[2px] rounded-[8px] px-4 border-solid border-[#ececec] mt-5 mb-5 bg-[#fcfcfc] py-8">
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8 ">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 ">
         <span className="w-[100%]">
           <Selection
             labels={"Topography"}
@@ -99,7 +99,7 @@ const LandForm = ({ propertyTypeName, register, watch, setValue, control }) => {
             value={watch("custom_fields.Clearances")}
           ></Selection>
         </span>
-        <span className="!w-[180%]">
+        <span className="lg:!w-[180%]">
           <span className="block mb-4 font-[700] text-PurpleColor text-[14.5px]">
           Utilities Available
           </span>
@@ -107,7 +107,7 @@ const LandForm = ({ propertyTypeName, register, watch, setValue, control }) => {
             name="custom_fields"
             control={control}
             render={({ field }) => (
-              <div className="grid max-[400px]:grid-cols-1 grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
+              <div className="grid max-[400px]:grid-cols-1 grid-cols-2 gap-2 lg:grid-cols-4 md:gap-3">
                 {[
                   { name: "Water", label: "Water" },
                   { name: "Sewer", label: "Sewer" },

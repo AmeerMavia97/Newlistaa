@@ -1,49 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+
+// SCREENS 
 import Home from "../../Screens/Home/Home";
+import Admin from "../../Screens/Admin/Admin";
 import Login from "../../Screens/Login/login";
-import OurPlans from "../../Screens/OurPlans/OurPlans";
-import Register from "../../Screens/Register/register";
+import Terms from "../../Screens/Terms/Terms.jsx";
 import AboutUs from "../../Screens/AboutUs/AboutUs";
 import Pricing from "../../Screens/Pricing/Pricing";
-import ContactUs from "../../Screens/ContactUs.jsx/ContactUs";
-import AddProperty from "../../Screens/AddProperty/AddProperty";
-import ViewProperty from "../../Screens/ViewProperty/ViewProperty";
-import PropertyDetails from "../../Screens/ViewProperty/PropertyDetails";
-import Residential from "../../Screens/Residential/Residential";
-import Commercial from "../../Screens/Commercial/Commercial";
-import Admin from "../../Screens/Admin/Admin";
-import Industrial from "../../Screens/Industrial/Industrial";
-import LeaseForm from "../../Screens/LeaseForm/LeaseForm";
-import ForgetPassword from "../../Screens/ProtectedScreen/ForgetPassword";
-import OptVerification from "../../Screens/ProtectedScreen/OptVerification";
-import SetNewPassword from "../../Screens/ProtectedScreen/SetNewPassword";
-import AddProperty2 from "../../Screens/AddProperty/AddProperty2";
-import AddProperty3 from "../../Screens/AddProperty/AddProperty3.jsx";
-import ScrollToTop from "../../Components/ScrollToTop/ScrollToTop.jsx";
-import ProtectiveRoute from "../ProtectiveRoute/ProtectiveRoute.jsx";
-import SinglePricing from "../../Screens/Pricing/PremiumYear.jsx";
-import FreeMontlhy from "../../Screens/Pricing/FreeMontly.jsx";
-import PremiumMonthly from "../../Screens/Pricing/PremiumMontlhy.jsx";
+import Register from "../../Screens/Register/register";
+import Privacy from "../../Screens/Privacy/Privacy.jsx";
+import Navbar from "../../Components/Navbar/Navbar.jsx";
+import Footer from "../../Components/Footer/Footer.jsx";
 import FreeYear from "../../Screens/Pricing/FreeYear.jsx";
+import ContactUs from "../../Screens/ContactUs/ContactUs.jsx";
+import FreeMontlhy from "../../Screens/Pricing/FreeMontly.jsx";
 import PremiumYear from "../../Screens/Pricing/PremiumYear.jsx";
+import MiniFooter from "../../Components/Footer/MiniFooter.jsx";
+import ViewProperty from "../../Screens/ViewProperty/ViewProperty";
+import ProtectiveRoute from "../ProtectiveRoute/ProtectiveRoute.jsx";
+import AddProperty3 from "../../Screens/AddProperty/AddProperty3.jsx";
+import PremiumMonthly from "../../Screens/Pricing/PremiumMontlhy.jsx";
+import ScrollToTop from "../../Components/ScrollToTop/ScrollToTop.jsx";
+import PropertyDetails from "../../Screens/ViewProperty/PropertyDetails";
+import ForgetPassword from "../../Screens/ProtectedScreen/ForgetPassword";
+import SetNewPassword from "../../Screens/ProtectedScreen/SetNewPassword";
+import OptVerification from "../../Screens/ProtectedScreen/OptVerification";
 import ForgetPassOtp from "../../Screens/ProtectedScreen/ForgetPassOpt.jsx";
 import ChangePassword from "../../Screens/ProtectedScreen/ChangePassword.jsx";
-import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
-import Privacy from "../../Screens/Privacy/Privacy.jsx";
-import Terms from "../../Screens/Terms/Terms.jsx";
-import Navbar from "../../Components/Navbar/Navbar.jsx";
 import TransparentNavbar from "../../Components/Navbar/TransparentNavbar.jsx";
-import Footer from "../../Components/Footer/Footer.jsx";
-import MiniFooter from "../../Components/Footer/MiniFooter.jsx";
+import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
 
 
 const Layout = ({ children }) => {
   const location = useLocation();
 
-  const showNavbar = ["/" , "/about-us" , "/pricing" , "/contact-us"].includes(location.pathname);
-  const showMiniFooter = ["/" , "/about-us" , "/contact-us" ].includes(location.pathname);
-  const showFooter = ["/" , "/about-us" , "/pricing" , "/contact-us"].includes(location.pathname);
+  const showNavbar = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property"].includes(location.pathname);
+  const showMiniFooter = ["/", "/about-us", "/contact-us", "/properties" , "/create-property"].includes(location.pathname);
+  const showFooter = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property"].includes(location.pathname);
 
   return (
     <>

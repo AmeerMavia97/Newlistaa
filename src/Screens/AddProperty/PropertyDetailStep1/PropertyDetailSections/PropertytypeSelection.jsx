@@ -3,7 +3,6 @@ import Inputs from "../../../../Components/InputFields/Inputs";
 import Selection from "../../../../Components/InputFields/Selection";
 import RadioButton from "../../../../Components/InputFields/RadioButton";
 import NumberInputs from "../../../../Components/InputFields/NumberInputs";
-import FormattedNumberInput from "../../../../Components/InputFields/NumberInputs";
 
 const propertyTypes = [
   "Apartments / Multifamily",
@@ -154,7 +153,7 @@ useEffect(() => {
         </span>
       </div>
 
-      <div className="grid  sm:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid  lg:grid-cols-2 gap-6 md:gap-8">
         {(PropertyRadios === "For Sale" ||
           PropertyRadios === "Both (For Sale & For Lease)") && (
             <span className="grid grid-cols-2 gap-5">
