@@ -23,7 +23,7 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
             Listing Visibility Options
           </h1>
         </div>
-        <div className="flex items-center gap-4 sm:gap-3">
+        <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center gap-3 min-[380px]:!gap-4 sm:!gap-3">
           <div className=" max-[400px]:w-[13%] relative">
             <Controller
               name="FeaturedListing"
@@ -56,8 +56,8 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
             />
 
           </div>
-          <div className="flex flex-col max-[400px]:w-[87%] gap-1">
-            <span className="flex gap-4">
+          <div className="flex flex-col max-[400px]:w-[100%] gap-1">
+            <span className="flex gap-3">
               <h1 className="block font-Urbanist text-[14.5px] sm:text-[15px] lg:text-[17px] font-[500] text-[#000000]">
                 Featured Listing
               </h1>
@@ -68,12 +68,12 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
                 Pay 10$
               </div>
             </span>
-            <p className="block font-Urbanist text-[12.5px] w-[70%] leading-[16px] sm:text-[14px] lg:text-[14.5px] font-[400] text-[#222222]">
+            <p className="block font-Urbanist text-[12.5px] sm:w-[70%] leading-[16px] sm:text-[14px] lg:text-[14.5px] font-[400] text-[#222222]">
               Get top placement and more visibility with Featured Listings—$10 for free users, included for paid members.
             </p>
           </div>
         </div>
-        {PropertyRadio === "For Sale" && <div className="flex items-center gap-3">
+        {PropertyRadio === "For Sale" && <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center gap-3 min-[380px]:!gap-4 sm:!gap-3">
           <div className="max-[400px]:w-[13%]">
             <Controller
               name="OffTheMarketListing"
@@ -96,7 +96,7 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
             />
 
           </div>
-          <div className="flex flex-col max-[400px]:w-[87%] gap-0.5">
+          <div className="flex flex-col max-[400px]:w-[100%] gap-0.5">
             <span className="flex gap-4">
               <h1 className="font-Urbanist text-[14.5px] sm:text-[15px] lg:text-[17px] font-[500]">
                 Off‑the‑Market Listing
@@ -146,7 +146,7 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
             Contact Visibility
           </h1>
         </div>
-        <div className="flex  items-center gap-3">
+        <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center gap-3">
           <div>
             <Controller
               name="ShowNumber"
@@ -177,7 +177,7 @@ const ListingVisibilitySwitches = ({ register, setValue, watch, controls, Proper
             </button>
           </div>
         </div>
-        <div className="flex  items-center gap-3">
+        <div className="flex flex-col min-[380px]:flex-row min-[380px]:items-center gap-3">
           <div>
             <Controller
               name="ShowEmail"

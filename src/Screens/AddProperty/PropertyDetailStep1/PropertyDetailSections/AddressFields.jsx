@@ -144,8 +144,8 @@ const AddressFields = ({
             error={errors.PropertyAddress?.message}
           ></Inputs>
         </div>
-        <div className="flex justify-between flex-wrap sm:flex-nowrap gap-5 md:gap-8">
-          <span className="w-[46%] sm:w-[100%]">
+        <div className="flex justify-between flex-wrap md:flex-nowrap gap-5 md:gap-8">
+          <span className="w-[100%] sm:w-[45%] md:w-[100%]">
             <label className="block mb-1 font-[700] text-PurpleColor w-full max-[1280px]:text-[14px] max-[1666px]:text-[15px] min-[1666px]:text-[16px]">
               State
             </label>
@@ -167,7 +167,7 @@ const AddressFields = ({
             <input type="hidden" {...register("state", { required: true })} />
           </span>
 
-          <span className="w-[46%] sm:w-[100%]">
+          <span className="w-[100%] sm:w-[50%] md:w-[100%]">
             <label className="block mb-1 font-[700] text-PurpleColor w-full max-[1280px]:text-[14px] max-[1666px]:text-[15px] min-[1666px]:text-[16px]">
               City
             </label>
@@ -182,7 +182,7 @@ const AddressFields = ({
               <p className="text-red-500 text-sm mt-1">City is required.</p>
             )}
           </span>
-          <span className="w-[100%] sm:w-[100%]">
+          <span className="w-[100%] sm:w-[45%] md:w-[100%]">
             <Inputs
               labels={"Zip / Postal Code"}
               type={"text"}

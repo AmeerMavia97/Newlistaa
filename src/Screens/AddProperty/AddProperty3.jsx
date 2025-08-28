@@ -327,7 +327,7 @@ const PropertyForm = () => {
           </div>
 
           {/* STEP TABS*/}
-          <div className="flex justify-center gap-1 min-[400px]:gap-3 md:gap-5 bg-[#F3EEFF] items-center px-2 min-[420px]:px-4 py-3 rounded-[5px] mx-2.5 sm:mx-0">
+          <div className="flex justify-center gap-1 min-[380px]:gap-3 md:gap-5 bg-[#F3EEFF] items-center px-0 min-[380px]:px-4 py-3 rounded-[5px] mx-1 min-[380px]:!mx-2 sm:!mx-0">
             {["Property Details", "Photo & Media", "Preview & Submit"].map(
               (label, index) => (
                 <div
@@ -338,7 +338,7 @@ const PropertyForm = () => {
                   }}
                 >
                   <span
-                    className={`text-[12px] min-[400px]:text-[14px] md:text-[14.5px] lg:text-[15px] xl:text-[18px] w-full  rounded-[5px] text-center md:px-10 py-2 font-[600] font-Urbanist border border-[#cecece]  ${currentStep === index
+                    className={`text-[12px] min-[400px]:text-[14px] md:text-[14.5px] lg:text-[15px] xl:text-[18px] w-full  rounded-[5px] text-center px-0.5 md:px-10 py-2 font-[600] font-Urbanist border border-[#cecece]  ${currentStep === index
                       ? "text-white bg-PurpleColor"
                       : "text-Paracolor"
                       }`}

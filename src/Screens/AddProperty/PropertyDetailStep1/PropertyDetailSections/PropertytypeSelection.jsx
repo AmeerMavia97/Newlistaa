@@ -156,7 +156,7 @@ useEffect(() => {
       <div className="grid  lg:grid-cols-2 gap-6 md:gap-8">
         {(PropertyRadios === "For Sale" ||
           PropertyRadios === "Both (For Sale & For Lease)") && (
-            <span className="grid grid-cols-2 gap-5">
+            <span className="grid sm:grid-cols-2 gap-5">
               <span className="">
                 <NumberInputs
                   labels={"Sale Price"}
@@ -214,9 +214,9 @@ useEffect(() => {
               value={watch("leaseRate") || ""}
             />
             {/* Lease Rate Fields */}
-            <span className="grid grid-cols-2 gap-4 flex-wrap">
+            <span className="grid sm:grid-cols-2 gap-4 flex-wrap">
               <span className="flex gap-2">
-                <span className="w-[100%]">
+                <span className="w-[100%] lg:w-[75%] xl:w-[100%]">
                   <NumberInputs
                     labels={"Lease Rate"}
                     type={"number"}
@@ -353,6 +353,7 @@ useEffect(() => {
           </div>
         )}
     </div>
+    
   );
 };
 

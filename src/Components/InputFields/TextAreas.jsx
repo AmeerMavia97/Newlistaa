@@ -13,7 +13,7 @@ const TextAreas = ({ label, placeholder, name, register, require , error }) => {
       <Textarea
         required={require}
         className={
-          `bg-[#F3EEFF] border placeholder:text-[#868686] font-[500] font-Urbanist text-[15px] w-[100%]  px-4 rounded-[6px] outline-none py-5  ${error ? "border-red-500" : "border-[#F3EEFF]"}`
+          `bg-[#F3EEFF] border placeholder:text-[#868686] font-[500] font-Urbanist text-[13.5px] sm:text-[15px] w-[100%]  px-4 rounded-[6px] outline-none py-5  ${error ? "border-red-500" : "border-[#F3EEFF]"}`
         }
         rows={6}
         name="description"

@@ -78,7 +78,7 @@ const CitySearchForm = ({
       />
 
       {showSuggestions && filteredSuggestions.length > 0 && (
-        <div className="mt-2 w-[13%] bg-white py-1 border absolute border-gray-300 rounded-md shadow-md max-h-48 overflow-y-auto">
+        <div className="mt-2 lg:w-[13%] bg-white py-1 border absolute border-gray-300 rounded-md shadow-md max-h-48 overflow-y-auto">
           {filteredSuggestions.map((cityObj) => (
             <div
               key={cityObj.id}

@@ -83,7 +83,7 @@ const AddPhotoSection = ({ register, setValue, error, DefaultImage = [] }) => {
 
   return (
     <>
-      <label className="block font-[700] text-PurpleColor w-full max-[1280px]:text-[16.5px]">
+      <label className="block font-[700] text-PurpleColor w-full text-[15px] sm:text-[16.5px]">
         Property Photos
       </label>
 

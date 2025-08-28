@@ -68,13 +68,13 @@ const Step2 = ({ onNext, onBack, defaultValues }) => {
         </div>
         <div className="flex gap-2 justify-between px-1.5 py-7 mx-3 sm:mx-0">
           <button
-            className="bg-transparent border-[#6C757D] cursor-pointer text-[15.5px] lg:text-[17px] border-solid border-[2px] font-[600] px-5 py-2 sm:px-6 sm:py-2.5 text-[#6C757D] font-Urbanist rounded-[6px]"
+            className="bg-transparent border-[#6C757D] cursor-pointer text-[14px] min-[380px]:!text-[15.5px] lg:!text-[17px] border-solid border-[2px] font-[600] px-5 py-2 sm:px-6 sm:py-2.5 text-[#6C757D] font-Urbanist rounded-[6px]"
             onClick={onBack}
           >
             Back to Details
           </button>
           <button
-            className="bg-PurpleColor font-[600] cursor-pointer text-[15.5px] lg:text-[17px] px-5 py-2 sm:px-6 sm:py-2.5 text-white font-Urbanist rounded-[6px]"
+            className="bg-PurpleColor font-[600] cursor-pointer text-[14px] min-[380px]:!text-[15.5px] lg:!text-[17px] px-5 py-2 sm:px-6 sm:py-2.5 text-white font-Urbanist rounded-[6px]"
             // onClick={onNext}
             type="submit"
           >
