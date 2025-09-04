@@ -30,6 +30,7 @@ import ForgetPassOtp from "../../Screens/ProtectedScreen/ForgetPassOpt.jsx";
 import ChangePassword from "../../Screens/ProtectedScreen/ChangePassword.jsx";
 import TransparentNavbar from "../../Components/Navbar/TransparentNavbar.jsx";
 import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
+import Cookie from "../../Components/Cookie/Cookie.jsx";
 
 
 const Layout = ({ children }) => {
@@ -95,6 +96,7 @@ const Routing = () => {
               element={<ProtectiveRoute component={<Admin />} />}
             />
           </Routes>
+          <Cookie></Cookie>
         </Layout>
 
       </BrowserRouter>
