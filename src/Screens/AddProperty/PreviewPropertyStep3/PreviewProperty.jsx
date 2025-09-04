@@ -117,7 +117,7 @@ const Step3 = ({ formData, onBack, onSubmit }) => {
               <h1 className="text-[18px] font-[600] font-Urbanist text-[#1E1E1E] flex items-center gap-2">
                 <Building size={22} /> Listing Verification
               </h1>
-              <div className="mt-3 flex flex-col gap-1">
+              <div className="mt-3 flex flex-col gap-4 sm:gap-3">
                 <Controller
                   name="confirmInfo"
                   control={control}

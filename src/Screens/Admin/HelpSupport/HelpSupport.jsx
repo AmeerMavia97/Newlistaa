@@ -91,9 +91,9 @@ const HelpSupport = () => {
           <img className="w-[80%]" src={ContactImage1_2} alt="" />
         </div>
 
-        <div className="flex justify-cente 2xl:w-[85%]">
+        <div className="flex justify-cente 2xl:w-[100%]">
           {/* CONTACT FORM SECTION */}
-          <div className=" w-[100%] lg:w-[70%] flex flex-col gap-8">
+          <div className=" w-[100%] lg:w-[70%] 2xl:w-[50%] flex flex-col gap-8">
             {/* CONTACT INFO  */}
             <div>
               <h1 className="max-[400px]:text-[31px] text-[32px] leading-[36px] sm:text-[35px] font-[700] font-Urbanist  text-[#1E1E1E] md:text-[43px] md:leading-[48px]">
@@ -119,24 +119,24 @@ const HelpSupport = () => {
                 {/* Name  */}
                 <div className="flex flex-wrap sm:flex-nowrap gap-5 w-[100%]">
                   <span className=" sm:w-[50%] w-full">
-                      <span>
-                        <div className="block mb-1 font-[700] text-PurpleColor w-full max-[1280px]:text-[14px] max-[1666px]:text-[15px] min-[1666px]:text-[16px] ">
-                          First Name
-                        </div>
-                        <div className="bg-[#F3EEFF] text-[#1d1d1d] font-[600] font-Urbanist text-[14px] w-full px-4 rounded-[6px] h-12 flex items-center cursor-not-allowed">
-                          {user.first_name}
-                        </div>
-                      </span>
+                    <span>
+                      <div className="block mb-1 font-[700] text-PurpleColor w-full max-[1280px]:text-[14px] max-[1666px]:text-[15px] min-[1666px]:text-[16px] ">
+                        First Name
+                      </div>
+                      <div className="bg-[#F3EEFF] text-[#1d1d1d] font-[600] font-Urbanist text-[14px] w-full px-4 rounded-[6px] h-12 flex items-center cursor-not-allowed">
+                        {user.first_name}
+                      </div>
+                    </span>
                   </span>
                   <span className=" sm:w-[50%] w-full">
-                      <span>
-                        <div className="block mb-1 font-[700] text-PurpleColor w-full max-[1280px]:text-[14px] max-[1666px]:text-[15px] min-[1666px]:text-[16px] ">
-                          Last Name
-                        </div>
-                        <div className="bg-[#F3EEFF] text-[#1d1d1d] font-[600] font-Urbanist text-[14px] w-full px-4 rounded-[6px] h-12 flex items-center cursor-not-allowed">
-                          {user.last_name}
-                        </div>
-                      </span>
+                    <span>
+                      <div className="block mb-1 font-[700] text-PurpleColor w-full max-[1280px]:text-[14px] max-[1666px]:text-[15px] min-[1666px]:text-[16px] ">
+                        Last Name
+                      </div>
+                      <div className="bg-[#F3EEFF] text-[#1d1d1d] font-[600] font-Urbanist text-[14px] w-full px-4 rounded-[6px] h-12 flex items-center cursor-not-allowed">
+                        {user.last_name}
+                      </div>
+                    </span>
                   </span>
                 </div>
 
@@ -184,6 +184,12 @@ const HelpSupport = () => {
                 </div>
               </form>
             )}
+          </div>
+
+          <div className="w-[42%] 2xl:w-[60%] hidden lg:flex lg:ml-10 xl:ml-0 justify-center 2xl:justify-end items-center">
+            <span>
+              <img src={ContactImage1_1} alt="" />
+            </span>
           </div>
         </div>
       </section>

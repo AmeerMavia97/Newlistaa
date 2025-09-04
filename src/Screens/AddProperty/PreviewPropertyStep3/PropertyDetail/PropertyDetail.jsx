@@ -88,7 +88,7 @@ const PropertyDetail = ({ formData }) => {
         </div>
         {/* LOCATION  */}
         <div className="md:w-[50%]">
-          <div className="flex  flex-col justify-between items-center mb-2 ">
+          <div className="flex sm:flex-row  md:flex-col lg:flex-row justify-between items-center md:items-start mb-2 ">
             <h1 className="text-[18px] sm:text-[21px] lg:text-[22px] font-[700] font-Urbanist  text-[#1E1E1E]">
               Location:
             </h1>
