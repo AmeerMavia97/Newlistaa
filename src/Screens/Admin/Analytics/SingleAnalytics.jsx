@@ -225,118 +225,120 @@ export default function PropertyViewChartCards() {
 
   return (
     <>
-      {/* STAT CARDS */}
-      <section className="flex flex-wrap gap-5 mt-5 min-[890px]:mt-9">
-        {statCards.map((card, index) => (
-          <div
-            key={index}
-            className="w-full sm:w-[47%] lg:w-[40%] xl:w-[31%] 2xl:w-[23%] bg-white rounded-[14px] p-6 flex flex-col justify-between gap-5"
-          >
-            <div className="flex justify-between">
-              <span>
-                <h4 className="text-[15px] font-Urbanist font-[500] text-[#666666]">
-                  {card.label}
-                </h4>
-                <h1 className="font-Urbanist text-[#222222] text-[30px] md:text-[35px] font-[700]">
-                  {card.value}
-                </h1>
-              </span>
-              <span>
-                <img className="max-[390px]:w-14 w-16" src={card.icon} alt="" />
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>
-                <img
-                  className="h-4 w-5"
-                  src={card.today > 0 ? UpIcon : DownIcon}
-                  alt=""
-                />
-              </span>
-              <span>
-                <h4 className="text-[#606060] font-Urbanist font-[600] text-[15px]">
-                  {card.today || 0} new today
-                </h4>
-              </span>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      {/* FILTER + CHARTS */}
-      <section className="max-w-6xl mx-auto pr-7 mt-7">
-        <div className="mb-5 items-center flex justify-between">
-          <div>
-            <h1 className="font-Urbanist font-bold text-[32px] leading-[43px] w-max">
-              Property View Analytics
-            </h1>
-          </div>
-          <div className="relative">
-            <select
-              id="viewFilter"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="block w-full pr-8.5 pl-6 py-2.5 rounded-[8px] font-semibold text-[15px] border-b-[1px] border-gray-300 focus:ring-PurpleColor focus:border-PurpleColor text-[#fcfcfc] font-Urbanist outline-none appearance-none cursor-pointer bg-black"
+      <div className="min-h-screen pr-3 sm:px-3 lg:px-0">
+        {/* STAT CARDS */}
+        <section className="grid sm:grid-cols-2 xl:grid-cols-3 min-[1780px]:grid-cols-4 flex-wrap gap-5 mt-5 min-[890px]:mt-9">
+          {statCards.map((card, index) => (
+            <div
+              key={index}
+              className="w-full bg-white rounded-[14px] p-6 flex flex-col justify-between gap-5"
             >
-              <option value="Daily">Select</option>
-              <option value="Last 24 Hours">Last 24 Hours</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Last 90 Days">Last 90 Days</option>
-            </select>
-            <ChevronDownIcon
-              className={`pointer-events-none absolute top-3 right-3 size-5 fill-[#fcfcfc] text-black`}
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
-          {/* LINE CHART */}
-          <div className="bg-white rounded-xl px-6 py-10 shadow-lg">
-            <div className="h-64">
-              <Line
-                data={{
-                  labels,
-                  datasets: [
-                    {
-                      label: "Views",
-                      data: views,
-                      fill: true,
-                      borderColor: "#3B82F6",
-                      backgroundColor: "rgba(59, 130, 246, 0.1)",
-                      tension: 0.4,
-                      pointRadius: 4,
-                      pointHoverRadius: 6,
-                      pointBackgroundColor: "#3B82F6",
-                    },
-                  ],
-                }}
-                options={chartOptions}
-              />
+              <div className="flex justify-between">
+                <span>
+                  <h4 className="text-[15px] 2xl:text-[17px] font-Urbanist font-[500] text-[#666666]">
+                    {card.label}
+                  </h4>
+                  <h1 className="font-Urbanist text-[#222222] text-[30px] md:text-[35px] font-[700] 2xl:text-[40px]">
+                    {card.value}
+                  </h1>
+                </span>
+                <span>
+                  <img className="max-[390px]:w-13 w-14 xl:w-16 2xl:w-[72px]" src={card.icon} alt="" />
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>
+                  <img
+                    className="h-4 w-5"
+                    src={card.today > 0 ? UpIcon : DownIcon}
+                    alt=""
+                  />
+                </span>
+                <span>
+                  <h4 className="text-[#606060] font-Urbanist font-[600] text-[15px]">
+                    {card.today || 0} new today
+                  </h4>
+                </span>
+              </div>
             </div>
-          </div>
+          ))}
+        </section>
 
-          {/* BAR CHART */}
-          <div className="bg-white flex justify-center items-center rounded-xl px-6 ">
-            <div className="h-64 w-full">
-              <Bar
-                data={{
-                  labels,
-                  datasets: [
-                    {
-                      label: "Views",
-                      data: views,
-                      backgroundColor: "#10B981",
-                      borderRadius: 4,
-                    },
-                  ],
-                }}
-                options={chartOptions}
+        {/* FILTER + CHARTS */}
+        <section className=" xl:pr-7 mt-9">
+          <div className="mb-5 sm:items-center flex flex-col sm:flex-row justify-between gap-2 sm:gap-0">
+            <div>
+              <h1 className="font-Urbanist font-bold text-[24px] sm:text-[25px] md:text-[28px] xl:text-[32px] leading-[43px] w-max">
+                Property View Analytics
+              </h1>
+            </div>
+            <div className="relative w-max ">
+              <select
+                id="viewFilter"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                className="block sm:w-full pr-3 pl-4 sm:pr-8.5 sm:pl-6 py-2.5 rounded-[8px] font-semibold text-[13.5px] md:text-[15px] border-b-[1px] border-gray-300 focus:ring-PurpleColor focus:border-PurpleColor text-[#fcfcfc] font-Urbanist outline-none appearance-none cursor-pointer bg-black  2xl:text-[17px] 2xl:py-3 "
+              >
+                <option value="Daily">Select</option>
+                <option value="Last 24 Hours">Last 24 Hours</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Last 90 Days">Last 90 Days</option>
+              </select>
+              <ChevronDownIcon
+                className={`pointer-events-none absolute top-3 right-3 size-5 fill-[#fcfcfc] text-black`}
+                aria-hidden="true"
               />
             </div>
           </div>
-        </div>
-      </section>
+          <div className="grid sm:grid-cols-2 md:grid-cols-2 gap-6 ">
+            {/* LINE CHART */}
+            <div className="bg-white rounded-xl px-6 py-6 sm:py-10 shadow-lg">
+              <div className="h-44 md:h-56 xl:h-64 2xl:h-72">
+                <Line
+                  data={{
+                    labels,
+                    datasets: [
+                      {
+                        label: "Views",
+                        data: views,
+                        fill: true,
+                        borderColor: "#3B82F6",
+                        backgroundColor: "rgba(59, 130, 246, 0.1)",
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: "#3B82F6",
+                      },
+                    ],
+                  }}
+                  options={chartOptions}
+                />
+              </div>
+            </div>
+
+            {/* BAR CHART */}
+            <div className="bg-white flex justify-center items-center rounded-xl px-6 py-6 sm:py-0">
+              <div className="h-44 md:h-56 xl:h-64 w-full 2xl:h-72">
+                <Bar
+                  data={{
+                    labels,
+                    datasets: [
+                      {
+                        label: "Views",
+                        data: views,
+                        backgroundColor: "#10B981",
+                        borderRadius: 4,
+                      },
+                    ],
+                  }}
+                  options={chartOptions}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
   );
 }

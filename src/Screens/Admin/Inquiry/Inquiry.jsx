@@ -3,7 +3,7 @@ import TruncatedText from "../../../Components/TruncatedText/TruncatedText";
 import UnkownUser from "../../../../public/Images/UnknowUser.png";
 import axios from "axios";
 import Spinner from "../../../Components/Spinner/Spinner";
-import { RotateCcw } from "lucide-react";
+import { ChevronLeft, RotateCcw } from "lucide-react";
 
 const Inquiry = () => {
   const [conversations, setConversations] = useState([]);
@@ -145,18 +145,18 @@ const Inquiry = () => {
   };
 
   return (
-    <div className="flex gap-8 h-[76vh] rounded-[10px] overflow-hidden my-5">
+    <div className="flex gap-4 md:gap-8 h-[76vh] rounded-[10px] overflow-hidden my-5 2xl:h-[80vh]">
       {/* Left: Conversation List */}
-      <div className="w-[25%] bg-white flex flex-col rounded-[10px]">
-        <div className="flex items-center px-5 justify-between">
-          <h1 className="text-3xl font-bold  pt-9 pb-7 text-gray-800">
+      <div className="w-[100%] mx-3 sm:w-[33%] xl:w-[25%] bg-white flex flex-col rounded-[10px] py-2 ">
+        <div className="flex items-center px-6 sm:px-5 justify-between">
+          <h1 className="text-[30px] xl:text-3xl font-bold  pt-9 pb-7 text-gray-800">
             Inquiries
           </h1>
           <button onClick={fetchConversations}>
-            <RotateCcw className="mt-3 text-red-500 size-4 cursor-pointer" />
+            <RotateCcw className="mt-3 text-red-500 size-5 cursor-pointer" />
           </button>
         </div>
-        <div className="flex flex-col overflow-auto no-scrollbar flex-grow">
+        <div className="flex flex-col overflow-auto no-scrollbar flex-grow px-2 sm:px-0">
           {loading ? (
             <div className="flex justify-center items-center h-full">
               <Spinner style={"w-14 h-20 text-PurpleColor z-50"} />
@@ -210,9 +210,9 @@ const Inquiry = () => {
       </div>
 
       {/* Right: Chat Window */}
-      <div className="flex-1 flex flex-col relative justify-between bg-white rounded-[10px] w-[70%]">
+      <div className="flex-1 fixed top-0 left-0 max-[550px]:min-h-screen  sm:relative  flex flex-col justify-between bg-white rounded-[10px]  sm:w-[70%] ">
         {selectedChatIndex === null ? (
-          <div className="flex justify-center items-center h-full text-gray-400 font-semibold">
+          <div className="hidden sm:flex justify-center items-center h-full text-gray-400 font-semibold">
             Select User To Check Inquiry
           </div>
         ) : loadingChat ? (
@@ -222,9 +222,13 @@ const Inquiry = () => {
         ) : (
           <>
             {/* Chat Header */}
-            <div className="flex items-center gap-4 p-5 border-b border-[#B9B9B9]">
+            <div className="flex items-center sm:gap-4 px-3 py-4 sm:p-5 border-b border-[#B9B9B9] ">
+
+              <div onClick={()=>(setSelectedChatIndex(null))}>
+                <ChevronLeft />
+              </div>
               <img
-                className="h-13 w-13 rounded-full object-cover border border-[#e6e6e6]"
+                className="w-11 h-11 ml-1 sm:ml-0 sm:h-13 sm:w-13 rounded-full object-cover border border-[#e6e6e6]"
                 src={
                   conversations[selectedChatIndex].with_user.image
                     ? import.meta.env.VITE_IMAGE_KEY +
@@ -235,7 +239,7 @@ const Inquiry = () => {
                 alt="User"
               />
               <div>
-                <h1 className="font-Urbanist font-[600] text-[#000] text-[19px]">
+                <h1 className="font-Urbanist font-[600] ml-3 sm:ml-0 text-[#000] text-[17px] sm:text-[19px]">
                   {`${conversations[selectedChatIndex].with_user.first_name} ${conversations[selectedChatIndex].with_user.last_name}`}
                 </h1>
               </div>
@@ -297,7 +301,7 @@ const Inquiry = () => {
               <button
                 type="submit"
                 disabled={sending}
-                className="bg-purple-600 text-white px-9 py-2.5 rounded-[6px] hover:bg-purple-700 text-[17px] font-Urbanist font-[600] transition cursor-pointer disabled:cursor-not-allowed disabled:bg-purple-400"
+                className="bg-purple-600 text-white px-7 sm:px-9 py-2.5 rounded-[6px] hover:bg-purple-700 text-[15px] sm:text-[17px] font-Urbanist font-[600] transition cursor-pointer disabled:cursor-not-allowed disabled:bg-purple-400"
               >
                 {sending ? "Sending..." : "Send"}
               </button>

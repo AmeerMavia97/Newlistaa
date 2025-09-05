@@ -29,18 +29,19 @@
       const timeB = latestMessages[b.id] || 0;
       return timeB - timeA;
     });
+    
 
     return (
       
-      <div className="w-full sm:w-[60%] md:w-[70%] lg:w-[35%] xl:w-[25%] overflow-auto no-scrollbar">
-        <div className="pt-7 pb-29 sm:py-10 bg-white rounded-[20px]">
+      <div className="w-[96%] sm:w-[35%] md:w-[30%] lg:w-[30%] xl:w-[25%] overflow-auto no-scrollbar">
+        <div className="pt-10 sm:pt-7 pb-29 sm:py-10 bg-white rounded-[20px]">
           <h1
             id={"connection"}
-            className="font-Urbanist px-6 pb-2 sm:pb-4 text-[#222222] text-[25px] sm:text-[26px] font-[700]"
+            className="font-Urbanist px-6 pb-3 sm:pb-4 text-[#222222] max-[340px]:text-[28px] text-[32px]  sm:text-[23px] font-[700]"
           >
             Connections
           </h1>
-          <div className="flex flex-col overflow-auto no-scrollbar h-[55vh]">
+          <div className="flex flex-col overflow-auto no-scrollbar h-[55vh] px-1.5">
             {sortedUsers.map((user, index) => {
               const isOnline = onlineUsers[user.id] === true;
               const unread = unreadCounts[user.id] || 0;
@@ -53,7 +54,7 @@
                   <div className="flex gap-2.5 items-center">
                     <div className="relative">
                       <img
-                        className="h-10 w-10 rounded-full object-cover"
+                        className="h-12 w-12 sm:h-10 sm:w-10 rounded-full object-cover"
                         src={ user.headshot ? import.meta.env.VITE_IMAGE_KEY + user.headshot : UnkownUser}
                         alt=""
                       />
@@ -64,7 +65,7 @@
                       ></span>
                     </div>
                     <div className="relative flex flex-col ">
-                      <h1 className="flex flex-col font-Urbanist text-[#222222] font-[500] mt-1 text-[15px]">
+                      <h1 className="flex flex-col font-Urbanist text-[#222222] font-[500] mt-1 text-[17px] sm:text-[15px]">
                         <TruncatedText
                           text={user.first_name + " " + user.last_name}
                           maxLength={15}

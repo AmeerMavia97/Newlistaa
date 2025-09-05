@@ -31,6 +31,47 @@ const ListItem = [
   },
 ];
 
+// At the top of the file, before the component definition:
+const dashboardCards = [
+  {
+    title: "Standard Listings Views",
+    key: "stadard_listing_views",
+    icon: DashboardIcon1_1,
+    alt: "Standard Listings Icon",
+  },
+  {
+    title: "Featured Listings Views",
+    key: "featured_listing_views",
+    icon: DashboardIcon3_1,
+    alt: "Featured Listings Icon",
+  },
+  {
+    title: "Off Market Listings Views",
+    key: "off_listing_views",
+    icon: DashboardIcon5_1,
+    alt: "Off Market Listings Icon",
+  },
+  {
+    title: "Received Offers",
+    key: "offers_received",
+    icon: DashboardIcon2_1,
+    alt: "Received Offers Icon",
+  },
+  {
+    title: "Accepted Offers",
+    key: "accepted_offers",
+    icon: DashboardIcon4_1,
+    alt: "Accepted Offers Icon",
+  },
+  {
+    title: "Pending Offers",
+    key: "pending_offers",
+    icon: DashboardIcon6_1,
+    alt: "Pending Offers Icon",
+  },
+];
+
+
 const Analytics = () => {
   const token = localStorage.getItem("token");
   const ApiKey = import.meta.env.VITE_API_KEY;
@@ -61,127 +102,55 @@ const Analytics = () => {
       <section className="py-6 px-2 sm:px-0">
         {/* PAGE TITTLE  */}
         <div className="flex justify-between">
-          <h1 className="font-Urbanist text-[#222222] text-[30px] font-[700]">
+          <h1 className="font-Urbanist text-[#222222] text-[30px] 2xl:text-[35px] font-[700]">
             Analytics
           </h1>
         </div>
       </section>
 
       {!Loading ? (
-        <div className="flex flex-col sm:flex-row gap-5 px-2 sm:px-0">
-          <section className="sm:w-[100%]">
+        <div className="flex flex-col sm:flex-row gap-5 px- sm:px-0">
+          <section className="sm:w-[100%] min-[1760px]:w-[80%]">
             {/* CARD SECTION  */}
-            <div className="grid grid-cols-3 gap-5 ">
+            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center">
               {/* CARD 1 */}
-              <div className="w-[90%] flex flex-col justify-start py-8 bg-white px-5 gap-3   sm:w-[95%] rounded-[14px]">
-                <div className="flex justify-between items-center">
-                  <span>
-                    <h4 className="text-[15px] font-Urbanist font-[500] text-[#666666]">
-                      Standard Listings Views
-                    </h4>
-                    <h1 className="font-Urbanist text-[#222222] text-[35px] font-[700]">
-                      {Analytics.stadard_listing_views}
-                    </h1>
-                  </span>
-                  <span>
-                    <img className="" src={DashboardIcon1_1} alt="" />
-                  </span>
+              {dashboardCards.map((card, index) => (
+                <div
+                  key={index}
+                  className="w-[90%] sm:w-[95%] flex flex-col justify-start py-8 px-5 gap-3 2xl:py-10 bg-white rounded-[14px]"
+                >
+                  <div className="flex justify-between items-center">
+                    <span>
+                      <h4 className="text-[14px] sm:text-[15px] 2xl:text-[17px] font-Urbanist font-[500] text-[#666666]">
+                        {card.title}
+                      </h4>
+                      <h1 className="text-[35px] 2xl:text-[42px] font-Urbanist font-[700] text-[#222222]">
+                        {Analytics[card.key]}
+                      </h1>
+                    </span>
+                    <span>
+                      <img className="w-[45px] sm:w-[55px] 2xl:w-[72px]" src={card.icon} alt={card.alt} />
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="w-[90%] flex flex-col justify-start py-8 bg-white px-5 gap-3   sm:w-[95%] rounded-[14px]">
-                <div className="flex justify-between items-center">
-                  <span>
-                    <h4 className="text-[15px] font-Urbanist font-[500] text-[#666666]">
-                      Featured Listings Views
-                    </h4>
-                    <h1 className="font-Urbanist text-[#222222] text-[35px] font-[700]">
-                      {Analytics.featured_listing_views}
-                    </h1>
-                  </span>
-                  <span>
-                    <img className="" src={DashboardIcon3_1} alt="" />
-                  </span>
-                </div>
-              </div><div className="w-[90%] flex flex-col justify-start py-8 bg-white px-5 gap-3   sm:w-[95%] rounded-[14px]">
-                <div className="flex justify-between items-center">
-                  <span>
-                    <h4 className="text-[15px] font-Urbanist font-[500] text-[#666666]">
-                      Off Market Listings Views
-                    </h4>
-                    <h1 className="font-Urbanist text-[#222222] text-[35px] font-[700]">
-                      {Analytics.off_listing_views}
-                    </h1>
-                  </span>
-                  <span>
-                    <img className="" src={DashboardIcon5_1} alt="" />
-                  </span>
-                </div>
-              </div>
-              
-              {/* CARD 2 */}
-              <div className="w-[90%] flex flex-col justify-start bg-white px-5 gap-3 py-8  sm:w-[95%] rounded-[14px]">
-                <div className="flex justify-between items-center">
-                  <span>
-                    <h4 className="text-[15px] font-Urbanist font-[500] text-[#666666]">
-                      Received Offers
-                    </h4>
-                    <h1 className="font-Urbanist text-[#222222] text-[35px] font-[700]">
-                      {Analytics.offers_received}
-                    </h1>
-                  </span>
-                  <span>
-                    <img src={DashboardIcon2_1} alt="" />
-                  </span>
-                </div>
-              </div>
-              {/* CARD 3 */}
-              <div className="w-[90%] flex flex-col justify-between bg-white px-5 gap-3 py-8  sm:w-[95%] rounded-[14px]">
-                <div className="flex justify-between items-center">
-                  <span>
-                    <h4 className="text-[15px] font-Urbanist font-[500] text-[#666666]">
-                      Accepted Offers
-                    </h4>
-                    <h1 className="font-Urbanist text-[#222222] text-[35px] font-[700]">
-                      {Analytics.accepted_offers}
-                    </h1>
-                  </span>
-                  <span>
-                    <img src={DashboardIcon4_1} alt="" />
-                  </span>
-                </div>
-              </div>
-              <div className="w-[90%] flex flex-col justify-between bg-white px-5 gap-3 py-8  sm:w-[95%] rounded-[14px]">
-                <div className="flex justify-between items-center">
-                  <span>
-                    <h4 className="text-[15px] font-Urbanist font-[500] text-[#666666]">
-                      Pending Offers
-                    </h4>
-                    <h1 className="font-Urbanist text-[#222222] text-[35px] font-[700]">
-                      {Analytics.pending_offers}
-                    </h1>
-                  </span>
-                  <span>
-                    <img src={DashboardIcon6_1} alt="" />
-                  </span>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* TABLE SECTION  */}
 
-            <div className="mt-10 overflow-x-auto rounded-[10px] w-[70%]">
+            <div className="mt-10 overflow-x-auto rounded-[10px] sm:w-[75%] lg:w-[70%] 2xl:w-[60%]">
               <table className="min-w-full text-sm text-left rtl:text-right text-gray-500 font-Urbanist">
-                <thead className="text-[14px] text-white uppercase bg-[#1E1E1E]">
+                <thead className="text-[13px] sm:text-[14px] 2xl:text-[16px] text-white uppercase bg-[#1E1E1E]">
                   <tr>
                     <th
                       scope="col"
-                      className="px-5 py-4 rounded-tl-2xl min-w-[120px]"
+                      className="px-5 py-4 rounded-tl-2xl min-w-[90px] sm:min-w-[120px]"
                     >
                       Metric
                     </th>
                     <th
                       scope="col"
-                      className="px-4 py-4 rounded-tr-2xl min-w-[100px]"
+                      className="pr-4 sm:px-4 py-4 rounded-tr-2xl min-w-[60px] sm:min-w-[100px]"
                     >
                       Value
                     </th>
@@ -191,66 +160,66 @@ const Analytics = () => {
                   <tr className="bg-white border-b border-gray-200 hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[15px] font-semibold"
+                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[14px] sm:text-[15px] 2xl:text-[16px] font-semibold"
                     >
                       👀 Total Listing Views
                     </th>
-                    <td className="px-4 py-4 text-[#222222] font-semibold text-[15px]">
+                    <td className="px-4 py-4 text-[#222222] font-semibold text-[14px] sm:text-[15px] 2xl:text-[16px]">
                       {Analytics.total_listing_views}
                     </td>
                   </tr>
                   <tr className="bg-white border-b border-gray-200 hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[15px] font-semibold"
+                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[14px] sm:text-[15px] 2xl:text-[16px] font-semibold"
                     >
                       📩 Total Properties
                     </th>
-                    <td className="px-4 py-4 text-[#222222] font-semibold text-[15px]">
+                    <td className="px-4 py-4 text-[#222222] font-semibold text-[14px] sm:text-[15px] 2xl:text-[16px]">
                       {Analytics.total_properties}
                     </td>
                   </tr>
                   <tr className="bg-white border-b border-gray-200 hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[15px] font-semibold"
+                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[14px] sm:text-[15px] 2xl:text-[16px] font-semibold"
                     >
                       💰 Offers Made & Received
                     </th>
-                    <td className="px-4 py-4 text-[#222222] font-semibold text-[15px]">
+                    <td className="px-4 py-4 text-[#222222] font-semibold text-[14px] sm:text-[15px] 2xl:text-[16px]" >
                       {Analytics.offers_made + Analytics.offers_received}
                     </td>
                   </tr>
                   <tr className="bg-white border-b border-gray-200 hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[15px] font-semibold"
+                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[14px] sm:text-[15px] 2xl:text-[16px] font-semibold"
                     >
                       🤝 Total Network Connections
                     </th>
-                    <td className="px-4 py-4 text-[#222222] font-semibold text-[15px]">
+                    <td className="px-4 py-4 text-[#222222] font-semibold text-[14px] sm:text-[15px] 2xl:text-[16px]">
                       {Analytics.network_connections}
                     </td>
                   </tr>
                   <tr className="bg-white border-b border-gray-200 hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[15px] font-semibold"
+                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[14px] sm:text-[15px] 2xl:text-[16px] font-semibold"
                     >
                       📊 Featured Listing Views
                     </th>
-                    <td className="px-4 py-4 text-[#222222] font-semibold text-[15px]">
+                    <td className="px-4 py-4 text-[#222222] font-semibold text-[14px] sm:text-[15px] 2xl:text-[16px]">
                       {Analytics.featured_listing_views}
                     </td>
                   </tr>
                   <tr className="bg-white border-b border-gray-200 hover:bg-gray-50 ">
                     <th
                       scope="row"
-                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[15px] font-semibold"
+                      className="px-5 py-4 text-gray-900 whitespace-nowrap text-[14px] sm:text-[15px] 2xl:text-[16px] font-semibold"
                     >
                       📢 Social Shares
                     </th>
-                    <td className="px-4 py-4 text-[#222222] font-semibold text-[15px]">
+                    <td className="px-4 py-4 text-[#222222] font-semibold text-[14px] sm:text-[15px] 2xl:text-[16px]">
                       {Analytics.social_shares}
                     </td>
                   </tr>
@@ -260,46 +229,7 @@ const Analytics = () => {
           </section>
 
           <section>
-            {/* <div className="flex justify-between">
-            <h1 className="font-Urbanist text-[#222222] text-[30px] font-[700] sm:-mt-[65px]">
-              Network Insights
-            </h1>
-          </div> */}
-            {/* <div className="flex flex-col gap-4 mt-3 sm:mt-1 w-[95%]">
-            <div className="bg-white rounded-[10px] px-5 py-2.5">
-              <h1 className="font-Urbanist text-[#222222] text-[18px] font-[500]">
-                New Connections This Month
-              </h1>
-              <h3 className="font-Urbanist text-[#222222] text-[18px] font-[700]">
-                24
-              </h3>
-            </div>
-            <div className="bg-white rounded-[7px] px-5 py-2.5">
-              <h1 className="font-Urbanist text-[#222222] text-[18px] font-[500]">
-                Messages Sent/Received
-              </h1>
-              <h3 className="font-Urbanist text-[#222222] text-[18px] font-[700]">
-                128 conversations
-              </h3>
-            </div>
-            <div className="bg-white rounded-[7px] px-5 py-2.5">
-              <h1 className="font-Urbanist text-[#222222] text-[18px] font-[500]">
-                Top Profile Viewers
-              </h1>
-              <h3 className="font-Urbanist text-[#222222] text-[18px] font-[700]">
-                Investor Group A (5 views)
-              </h3>
-            </div>
-            <div className="bg-white rounded-[7px] px-5 py-2.5">
-              <h1 className="font-Urbanist text-[#222222] text-[18px] font-[500]">
-                Pending Connection Requests
-              </h1>
-              <h3 className="font-Urbanist text-[#222222] text-[18px] font-[700]">
-                12
-              </h3>
-            </div>
 
-          </div> */}
           </section>
         </div>
       ) : (

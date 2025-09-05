@@ -85,21 +85,21 @@ const HelpSupport = () => {
   return (
     <>
       {/* CONTACT SECTION START   */}
-      <section className=" relative gap-48 py-20 sm:py-10 md:py-16 overflow-x-hidden flex justify-center items-center  ">
+      <section className=" relative gap-48 py-7 min-[380px]:!px-3 sm:!py-10 md:!py-12 lg:!py-10 overflow-x-hidden flex justify-center items-center  ">
         {/* SHAPE  */}
         <div className="absolute -z-10 -end-30 overflow -top-10">
           <img className="w-[80%]" src={ContactImage1_2} alt="" />
         </div>
 
-        <div className="flex justify-cente 2xl:w-[100%]">
+        <div className="flex justify-cente sm:px-6 lg:px-0 lg:pl-5 2xl:w-[100%]">
           {/* CONTACT FORM SECTION */}
-          <div className=" w-[100%] lg:w-[70%] 2xl:w-[50%] flex flex-col gap-8">
+          <div className=" w-[100%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] flex flex-col gap-8">
             {/* CONTACT INFO  */}
             <div>
-              <h1 className="max-[400px]:text-[31px] text-[32px] leading-[36px] sm:text-[35px] font-[700] font-Urbanist  text-[#1E1E1E] md:text-[43px] md:leading-[48px]">
+              <h1 className="max-[400px]:text-[31px] text-[32px] leading-[36px] sm:text-[35px] font-[700] font-Urbanist  text-[#1E1E1E] md:text-[39px] lg:text-[43px] md:leading-[48px]">
                 Customer Support
               </h1>
-              <p className="text-[12.5px] font-Inter font-medium text-pretty text-Paracolor sm:text-[14px]/8 sm:leading-[18px] mt-5">
+              <p className="text-[12px] font-Inter font-medium text-pretty text-Paracolor sm:text-[14px]/8 sm:leading-[18px] mt-5">
                 Experiencing issues or have suggestions? Our support team is
                 here to help. Fill out the form below and we’ll get back to you
                 as soon as possible
@@ -186,7 +186,7 @@ const HelpSupport = () => {
             )}
           </div>
 
-          <div className="w-[42%] 2xl:w-[60%] hidden lg:flex lg:ml-10 xl:ml-0 justify-center 2xl:justify-end items-center">
+          <div className="w-[42%] 2xl:w-[60%] hidden 2xl:flex lg:ml-10 xl:ml-0 justify-center 2xl:justify-center items-center">
             <span>
               <img src={ContactImage1_1} alt="" />
             </span>

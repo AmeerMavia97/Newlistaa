@@ -124,7 +124,7 @@ function Inbox() {
     <>
       {!Loading ? (
         otherUsers ? (
-          <div className="flex flex-col sm:flex-row w-full mt-3 sm:gap-5 lg:gap-10 text-black">
+          <div className="flex flex-col sm:flex-row w-full mt-3 sm:gap-5 xl:gap-10 text-black 2xl:w-[80%] min-h-[85vh]">
             <UserList
               users={otherUsers}
               onSelect={setChatUser}
@@ -133,7 +133,7 @@ function Inbox() {
             />
 
             {!chatUser ? (
-              <div className="w-full sm:w-[75%] flex items-center justify-center text-center">
+              <div className="w-full hidden sm:w-[75%] sm:flex items-center justify-center text-center">
                 <p className="text-[18px] font-Urbanist text-gray-500 font-semibold">
                   Select a user to start chatting.
                 </p>

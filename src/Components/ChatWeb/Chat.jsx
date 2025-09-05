@@ -64,9 +64,9 @@ export default function PrivateChat({
   }, [text]);
 
   useEffect(() => {
-    const db = getDatabase(); 
+    const db = getDatabase();
     const messagesRef = ref(db, `messages/${chatId}`);
-    setMessages([]); 
+    setMessages([]);
     const handleNewMessage = (snapshot) => {
       setMessages((prevMessages) => [...prevMessages, snapshot.val()]);
     };
@@ -190,7 +190,7 @@ export default function PrivateChat({
     return () => unsubscribe();
   }, [chatUser.id, currentUser.id]);
 
-   const formatJoinDate = (isoDate) => {
+  const formatJoinDate = (isoDate) => {
     const date = new Date(isoDate);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -200,13 +200,13 @@ export default function PrivateChat({
 
   return (
     <>
-      <div className="sm:w-[75%] sm:relative h-[76vh] relative w-full  top-0 left-0 bg-white flex flex-col rounded-[10px] sm:border border-[#B9B9B9] justify-between overflow-hidden">
+      <div className="sm:w-[75%] fixed sm:relative sm:h-[80vh] w-full  top-0 left-0 bg-white flex flex-col rounded-[10px] sm:border border-[#B9B9B9] justify-between overflow-hidden h-full">
         {/* Header */}
-        <div className="flex justify-between border-b border-[#B9B9B9] py-5 px-5">
+        <div className="flex justify-between border-b border-[#B9B9B9] py-3.5 lg:py-5 px-5">
           <div className="flex gap-3 items-center relative">
             <div
               onClick={() => setChatUser(null)}
-              className="bg-[#F5F5F5] px-3 rounded-[5px] py-2 cursor-pointer xl:hidden"
+              className="  rounded-full py-2 cursor-pointer sm:hidden"
             >
               <img className="z-10 relative" src={RightSideImage1_2} alt="" />
             </div>
@@ -221,9 +221,8 @@ export default function PrivateChat({
                 alt=""
               />
               <span
-                className={`absolute bottom-0.5 right-0 w-3 h-3 border-2 border-white rounded-full ${
-                  isChatUserOnline ? "bg-green-500" : "bg-red-600"
-                }`}
+                className={`absolute bottom-0.5 right-0 w-3 h-3 border-2 border-white rounded-full ${isChatUserOnline ? "bg-green-500" : "bg-red-600"
+                  }`}
               ></span>
             </div>
             <div className="flex flex-col gap-0">
@@ -308,11 +307,10 @@ export default function PrivateChat({
                   )}
 
                   <div
-                    className={`flex ${
-                      msg.from === currentUser.id
+                    className={`flex ${msg.from === currentUser.id
                         ? "justify-end"
                         : "justify-start"
-                    } gap-2 relative`}
+                      } gap-2 relative`}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
@@ -329,11 +327,10 @@ export default function PrivateChat({
                       />
                     )}
                     <div
-                      className={`relative max-w-[80%] py-3 px-4 border-gray-200 leading-1.5 ${
-                        msg.from === currentUser.id
+                      className={`relative max-w-[80%] py-3 px-4 border-gray-200 leading-1.5 ${msg.from === currentUser.id
                           ? "bg-[#4880FF] text-white rounded-t-xl rounded-l-xl"
                           : "bg-gray-100 text-gray-900 rounded-t-xl rounded-r-xl"
-                      }`}
+                        }`}
                     >
                       <p className="text-sm font-[500] font-Urbanist text-[13.5px] break-words whitespace-pre-wrap">
                         {msg.text}
@@ -342,11 +339,10 @@ export default function PrivateChat({
                       {/* Hover time */}
                       {hoveredIndex === index && (
                         <span
-                          className={`absolute text-xs text-gray-500 select-none pointer-events-none font-Urbanist w-max ${
-                            msg.from === currentUser.id
+                          className={`absolute text-xs text-gray-500 select-none pointer-events-none font-Urbanist w-max ${msg.from === currentUser.id
                               ? "right-full top-[35%] mr-2"
                               : "left-full ml-2"
-                          }`}
+                            }`}
                         >
                           {currentDate.toLocaleTimeString(undefined, {
                             hour: "2-digit",
@@ -385,12 +381,12 @@ export default function PrivateChat({
     placeholder:text-[12.5px] sm:placeholder:text-[14px]
     w-full px-4 py-4 rounded-[6px] outline-none resize-none
     overflow-y-auto break-words whitespace-pre-wrap
-    h-[48px] !max-h-[180px] leading-[20px]"
+    xl:h-[48px] !max-h-[180px] leading-[20px]"
           />
 
           <button
             type="submit"
-            className="bg-PurpleColor text-white px-9 py-2.5 rounded-[6px] hover:bg-blue-700 text-[17px] font-Urbanist font-[600] transition cursor-pointer"
+            className="bg-PurpleColor text-white px-6 sm:px-9 py-2 xl:py-2.5 rounded-[6px] hover:bg-blue-700 text-[14px] sm:text-[17px] font-Urbanist font-[600] transition cursor-pointer"
           >
             Send
           </button>
@@ -411,9 +407,8 @@ export default function PrivateChat({
                 {" "}
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className={` bg-white shadow-xl sm:max-w-md md:max-w-lg 2xl:max-w-xl w-[90%] sm:w-[50%] min-[380px]:rounded-lg overflow-y-auto no-scrollbar relative transform transition-transform duration-500 ease-in ${
-                    isProfileOpen ? "translate-x-0" : "translate-x-full"
-                  } `}
+                  className={` bg-white shadow-xl sm:max-w-md md:max-w-lg 2xl:max-w-xl w-[90%] sm:w-[50%] min-[380px]:rounded-lg overflow-y-auto no-scrollbar relative transform transition-transform duration-500 ease-in ${isProfileOpen ? "translate-x-0" : "translate-x-full"
+                    } `}
                 >
                   {" "}
                   <button
