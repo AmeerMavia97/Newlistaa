@@ -61,7 +61,7 @@ const OurRequest = ({
   return (
     <>
       <section className="flex flex-col gap-7 sm:gap-10 items-center sm:items-start w-full">
-        <h1 className="text-[26px] mt-5 font-Urbanist text-[#f5f5f5] bg-PurpleColor w-max px-5 rounded-[7px] sm:text-[30px] font-[700]">
+        <h1 className="text-[20px] mt-5 font-Urbanist text-[#f5f5f5] bg-PurpleColor w-max px-6 py-1  rounded-[7px] sm:text-[23px] sm:px-8 sm:py-1.5 xl:text-[26px] 2xl:text-[30px] font-[700]">
           Received Requests
         </h1>
 
@@ -118,8 +118,8 @@ const OurRequest = ({
         </div>
 
         {/* 🔻 Sent Requests */}
-        <div className="w-full">
-          <h1 className="text-[26px] my-6 font-Urbanist text-[#f5f5f5] bg-PurpleColor w-max px-5 rounded-[7px] sm:text-[30px] font-[700]">
+        <div className="w-full items-center sm:items-start flex flex-col">
+          <h1 className="text-[20px] mt-5 font-Urbanist text-[#f5f5f5] bg-PurpleColor w-max px-6 py-1  rounded-[7px] sm:text-[23px] sm:px-8 sm:py-1.5 xl:text-[26px] 2xl:text-[30px] font-[700] mb-7">
             Sent Requests
           </h1>
           <div className="flex flex-wrap gap-4 mb-7 justify-center sm:justify-start">

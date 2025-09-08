@@ -62,9 +62,9 @@ const HeadShootBanner = ({ setValue, defaultBanner, defaultHeadshot }) => {
         </div>
 
         {/* Icon Button for Banner Upload */}
-        <label className="absolute top-3 right-3 z-10 bg-white p-2 rounded-[8px] shadow cursor-pointer hover:bg-gray-100 transition hover-btn hover-btn-white">
+        <label className="absolute top-3 right-3 z-10 bg-white p-1.5 sm:p-2 rounded-[8px] shadow cursor-pointer hover:bg-gray-100 transition hover-btn hover-btn-white">
           <span>
-            <Pen className="size-4.5" />
+            <Pen className="size-3 sm:size-4 lg:size-4.5" />
           </span>
           <input
             type="file"
@@ -80,28 +80,32 @@ const HeadShootBanner = ({ setValue, defaultBanner, defaultHeadshot }) => {
       </div>
 
       {/* Profile Section */}
-      <div className="ml-4 sm:ml-12 -mt-20 relative">
-        <div className="relative w-full sm:w-[21%]">
+      <div className="ml-0 sm:ml-7 md:ml-4 xl:ml-10 -mt-20 relative items-center flex justify-center sm:justify-start">
+        <div className="relative w-max sm:w-[25%] md:w-[27%] xl:w-[21%]">
           {defaultHeadshot === undefined ? (
             <div className="w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] flex items-center justify-center rounded-full bg-gray-100">
               <span className="text-sm text-gray-500">Loading...</span>
             </div>
           ) : (
-            <img
-              className="w-[120px] h-[120px] sm:w-[200px] xl:w-full sm:h-[200px] bg-white object-cover rounded-full"
-              src={
-                profilePreview ||
-                (defaultHeadshot
-                  ? import.meta.env.VITE_IMAGE_KEY + defaultHeadshot
-                  : UnkownUser)
-              }
-              alt="Profile"
-            />
+
+            <div className="w-full h-auto max-w-[150px]  sm:max-w-[160px]  xl:max-w-[180px] 2xl:max-w-[250px] mx-auto">
+              <img
+                className="w-full aspect-square rounded-full object-cover border-4 border-PurpleColor"
+                src={
+                  profilePreview ||
+                  (defaultHeadshot
+                    ? import.meta.env.VITE_IMAGE_KEY + defaultHeadshot
+                    : UnkownUser)
+                }
+                alt="Profile"
+              />
+            </div>
+
           )}
 
-          <label className="absolute bottom-4.5 right-1.5 z-10 bg-black p-2 rounded-full shadow cursor-pointer hover:bg-gray-100 text-white transition hover-btn hover-btn-black">
+          <label className="absolute bottom-3.5 sm:bottom-4.5 right-0.5 sm:right-0.5 md:right-3.5 lg:right-2  xl:right-2 min-[1780px]:!right-10.5 z-10 bg-black p-2 rounded-full shadow cursor-pointer hover:bg-gray-100 text-white transition hover-btn hover-btn-black">
             <span>
-              <Camera className="size-4.5 " />
+              <Camera className="size-3.5 sm:size-4 xl:size-4.5 2xl:size-5.5" />
             </span>
             <input
               type="file"

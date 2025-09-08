@@ -406,10 +406,10 @@ const AccountSetting = () => {
           onSubmit={handleSubmit(ProfileComplete)}
           className="flex flex-col gap-4"
         >
-          <section className="flex flex-col justify-start items-start sm:flex-row gap-14 px-2">
-            <div className="sm:w-[47%] w-[98%] flex flex-col gap-6">
+          <section className="flex flex-col justify-start items-start md:flex-row gap-8 sm:gap-10 xl:gap-14 px-2">
+            <div className="md:w-[50%] w-[98%] flex flex-col gap-6">
               {/* Name  */}
-              <div className="w-[100%] flex gap-5">
+              <div className="w-[100%] grid  min-[400px]:grid-cols-2 gap-5">
                 <span>
                   <Inputs
                     register={register("first_name", {
@@ -472,7 +472,7 @@ const AccountSetting = () => {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid min-[400px]:grid-cols-2 gap-6">
                 <span>
                   <Selection
                     labels="Country"
@@ -567,7 +567,7 @@ const AccountSetting = () => {
                     error={errors.company_name?.message}
                   ></Inputs>
                 </span>
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid min-[400px]:grid-cols-2 gap-5">
                   <span>
                     <Selection
                       labels={"Experience Level"}
@@ -678,7 +678,7 @@ const AccountSetting = () => {
 
               {/* Message */}
             </div>
-            <div className="sm:w-[50%] flex flex-col gap-6  ">
+            <div className="w-full md:w-[50%] flex flex-col flex-wrap gap-6  ">
               <div>
                 {/* CHECK BOXS  */}
                 <label
@@ -704,7 +704,7 @@ const AccountSetting = () => {
 
                     return (
                       <>
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="grid grid-cols-2 2xl:grid-cols-3 gap-2 md:gap-3.5" >
                           {PropertyInterest.map((type) => {
                             const isChecked = selected.includes(type.name);
 
@@ -736,7 +736,7 @@ const AccountSetting = () => {
                   }}
                 />
               </div>
-              <div className="w-[90%] ">
+              <div className="xl:w-[95%] ">
                 <div>
                   <Selection
                     labels={"Preferred Investment Range"}
@@ -748,84 +748,6 @@ const AccountSetting = () => {
                     error={errors.preferred_investment_range?.message}
                   />
                 </div>
-
-                {/* <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-2">
-                    <label
-                      htmlFor="text"
-                      className="block mb-1 text-[15px] font-[700] text-Paracolor"
-                    >
-                      Min
-                    </label>
-                    <Controller
-                      name="minRange"
-                      control={control}
-                      render={({ field }) => (
-                        <select
-                          {...field}
-                          className="bg-[#0c0c0c] border-[#F3EEFF] text-[#e6e6e6] font-[600] font-Urbanist text-[14px] w-20 h-8  rounded-[6px] px-1 outline-none   "
-                          onChange={(e) => {
-                            const val = Number(e.target.value);
-                            field.onChange(val);
-                          }}
-                        >
-                          {MinRange.map(({ label, value }) => (
-                            <option key={value} value={value}>
-                              {label}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    />
-                  </div>
-
-                  <Controller
-                    name="preferred_investment_range"
-                    control={control}
-                    rules={{
-                      validate: (value) =>
-                        value > 0 || "Property Range must be greater than zero",
-                    }}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        type="range"
-                        min={PreferredRangeMin || 0}
-                        max={PreferredRangeMin || 100000}
-                        className="w-full h-2 bg-gray-200 rounded-lg cursor-pointer"
-                      />
-                    )}
-                  />
-
-                  <div className="flex gap-2 items-center">
-                    <label
-                      htmlFor="text"
-                      className="block mb-1 text-[15px] font-[700] text-Paracolor"
-                    >
-                      Max
-                    </label>
-                    <Controller
-                      name="maxRange"
-                      control={control}
-                      render={({ field }) => (
-                        <select
-                          {...field}
-                          className="bg-[#0c0c0c] border-[#F3EEFF] text-[#e6e6e6] font-[600] font-Urbanist text-[14px] w-20 h-8  rounded-[6px] px-1 outline-none   "
-                          onChange={(e) => {
-                            const val = Number(e.target.value);
-                            field.onChange(val);
-                          }}
-                        >
-                          {MaxRange.map(({ label, value }) => (
-                            <option key={value} value={value}>
-                              {label}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    />
-                  </div>
-                </div> */}
               </div>
 
               <div>
@@ -836,11 +758,11 @@ const AccountSetting = () => {
                   Preferred Investment Location
                 </label>
                 <div className="relative w-[100%]">
-                  <div className="bg-[#F3EEFF] flex w-[90%] gap-3 items-center rounded-[6px] ">
+                  <div className="bg-[#F3EEFF] flex xl:w-[95%] sm:gap-3 items-center rounded-[6px] ">
                     <div className=" inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
-                      <Search />
+                      <Search className="size-4" />
                     </div>
-                    <div className="w-[80%]">
+                    <div className="w-[100%] sm:w-[80%]">
                       <SuggestedState
                         errors={errors}
                         register={register}
@@ -859,11 +781,11 @@ const AccountSetting = () => {
                 {selectedStates.map((name) => (
                   <span
                     key={name}
-                    className="flex items-center font-Urbanist text-[14px] font-semibold bg-[#E7E7E7] rounded-full px-4 py-2 gap-2"
+                    className="flex items-center font-Urbanist text-[13px] font-semibold bg-[#E7E7E7] rounded-full px-4 py-2 gap-2"
                   >
                     {name}
                     <img
-                      className="w-5 h-5 cursor-pointer"
+                      className="w-4.5 h-4.5 sm:w-5 sm:h-5 cursor-pointer"
                       src={CrossImage}
                       alt="Remove"
                       onClick={() => handleRemoveState(name)}
@@ -872,7 +794,7 @@ const AccountSetting = () => {
                 ))}
               </div>
 
-              <div className="w-[90%] ">
+              <div className="xl:w-[95%] ">
                 <label
                   htmlFor="email"
                   className="block mb-3 text-[15px] font-[700] text-PurpleColor"
@@ -915,7 +837,7 @@ const AccountSetting = () => {
 
                     return (
                       <>
-                        <div className="grid grid-cols-3 gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 xl:grid-cols-3 gap-4">
                           {options.map((type) => {
                             const isChecked = selected.includes(type);
 
@@ -960,10 +882,10 @@ const AccountSetting = () => {
             </div>
           </section>
           {/* Send Message Button */}
-          <div className="mt-1 w-[50%] sm:w-[46%] px-2">
+          <div className="mt-1 md:-mt-16 xl:mt-0 w-[100%] sm:w-[30%] md:w-[48%] 2xl:mt-3 px-2">
             <button
               type="submit"
-              className="bg-PurpleColor font-[700] w-[100%] h-11 text-white font-Urbanist rounded-[6px] hover-btn  hover-btn-purple"
+              className="bg-PurpleColor text-[15px] font-[700] w-[100%] h-11 text-white font-Urbanist rounded-[6px] hover-btn  hover-btn-purple"
             >
               <span>Save Details</span>
             </button>

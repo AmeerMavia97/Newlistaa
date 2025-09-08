@@ -163,13 +163,13 @@ const AddToNetwork = ({
                 },
               });
             }}
-            className="font-Inter text-[#fff] font-semibold text-[15px] px-7 py-1.5 rounded-full border-solid border-[2px] border-[#43B274] bg-[#43B274] cursor-pointer"
+            className="font-Inter text-[#fff] font-semibold text-[13px] sm:text-[15px] px-7 py-1.5 rounded-full border-solid border-[2px] border-[#43B274] bg-[#43B274] cursor-pointer"
           >
             Message
           </button>
           <button
             onClick={() => openConfirmation("remove")}
-            className="font-Inter cursor-pointer text-[#fff] font-semibold text-[12px] px-4 py-1.5 sm:text-[12.5px] sm:px-2.5 sm:py-1 lg:px-3.5 rounded-full border-solid border-[2px] border-[#F61418] bg-[#F61418]"
+            className="font-Inter cursor-pointer text-[#fff] font-semibold text-[13px] px-4 py-1.5 sm:text-[12.5px] sm:px-2.5 sm:py-1 lg:px-3.5 rounded-full border-solid border-[2px] border-[#F61418] bg-[#F61418]"
           >
             Remove
           </button>

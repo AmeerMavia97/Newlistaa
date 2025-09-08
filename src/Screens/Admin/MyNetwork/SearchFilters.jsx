@@ -165,12 +165,12 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
     <>
       <section className="w-[100%] pt-5">
         {/* UPPER TAB  */}
-        <div className="flex flex-col sm:gap-5 ">
+        <div className="flex gap-2 xl:flex-col 2xl:flex-row items-center sm:gap-5 ">
           {/* SEARCH  */}
-          <div className="relative max-[350px]: w-[100%] ">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
+          <div className="relative max-[350px]:w-[70%] w-full 2xl:w-[40%]">
+            <div className="absolute inset-y-0 start-0 flex items-center ps-3 sm:ps-4 pointer-events-none">
               <svg
-                className="w-4 h-4 text-[#444444] "
+                className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#444444] "
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -189,7 +189,7 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
               title="Search by Investor name, Company and Keyword Filter by Property Type, Maximum Investment Amount, Investment Location"
               type="search"
               id="default-search"
-              className=" w-[100%] text-[#444444] placeholder:text-[#444444] font-Urbanist font-semibold py-4.5 pl-11 rounded-[10px] text-[15px] bg-[#F3EEFF] outline-none"
+              className=" w-[100%] text-[#444444] placeholder:text-[#444444] font-Urbanist font-semibold pl-9 max-[400px]:py-3.5 py-4 2xl:py-5 sm:py-3.5 sm:pl-11 rounded-[10px] text-[13px] sm:text-[15px] bg-[#F3EEFF] outline-none"
               placeholder="Search by Name, Company and Keyword"
               {...register("search")}
             />
@@ -248,17 +248,17 @@ const SearchFilters = ({ watch, setValue, register, control }) => {
             </div>
           </div>
           {/* Mobile filter button (visible only on small screens) */}
-          <div className="flex xl:hidden  px-4 w-[30%]  md:w-[20%] py-2 bg-white">
+          <div className="flex xl:hidden  w-[30%] sm:w-[20%]   md:w-[17%] py-[11.8px] sm:py-3 md:py-[12.8px] max-[350px]:px-0 px-4 bg-[#1E1E1E] justify-center rounded-[10px]">
             <button
               onClick={() => setIsFilterOpen(true)}
-              className="bg-[#1E1E1E] text-white py-2.5 pl-3.5 pr-9.5 lg:pl-5 lg:pr-10 rounded-[10px] flex items-center gap-2"
+              className=" text-white  flex items-center gap-2"
             >
               <img
-                className="w-5 h-5 lg:w-7 lg:h-7"
+                className="w-4.5 h-4.5 sm:w-5 sm:h-5 lg:w-5.5 lg:h-5.5"
                 src={SortIcon}
                 alt="Filter"
               />
-              <span className="font-Urbanist font-medium text-[15px] lg:text-[18px]">
+              <span className="font-Urbanist font-medium text-[14px] sm:text-[15px] lg:text-[16px]">
                 Filter
               </span>
             </button>

@@ -252,17 +252,17 @@ const MyNetwork2 = () => {
       />
 
       <div className="w-full">
-        <div className="flex flex-wrap justify-between gap-2 sm:gap-4 mt-11 mb-6 bg-gray-200 rounded-[10px] w-full">
+        <div className="flex justify-center items-center gap-2 sm:gap-4 2xl:gap-10 2xl:bg-transparent mt-11 mb-6 sm:bg-gray-200 rounded-[10px] w-full">
           {TabNames.map((val, index) => (
             <button
               key={index}
               onClick={() => setActiveTab(val.TabLink)}
-              className={`flex-1 min-w-[100px] text-[15px] sm:text-[18px] font-Urbanist py-2.5 md:py-2 px-2.5 md:px-4 rounded-[7px] font-semibold text-center transition duration-200 items-center cursor-pointer relative ${activeTab === val.TabLink
-                ? "bg-PurpleColor text-white"
-                : "bg-gray-200 text-gray-700"
+              className={`flex-1  max-w-[140px] sm:max-w-full max-[380px]:text-[13.5px] text-[15px] leading-[17px] sm:text-[17px] md:text-[17.5px] xl:text-[19px] 2xl:text-[22px] font-Urbanist py-2.5 sm:py-4 md:py-4.5 px-0 md:px-4 sm:rounded-[7px] 2xl:py-5.5 font-semibold text-center transition duration-200 items-center cursor-pointer relative ${activeTab === val.TabLink
+                ? "sm:bg-PurpleColor border-b-[2px] sm:border-none text-PurpleColor border-PurpleColor sm:text-white"
+                : "sm:bg-gray-200 sm:text-gray-700"
                 }`}
             >
-              <span>{val.name}</span>
+              <span className="w-max">{val.name}</span>
               {val.TabLink === "pending" && PendinNetwork.length > 0 && (
                 <span className="text-[11px] absolute bg-red-600 ml-[4px] px-[6px] pt-[1px] text-white rounded-full font-bold">
                   {PendinNetwork.length}

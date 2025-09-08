@@ -117,7 +117,7 @@ const SuggestedState = ({ onSelect, register, errors }) => {
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
         placeholder="Search Preferred Investment Location"
-        className="w-full p-2 rounded bg-[#F3EEFF] text-sm py-3.5 font-Urbanist font-[600] outline-none focus:outline-none"
+        className="w-full text-[13px] p-2 rounded bg-[#F3EEFF] text-sm py-3.5 font-Urbanist font-[600] outline-none focus:outline-none"
       />
       {suggestions.length > 0 && (
         <ul className="absolute z-50 w-[50%] bg-white mt-1 rounded shadow max-h-40 overflow-auto">
@@ -125,7 +125,7 @@ const SuggestedState = ({ onSelect, register, errors }) => {
             <li
               key={state.code}
               onMouseDown={() => handleSelect(state)}
-              className="px-4 py-2 border-b border-[#d6d6d6] hover:bg-gray-100 cursor-pointer font-Urbanist font-[600]"
+              className="px-4 py-2 text-[13px] border-b border-[#d6d6d6] hover:bg-gray-100 cursor-pointer font-Urbanist font-[600]"
             >
               {state.name}
             </li>

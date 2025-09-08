@@ -13,8 +13,8 @@ export default function CapRate({
   const max = 30;
 
   return (
-    <div className="w-full max-w-md mx-auto text-white font-Urbanist">
-      <div className="flex items-center justify-center gap-2 mb-6">
+    <div className="w-full lg:max-w-md  mx-auto text-white font-Urbanist">
+      <div className="flex items-center justify-between sm:justify-start lg:justify-center gap-2 mb-6">
         {/* Min Input */}
         <div className="flex gap-2 items-center">
           <label className="text-[#616362] font-Inter text-[15px] font-[700]">
@@ -65,7 +65,7 @@ export default function CapRate({
                 const minPercent = ((minVal - min) / (max - min)) * 100;
                 const maxPercent = ((maxVal - min) / (max - min)) * minVal;
                 return (
-                  <div className="relative w-full">
+                  <div className="relative hidden sm:flex w-full">
                     <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-400 rounded -translate-y-1/2" />
                     <div
                       className="absolute top-1/2 h-1 bg-[#0075ff] rounded -translate-y-1/2"
