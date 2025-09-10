@@ -31,14 +31,15 @@ import ChangePassword from "../../Screens/ProtectedScreen/ChangePassword.jsx";
 import TransparentNavbar from "../../Components/Navbar/TransparentNavbar.jsx";
 import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
 import Cookie from "../../Components/Cookie/Cookie.jsx";
+import Accessibility from "../../Screens/Accessibility/Accessibility.jsx";
 
 
 const Layout = ({ children }) => {
   const location = useLocation();
 
-  const showNavbar = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property"].includes(location.pathname);
-  const showMiniFooter = ["/", "/about-us", "/contact-us", "/properties" , "/create-property"].includes(location.pathname);
-  const showFooter = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property"].includes(location.pathname);
+  const showNavbar = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property" , "/accessibility"].includes(location.pathname);
+  const showMiniFooter = ["/", "/about-us", "/contact-us", "/properties" , "/create-property" , "/accessibility"].includes(location.pathname);
+  const showFooter = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property" , "/accessibility"].includes(location.pathname);
 
   return (
     <>
@@ -90,6 +91,7 @@ const Routing = () => {
             <Route path={"/register"} element={<Register />} />
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/privacy-policy" element={<Privacy />} />
+            <Route path="/accessibility" element={<Accessibility />} />
             <Route path="/terms-of-use" element={<Terms />} />
             <Route
               path={"/admin/*"}

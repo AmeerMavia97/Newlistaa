@@ -149,7 +149,7 @@ const Inquiry = () => {
       {/* Left: Conversation List */}
       <div className="w-[100%] mx-3 sm:w-[33%] xl:w-[25%] bg-white flex flex-col rounded-[10px] py-2 ">
         <div className="flex items-center px-6 sm:px-5 justify-between">
-          <h1 className="text-[30px] xl:text-3xl font-bold  pt-9 pb-7 text-gray-800">
+          <h1 className="text-[27px] xl:text-3xl font-bold  pt-9 pb-7 text-gray-800">
             Inquiries
           </h1>
           <button onClick={fetchConversations}>
@@ -224,7 +224,7 @@ const Inquiry = () => {
             {/* Chat Header */}
             <div className="flex items-center sm:gap-4 px-3 py-4 sm:p-5 border-b border-[#B9B9B9] ">
 
-              <div onClick={()=>(setSelectedChatIndex(null))}>
+              <div className="lg:hidden" onClick={()=>(setSelectedChatIndex(null))}>
                 <ChevronLeft />
               </div>
               <img

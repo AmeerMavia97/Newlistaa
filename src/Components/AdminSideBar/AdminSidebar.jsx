@@ -49,7 +49,7 @@ const AdminSidebar = ({ screen }) => {
 
   return (
     <>
-      <div className="bg-[#F9F7FF] flex flex-col min-[890px]:flex-row gap-10 pt-6 min-[890px]:pt-6.5 justify-end ">
+      <div className="bg-[#F9F7FF]  flex flex-col min-[890px]:flex-row gap-10 pt-6 min-[890px]:pt-6.5 justify-end ">
         {/* MOBILE SCREEN BUTTON */}
         <button
           type="button"
@@ -487,7 +487,7 @@ const AdminSidebar = ({ screen }) => {
         </aside>
 
         {/* ADMIN SCREEN  */}
-        <div className="px-4 flex flex-col gap-2 min-[890px]:!w-[70%] xl:!w-[75%] h-[100%] pb-5">
+        <div className="px-4 flex flex-col gap-2 min-[890px]:!w-[70%] xl:!w-[75%] h-[100%] min-h-screen pb-5">
           <div>
             <AdminNavbar></AdminNavbar>
           </div>
