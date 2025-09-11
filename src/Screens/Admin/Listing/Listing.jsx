@@ -77,23 +77,23 @@ const Listing = () => {
       {/* HEADING SECTION  */}
       <section className="py-6">
         {/* PAGE TITTLE  */}
-        <div className="flex flex-co flex-wrap max-[350px]:gap-3 gap-5 sm:flex-row justify-between items-center">
-          <h1 className="font-Urbanist text-[#222222] text-[24px] sm:text-[30px] font-[700]">
+        <div className="flex flex-co flex-wrap max-[350px]:gap-3 gap-5 sm:px-2 sm:flex-row justify-between items-center">
+          <h1 className="font-Urbanist text-[#222222] text-[24px] sm:text-[30px] xl:text-[32px] font-[700]">
             My Listings
           </h1>
           <Link to={"/create-property"}>
-            <button className="!text-[11px] sm:!text-[13.5px] px-3 sm:px-5 md:text-[15px] font-Inter hover-btn hover-btn-black  bg-[#1E1E1E] text-white py-2.5 sm:py-3 max-[350px]:text-[12.5px] rounded-[7px]">
+            <button className="!text-[11px] sm:!text-[13.5px] px-3 sm:px-5 md:!text-[15px] font-Inter hover-btn hover-btn-black  bg-[#1E1E1E] text-white py-2.5 sm:py-3 max-[350px]:text-[12.5px] rounded-[7px]">
               <span>Add New Property</span>
             </button>
           </Link>
         </div>
       </section>
 
-      <section className=" bg-white rounded-t-[20px] w-[100%] px-4 sm:px-0 pt-5">
+      <section className=" sm:bg-white rounded-t-[20px] w-[100%] pt-3 sm:pt-5">
         {/* UPPER TAB  */}
-        <div className="flex xl:flex-col overflow-hidden gap-4 sm:gap-5 sm:px-7 bg-white">
+        <div className="flex xl:flex- 2xl:flex-row overflow-hidden gap-3 sm:gap-5 sm:px-4 sm:bg-white">
           {/* SEARCH  */}
-          <div className="relative w-[100%]">
+          <div className="relative w-[100%] xl:w-[33%] 2xl:w-[30%]">
             <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">
               <svg
                 className="w-4 h-4 text-[#444444] "
@@ -114,14 +114,14 @@ const Listing = () => {
             <input
               type="search"
               id="default-search"
-              className="w-[100%] text-[#444444] placeholder:text-[#444444] font-Urbanist font-semibold py-3.5 pl-11 rounded-[10px] text-[13px] sm:text-[15px] bg-[#F3EEFF] outline-none"
+              className="w-[100%] text-[#444444] placeholder:text-[#444444] font-Urbanist font-semibold py-[13.5px] xl:py-4 pl-11 rounded-[10px] text-[13px] sm:text-[15px] bg-[#F3EEFF] outline-none"
               placeholder="Search Property Name "
               {...register("search")}
             />
           </div>
           {/* FILTER  */}
           {/* Desktop filter bar (hidden on mobile) */}
-          <div className="hidden xl:flex gap-2 px-0 bg-white  w-[100%] border-[1px] border-solid border-[#1E1E1E] rounded-[10px]">
+          <div className="hidden xl:flex gap-1 px-0 bg-white  w-[100%] border-[1px] border-solid border-[#1E1E1E] rounded-[10px]">
             {/* FILTER BUTTON  */}
             <button className=" font-Inter bg-[#1E1E1E] text-white py-2.5 rounded-l-[7px] flex items-center px-4 gap-1 w-[15%]">
               <img className="w-5 h-5" src={FilterIcon} alt="" />{" "}
@@ -179,17 +179,17 @@ const Listing = () => {
             </div>
           </div>
           {/* Mobile filter button (visible only on small screens) */}
-          <div className="flex xl:hidden  px-0 w-[20%]  md:w-[20%] sm:py- bg-white">
+          <div className="flex xl:hidden  max-[400px]:w-[40%] w-[30%] sm:w-[22%]   md:w-[17%] py-[9px] sm:py-3 md:py-[12.8px] max-[350px]:px-4 px-4 bg-[#1E1E1E] justify-center rounded-[10px]">
             <button
               onClick={() => setIsFilterOpen(true)}
-              className="bg-[#1E1E1E] text-white py-2.5 pl-3.5 pr-9.5 xl:pl-5 xl:pr-10 rounded-[10px] flex items-center gap-2"
+              className="bg-[#1E1E1E] text-white rounded-[10px] flex items-center gap-1"
             >
               <img
-                className="w-5 h-5 lg:w-7 lg:h-7"
+                className="w-4.5 h-4.5 sm:w-5 sm:h-5 lg:w-5.5 lg:h-5.5"
                 src={FilterIcon}
                 alt="Filter"
               />
-              <span className="font-Urbanist font-medium text-[15px] lg:text-[18px]">
+              <span className="font-Urbanist font-medium text-[15.5px] sm:text-[16px] lg:text-[16px]">
                 Filter
               </span>
             </button>
@@ -271,84 +271,6 @@ const Listing = () => {
         status={status}
         propertyType={propertyType}
       ></ListingTable>
-
-      {/* HEADING SECTION  */}
-      {/* <section className="pt-6 pb-4 sm:py-6 px-2 sm:px-0 ">
-        PAGE TITTLE 
-        <div className="flex justify-between">
-          <h1 className="font-Urbanist text-[#222222] text-[26px]  sm:text-[30px] font-[700]">
-            Performance Overview
-          </h1>
-        </div>
-      </section> */}
-
-      {/* CARDS  */}
-      {/* <section className="flex  flex-wrap gap-3  ">
-        CARD 1
-        <div className="flex flex-col justify-between bg-white px-5 gap-5 sm:py-7 py-10 max-[350px]:w-[100%] w-[90%] sm:w-[47%] md:w-[35%] 2xl:w-[24%] rounded-[14px]">
-          <div className="flex justify-between ">
-            <span>
-              <h4 className="sm:text-[14px] text-[15px]  font-Urbanist font-[500] text-[#666666]">
-                Days on the Market
-              </h4>
-              <h1 className="font-Urbanist text-[#222222] text-[25px] sm:text-[25px] font-[700]">
-                42 Days
-              </h1>
-            </span>
-            <span>
-              <img className="max-[350px]:w-14" src={ListingImage1_1} alt="" />
-            </span>
-          </div>
-        </div>
-        CARD 2
-        <div className="flex flex-col justify-between bg-white px-5 gap-5 sm:py-7 py-10 w-[90%] max-[350px]:w-[100%] sm:w-[47%] md:w-[35%] 2xl:w-[24%] rounded-[14px]">
-          <div className="flex justify-between">
-            <span>
-              <h4 className="sm:text-[14px] text-[15px]  font-Urbanist font-[500] text-[#666666]">
-                Total Views
-              </h4>
-              <h1 className="font-Urbanist text-[#222222] text-[25px] sm:text-[25px] font-[700]">
-                2,430 Views
-              </h1>
-            </span>
-            <span>
-              <img className="max-[350px]:w-14" src={ListingImage1_2} alt="" />
-            </span>
-          </div>
-        </div>
-        CARD 3
-        <div className="flex flex-col justify-between bg-white px-5 gap-5 sm:py-7 py-10 w-[90%] max-[350px]:w-[100%] sm:w-[47%] md:w-[35%] 2xl:w-[24%] rounded-[14px]">
-          <div className="flex justify-between">
-            <span>
-              <h4 className="sm:text-[14px] text-[15px] font-Urbanist font-[500] text-[#666666]">
-                Number of Offers
-              </h4>
-              <h1 className="font-Urbanist text-[#222222] text-[25px] sm:text-[25px] font-[700]">
-                3 Offers
-              </h1>
-            </span>
-            <span>
-              <img className="max-[350px]:w-14" src={ListingImage1_3} alt="" />
-            </span>
-          </div>
-        </div>
-        CARD 4
-        <div className="flex flex-col justify-between bg-white px-5 gap-5 sm:py-7 py-10 w-[90%] max-[350px]:w-[100%] sm:w-[47%] md:w-[35%] 2xl:w-[24%] rounded-[14px]">
-          <div className="flex justify-between">
-            <span>
-              <h4 className="sm:text-[14px] text-[15px] font-Urbanist font-[500] text-[#666666]">
-                Number of Rejections
-              </h4>
-              <h1 className="font-Urbanist text-[#222222] text-[25px] sm:text-[25px] font-[700]">
-                1 Rejection
-              </h1>
-            </span>
-            <span>
-              <img className="max-[350px]:w-13" src={ListingImage1_4} alt="" />
-            </span>
-          </div>
-        </div>
-      </section> */}
     </>
   );
 };

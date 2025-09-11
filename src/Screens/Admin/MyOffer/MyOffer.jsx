@@ -49,11 +49,9 @@ export default function MyOffersTable() {
         setSentOffers(sent);
         setReceivedOffers(received);
 
-        // Filter pending received offers count
         const pendingCount = received.filter(
           (offer) => offer.status === "pending"
         ).length;
-        // Dispatch to redux
         dispatch(setPendingOffersCount(pendingCount));
       } catch (error) {
         console.error("Fetch error:", error);
@@ -166,7 +164,7 @@ export default function MyOffersTable() {
                   setCurrentPage(1);
                 }}
                 className={clsx(
-                  "px-4 py-2.5 sm:px-5 sm:py-2 rounded-full transition font-semibold text-[13.5px] sm:text-[14.5px] md:text-[15.5px] 2xl:text-[18px] font-Urbanist cursor-pointer",
+                  "px-4 py-2.5 sm:px-5 sm:py-2 rounded-full flex items-center transition font-semibold text-[13.5px] sm:text-[14.5px] md:text-[15.5px] 2xl:text-[18px] font-Urbanist cursor-pointer",
                   tab === key
                     ? "bg-purple-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -178,7 +176,7 @@ export default function MyOffersTable() {
                   <div className="flex justify-center items-center gap-1">
                     Received Offers
                     {pendingOffersCount > 0 && (
-                      <span className="bg-red-500 text-white px-[2px] sm:px-[3px] py-[1.5px] sm:py-[2px] text-[11px] sm:text-[12px] rounded-full font-bold  font-Urbanist min-w-[21px] h-[21px]">
+                      <span className="bg-red-500 text-white px-[x] sm:px-[3px] py-[1px] sm:py-[2px] text-[11px] sm:text-[12px] rounded-full font-bold  font-Urbanist min-w-[18.5px] h-[18.5px] sm:min-w-[21px] sm:h-[21px]">
                         {pendingOffersCount}
                       </span>
                     )}
@@ -191,7 +189,7 @@ export default function MyOffersTable() {
       </section>
 
 
-      <div className="overflow-x-auto  rounded-lg relative   mt-3">
+      <div className="overflow-x-auto  rounded-lg relative  mt-3">
         {/* Desktop */}
         <div className="hidden xl:block">
           <div className=" pb-6 font-urbanist">
@@ -364,11 +362,6 @@ export default function MyOffersTable() {
           />
         </div>
       </div>
-
-
-
-
-
 
       {!loading && totalPages > 1 && (
         <section className="flex justify-between items-center px-2 pb-4 mt-3 xl:mt-0">

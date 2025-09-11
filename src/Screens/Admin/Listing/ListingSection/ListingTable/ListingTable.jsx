@@ -8,6 +8,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../../../../Components/ConfirmationModal/ConfirmationModal";
 import { useConfirmation } from "../../../AccountSetting/Fields/Confirmation";
 import TruncatedText from "../../../../../Components/TruncatedText/TruncatedText";
+import ListingMobileTable from "../../../../../Components/Admin/Listing/ListingMobileTable";
 
 const ListingTable = ({ status, propertyType, priceRange, search }) => {
 
@@ -154,124 +155,142 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
 
   return (
     <>
-      <div className="pt-8 sm:px-4 md:px-7 bg-white  rounded-b-[13px] xl:w-full overflow-x-auto h-[88vh]">
+      <div className=" pt-8 sm:px-4 md:px-7 xl:bg-white  rounded-b-[13px] xl:w-full overflow-x-auto h-[88vh]">
         {loading ? (
           <div className="flex justify-center items-center !h-[75vh]">
             <Spinner style={"w-14 h-20 text-PurpleColor z-50"} />
           </div>
         ) : (
-          <table className="min-w-[880px] w-full text-sm text-left rtl:text-right text-gray-500 bg-[#fcfcfc]">
-            <thead className="text-[13.5px] tracking-[1.5px] sm:tracking-normal sm:text-[14px] md:text-[15px] text-white font-Urbanist uppercase bg-[#1E1E1E]">
-              <tr>
-                <th className="px-6 py-4.5 rounded-tl-2xl">Property Name</th>
-                <th className="px-6 py-4.5">Type</th>
-                <th className="px-6 py-4.5">Price</th>
-                <th className="px-6 py-4.5">Status</th>
-                <th className="px-6 py-4.5">Date Listed</th>
-                <th
-                  onClick={() =>
-                    setSortByViews((prev) => (prev === "desc" ? "asc" : "desc"))
-                  }
-                  className="px-6 py-4.5 cursor-pointer select-none"
-                >
-                  Views{" "}
-                </th>
-                <th className="px-6 py-4.5 rounded-tr-3xl">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentListings.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={7}
-                    className="text-center bg-white py-10 text-gray-500 font-Urbanist text-[16px]"
-                  >
-                    No listings found.
-                  </td>
-                </tr>
-              ) : (
-                currentListings.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="bg-white border-b border-gray-200 hover:bg-gray-50 font-Urbanist"
-                  >
-                    <th
-                      scope="row"
-                      className="w-[26%] text-[14px] px-4 py-6 font-medium text-gray-900 whitespace-nowrap sm:text-[14px] md:text-[16px] "
-                    >
-                      <NavLink
-                        className={"hover:border-b-[1px] pb-2"}
-                        to={`/properties/${item.id}`}
-                      >
-                        <TruncatedText text={item.property_name} maxLength={35} />
-                      </NavLink>
-                    </th>
-                    <td className="w-[18%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
-                    <TruncatedText text={item.property_type} maxLength={12} />
-                    </td>
-                    <td className="w-[15%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
-                      {item.listing_type === "For Sale" && <TruncatedText text={item.sale_price} maxLength={9} />}
-                      {item.listing_type === "For Lease" && <TruncatedText text={item.lease_rate} maxLength={9} />}
-                      {item.listing_type === "Both (For Sale & For Lease)" && <TruncatedText text={item.sale_price + "/sale" + item.lease_rate + "/lease"} maxLength={9} />}
-                    </td>
-                    <td className="px-3.5 py-6 text-[#222222] font-[550] text-[16px] flex gap-1 items-center mt-3 ml-2 sm:ml-0 sm:mt-2.5">
-                      <div
-                        className={`h-2 w-2 rounded-full ${item.listing_status === "Available"
-                          ? "bg-[#02E327]"
-                          : item.listing_status === "Loss"
-                            ? "bg-[#E31D1C]"
-                            : "bg-[#4379EE]"
-                          }`}
-                      ></div>
-                      {item.listing_status}
-                    </td>
-                    <td className="w-[35%] sm:w-[22%] text-center px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
-                      {new Date(item.created_at).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </td>
-                    <td className="text-center font-Inter font-[550] text-[#222222] text-[16px]">
-                      {item.views_count}
-                    </td>
-                    <td className="px-4 py-6 text-[#222222] font-[550] text-[16px] flex gap-1.5 justify-center">
-                      {!Islocked ? (
-                        <Link title="Property Analytics" to={`/admin/analytics/${item.id}`}>
-                          <ChartNoAxesCombined />
-                        </Link>
-                      ) : (
-                        <span className="relative">
-                          <span className="">
-                            <Lock
-                              strokeWidth={3}
-                              className="absolute text-red-600 size-2 -right-1 z-50 sm:size-2 -top-1 sm:mt-0 "
-                            />
-                          </span>
-                          <ChartNoAxesCombined className="cursor-not-allowed" />
-                        </span>
-                      )}
 
-                      <button
-                        onClick={() => handleConfirmation(item.id)}
-                        className="cursor-pointer"
-                        title="Edit Property"
-                      >
-                        <img
-                          className="w-5.5 h-5.5"
-                          src={EditIcon}
-                          alt="Edit"
-                        />
-                      </button>
-                      <button title="Delete Property" onClick={() => handleDeleteConfirmation(item.id)}>
-                        <Trash2 className="size-5 cursor-pointer" />
-                      </button>
+          <section>
+            <table className="hidden xl:block min-w-[880px] w-full text-sm text-left rtl:text-right text-gray-500 bg-[#fcfcfc]">
+              <thead className="text-[13.5px] tracking-[1.5px] sm:tracking-normal sm:text-[14px] md:text-[15px] text-white font-Urbanist uppercase bg-[#1E1E1E]">
+                <tr>
+                  <th className="px-6 py-4.5 rounded-tl-2xl">Property Name</th>
+                  <th className="px-6 py-4.5">Type</th>
+                  <th className="px-6 py-4.5">Price</th>
+                  <th className="px-6 py-4.5">Status</th>
+                  <th className="px-6 py-4.5">Date Listed</th>
+                  <th
+                    onClick={() =>
+                      setSortByViews((prev) => (prev === "desc" ? "asc" : "desc"))
+                    }
+                    className="px-6 py-4.5 cursor-pointer select-none"
+                  >
+                    Views{" "}
+                  </th>
+                  <th className="px-6 py-4.5 rounded-tr-3xl">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentListings.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={7}
+                      className="text-center bg-white py-10 text-gray-500 font-Urbanist text-[16px]"
+                    >
+                      No listings found.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  currentListings.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="bg-white border-b border-gray-200 hover:bg-gray-50 font-Urbanist"
+                    >
+                      <th
+                        scope="row"
+                        className="w-[26%] text-[14px] px-4 py-6 font-medium text-gray-900 whitespace-nowrap sm:text-[14px] md:text-[16px] "
+                      >
+                        <NavLink
+                          className={"hover:border-b-[1px] pb-2"}
+                          to={`/properties/${item.id}`}
+                        >
+                          <TruncatedText text={item.property_name} maxLength={35} />
+                        </NavLink>
+                      </th>
+                      <td className="w-[18%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
+                        <TruncatedText text={item.property_type} maxLength={12} />
+                      </td>
+                      <td className="w-[15%] text-start px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
+                        {item.listing_type === "For Sale" && <TruncatedText text={item.sale_price} maxLength={9} />}
+                        {item.listing_type === "For Lease" && <TruncatedText text={item.lease_rate} maxLength={9} />}
+                        {item.listing_type === "Both (For Sale & For Lease)" && <TruncatedText text={item.sale_price + "/sale" + item.lease_rate + "/lease"} maxLength={9} />}
+                      </td>
+                      <td className="px-3.5 py-6 text-[#222222] font-[550] text-[16px] flex gap-1 items-center mt-3 ml-2 sm:ml-0 sm:mt-2.5">
+                        <div
+                          className={`h-2 w-2 rounded-full ${item.listing_status === "Available"
+                            ? "bg-[#02E327]"
+                            : item.listing_status === "Loss"
+                              ? "bg-[#E31D1C]"
+                              : "bg-[#4379EE]"
+                            }`}
+                        ></div>
+                        {item.listing_status}
+                      </td>
+                      <td className="w-[35%] sm:w-[22%] text-center px-3.5 py-6 text-[#222222] font-[550] text-[16px]">
+                        {new Date(item.created_at).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </td>
+                      <td className="text-center font-Inter font-[550] text-[#222222] text-[16px]">
+                        {item.views_count}
+                      </td>
+                      <td className="px-4 py-6 text-[#222222] font-[550] text-[16px] flex gap-1.5 justify-center">
+                        {!Islocked ? (
+                          <Link title="Property Analytics" to={`/admin/analytics/${item.id}`}>
+                            <ChartNoAxesCombined />
+                          </Link>
+                        ) : (
+                          <span className="relative">
+                            <span className="">
+                              <Lock
+                                strokeWidth={3}
+                                className="absolute text-red-600 size-2 -right-1 z-50 sm:size-2 -top-1 sm:mt-0 "
+                              />
+                            </span>
+                            <ChartNoAxesCombined className="cursor-not-allowed" />
+                          </span>
+                        )}
+
+                        <button
+                          onClick={() => handleConfirmation(item.id)}
+                          className="cursor-pointer"
+                          title="Edit Property"
+                        >
+                          <img
+                            className="w-5.5 h-5.5"
+                            src={EditIcon}
+                            alt="Edit"
+                          />
+                        </button>
+                        <button title="Delete Property" onClick={() => handleDeleteConfirmation(item.id)}>
+                          <Trash2 className="size-5 cursor-pointer" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+
+            <div className="xl:hidden">
+              <ListingMobileTable
+                loading={loading}
+                items={currentListings}          // same page slice as desktop
+                navigate={navigate}
+                setSortByViews={setSortByViews}
+                Islocked={Islocked}
+                onEdit={handleConfirmation}      // opens your confirmation modal then navigates
+                onDelete={handleDeleteConfirmation}
+              />
+            </div>
+          </section>
+
+
+
         )}
       </div>
 
