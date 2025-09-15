@@ -37,9 +37,9 @@ import Accessibility from "../../Screens/Accessibility/Accessibility.jsx";
 const Layout = ({ children }) => {
   const location = useLocation();
 
-  const showNavbar = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property" , "/accessibility"].includes(location.pathname);
-  const showMiniFooter = ["/", "/about-us", "/contact-us", "/properties" , "/create-property" , "/accessibility"].includes(location.pathname);
-  const showFooter = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property" , "/accessibility"].includes(location.pathname);
+  const showNavbar = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property" , "/accessibility" , "/privacy-policy"].includes(location.pathname);
+  const showMiniFooter = ["/", "/about-us", "/contact-us", "/properties" , "/create-property" , "/accessibility" , "/privacy-policy"].includes(location.pathname);
+  const showFooter = ["/", "/about-us", "/pricing", "/contact-us", "/properties" , "/create-property" , "/accessibility" , "/privacy-policy"].includes(location.pathname);
 
   return (
     <>

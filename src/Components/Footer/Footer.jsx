@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 // IMAGES
 import WhiteLogo from "../../assets/WhiteLogo.png";
@@ -61,6 +60,9 @@ const Footer = () => {
                   </li>
                   <li className=" hover:text-[#c4c4c4]">
                     <Link to={"/privacy-policy"}>Privacy Policy</Link>
+                  </li>
+                  <li className=" hover:text-[#c4c4c4]">
+                    <Link to={"/accessibility"}>Accessibility</Link>
                   </li>
                 </ul>
               </div>
