@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ScrollSpyNav from "../ScrollSpyNav/ScrollSpyNav";
 import useScrollSpy from "../../CustomHook/useScrollSpy/useScrollSpy";
-
 
 export default function PolicyLayout({
   title = "Page",
@@ -21,6 +19,18 @@ export default function PolicyLayout({
   };
 
   const activeId = useScrollSpy(sections.map((s) => s.id));
+
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // remove any existing hash cleanly
+    if (history.replaceState) {
+      const clean = window.location.pathname + window.location.search;
+      history.replaceState(null, "", clean);
+    }
+  };
 
   return (
     <>
@@ -41,9 +51,8 @@ export default function PolicyLayout({
         </div>
       </section>
 
-      {/* Soft gradient spacer (optional) */}
+      {/* Spacer */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#F7FAFF] to-white">
-        <div className="pointer-events-none hidden absolute inset-0 opacity-30 [background:radial-gradient(600px_300px_at_20%_10%,#C7E3FF_0%,transparent_60%),radial-gradient(500px_300px_at_80%_0%,#E8D9FF_0%,transparent_60%)]" />
         <div className="relative px-6 sm:px-10 md:px-12 lg:px-16 pt-10 pb-10 sm:pt-20 md:pt-20"></div>
       </section>
 
@@ -56,7 +65,12 @@ export default function PolicyLayout({
 
           <div className="grid grid-cols-12 xl:grid-cols-12 2xl:grid-cols-11 gap-6 lg:gap-10">
             {/* Sidebar (TOC) */}
-            <ScrollSpyNav sections={sections} activeId={activeId} title={sidebarTitle} />
+            <ScrollSpyNav
+              sections={sections}
+              activeId={activeId}
+              title={sidebarTitle}
+              onItemClick={scrollToId}   // <-- pass handler
+            />
 
             {/* Main card */}
             <div className="col-span-12 2xl:col-span-8 lg:col-span-8 xl:col-span-9">
@@ -74,14 +88,15 @@ export default function PolicyLayout({
                 </div>
               </div>
 
-              {/* Back to top */}
+              {/* Back to top (button, not anchor) */}
               <div className="mt-6 flex justify-end sm:hidden lg:block">
-                <a
-                  href={`#${backToTopId}`}
+                <button
+                  type="button"
+                  onClick={() => scrollToId(backToTopId)}
                   className="inline-flex items-center gap-2 rounded-full hover-btn hover-btn-black border border-gray-200 px-4 py-2 text-sm 2xl:text-[19px] font-medium text-white shadow-sm hover:bg-gray-50"
                 >
-                  Back to Top
-                </a>
+                  <span>Back to Top</span>
+                </button>
               </div>
             </div>
           </div>

@@ -87,7 +87,7 @@ const Privacy = () => {
           </h1>
           <div className="grid grid-cols-12 xl:grid-cols-12 2xl:grid-cols-11 gap-6 lg:gap-10">
             {/* Sidebar / TOC */}
-            <aside className="col-span-12 sm:hidden lg:block lg:col-span-4 lg:w-[90%] xl:col-span-3 ">
+            <aside className="col-span-12 sm:hidden lg:block lg:col-span-4 lg:w-[90%] xl:w-full xl:col-span-3 ">
               <div className="font-Urbanist sticky top-16 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur px-4 py-6 sm:px-5 sm:py-8 shadow-sm">
                 <h3 className=" mb-3 text-[17px] sm:text-[16px] 2xl:text-[18px] font-bold uppercase tracking-wide text-black">
                   On this page

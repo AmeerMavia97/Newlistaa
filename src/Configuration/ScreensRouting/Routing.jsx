@@ -9,7 +9,6 @@ import Terms from "../../Screens/Terms/Terms.jsx";
 import AboutUs from "../../Screens/AboutUs/AboutUs";
 import Pricing from "../../Screens/Pricing/Pricing";
 import Register from "../../Screens/Register/register";
-import Privacy from "../../Screens/Privacy/Privacy.jsx";
 import Navbar from "../../Components/Navbar/Navbar.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
 import FreeYear from "../../Screens/Pricing/FreeYear.jsx";
@@ -32,6 +31,7 @@ import TransparentNavbar from "../../Components/Navbar/TransparentNavbar.jsx";
 import useUnreadMessageListener from "../../CustomHook/useUnreadMessageListener/useUnreadMessageListener.js";
 import Cookie from "../../Components/Cookie/Cookie.jsx";
 import Accessibility from "../../Screens/Accessibility/Accessibility.jsx";
+import PrivacyPolicy from "../../Screens/Privacy/PrivacyPolicy.jsx";
 
 
 const Layout = ({ children }) => {
@@ -90,7 +90,7 @@ const Routing = () => {
             <Route path={"/set-new-password"} element={<SetNewPassword />} />
             <Route path={"/register"} element={<Register />} />
             <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/privacy-policy" element={<Privacy />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/accessibility" element={<Accessibility />} />
             <Route path="/terms-of-use" element={<Terms />} />
             <Route

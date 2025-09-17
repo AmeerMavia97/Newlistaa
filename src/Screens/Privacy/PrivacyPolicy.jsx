@@ -195,28 +195,136 @@ const sections = [
         content: (
             <>
                 <p className="mt-2 font-Inter text-[15.5px] 2xl:text-[16.5px] font-semibold">If you are a California resident, you have the right to:</p>
-                                    <ul className="mt-1 list-disc pl-6 space-y-1 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
-                                      <li>Request access to the personal information we collect</li>
-                                      <li>Request correction or deletion of your data</li>
-                                      <li>
-                                        Opt-out of the sale or sharing of your personal information (note: we do not
-                                        sell personal data)
-                                      </li>
-                                      <li>Request information about how your data is shared with third parties</li>
-                                    </ul>
-                                    <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
-                                      You may exercise these rights by contacting us at{" "}
-                                      <Link className="text-PurpleColor font-semibold underline" to="mailto:privacy@newlista.com">
-                                        privacy@newlista.com
-                                      </Link>
-                                      .
-                                    </p>
+                <ul className="mt-1 list-disc pl-6 space-y-1 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    <li>Request access to the personal information we collect</li>
+                    <li>Request correction or deletion of your data</li>
+                    <li>
+                        Opt-out of the sale or sharing of your personal information (note: we do not
+                        sell personal data)
+                    </li>
+                    <li>Request information about how your data is shared with third parties</li>
+                </ul>
+                <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    You may exercise these rights by contacting us at{" "}
+                    <Link className="text-PurpleColor font-semibold underline" to="mailto:privacy@newlista.com">
+                        privacy@newlista.com
+                    </Link>
+                    .
+                </p>
+            </>
+        ),
+    },
+    {
+        id: "children",
+        label: "10. Children’s Privacy (COPPA)",
+        content: (
+            <>
+                <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    Newlista is not intended for users under the age of 18. We do not knowingly
+                    collect personal data from children under 13. If you believe we have collected
+                    such information, contact us immediately at{" "}
+                    <Link
+                        className="text-PurpleColor font-semibold underline ml-1"
+                        to="mailto:compliance@newlista.com"
+                    >
+                        compliance@newlista.com
+                    </Link>{" "}
+                    and we will delete it.
+                </p>
+            </>
+        ),
+    },
+    {
+        id: "security",
+        label: "11. Security of Your Information",
+        content: (
+            <>
+                <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    We implement appropriate administrative, technical, and physical safeguards to
+                    protect your data. However, no system is completely secure. Users are
+                    responsible for keeping login credentials confidential.
+                </p>
+            </>
+        ),
+    },
+    {
+        id: "accessibility",
+        label: "12. ADA & Accessibility",
+        content: (
+            <>
+                <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    Newlista is committed to providing a platform that is accessible to all users.
+                    If you experience any accessibility barriers while using our platform, please
+                    contact us at{" "}
+                    <Link className="text-PurpleColor font-semibold underline ml-1" to="mailto:support@newlista.com">
+                        support@newlista.com
+                    </Link>
+                    .
+                </p>
+            </>
+        ),
+    },
+    {
+        id: "intl",
+        label: "13. International Use",
+        content: (
+            <>
+                <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    Newlista is intended for use by U.S. residents only. If you access the
+                    platform from outside the U.S., you do so at your own risk and are responsible
+                    for complying with local laws.
+                </p>
+            </>
+        ),
+    },
+    {
+        id: "changes",
+        label: "14. Changes to This Privacy Policy",
+        content: (
+            <>
+                <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    We may update this Privacy Policy from time to time. Any changes will be
+                    posted on this page, and your continued use of Newlista constitutes your
+                    acceptance of those changes.
+                </p>
+            </>
+        ),
+    },
+    {
+        id: "contact",
+        label: "15. Contact Us",
+        content: (
+            <>
+                <p className="mt-2 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px] 2xl:text-[16.5px]">
+                    If you have questions about this Privacy Policy or wish to make a request
+                    regarding your data, please contact:
+                </p>
+                <ul className="mt-2 list-none pl-0 space-y-1 font-Inter text-[12.5px] leading-[19px] sm:leading-[24px] sm:text-[14.5px]">
+                    <li>Newlista</li>
+                    <li>
+                        Email:{" "}
+                        <Link to="mailto:info@newlista.com" className="text-PurpleColor font-semibold underline">
+                            privacy@newlista.com
+                        </Link>
+                    </li>
+                    <li>
+                        Website:{" "}
+                        <Link
+                            to="/"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-PurpleColor font-semibold underline"
+                        >
+                            www.newlista.com
+                        </Link>
+                    </li>
+                </ul>
             </>
         ),
     },
 ];
 
-export default function Privacy() {
+export default function PrivacyPolicy() {
     return (
         <PolicyLayout
             title="Privacy Policy"
