@@ -331,6 +331,7 @@ export default function PrivacyPolicy() {
             lastUpdated="October 1, 2025"
             bannerImage={AddPropertyBanner}
             sections={sections}
+            desc={"We are committed to respecting your privacy and protecting your personal information"}
             sidebarTitle="On this page"
             backToTopId="intro"
         />

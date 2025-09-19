@@ -8,6 +8,7 @@ import axios from "axios";
 import Spinner from "../../Components/Spinner/Spinner";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import AuthScreenLayout from "../../Components/Authentication/AuthScreenLayout";
 
 const ForgetPassOtp = () => {
   const ApiKey = import.meta.env.VITE_API_KEY;
@@ -61,18 +62,18 @@ const ForgetPassOtp = () => {
         email: storedEmail,
       });
       navigate("/set-new-password")
-    //   if (response.data.profile_complete) {
-    //     navigate("/admin");
-    //     reset();
-    //   } else {
-    //     localStorage.setItem("token", response.data.token);
-    //     localStorage.setItem("User", JSON.stringify(response.data.user));
-    //     localStorage.setItem(
-    //       "ProfileComplete",
-    //       JSON.stringify(response.data.profile_complete)
-    //     );
-    //     navigate("/admin/account-setting");
-    //   }
+      //   if (response.data.profile_complete) {
+      //     navigate("/admin");
+      //     reset();
+      //   } else {
+      //     localStorage.setItem("token", response.data.token);
+      //     localStorage.setItem("User", JSON.stringify(response.data.user));
+      //     localStorage.setItem(
+      //       "ProfileComplete",
+      //       JSON.stringify(response.data.profile_complete)
+      //     );
+      //     navigate("/admin/account-setting");
+      //   }
       reset();
     } catch (error) {
       setLoading(false);
@@ -91,6 +92,78 @@ const ForgetPassOtp = () => {
 
   return (
     <>
+
+      <AuthScreenLayout
+        BannerImage={Image}
+        Heading={"Verify code"}
+        Description={"An authentication code has been sent to your email."}
+        BackLogin={true}
+      >
+
+
+        <form
+          onSubmit={handleSubmit(VerifyOtp)}
+          className="flex flex-col gap-4"
+        >
+          {/* Name  */}
+          <div>
+
+            <Controller
+              name="otp"
+              control={control}
+              rules={{
+                required: "OTP is required",
+                minLength: {
+                  value: 6,
+                  message: "OTP must be 6 digits",
+                },
+              }}
+              render={({ field }) => (
+                <OtpInput
+                  length={6}
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  error={errors.otp}
+
+                />
+              )}
+            />
+            {OtpSendMess && (
+              <p className="font-Poppins mb-2 font-[500] border-green-500 text-green-500  text-[13px]">
+                {OtpSendMess}
+              </p>
+            )}
+            {errors.otp && (
+              <p className="text-red-500 font-[500] text-[13.5px] pt-1  font-Urbanist tracking-wide">
+                {errors.otp.message}
+              </p>
+            )}
+
+            {ErrorMessage && (
+              <p className="font-Poppins mt-2 font-[500] border-red-500 text-red-600  text-[13px]">
+                {ErrorMessage}
+              </p>
+            )}
+            <p onClick={ResendCode} className="font-Urbanist text-Paracolor mt-3 font-[700] text-[12.5px] min-[410px]:text-[14px]">
+              Didn’t receive a code?{" "}
+              <Link className="text-[#FF8682]">Resend</Link>
+            </p>
+          </div>
+          {/* Sign Up Button */}
+          <div className="mt-1">
+            <button
+              type="submit"
+              disabled={Loading}
+              className={`bg-PurpleColor w-[100%] 2xl:w-[80%] h-11 cursor-pointer mt-3 text-white font-Urbanist rounded-[6px] font-[700]  ${Loading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+            >
+              {Loading ? "Verifying..." : "Verify"}
+            </button>
+          </div>
+        </form>
+
+
+      </AuthScreenLayout>
       <div className="min-h-screen md:flex ">
         {/* IMAGE SECTION  */}
         <div className="md:w-[40%] min-[900px]:!w-[48%] lg:!w-[43%] xl:!w-[42%] 2xl:!w-[48%]">
@@ -119,67 +192,6 @@ const ForgetPassOtp = () => {
             </p>
           </div>
 
-          <form
-            onSubmit={handleSubmit(VerifyOtp)}
-            className="flex flex-col gap-4"
-          >
-            {/* Name  */}
-            <div>
-              
-              <Controller
-                name="otp"
-                control={control}
-                rules={{
-                  required: "OTP is required",
-                  minLength: {
-                    value: 6,
-                    message: "OTP must be 6 digits",
-                  },
-                }}
-                render={({ field }) => (
-                  <OtpInput
-                    length={6}
-                    value={field.value || ""}
-                    onChange={field.onChange}
-                    error={errors.otp}
-                    
-                  />
-                )}
-              />
-              {OtpSendMess && (
-                <p className="font-Poppins mb-2 font-[500] border-green-500 text-green-500  text-[13px]">
-                  {OtpSendMess}
-                </p>
-              )}
-              {errors.otp && (
-                <p className="text-red-500 font-[500] text-[13.5px] pt-1  font-Urbanist tracking-wide">
-                  {errors.otp.message}
-                </p>
-              )}
-              
-              {ErrorMessage && (
-                <p className="font-Poppins mt-2 font-[500] border-red-500 text-red-600  text-[13px]">
-                  {ErrorMessage}
-                </p>
-              )}
-              <p onClick={ResendCode} className="font-Urbanist text-Paracolor mt-3 font-[700] text-[12.5px] min-[410px]:text-[14px]">
-                Didn’t receive a code?{" "}
-                <Link className="text-[#FF8682]">Resend</Link>
-              </p>
-            </div>
-            {/* Sign Up Button */}
-            <div className="mt-1">
-              <button
-                type="submit"
-                disabled={Loading}
-                className={`bg-PurpleColor w-[100%] 2xl:w-[80%] h-11 cursor-pointer mt-3 text-white font-Urbanist rounded-[6px] font-[700]  ${
-                  Loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                {Loading ? "Verifying..." : "Verify"}
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </>

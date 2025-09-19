@@ -11,6 +11,7 @@ import PasswordChangeSuccesFully from "../../Components/PasswordChangeSuccesFull
 // IMAGE
 import Image from "../../assets/SetNewPassword.jpg";
 import { Eye, EyeOff } from "lucide-react";
+import AuthScreenLayout from "../../Components/Authentication/AuthScreenLayout";
 
 const SetNewPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -102,21 +103,13 @@ const SetNewPassword = () => {
   return (
     <>
       {!showSuccess ? (
-        <div className="flex">
-          {/* IMAGE SECTION */}
-          <div className="w-[44%] min-h-screen">
-            <img className="h-full object-cover" src={Image} alt="Reset Password" />
-          </div>
-
-          {/* FORM SECTION */}
-          <div className="w-[58%] px-36 flex flex-col justify-center gap-7">
-            <div className="flex flex-col">
-              <h1 className="font-Poppins font-bold text-[40px]">Set a password</h1>
-              <p className="font-Urbanist text-Paracolor font-semibold text-[14px]">
-                Your previous password has been reset. Please set a new password.
-              </p>
-            </div>
-
+        <>
+          <AuthScreenLayout
+            BannerImage={Image}
+            Heading={"Set a password"}
+            Description={"Your previous password has been reset. Please set a new password."}
+            Style={true}
+          >
             <form
               onSubmit={handleSubmit(SetNewPassword)}
               className="flex flex-col gap-5"
@@ -164,7 +157,7 @@ const SetNewPassword = () => {
                   {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </span>
-             
+
 
               <button
                 type="submit"
@@ -179,8 +172,8 @@ const SetNewPassword = () => {
                 )}
               </button>
             </form>
-          </div>
-        </div>
+          </AuthScreenLayout>
+        </>
       ) : (
         <div className="transition-opacity duration-700 ease-in-out">
           <PasswordChangeSuccesFully />

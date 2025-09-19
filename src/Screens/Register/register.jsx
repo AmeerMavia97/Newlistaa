@@ -368,18 +368,6 @@ const Register = () => {
                   />
                 )}
               />
-              {/* LOCATION */}
-              {/* <span className="">
-                <Inputs
-                  name={"address"}
-                  register={register("address", {
-                    required: "Location is required",
-                  })}
-                  labels={"Location"}
-                  placeholder={"Enter your city"}
-                  error={errors.address?.message}
-                ></Inputs>
-              </span> */}
               {/* PASSOWRD  */}
               <span className="relative">
                 <Inputs
@@ -429,33 +417,6 @@ const Register = () => {
                 </button>
               </span>
             </div>
-            {/* <div className="flex items-start gap-2 mt-2">
-              <input
-                type="checkbox"
-                {...register("termsAgreement", {
-                  required: "You must agree to the terms to register",
-                })}
-                className="mt-1"
-              />
-              <label className="text-sm sm:text-[15px] text-gray-700 leading-snug">
-                I agree to{" "}
-                <Link to="/terms-of-use" className="underline text-blue-600">
-                  Newlista’s Terms of Use
-                </Link>{" "}
-                and{" "}
-                <Link to="/privacy-policy" className="underline text-blue-600">
-                  Privacy Policy
-                </Link>
-                , and confirm I am a real estate investor using this platform
-                for investment purposes only.
-              </label>
-            </div>
-            {errors.termsAgreement && (
-              <p className="text-red-600 text-sm">
-                {errors.termsAgreement.message}
-              </p>
-            )} */}
-
             {/* Sign Up Button */}
             <div className="mt-1">
               <button
@@ -505,35 +466,11 @@ const Register = () => {
           <div className="bg-white rounded-lg shadow-lg pt-10 pb-7  px-6.5 max-w-[37%] mx-4 no-scrollbar ">
             <h2 className="text-[30px] leading-[34px] font-semibold mb-4 font-Urbanist">Important Notice for Investors</h2>
             <div className="bg-red-50 border border-red-200 mb-4 rounded-md -4"><div className=" text-red-700 text-sm sm:text-[14px] rounded-md p-4  max-h-[300px] overflow-auto  no-scrollbar ">
-             <p className="font-semibold">
-              Newlista is exclusively for bona fide real estate investors. Soliciting, wholesaling, or marketing to other users is prohibited. We do not facilitate syndications. Investors must follow all SEC rules. Users misusing the platform will be suspended or banned without refund. By signing up, you agree to these terms.
-             </p>
-             
-              {/* <p className="mb-2 font-semibold">
-                Newlista is a platform exclusively for real estate investors
-                seeking off-market properties. To maintain the integrity and focus
-                of our community:
+              <p className="font-semibold">
+                Newlista is exclusively for bona fide real estate investors. Soliciting, wholesaling, or marketing to other users is prohibited. We do not facilitate syndications. Investors must follow all SEC rules. Users misusing the platform will be suspended or banned without refund. By signing up, you agree to these terms.
               </p>
-              <ul className="list-disc list-inside space-y-1">
-                <li>All users must be bona fide investors.</li>
-                <li>
-                  Soliciting services, including brokerage, wholesaling, or
-                  marketing to other users, is strictly prohibited.
-                </li>
-                <li>
-                  Users found soliciting or misusing the platform for
-                  non-investment purposes will have their accounts suspended or
-                  banned without refund.
-                </li>
-                <li>
-                  We reserve the right to verify user eligibility and enforce
-                  these policies to protect the quality of our network.
-                </li>
-              </ul>
-              <p className="mt-2">
-                By signing up, you agree to comply with these terms and
-                acknowledge that Newlista is designed for investors only.
-              </p> */}
+
+
             </div></div>
 
             <label className="flex items-start space-x-2 mb-8">

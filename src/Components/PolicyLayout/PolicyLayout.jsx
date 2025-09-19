@@ -4,6 +4,7 @@ import useScrollSpy from "../../CustomHook/useScrollSpy/useScrollSpy";
 
 export default function PolicyLayout({
   title = "Page",
+  desc,
   lastUpdated,
   bannerImage,
   sections = [],
@@ -37,11 +38,11 @@ export default function PolicyLayout({
       {/* Banner */}
       <section style={BannerBackground} className="flex items-center justify-center">
         <div className="py-14 sm:py-16 lg:py-20 xl:py-22 text-center flex flex-col justify-center items-center">
-          <h1 className="text-white font-Urbanist text-[31px] sm:text-[37px] lg:text-[40px] xl:text-5xl font-bold 2xl:text-[55px]">
+          <h1 className="text-white font-Urbanist text-[33px] sm:text-[37px] lg:text-[40px] xl:text-5xl font-bold 2xl:text-[55px]">
             {title}
           </h1>
-          <p className="font-Urbanist w-[85%] sm:w-[80%] text-[13px] sm:text-[14px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px] rounded-[10px] text-[#f2f2f2] font-[500] mt-4 text-center">
-            We are committed to respecting your privacy and protecting your personal information
+          <p className="font-Urbanist w-[85%] sm:w-[80%] text-[13.5px] sm:text-[14px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px] rounded-[10px] text-[#f2f2f2] font-[500] mt-4 text-center">
+            {desc}
           </p>
           {lastUpdated && (
             <span className="font-Urbanist text-[12px] lg:text-[14px] xl:text-[15px] w-max px-8 sm:px-10 2xl:text-[17px] rounded-[10px] py-2.5 sm:py-3 bg-[#ffffff27] text-[#f2f2f2] font-semibold mt-4 text-center">
@@ -58,12 +59,12 @@ export default function PolicyLayout({
 
       {/* Content */}
       <section className="scroll-smooth flex justify-center">
-        <div className="max-[360px]:px-6 px-9 sm:px-10 md:px-12 lg:px-16 pb-20 md:pb-28 2xl:w-[85%] min-[1780px]:!w-[75%]">
+        <div className="max-[380px]:px-6 px-7.5 sm:px-10 md:px-12 lg:px-16 pb-20 md:pb-28 2xl:w-[85%] min-[1780px]:!w-[75%]">
           <h1 className="font-Urbanist text-3xl sm:text-4xl xl:text-[39px] 2xl:text-[45px] font-extrabold tracking-tight text-[#111] mb-10">
             {title} for Newlista
           </h1>
 
-          <div className="grid grid-cols-12 xl:grid-cols-12 2xl:grid-cols-11 gap-6 lg:gap-10">
+          <div className="grid grid-cols-12 xl:grid-cols-11 2xl:grid-cols-11 gap-6 lg:gap-10">
             {/* Sidebar (TOC) */}
             <ScrollSpyNav
               sections={sections}
@@ -73,7 +74,7 @@ export default function PolicyLayout({
             />
 
             {/* Main card */}
-            <div className="col-span-12 2xl:col-span-8 lg:col-span-8 xl:col-span-9">
+            <div className="col-span-12 2xl:col-span-8 lg:col-span-8 xl:col-span-8">
               <div className="rounded-3xl border border-gray-200 bg-white shadow-sm">
                 <div className="py-9 px-5 sm:p-8 md:p-10 text-[16.5px] leading-relaxed font-Inter text-gray-800">
                   {sections.map(({ id, label, content }, idx) => (
