@@ -89,9 +89,9 @@ const Listing = () => {
         </div>
       </section>
 
-      <section className=" sm:bg-white rounded-t-[20px] w-[100%] pt-3 sm:pt-5">
+      <section className=" xl:bg-white rounded-t-[20px] w-[100%] pt-3 sm:pt-5">
         {/* UPPER TAB  */}
-        <div className="flex xl:flex- 2xl:flex-row overflow-hidden gap-3 sm:gap-5 sm:px-4 sm:bg-white">
+        <div className="flex xl:flex- 2xl:flex-row overflow-hidden gap-3 sm:gap-5 sm:px-4 xl:bg-white">
           {/* SEARCH  */}
           <div className="relative w-[100%] xl:w-[33%] 2xl:w-[30%]">
             <div className="absolute inset-y-0 start-0 flex items-center ps-4 pointer-events-none">

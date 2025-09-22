@@ -162,7 +162,7 @@ export default function OffersMobileTable({
                     onClick={closeSheet}
                 />
                 {/* Panel */}
-                <div className={`absolute sm:w-[70%] left-0 sm:left-24 md:left-30 min-[890px]:w-[50%] min-[890px]:left-[40%] right-0 bottom-0 max-h-[85vh] min-h-[50vh] bg-white rounded-t-2xl shadow-2xl transition-transform duration-300 ${open ? "translate-y-0" : "translate-y-full"}`}>
+                <div className={`absolute sm:w-[70%] left-0 sm:left-24 md:left-30 min-[890px]:!w-[50%] min-[890px]:!left-[40%] right-0 bottom-0 max-h-[85vh] min-h-[50vh] bg-white rounded-t-2xl shadow-2xl transition-transform duration-300 ${open ? "translate-y-0" : "translate-y-full"}`}>
                     <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-4" />
                     <div className="p-4">
                         {active && (

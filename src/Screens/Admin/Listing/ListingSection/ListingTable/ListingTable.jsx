@@ -155,7 +155,7 @@ const ListingTable = ({ status, propertyType, priceRange, search }) => {
 
   return (
     <>
-      <div className=" pt-8 sm:px-4 md:px-7 xl:bg-white  rounded-b-[13px] xl:w-full overflow-x-auto h-[88vh]">
+      <div className=" pt-8 sm:px-4 md:px-3 xl:bg-white  rounded-b-[13px] xl:w-full overflow-x-auto xl:h-[88vh]">
         {loading ? (
           <div className="flex justify-center items-center !h-[75vh]">
             <Spinner style={"w-14 h-20 text-PurpleColor z-50"} />

@@ -5,7 +5,6 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { BellIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserRoundCheck } from "lucide-react";
@@ -19,6 +18,7 @@ import { useConfirmation } from "../../Screens/Admin/AccountSetting/Fields/Confi
 import DummyLogo from "../../../public/Images/UnknowUser.png";
 import axios from "axios";
 import Spinner from "../Spinner/Spinner";
+import Notification from "../Notification/Notification";
 
 function AdminNavbar() {
   const [showSearch, setShowSearch] = useState(false);
@@ -39,7 +39,7 @@ function AdminNavbar() {
       try {
         const response = await axios.post(
           `${ApiKey}/logout`,
-          {}, 
+          {},
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ function AdminNavbar() {
             },
           }
         );
-        
+
         localStorage.removeItem("token");
         localStorage.removeItem("User");
         localStorage.removeItem("ProfileComplete");
@@ -119,14 +119,11 @@ function AdminNavbar() {
                 </button>
               </Link>
 
+             
+
               {/* Notification Icon */}
-              {/* <button className="p-1 text-[#666666] rounded-full">
-                <span className="sr-only">View notifications</span>
-                <BellIcon
-                  className="max-[380px]:w-5.5 h-7 w-7"
-                  aria-hidden="true"
-                />
-              </button> */}
+              <Notification></Notification>
+              
               {/* Profile Menu */}
               <Menu as="div" className="relative">
                 <MenuButton className="flex rounded-full overflow-hidden">
@@ -142,7 +139,7 @@ function AdminNavbar() {
                           : DummyLogo
                       }
                       onError={(e) => {
-                        e.target.onerror = null; 
+                        e.target.onerror = null;
                         e.target.src = DummyLogo;
                       }}
                     />

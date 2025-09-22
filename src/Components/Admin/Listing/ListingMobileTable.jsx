@@ -53,40 +53,45 @@ export default function ListingMobileTable({
                     Property Name
                 </h1>
                 <div className="flex items-center gap-3">
-                    <h1 className="text-white hidden sm:block font-Urbanist text-[16px] sm:text-[17px] font-bold">
-                    Status
-                </h1>
-                <h1 onClick={() =>
-                      setSortByViews((prev) => (prev === "desc" ? "asc" : "desc"))
+                    <h1 className="text-white hidden pr-8 sm:block font-Urbanist text-[16px] sm:text-[17px] font-bold">
+                        Status
+                    </h1>
+                    <h1 onClick={() =>
+                        setSortByViews((prev) => (prev === "desc" ? "asc" : "desc"))
                     } className="text-white  font-Urbanist text-[16px] px-1 sm:text-[17px] lg:text-[19px] font-bold">
-                    View
-                </h1>
-                <TextSearch className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+                        View
+                    </h1>
+                    <TextSearch className="text-white w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
             </div>
 
             {/* List */}
-            <ul className="divide-y divide-gray-200 bg-white min-h-[60vh]">
+            <ul className="divide-y divide-gray-200 bg-white min-h-[60vh]  rounded-b-[13px]">
                 {items.map((item) => (
                     <li key={item.id} className="border-b border-[#dadada]">
                         <button
                             onClick={() => openSheet(item)}
-                            className="w-full flex items-center justify-between px-3.5 py-4 active:bg-gray-50"
+                            className="w-full flex items-center justify-between px-3.5 py-4 md:py-4.5 active:bg-gray-50"
                         >
-                            <div className="text-left w-[74%] pr-2">
-                                <div className="text-[15px] sm:text-[17px] leading-[19px] font-[800] text-[#2c2a2a] font-Urbanist">
+                            <div className="text-left w-[74%] sm:w-[60%] pr-2">
+                                <div className="text-[15px] sm:text-[17px] leading-[19px] font-[800] text-[#2c2a2a] font-Urbanist sm:w-[100%]">
                                     <TruncatedText text={item.property_name || "—"} maxLength={48} />
                                 </div>
-                                <div className="mt-0.5 text-[12.5px] text-gray-500 font-Urbanist">
+                                <div className="mt-0.5 text-[12.5px] text-gray-500 font-Urbanist sm:w-[100%]">
                                     <TruncatedText text={item.property_type || "—"} maxLength={24} />
                                 </div>
                             </div>
 
-                            <div className="pr-5 font-Urbanist font-semibold">
-                                 {item.views_count}
-                            </div>
+                            <div className="flex gap-1">
+                                <div className="hidden sm:block">
+                                    <StatusPill status={item.listing_status} />
+                                </div>
+                                <div className="pr-5 sm:px-6 md:px-7 font-Urbanist font-semibold">
+                                    {item.views_count}
+                                </div>
 
-                            <ChevronsDown className="w-6 h-6 text-black" />
+                                <ChevronsDown className="w-6 h-6 text-black" />
+                            </div>
                         </button>
                     </li>
                 ))}
@@ -101,9 +106,7 @@ export default function ListingMobileTable({
                 />
                 {/* Panel */}
                 <div
-                    className={`absolute left-0 right-0 bottom-0 max-h-[85vh] min-h-[50vh] 
-          bg-white rounded-t-2xl shadow-2xl transition-transform duration-300
-          ${open ? "translate-y-0" : "translate-y-full"}`}
+                    className={`absolute sm:w-[70%] left-0 sm:left-24 md:left-30 min-[890px]:!w-[50%] min-[890px]:!left-[40%] right-0 bottom-0 max-h-[85vh] min-h-[50vh] bg-white rounded-t-2xl shadow-2xl transition-transform duration-300 ${open ? "translate-y-0" : "translate-y-full"}`}
                 >
                     <div className="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mt-3" />
                     <div className="p-4">
@@ -131,11 +134,11 @@ function StatusPill({ status }) {
     return (
         <span
             className={clsx(
-                "inline-flex items-center gap-2 px-3 py-1 rounded-full text-[12px] font-semibold",
+                "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] font-semibold",
                 pill.className
             )}
         >
-            <span className={clsx("h-2 w-2 rounded-full", pill.dot)} />
+            {/* <span className={clsx("h-2 w-2 rounded-full", pill.dot)} /> */}
             {status || "—"}
         </span>
     );
@@ -170,11 +173,11 @@ function SheetContent({ item, Islocked, navigate, onEdit, onDelete, onClose }) {
         <div>
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <h3 className="text-[20px] leading-[26px] font-Urbanist font-[800] text-gray-900">
+                    <h3 className="text-[20px] md:text-[24px] leading-[26px] font-Urbanist font-[800] text-gray-900">
                         {item.property_name || "—"}
                     </h3>
                     <p className="text-[13.5px] text-gray-500 font-Urbanist">
-                        {item.property_type || "—"}
+                        
                     </p>
                 </div>
                 <button onClick={onClose} aria-label="Close">
@@ -182,55 +185,53 @@ function SheetContent({ item, Islocked, navigate, onEdit, onDelete, onClose }) {
                 </button>
             </div>
 
-            {/* Details grid */}
-            <div className="mt-4 grid grid-cols-2 gap-3 text-[14px]">
-                <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="text-gray-500">Price</div>
-                    <div className="font-bold text-gray-900">
-                        <TruncatedText text={formatPrice(item)} maxLength={26} />
-                    </div>
+            <div className="flex flex-col gap-1.5 mt-3">
+                <div className="font-Urbanist text-[17px] font-bold">
+                    Type: <span>{item.property_type || "—"}</span>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="text-gray-500">Status</div>
-                    <div className="mt-1"><StatusPill status={item.listing_status} /></div>
+                <div className="font-Urbanist text-[17px] font-bold">
+                    Amount: <span>$<TruncatedText text={formatPrice(item)} maxLength={26} /></span>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="text-gray-500">Date Listed</div>
-                    <div className="font-semibold text-gray-900">
+                 
+                <div className="font-Urbanist text-[17px] font-bold">
+                    Date:{" "}
+                    <span>
                         {new Date(item.created_at).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "short",
                             day: "numeric",
                         })}
-                    </div>
+                    </span>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="text-gray-500">Views</div>
-                    <div className="font-semibold text-gray-900">{item.views_count || 0}</div>
+                <div className="font-Urbanist text-[17px] font-bold mt-1">
+                    Status:{" "}
+                    <StatusPill status={item.listing_status} />
                 </div>
+                <div className="font-Urbanist text-[17px] flex gap-2 mt-1 items-center font-bold">
+                    Action Url:
+                    <button
+                        onClick={() => {
+                            navigate(`/properties/${item.id}`);
+                            onClose();
+                        }}
+                        className="text-indigo-600 underline font-[500] text-[14px] flex items-center gap-1"
+                    >
+                        <ExternalLink className="w-4 h-4" /> Property page
+                    </button>
+                </div>
+
+
             </div>
 
             {/* Actions */}
-            <div className="mt-5 grid grid-cols-2 gap-3">
-                {/* View listing */}
-                <button
-                    onClick={() => {
-                        navigate(`/properties/${item.id}`);
-                        onClose();
-                    }}
-                    className="flex items-center justify-center gap-2 bg-gray-900 text-white py-2 rounded-lg font-semibold"
-                >
-                    <Eye className="w-4 h-4" />
-                    View
-                </button>
-
+            <div className="mt-5 grid grid-cols-3 gap-3">
                 {/* Analytics (locked if Islocked) */}
                 {Islocked ? (
                     <button
                         disabled
-                        className="flex items-center justify-center gap-2 bg-gray-200 text-gray-600 py-2 rounded-lg font-semibold cursor-not-allowed"
+                        className="flex items-center justify-center  bg-gray-200 text-gray-600 py-1 font-semibold text-[14.5px] cursor-not-allowed rounded-full relative"
                     >
-                        <Lock className="w-4 h-4 text-red-600" />
+                        <Lock className="w-4.5 h-4.5 text-red-600 absolute -top-0.5 bg-white rounded-full px-1 -right-1 " />
                         Analytics
                     </button>
                 ) : (
@@ -239,9 +240,8 @@ function SheetContent({ item, Islocked, navigate, onEdit, onDelete, onClose }) {
                             navigate(`/admin/analytics/${item.id}`);
                             onClose();
                         }}
-                        className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg font-semibold"
+                        className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-[14.5px] text-white py-1 rounded-full font-semibold"
                     >
-                        <ChartNoAxesCombined className="w-4 h-4" />
                         Analytics
                     </button>
                 )}
@@ -252,9 +252,8 @@ function SheetContent({ item, Islocked, navigate, onEdit, onDelete, onClose }) {
                         await onEdit?.(item.id);
                         onClose();
                     }}
-                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold col-span-1"
+                    className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-1 rounded-full text-[14.5px] font-semibold col-span-1"
                 >
-                    <Edit className="w-4 h-4" />
                     Edit
                 </button>
 
@@ -264,24 +263,9 @@ function SheetContent({ item, Islocked, navigate, onEdit, onDelete, onClose }) {
                         await onDelete?.(item.id);
                         onClose();
                     }}
-                    className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-semibold col-span-1"
+                    className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white py-[8px] rounded-full text-[14.5px] font-semibold col-span-1"
                 >
-                    <Trash2 className="w-4 h-4" />
                     Delete
-                </button>
-            </div>
-
-            {/* Deep link (optional) */}
-            <div className="mt-3 flex items-center gap-2 text-[14px] font-Urbanist">
-                <span className="text-gray-600">Open detail:</span>
-                <button
-                    onClick={() => {
-                        navigate(`/properties/${item.id}`);
-                        onClose();
-                    }}
-                    className="text-indigo-600 underline flex items-center gap-1"
-                >
-                    <ExternalLink className="w-4 h-4" /> Property page
                 </button>
             </div>
         </div>
